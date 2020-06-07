@@ -7,3 +7,13 @@
 .question {
     font-size: 20px;
 }
+.scroll-questions {
+    height: 50vh;
+    overflow-y: auto;
+}
+.question-image {
+    max-width: 50vh;
+}
+.option-image {
+    max-height: 10vh;
+}

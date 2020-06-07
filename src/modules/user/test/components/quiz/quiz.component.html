@@ -1,5 +1,6 @@
 <div *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
-    <p>{{ counter + 1 }}/{{test.questions.length}}</p>
+    <h3>Question {{ counter + 1 }}:</h3>
+    <mat-divider></mat-divider>
     <div class="question-container">
         <app-question
             *ngIf="question"
@@ -7,23 +8,35 @@
             [counter]="counter"
         ></app-question>
     </div>
-    <div>
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
-            <button mat-raised-button color="primary" *ngIf="counter!==0" (click)="firstQuestion()">
-                <mat-icon>skip_previous</mat-icon>
-                First
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.1em">
+            <button fxFlex="25" mat-raised-button color="lime" *ngIf="counter!== test.questions.length - 1" (click)="prevQuestion()"> 
+                Save & Next
             </button>
-            <button mat-raised-button color="primary" *ngIf="counter!==0" (click)="prevQuestion()"> 
-                <mat-icon>keyboard_arrow_left</mat-icon>
-                Prev
+            <button fxFlex="25" mat-raised-button color="accent" *ngIf="counter!== test.questions.length - 1" (click)="prevQuestion()"> 
+                Save & Mark for review
             </button>
-            <button mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
-                Next
-                <mat-icon>keyboard_arrow_right</mat-icon>
+            <button fxFlex="25" mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
+                Mark for review & Next
             </button>
-            <button mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="lastQuestion()">
-                Last
-                <mat-icon>skip_next</mat-icon>
+            <button mat-raised-button *ngIf="counter !== test.questions.length - 1" (click)="lastQuestion()">
+                Clear Response
+            </button>
+        </div>
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+                <button mat-raised-button color="" *ngIf="counter!==0" (click)="firstQuestion()">
+                    <mat-icon>skip_previous</mat-icon>
+                    Previous
+                </button>
+                <button mat-raised-button color="" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
+                    Next
+                    <mat-icon>skip_next</mat-icon>
+                </button>
+            </div>
+            <button fxFlex="20" mat-raised-button color="lime" (click)="firstQuestion()">
+                <mat-icon>done_outline</mat-icon>
+                Submit Test
             </button>
         </div>
     </div>

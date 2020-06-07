@@ -1,0 +1,16 @@
+<div class="info">
+    <button mat-mini-fab color=""></button> Not visited <br>
+    <button mat-mini-fab color="warn"></button> Unanswered <br>
+    <button mat-mini-fab color="lime"></button> Answered <br>
+    <button mat-mini-fab color="accent"></button> Answered and Marked <br>
+    <button mat-mini-fab color="primary"></button> Marked for review <br>
+</div>
+<h3>Choose a Question</h3>
+<mat-divider></mat-divider>
+<div class="info scroll-pallete">
+    <button mat-mini-fab (click)="changeStatus(ob)" [color]="getColor(ob)" *ngFor="let ob of questions">
+        {{ ob.num }}
+    </button>
+</div>
+
+

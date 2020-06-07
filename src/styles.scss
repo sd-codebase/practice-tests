@@ -6,3 +6,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-container {
     margin: 0.5em 1em;
 }
+
+.mat-success {
+    color: #f0fff3;
+    background-color: #155724;
+}
+
+.mat-orange {
+    color: #424442;
+    background-color: #ffa500;
+}
+
+.mat-chartreuse {
+    color: #424442;
+    background-color: chartreuse;
+}
+
+.mat-mint {
+    color: #424442;
+    background-color: mintcream;
+}
+
+.mat-lime {
+    color: #424442;
+    background-color: lime;
+}

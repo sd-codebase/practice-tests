@@ -1,34 +1,36 @@
-<div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-    <button mat-raised-button color="primary" *ngIf="!test" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-icon>grading</mat-icon>
-        Create Test
-    </button>
-    <button mat-raised-button color="primary" *ngIf="test && test.status === 0" (click)="startTest()" fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-icon>article</mat-icon>
-        Start Test
-    </button>
-    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-        <button mat-raised-button color="primary" *ngIf="test && test.status === 1" (click)="finishTest()" fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-icon>done_outline</mat-icon>
-            Submit Test
+<div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="0.5em">
+    <div fxFlex="78" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+        <button mat-raised-button color="primary" *ngIf="!test" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            Create Test
         </button>
-        <button mat-raised-button color="primary" *ngIf="test && test.status === 1" fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-icon>timer</mat-icon>
-            <countdown [config]="{leftTime: timer, format: 'm:s'}" (event)="handleEvent($event)"></countdown> / {{ timer/60 }}
+        <button mat-raised-button color="primary" *ngIf="test && test.status === 0" (click)="startTest()" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>article</mat-icon>
+            Start Test
+        </button>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="test && test.status === 1" >
+            <h4>Time left</h4>
+            <button mat-raised-button color="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-icon>timer</mat-icon>
+                <countdown [config]="{leftTime: timer, format: 'mm:ss'}" (event)="handleEvent($event)"></countdown>
+            </button>
+        </div>
+        <app-quiz fxFill
+            *ngIf="test && test.status === 1"
+            [test]="test"
+            (timerPause) = "pauseTimer()"
+            (timerResume) = "resumeTimer()"
+        ></app-quiz>
+        <app-test-statistics fxFill
+            *ngIf="test && test.status === 2"
+            [test]="test"
+        ></app-test-statistics>
+        <button mat-raised-button color="primary" *ngIf="test && test.status === 2" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            Create New Test
         </button>
     </div>
-    <app-quiz 
-        *ngIf="test && test.status === 1"
-        [test]="test"
-        (timerPause) = "pauseTimer()"
-        (timerResume) = "resumeTimer()"
-    ></app-quiz>
-    <app-test-statistics 
-        *ngIf="test && test.status === 2"
-        [test]="test"
-    ></app-test-statistics>
-    <button mat-raised-button color="primary" *ngIf="test && test.status === 2" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-icon>grading</mat-icon>
-        Create New Test
-    </button>
+    <div *ngIf="test && test.status === 1" fxFlex="20" >
+        <app-question-pallete></app-question-pallete>
+    </div>
 </div>

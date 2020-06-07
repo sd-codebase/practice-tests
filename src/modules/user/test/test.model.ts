@@ -16,10 +16,19 @@ export enum ETestStatus {
     FINISHED
 }
 
+export enum EQuestionStatus {
+    ANSWERED,
+    UNANSWERED,
+    MARKED,
+    MARKEDANSWERD
+}
+
 export class CQuestion {
     id?: string;
     question: string;
     options: string[];
+    isQuestionImage: boolean;
+    isOptionImage: boolean[];
     answer?: number[];
     userAnswer?: number[] = [];
     isSubmitted?: boolean;
