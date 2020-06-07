@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
+    <div class="question-div">
+      {{counter + 1}}) <app-mathjax [content]="question.question"></app-mathjax>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options;let i = index">
+        <mat-checkbox
+          color="primary"
+          [disabled]="question.isSubmitted"
+          [value]="i+1" 
+          (change)="onCheckboxChange($event)"
+          [checked]="question.userAnswer.includes(i+1)"
+        ></mat-checkbox>
+        {{i+1}}) <app-mathjax [content]="op"></app-mathjax>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!question.userAnswer.length || question.isSubmitted" (click)="submitAnswer()">
+      <mat-icon>done</mat-icon>
+      Submit Answer
+    </button>
+    <div class="answer-flag-div" *ngIf="question.isSubmitted != null">
+      <button mat-raised-button class="green" *ngIf="question.correctAnswer === true">
+        <mat-icon>done</mat-icon>
+        Correct
+      </button>
+      <button mat-raised-button class="red" *ngIf="question.correctAnswer === false">
+        <mat-icon>close</mat-icon>
+        Wrong
+      </button>
+    </div>
+</div>

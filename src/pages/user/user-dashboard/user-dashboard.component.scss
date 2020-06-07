@@ -1,0 +1,13 @@
+.user-dashboard {
+    height: 100%;
+    .drawer-container {
+        height: 100%;
+        mat-drawer {
+            width: 15em;
+            padding: 1em;
+            .mat-list-item {
+                cursor: pointer;
+            }
+        }
+    }
+}

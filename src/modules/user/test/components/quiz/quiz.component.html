@@ -1,0 +1,30 @@
+<div *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
+    <p>{{ counter + 1 }}/{{test.questions.length}}</p>
+    <div class="question-container">
+        <app-question
+            *ngIf="question"
+            [question]="question"
+            [counter]="counter"
+        ></app-question>
+    </div>
+    <div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
+            <button mat-raised-button color="primary" *ngIf="counter!==0" (click)="firstQuestion()">
+                <mat-icon>skip_previous</mat-icon>
+                First
+            </button>
+            <button mat-raised-button color="primary" *ngIf="counter!==0" (click)="prevQuestion()"> 
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                Prev
+            </button>
+            <button mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
+                Next
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="lastQuestion()">
+                Last
+                <mat-icon>skip_next</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

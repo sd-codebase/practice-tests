@@ -17,7 +17,25 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "types": ["mathjax"],
+    "paths" : {
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@core/*": [
+        "./src/core/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

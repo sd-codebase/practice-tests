@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">Import Questions</mat-toolbar>
+<div class="page-container">
+    <app-xlsx-to-json-upload
+        (handleUploadedData)="onDataRead($event)"
+    ></app-xlsx-to-json-upload>
+    <table *ngIf="uploadData">
+        <tr>
+            <th>Que.</th>
+            <th>Upload Status</th>
+        </tr>
+        <tr *ngFor="let upload of uploadData">
+            <td>{{ upload.data.question }}</td>
+            <td>{{ upload.status }}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,31 @@
+<div class="user-dashboard">
+    <mat-drawer-container class="drawer-container">
+        <mat-drawer mode="side" opened>
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
+                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/test']">
+                    Take a test
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/my-tests']">
+                    My tests
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/test']">
+                    Take a test
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/test']">
+                    Take a test
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/test']">
+                    Take a test
+                    <mat-icon>done</mat-icon>
+                </button>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

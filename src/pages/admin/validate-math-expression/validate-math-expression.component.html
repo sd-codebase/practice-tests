@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">Validate Math Expression</mat-toolbar>
+<div class="page-container">
+    <textarea [(ngModel)]="content"></textarea>
+    <div>
+        <app-mathjax *ngIf="content" [content]="content"></app-mathjax>
+    </div>
+</div>
