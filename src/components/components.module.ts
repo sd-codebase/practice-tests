@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MathjaxComponent } from './mathjax/mathjax.component';
 import { CoreModule } from '@core/core.module';
 import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-upload.component';
+import { HttpService } from './http.service';
+import { GlobalService } from './mathjax/global.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,10 @@ import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-up
   exports: [
     MathjaxComponent,
     XlsxToJsonUploadComponent,
-  ]
+  ],
+  providers : [
+    HttpService,
+    GlobalService,
+  ],
 })
 export class ComponentsModule { }
