@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { ITest, CQuestion } from '../../test.model';
+import { ITest, CQuestion, EQuestionStatus } from '../../test.model';
 
 @Component({
   selector: 'app-quiz',
@@ -10,6 +10,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   @Input() test: ITest;
   @Output() timerPause = new EventEmitter();
   @Output() timerResume = new EventEmitter();
+  @Output() handleFinishTest = new EventEmitter();
   public counter: number;
   public question: CQuestion;
 
@@ -29,11 +30,25 @@ export class QuizComponent implements OnInit, OnDestroy {
     }, 2000);
   }
 
-  nextQuestion() {
+  setQuestion( question: CQuestion) {
     this.pauseTimer();
     this.question = null;
     setTimeout(() => {
-      this.question = this.test.questions[++this.counter];
+      this.question = question;
+    }, 1);
+    this.resumeTimer();
+  }
+
+  nextQuestion() {
+    if (this.test.questionCount === this.question.questionNum) {
+      return;
+    }
+    this.pauseTimer();
+    const questionNum = this.question.questionNum;
+    this.question = null;
+    setTimeout(() => {
+      this.question = this.test.questions.find( que => que.questionNum === (questionNum + 1));
+      this.updateQuestionStatus();
     }, 1);
     this.resumeTimer();
   }
@@ -43,6 +58,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.question = null;
     setTimeout(() => {
       this.question = this.test.questions[0];
+      this.updateQuestionStatus();
     }, 1);
     this.counter = 0;
     this.resumeTimer();
@@ -50,21 +66,55 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   prevQuestion() {
     this.pauseTimer();
+    const questionNum = this.question.questionNum;
     this.question = null;
     setTimeout(() => {
-      this.question = this.test.questions[--this.counter];
+      this.question = this.test.questions.find( que => que.questionNum === (questionNum - 1));
+      this.updateQuestionStatus();
     }, 1);
     this.resumeTimer();
   }
 
-  lastQuestion() {
-    this.pauseTimer();
-    this.question = null;
-    setTimeout(() => {
-      this.question = this.test.questions[this.test.questions.length - 1];
-    }, 1);
-    this.counter = this.test.questions.length - 1;
-    this.resumeTimer();
+  saveAndNext() {
+    if (!this.question.userAnswer.length) {
+      return;
+    }
+    this.question.isSubmitted = true;
+    this.question.status = EQuestionStatus.ANSWERED;
+    this.nextQuestion();
+  }
+
+  saveAndMarkForReviewAndNext() {
+    if (!this.question.userAnswer.length) {
+      return;
+    }
+    this.question.isSubmitted = true;
+    this.question.status = EQuestionStatus.MARKEDANSWERD;
+    this.nextQuestion();
+  }
+
+  markForReviewAndNext() {
+    this.question.status = EQuestionStatus.MARKED;
+    this.nextQuestion();
+  }
+
+  clearResponse() {
+    this.question.isSubmitted = false;
+    this.question.userAnswer = [];
+  }
+
+  isLastQuestion() {
+    return this.question.questionNum === this.test.questionCount;
+  }
+
+  updateQuestionStatus() {
+    if ( this.question.status === EQuestionStatus.NOTVISITED) {
+      this.question.status = EQuestionStatus.UNANSWERED;
+    }
+  }
+
+  finishTest() {
+    this.handleFinishTest.emit();
   }
 
   ngOnDestroy() {

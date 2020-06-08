@@ -15,28 +15,5 @@
           <app-mathjax *ngIf="!question.isOptionImage || !question.isOptionImage[i]" [content]="op"></app-mathjax>
           <img *ngIf="question.isOptionImage && question.isOptionImage[i]" [src]="op" class="option-image">
       </div>
-      <!-- <button mat-raised-button color="primary" [disabled]="!question.userAnswer.length || question.isSubmitted" (click)="submitAnswer()">
-        <mat-icon>done</mat-icon>
-        Submit Answer
-      </button>
-      <div class="answer-flag-div" *ngIf="question.isSubmitted != null">
-        <button mat-raised-button class="green" *ngIf="question.correctAnswer === true">
-          <mat-icon>done</mat-icon>
-          Correct
-        </button>
-        <button mat-raised-button class="red" *ngIf="question.correctAnswer === false">
-          <mat-icon>close</mat-icon>
-          Wrong
-        </button>
-      </div> -->
-      <!-- 
-        isQuestionImage,
-        isOption1Image,
-        isOption2Image,
-        isOption3Image,
-        isOption4Image,
-        isOption5Image,
-        isAnswerInput,
-       -->
   </div>
 </div>

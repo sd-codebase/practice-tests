@@ -1,0 +1,2 @@
+ng build --prod --base-href "https://sd-codebase.github.io/practice-tests/"
+ngh --dir dist/online-quiz-app

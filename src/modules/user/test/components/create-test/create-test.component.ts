@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ITest, ETestStatus, CQuestion } from '../../test.model';
 import { HttpService } from '@components/http.service';
 import { CountdownComponent } from 'ngx-countdown';
+import { QuizComponent } from '../quiz/quiz.component';
 
 @Component({
   selector: 'app-create-test',
@@ -11,6 +12,10 @@ import { CountdownComponent } from 'ngx-countdown';
 export class CreateTestComponent implements OnInit {
   @ViewChild(CountdownComponent, {static: false})
   public counter: CountdownComponent;
+
+  @ViewChild(QuizComponent, {static: false})
+  public quizCompo: QuizComponent;
+
 
   public test: ITest;
   public timer = 0;
@@ -23,7 +28,11 @@ export class CreateTestComponent implements OnInit {
 
   async createTest() {
     this.test = await this.http.post('/tests').toPromise() as ITest;
-    this.test.questions = this.test.questions.map( que => new CQuestion(que as any));
+    this.test.questions = this.test.questions.map( (que, index) => {
+      const question = new CQuestion(que as any);
+      question.questionNum = index + 1;
+      return question;
+    });
   }
 
   startTest() {
@@ -33,7 +42,7 @@ export class CreateTestComponent implements OnInit {
     }, 2000);
   }
 
-  async finishTest() {
+  async onFinishTest() {
     if (this.counter) {
       this.counter.stop();
     }
@@ -60,6 +69,10 @@ export class CreateTestComponent implements OnInit {
     if (e.action === 'stop') {
       this.test.completeTime = e.left / 1000;
     }
+  }
+
+  onQuestionSelection(question: CQuestion) {
+    this.quizCompo.setQuestion(question);
   }
 
 }

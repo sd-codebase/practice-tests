@@ -1,5 +1,5 @@
 <div *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
-    <h3>Question {{ counter + 1 }}:</h3>
+    <h3 *ngIf="question">Question {{ question.questionNum }}:</h3>
     <mat-divider></mat-divider>
     <div class="question-container">
         <app-question
@@ -8,33 +8,33 @@
             [counter]="counter"
         ></app-question>
     </div>
-    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.1em">
-            <button fxFlex="25" mat-raised-button color="lime" *ngIf="counter!== test.questions.length - 1" (click)="prevQuestion()"> 
-                Save & Next
+            <button fxFlex="25" mat-raised-button color="lime" [disabled]="question.userAnswer.length === 0" (click)="saveAndNext()"> 
+                {{ isLastQuestion() ? 'Save' : 'Save & Next' }}
             </button>
-            <button fxFlex="25" mat-raised-button color="accent" *ngIf="counter!== test.questions.length - 1" (click)="prevQuestion()"> 
-                Save & Mark for review
+            <button fxFlex="25" mat-raised-button color="accent" [disabled]="question.userAnswer.length === 0" (click)="saveAndMarkForReviewAndNext()"> 
+                {{ isLastQuestion() ? 'Save & Mark for review' : 'Save, Mark for review & Next' }}
             </button>
-            <button fxFlex="25" mat-raised-button color="primary" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
-                Mark for review & Next
+            <button fxFlex="25" mat-raised-button color="primary" (click)="markForReviewAndNext()">
+                {{ isLastQuestion() ? 'Mark for review' : 'Mark for review & Next' }}
             </button>
-            <button mat-raised-button *ngIf="counter !== test.questions.length - 1" (click)="lastQuestion()">
+            <button mat-raised-button [disabled]="question.userAnswer.length === 0" (click)="clearResponse()">
                 Clear Response
             </button>
         </div>
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
             <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                <button mat-raised-button color="" *ngIf="counter!==0" (click)="firstQuestion()">
+                <button mat-raised-button color="" *ngIf="question.questionNum !== 1 " (click)="prevQuestion()">
                     <mat-icon>skip_previous</mat-icon>
                     Previous
                 </button>
-                <button mat-raised-button color="" *ngIf="counter !== test.questions.length - 1" (click)="nextQuestion()">
+                <button mat-raised-button color="" *ngIf="question.questionNum !== test.questionCount" (click)="nextQuestion()">
                     Next
                     <mat-icon>skip_next</mat-icon>
                 </button>
             </div>
-            <button fxFlex="20" mat-raised-button color="lime" (click)="firstQuestion()">
+            <button fxFlex="20" mat-raised-button color="lime" (click)="finishTest()">
                 <mat-icon>done_outline</mat-icon>
                 Submit Test
             </button>

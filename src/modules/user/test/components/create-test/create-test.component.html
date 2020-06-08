@@ -18,6 +18,7 @@
         <app-quiz fxFill
             *ngIf="test && test.status === 1"
             [test]="test"
+            (handleFinishTest)="onFinishTest()"
             (timerPause) = "pauseTimer()"
             (timerResume) = "resumeTimer()"
         ></app-quiz>
@@ -31,6 +32,9 @@
         </button>
     </div>
     <div *ngIf="test && test.status === 1" fxFlex="20" >
-        <app-question-pallete></app-question-pallete>
+        <app-question-pallete
+            [test]="test"
+            (handleQuestionSelection)="onQuestionSelection($event)"
+        ></app-question-pallete>
     </div>
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { EQuestionStatus } from '../../test.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { EQuestionStatus, ITest, CQuestion } from '../../test.model';
 
 @Component({
   selector: 'app-question-pallete',
@@ -7,42 +7,33 @@ import { EQuestionStatus } from '../../test.model';
   styleUrls: ['./question-pallete.component.scss']
 })
 export class QuestionPalleteComponent implements OnInit {
-  questions = [];
+  @Input() test: ITest;
+  @Output() handleQuestionSelection = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
-    for (let i = 1; i <= 20; i++) {
-      const que = {num: i, status: EQuestionStatus.UNANSWERED};
-      this.questions.push(que);
-    }
-    for (let i = 21; i <= 40; i++) {
-      const que = {num: i, status: EQuestionStatus.ANSWERED};
-      this.questions.push(que);
-    }
-    for (let i = 41; i <= 60; i++) {
-      const que = {num: i, status: EQuestionStatus.MARKED};
-      this.questions.push(que);
-    }
-    for (let i = 61; i <= 80; i++) {
-      const que = {num: i, status: EQuestionStatus.MARKEDANSWERD};
-      this.questions.push(que);
-    }
+
   }
 
-  getColor(ob) {
-    if (ob.status === EQuestionStatus.UNANSWERED) {
-      return 'lime';
-    } else if (ob.status === EQuestionStatus.MARKED) {
+  getColor(question: CQuestion) {
+    if (question.status === EQuestionStatus.NOTVISITED) {
+      return '';
+    } else if (question.status === EQuestionStatus.UNANSWERED) {
       return 'warn';
-    } else if (ob.status === EQuestionStatus.ANSWERED) {
-      return 'chartreuse';
-    } else if (ob.status === EQuestionStatus.MARKEDANSWERD) {
+    } else if (question.status === EQuestionStatus.MARKED) {
       return 'primary';
+    } else if (question.status === EQuestionStatus.ANSWERED) {
+      return 'lime';
+    } else if (question.status === EQuestionStatus.MARKEDANSWERD) {
+      return 'accent';
     }
   }
 
-  changeStatus(ob){
-    ob.status = EQuestionStatus.ANSWERED;
+  chooseQuestion(question: CQuestion) {
+    if ( question.status === EQuestionStatus.NOTVISITED) {
+      question.status = EQuestionStatus.UNANSWERED;
+    }
+    this.handleQuestionSelection.emit(question);
   }
 
 }
