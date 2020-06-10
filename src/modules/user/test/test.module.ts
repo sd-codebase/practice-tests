@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentsModule } from '@components/components.module';
 import { TestStatisticsComponent } from './components/test-statistics/test-statistics.component';
 import { QuestionPalleteComponent } from './components/question-pallete/question-pallete.component';
+import { StatementComponent } from './components/question/statement/statement.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { QuestionPalleteComponent } from './components/question-pallete/question
     QuizComponent,
     TestStatisticsComponent,
     QuestionPalleteComponent,
+    StatementComponent,
   ]
 })
 export class TestModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ITest, CQuestion, EQuestionStatus } from '../../test.model';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-quiz',
@@ -14,23 +15,30 @@ export class QuizComponent implements OnInit, OnDestroy {
   public counter: number;
   public question: CQuestion;
 
-  constructor() { }
+  constructor(
+    private loaderService: LoaderService
+  ) { }
 
   ngOnInit() {
     this.firstQuestion();
   }
 
   pauseTimer() {
+    this.loaderService.show();
     this.timerPause.emit();
   }
 
   resumeTimer() {
     setTimeout(() => {
       this.timerResume.emit();
+      this.loaderService.hide();
     }, 2000);
   }
 
   setQuestion( question: CQuestion) {
+    if (this.question === question) {
+      return;
+    }
     this.pauseTimer();
     this.question = null;
     setTimeout(() => {
@@ -75,8 +83,13 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.resumeTimer();
   }
 
+  isValidAnswerSelected() {
+    return (this.question.isSingleAnswer && !this.question.userAnswer)
+    || (!this.question.isSingleAnswer && !this.question.userAnswer.length);
+  }
+
   saveAndNext() {
-    if (!this.question.userAnswer.length) {
+    if (this.isValidAnswerSelected()) {
       return;
     }
     this.question.isSubmitted = true;
@@ -85,7 +98,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   saveAndMarkForReviewAndNext() {
-    if (!this.question.userAnswer.length) {
+    if (this.isValidAnswerSelected()) {
       return;
     }
     this.question.isSubmitted = true;

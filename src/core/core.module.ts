@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio';
 
 const MaterialModules = [
   MatSidenavModule,
@@ -24,6 +25,7 @@ const MaterialModules = [
   MatCardModule,
   MatDividerModule,
   MatToolbarModule,
+  MatRadioModule,
 ];
 
 @NgModule({

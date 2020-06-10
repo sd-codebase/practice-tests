@@ -34,13 +34,7 @@ export class XlsxToJsonUploadComponent implements OnInit {
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         return initial;
       }, {});
-      jsonData = jsonData[names[0]].map( obj => {
-        obj.options = [obj.op1, obj.op2, obj.op3, obj.op4, obj.op5];
-        obj.answer = obj.answer.split(',').map(op => Number(op));
-        delete obj.op1; delete obj.op2; delete obj.op3; delete obj.op4; delete obj.op5;
-        return obj;
-      });
-      this.handleUploadedData.emit(jsonData);
+      this.handleUploadedData.emit({names, jsonData});
     };
     reader.readAsBinaryString(file);
   }

@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 14px;}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 !important;
+}
 
 .page-container {
     margin: 0.5em 1em;
@@ -30,4 +34,47 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-lime {
     color: #424442;
     background-color: lime;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 46px !important;
+}
+
+.mat-toolbar, .mat-toolbar h1, .mat-toolbar h2, .mat-toolbar h3, .mat-toolbar h4, .mat-toolbar h5, .mat-toolbar h6 {
+    font: 300 16px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+
+.mat-raised-button {
+    line-height: 30px !important;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0px 10px !important;
+
+    &.strong {
+        font-weight: bold;
+    }
+}
+
+.mat-mini-fab {
+    line-height: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    .mat-button-wrapper {
+        padding: 0px 0 !important;
+    }
+}
+
+.mat-radio-inner-circle, .mat-radio-outer-circle {
+    height: 16px !important;
+    width: 16px !important;
+}
+
+.mat-icon {
+    height: 20px !important;
+}
+
+.material-icons {
+    font-size: 20px !important;
 }

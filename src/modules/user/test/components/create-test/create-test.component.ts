@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ITest, ETestStatus, CQuestion } from '../../test.model';
+import { ITest, ETestStatus, CQuestion, EQuestionStatus } from '../../test.model';
 import { HttpService } from '@components/http.service';
 import { CountdownComponent } from 'ngx-countdown';
 import { QuizComponent } from '../quiz/quiz.component';
+import { StorageService } from '@components/storage.serice';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-create-test',
@@ -21,36 +23,58 @@ export class CreateTestComponent implements OnInit {
   public timer = 0;
   constructor(
     private http: HttpService,
+    private storage: StorageService,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
   }
 
   async createTest() {
-    this.test = await this.http.post('/tests').toPromise() as ITest;
-    this.test.questions = this.test.questions.map( (que, index) => {
-      const question = new CQuestion(que as any);
-      question.questionNum = index + 1;
-      return question;
-    });
+    this.loaderService.show();
+    try {
+      this.test = await this.http.post('/tests', {userId: this.storage.getUserId()}).toPromise() as ITest;
+      const {questions} = this.test;
+      this.test.questions = [
+        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
+        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
+        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
+      ];
+      this.test.questions = this.test.questions.map( (que, index) => {
+        const question = new CQuestion(que as any);
+        question.questionNum = index + 1;
+        question.status = EQuestionStatus.NOTVISITED;
+        return question;
+      });
+    } catch (e) {
+
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
   startTest() {
+    this.loaderService.show();
     this.test.status = ETestStatus.STARTED;
     setTimeout(() => {
       this.timer = this.test.allottedTime;
+      this.loaderService.hide();
     }, 2000);
   }
 
   async onFinishTest() {
-    if (this.counter) {
-      this.counter.stop();
+    this.loaderService.show();
+    try {
+      this.test.status = ETestStatus.FINISHED;
+      this.test.attemptCount = this.test.questions.filter( que => que.isSubmitted).length;
+      //this.test.correctCount = this.test.questions.filter( que => que.correctAnswer).length;
+      this.test.percentage = +(this.test.correctCount / this.test.questionCount * 100).toFixed(2);
+      this.test = await this.http.put('/tests', this.test).toPromise()  as ITest;
+    } catch (e) {
+
+    } finally {
+      this.loaderService.hide();
     }
-    this.test.status = ETestStatus.FINISHED;
-    this.test.attemptCount = this.test.questions.filter( que => que.isSubmitted).length;
-    this.test.correctCount = this.test.questions.filter( que => que.correctAnswer).length;
-    this.test.percentage = +(this.test.correctCount / this.test.questionCount * 100).toFixed(2);
-    this.test = await this.http.put('/tests', this.test).toPromise()  as ITest;
   }
 
   pauseTimer() {
@@ -65,9 +89,16 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+  finishTest() {
+    if (this.counter) {
+      this.counter.stop();
+    }
+  }
+
   handleEvent(e) {
     if (e.action === 'stop') {
-      this.test.completeTime = e.left / 1000;
+      this.test.completeTime = e.left ? e.left / 1000 : this.test.allottedTime;
+      this.onFinishTest();
     }
   }
 

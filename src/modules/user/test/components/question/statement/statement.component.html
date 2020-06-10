@@ -1,0 +1,8 @@
+<div *ngIf="!statement.isImage" fxLayout="{{statement.isImageFloated ? 'row' : 'column' }}" fxFill fxLayoutAlign="start {{statement.isImageFloated ? 'center' : 'start' }}" fxLayoutGap="0.5em">
+    <app-mathjax *ngIf="statement.isMathExpression" [content]="statement.statement"></app-mathjax>
+    <span *ngIf="!statement.isMathExpression">{{ statement.statement }}</span>
+    <img [ngClass]="{'flotted-image': statement.isImageFloated, 'below-image': !statement.isImageFloated}" *ngIf="statement.hasImage" [src]="fetchImage(statement.containedImage)"/>
+</div>
+<div *ngIf="statement.isImage">
+    <img class="below-image" [src]="fetchImage(statement.statement)"/>
+</div>

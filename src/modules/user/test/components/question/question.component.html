@@ -1,19 +1,38 @@
 <div class="scroll-questions">
   <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
-      <div class="question-div">
-        <app-mathjax *ngIf="question.isQuestionImage !== false" [content]="question.question"></app-mathjax>
-        <img *ngIf="question.isQuestionImage === true" [src]="question.question" class="question-image">
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options;let i = index">
-          <mat-checkbox
+    <div fxFill class="question-div">
+      <app-statement
+        [statement]="question.question"
+      ></app-statement>
+    </div>
+    <div fxFill class="options-div" *ngIf="question.isSingleAnswer">
+      <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
+        <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
+          <mat-radio-button 
+            class="margin-half-em" 
             color="primary"
             [disabled]="question.isSubmitted"
-            [value]="i+1" 
-            (change)="onCheckboxChange($event)"
-            [checked]="question.userAnswer.includes(i+1)"
-          ></mat-checkbox>
-          <app-mathjax *ngIf="!question.isOptionImage || !question.isOptionImage[i]" [content]="op"></app-mathjax>
-          <img *ngIf="question.isOptionImage && question.isOptionImage[i]" [src]="op" class="option-image">
+            [value]="i+1"
+          ></mat-radio-button>
+          <app-statement
+            [statement]="op"
+          ></app-statement>
+        </div>
+      </mat-radio-group>
+    </div>
+    <div fxFill class="options-div" *ngIf="!question.isSingleAnswer">
+      <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options;let i = index">
+        <mat-checkbox
+          class="margin-half-em" 
+          color="primary"
+          [disabled]="question.isSubmitted"
+          [value]="i+1" 
+          (change)="onCheckboxChange($event)"
+        ></mat-checkbox>
+        <app-statement
+          [statement]="op"
+        ></app-statement>
       </div>
+    </div>
   </div>
 </div>

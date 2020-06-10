@@ -5,11 +5,13 @@ import { CoreModule } from '@core/core.module';
 import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-upload.component';
 import { HttpService } from './http.service';
 import { GlobalService } from './mathjax/global.service';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     MathjaxComponent,
-    XlsxToJsonUploadComponent
+    XlsxToJsonUploadComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { GlobalService } from './mathjax/global.service';
   exports: [
     MathjaxComponent,
     XlsxToJsonUploadComponent,
+    LoaderComponent,
   ],
   providers : [
     HttpService,

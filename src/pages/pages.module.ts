@@ -8,6 +8,7 @@ import { ComponentsModule } from '@components/components.module';
 import { CommonModule } from '@angular/common';
 import { ImportQuestionsComponent } from './admin/import-questions/import-questions.component';
 import { ValidateMathExpressionComponent } from './admin/validate-math-expression/validate-math-expression.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { ValidateMathExpressionComponent } from './admin/validate-math-expressio
     TestComponent,
     ImportQuestionsComponent,
     ValidateMathExpressionComponent,
+    HomeComponent,
   ]
 })
 export class PagesModule { }

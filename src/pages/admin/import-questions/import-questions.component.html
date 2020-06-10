@@ -9,7 +9,7 @@
             <th>Upload Status</th>
         </tr>
         <tr *ngFor="let upload of uploadData">
-            <td>{{ upload.data.question }}</td>
+            <td>{{ upload.data.question.statement }}</td>
             <td>{{ upload.status }}</td>
         </tr>
     </table>

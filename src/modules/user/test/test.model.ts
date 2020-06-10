@@ -24,25 +24,57 @@ export enum EQuestionStatus {
     MARKEDANSWERD
 }
 
+export class CStatement {
+    statement: string; //if isImage true question itself would be image
+    containedImage: string; //if hasImage true, then img will have value 
+    isImage: boolean;
+    hasImage: boolean;
+    isImageFloated: boolean; //if only hasImage true then true or false
+    isMathExpression: boolean;
+
+    constructor(st: string, containedImage: string, statement: CStatement) {
+        this.statement = st;
+        this.containedImage = containedImage ? containedImage.toString() : '';
+        this.isImage = statement.isImage;
+        this.hasImage = statement.hasImage;
+        this.isImageFloated = statement.isImageFloated;
+        this.isMathExpression = statement.isMathExpression;
+    }
+}
+
+export class CChapter {
+    stream: string;
+    class: string;
+    subject: string;
+    chapter: string;
+
+    constructor(chapter: CChapter) {
+        this.stream = chapter.stream;
+        this.class = chapter.stream;
+        this.subject = chapter.subject;
+        this.chapter = chapter.chapter;
+    }
+}
+
 export class CQuestion {
     id?: string;
-    question: string;
-    options: string[];
-    isQuestionImage: boolean;
-    isOptionImage: boolean[];
-    answer?: number[];
+    question: CStatement;
+    options: CStatement[];
+    answer: number[] | number;
+    isSingleAnswer: boolean;
     userAnswer?: number[] = [];
-    isSubmitted = false;
-    correctAnswer?: boolean;
+    isSubmitted?: boolean;
     status?: EQuestionStatus;
     questionNum?: number;
+    chapter: CChapter;
 
-    constructor({_id, question, options, answer}) {
+    constructor({_id, question, options, answer, isSingleAnswer, chapter}) {
         this.id = _id;
         this.question = question;
         this.options = options;
         this.answer = answer;
-        this.status = EQuestionStatus.NOTVISITED;
+        this.isSingleAnswer = isSingleAnswer;
+        this.chapter = chapter;
     }
 
     isCorrectAnswer() {

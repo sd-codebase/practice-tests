@@ -5,10 +5,12 @@ import { UserDashboardComponent } from '@pages/user/user-dashboard/user-dashboar
 import { TestComponent } from '@pages/user/test/test.component';
 import { ImportQuestionsComponent } from '@pages/admin/import-questions/import-questions.component';
 import { ValidateMathExpressionComponent } from '@pages/admin/validate-math-expression/validate-math-expression.component';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { HomeComponent } from '@pages/home/home.component';
 
 
 const routes: Routes = [
-  { path: '', component: AdminDashboardComponent, pathMatch: 'full' },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   {
     path: 'admin', component: AdminDashboardComponent,
     children: [
@@ -17,7 +19,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'user', component: UserDashboardComponent,
+    path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
     children: [
       {path: 'test', component: TestComponent},
     ],
