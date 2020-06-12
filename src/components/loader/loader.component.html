@@ -1,1 +1,5 @@
-<div class="{{ loading ? 'loader' : '' }}" >Loading...</div>
+<div class="{{ loading ? 'loader' : '' }}">
+    <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+        <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+    </div>
+</div>

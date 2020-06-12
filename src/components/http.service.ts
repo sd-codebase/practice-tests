@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const host = 'http://localhost:3001/api';
+const host = 'https://test-for-all-services.herokuapp.com/api';
 @Injectable({
   providedIn: 'root'
 })

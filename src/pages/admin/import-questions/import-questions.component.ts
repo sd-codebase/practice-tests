@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@components/http.service';
 import { CChapter, CQuestion, CStatement } from '@modules/user/test/test.model';
 import * as _ from 'lodash';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-import-questions',
@@ -13,12 +14,14 @@ export class ImportQuestionsComponent implements OnInit {
   public uploadData: any;
   constructor(
     private http: HttpService,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
   }
 
   async onDataRead({names, jsonData}) {
+    this.loaderService.show();
     const dataToPush = [];
     jsonData[names[0]].forEach( data => {
       const chapter = new CChapter(data);
@@ -63,6 +66,7 @@ export class ImportQuestionsComponent implements OnInit {
     });
     // console.log(dataToPush);
     this.uploadData = await this.http.post(this.urlToUpload, dataToPush).toPromise();
+    this.loaderService.hide();
   }
 }
 

@@ -1,5 +1,14 @@
-<header>
-    <button [routerLink]="['/user']" *ngIf="auth.loggedIn">Dashboard</button>
-    <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
-    <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
-</header>
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/user']" *ngIf="auth.loggedIn">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+    </button>
+    <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="auth.login()" *ngIf="!auth.loggedIn">
+        <mat-icon>login</mat-icon>
+        Log In
+    </button>
+    <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="auth.logout()" *ngIf="auth.loggedIn">
+        <mat-icon>settings_power</mat-icon>
+        Log Out
+    </button>
+</div>
