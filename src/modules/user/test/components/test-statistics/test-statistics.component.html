@@ -5,15 +5,15 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="5em">
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
             <label>Questions</label><button mat-mini-fab color="warn">{{ test.questionCount }}</button>
             <label>Attempted</label><button mat-mini-fab color="warn">{{ test.attemptCount }}</button>
             <label>Correct</label><button mat-mini-fab color="warn">{{ test.correctCount }}</button>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-            <label>Alotted Time</label><button mat-mini-fab color="warn">{{ test.allottedTime }}</button>
-            <label>Complete Time</label><button mat-mini-fab color="warn">{{ test.completeTime }}</button>
-            <label>Percentage</label><button mat-mini-fab color="warn">{{ test.percentage}}</button>
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+            <label>Alotted Time</label><button mat-raised-button color="warn">{{ test.allottedTime | time : 'fromSeconds' }}</button>
+            <label>Complete Time</label><button mat-raised-button color="warn">{{ test.completeTime | time : 'fromSeconds' }}</button>
+            <label>Percentage</label><button mat-raised-button color="warn">{{ test.percentage }}</button>
         </div>
     </mat-card-content>
 </mat-card>

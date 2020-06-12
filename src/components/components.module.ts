@@ -6,12 +6,14 @@ import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-up
 import { HttpService } from './http.service';
 import { GlobalService } from './mathjax/global.service';
 import { LoaderComponent } from './loader/loader.component';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
     MathjaxComponent,
     XlsxToJsonUploadComponent,
     LoaderComponent,
+    TimePipe,
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { LoaderComponent } from './loader/loader.component';
     MathjaxComponent,
     XlsxToJsonUploadComponent,
     LoaderComponent,
+    TimePipe,
   ],
   providers : [
     HttpService,

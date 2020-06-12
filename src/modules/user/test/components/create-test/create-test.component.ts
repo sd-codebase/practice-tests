@@ -21,6 +21,7 @@ export class CreateTestComponent implements OnInit {
 
   public test: ITest;
   public timer = 0;
+  public isTestLoaded = false;
   constructor(
     private http: HttpService,
     private storage: StorageService,
@@ -32,6 +33,7 @@ export class CreateTestComponent implements OnInit {
 
   async createTest() {
     this.loaderService.show();
+    this.isTestLoaded = false;
     try {
       this.test = await this.http.post('/tests', {userId: this.storage.getUserId()}).toPromise() as ITest;
       const {questions} = this.test;
@@ -58,6 +60,7 @@ export class CreateTestComponent implements OnInit {
     this.test.status = ETestStatus.STARTED;
     setTimeout(() => {
       this.timer = this.test.allottedTime;
+      this.isTestLoaded = true;
       this.loaderService.hide();
     }, 2000);
   }
@@ -96,7 +99,7 @@ export class CreateTestComponent implements OnInit {
   }
 
   handleEvent(e) {
-    if (e.action === 'stop') {
+    if (this.isTestLoaded && (e.action === 'stop' || e.action === 'done')) {
       this.test.completeTime = e.left ? e.left / 1000 : this.test.allottedTime;
       this.onFinishTest();
     }
