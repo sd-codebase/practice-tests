@@ -70,7 +70,7 @@ export class CreateTestComponent implements OnInit {
     try {
       this.test.status = ETestStatus.FINISHED;
       this.test.attemptCount = this.test.questions.filter( que => que.isSubmitted).length;
-      //this.test.correctCount = this.test.questions.filter( que => que.correctAnswer).length;
+      // this.test.correctCount = this.test.questions.filter( que => que.correctAnswer).length;
       this.test.percentage = +(this.test.correctCount / this.test.questionCount * 100).toFixed(2);
       this.test = await this.http.put('/tests', this.test).toPromise()  as ITest;
     } catch (e) {
