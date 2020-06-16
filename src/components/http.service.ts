@@ -9,8 +9,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  get(url) {
-    return this.http.get(host + url);
+  get(url, params?) {
+    return this.http.get(host + url, params);
   }
 
   post(url, data?) {
