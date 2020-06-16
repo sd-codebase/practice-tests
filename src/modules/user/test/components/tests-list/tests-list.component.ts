@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@components/http.service';
 import { ITest } from '../../test.model';
 import { StorageService } from '@components/storage.serice';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-tests-list',
@@ -13,12 +14,13 @@ export class TestsListComponent implements OnInit {
   constructor(
     private http: HttpService,
     private storage: StorageService,
+    private loaderService: LoaderService,
   ) { }
 
   async ngOnInit() {
-    this.http.get('/tests/all', {userId: this.storage.getUserId()}).subscribe( tests => {
-      this.tests = tests;
-    });
+    this.loaderService.show();
+    this.tests = await this.http.get('/tests/all', {userId: this.storage.getUserId()}).toPromise();
+    this.loaderService.hide();
   }
 
 }

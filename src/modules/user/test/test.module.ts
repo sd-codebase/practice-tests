@@ -28,6 +28,6 @@ import { TestsListComponent } from './components/tests-list/tests-list.component
     QuestionPalleteComponent,
     StatementComponent,
     TestsListComponent,
-  ]
+  ],
 })
 export class TestModule { }
