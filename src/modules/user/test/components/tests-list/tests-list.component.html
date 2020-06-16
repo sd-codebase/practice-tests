@@ -1,0 +1,24 @@
+<mat-accordion multi>
+    <mat-expansion-panel *ngFor="let test of tests">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ test.chapter.subject }}</mat-panel-title>
+        <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
+            Created: {{ test.createdAt }}
+            <button mat-raised-button color="{{ test.isSubmitted ? 'success' : 'accent'}}" fxLayout="row" fxLayoutAlign="space-between center">
+              <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
+              {{ test.isSubmitted ? 'Finished' : 'Pending'}}
+            </button>
+            <a *ngIf="!test.isSubmitted" class="view-questions" [routerLink]="['/user/test']">Start Test Again</a>
+            <a *ngIf="test.isSubmitted" class="view-questions" [routerLink]="['/user/test']">View Questions</a>
+            <button title="Delete this test" mat-mini-fab color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <app-test-statistics
+        [test]="test"
+      ></app-test-statistics>
+  
+    </mat-expansion-panel>
+</mat-accordion>

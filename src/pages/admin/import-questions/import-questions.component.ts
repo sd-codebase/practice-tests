@@ -62,7 +62,8 @@ export class ImportQuestionsComponent implements OnInit {
         options.push(op5);
       }
       const isSingleAnswer = data[Keys.question].split(',')[4] === 'Yes';
-      dataToPush.push(new CQuestion({_id: null, question, options, answer : data.answer, isSingleAnswer, chapter}));
+      const {level, tags} = data;
+      dataToPush.push(new CQuestion({_id: null, question, options, answer : data.answer, isSingleAnswer, chapter, level, tags}));
     });
     // console.log(dataToPush);
     this.uploadData = await this.http.post(this.urlToUpload, dataToPush).toPromise();

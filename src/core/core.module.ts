@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MaterialModules = [
   MatSidenavModule,
@@ -28,6 +29,7 @@ const MaterialModules = [
   MatToolbarModule,
   MatRadioModule,
   MatProgressSpinnerModule,
+  MatExpansionModule,
 ];
 
 @NgModule({

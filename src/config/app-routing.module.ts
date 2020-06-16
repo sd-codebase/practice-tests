@@ -7,6 +7,7 @@ import { ImportQuestionsComponent } from '@pages/admin/import-questions/import-q
 import { ValidateMathExpressionComponent } from '@pages/admin/validate-math-expression/validate-math-expression.component';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { HomeComponent } from '@pages/home/home.component';
+import { MyTestsComponent } from '@pages/user/my-tests/my-tests.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
     children: [
       {path: 'test', component: TestComponent},
+      {path: 'my-tests', component: MyTestsComponent},
     ],
   }
 ];

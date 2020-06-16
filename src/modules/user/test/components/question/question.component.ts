@@ -31,4 +31,8 @@ export class QuestionComponent implements OnInit {
     this.question.isCorrectAnswer();
   }
 
+  isCheckedOption(opNum) {
+    return this.question.userAnswer && this.question.userAnswer.length && this.question.userAnswer.includes(opNum);
+  }
+
 }

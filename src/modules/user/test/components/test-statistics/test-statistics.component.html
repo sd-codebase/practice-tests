@@ -1,19 +1,19 @@
 <mat-card *ngIf="test">
-    <mat-card-header>
+    <!-- <mat-card-header>
       <mat-card-title>Test Statistics</mat-card-title>
       <mat-card-subtitle>Mathematics</mat-card-subtitle>
     </mat-card-header>
-    <mat-divider></mat-divider>
+    <mat-divider></mat-divider> -->
     <mat-card-content fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="5em">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-            <label>Questions</label><button mat-mini-fab color="warn">{{ test.questionCount }}</button>
-            <label>Attempted</label><button mat-mini-fab color="warn">{{ test.attemptCount }}</button>
-            <label>Correct</label><button mat-mini-fab color="warn">{{ test.correctCount }}</button>
+            <label>Questions</label><button mat-mini-fab color="primary">{{ test.questionCount }}</button>
+            <label>Attempted</label><button mat-mini-fab [color]="getButtonColor(test.attemptCount, test.questionCount)">{{ test.attemptCount }}</button>
+            <label>Correct</label><button mat-mini-fab [color]="getButtonColor(test.correctCount, test.questionCount)">{{ test.correctCount }}</button>
         </div>
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-            <label>Alotted Time</label><button mat-raised-button color="warn">{{ test.allottedTime | time : 'fromSeconds' }}</button>
-            <label>Complete Time</label><button mat-raised-button color="warn">{{ test.completeTime | time : 'fromSeconds' }}</button>
-            <label>Percentage</label><button mat-raised-button color="warn">{{ test.percentage }}</button>
+            <label>Alotted Time</label><button mat-raised-button color="primary">{{ test.allottedTime | time : 'fromSeconds' }}</button>
+            <label>Complete Time</label><button mat-raised-button [color]="getButtonColor((test.allottedTime - test.completeTime), test.allottedTime)">{{ (test.allottedTime - test.completeTime) | time : 'fromSeconds' }}</button>
+            <label>Percentage</label><button mat-raised-button [color]="getButtonColor(test.percentage, 100)">{{ test.percentage  | number:'2.0-2' }}%</button>
         </div>
     </mat-card-content>
 </mat-card>

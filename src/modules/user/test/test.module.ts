@@ -8,6 +8,7 @@ import { ComponentsModule } from '@components/components.module';
 import { TestStatisticsComponent } from './components/test-statistics/test-statistics.component';
 import { QuestionPalleteComponent } from './components/question-pallete/question-pallete.component';
 import { StatementComponent } from './components/question/statement/statement.component';
+import { TestsListComponent } from './components/tests-list/tests-list.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { StatementComponent } from './components/question/statement/statement.co
   ],
   exports: [
     CreateTestComponent,
+    TestsListComponent,
   ],
   declarations: [
     CreateTestComponent,
@@ -25,6 +27,7 @@ import { StatementComponent } from './components/question/statement/statement.co
     TestStatisticsComponent,
     QuestionPalleteComponent,
     StatementComponent,
+    TestsListComponent,
   ]
 })
 export class TestModule { }

@@ -24,6 +24,13 @@ export enum EQuestionStatus {
     MARKEDANSWERD
 }
 
+export enum EQuestionLevels {
+    Pro = 1,
+    Advance = 2,
+    Mid = 3,
+    Easy = 4,
+}
+
 export class CStatement {
     statement: string; //if isImage true question itself would be image
     containedImage: string; //if hasImage true, then img will have value 
@@ -67,14 +74,18 @@ export class CQuestion {
     status?: EQuestionStatus;
     questionNum?: number;
     chapter: CChapter;
+    tags: string;
+    level: EQuestionLevels;
 
-    constructor({_id, question, options, answer, isSingleAnswer, chapter}) {
+    constructor({_id, question, options, answer, isSingleAnswer, chapter, level, tags}) {
         this.id = _id;
         this.question = question;
         this.options = options;
         this.answer = answer;
         this.isSingleAnswer = isSingleAnswer;
         this.chapter = chapter;
+        this.tags = tags;
+        this.level = level;
     }
 
     isCorrectAnswer() {

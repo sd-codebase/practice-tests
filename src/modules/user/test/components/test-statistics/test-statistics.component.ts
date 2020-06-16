@@ -14,4 +14,15 @@ export class TestStatisticsComponent implements OnInit {
   ngOnInit() {
   }
 
+  getButtonColor(num1, num2) {
+    const num = num1 / num2 * 100;
+    if (num <= 40) {
+      return 'warn';
+    } else if (num > 40 && num <= 70) {
+      return 'accent';
+    } else if (num > 70 && num <= 100) {
+      return 'success';
+    }
+  }
+
 }

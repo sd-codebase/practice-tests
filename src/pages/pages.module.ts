@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ImportQuestionsComponent } from './admin/import-questions/import-questions.component';
 import { ValidateMathExpressionComponent } from './admin/validate-math-expression/validate-math-expression.component';
 import { HomeComponent } from './home/home.component';
+import { MyTestsComponent } from './user/my-tests/my-tests.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
     ImportQuestionsComponent,
     ValidateMathExpressionComponent,
     HomeComponent,
+    MyTestsComponent,
   ]
 })
 export class PagesModule { }

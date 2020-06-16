@@ -26,10 +26,16 @@
             *ngIf="test && test.status === 2"
             [test]="test"
         ></app-test-statistics>
-        <button mat-raised-button color="primary" *ngIf="test && test.status === 2" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-icon>grading</mat-icon>
-            Create New Test
-        </button>
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+            <button mat-raised-button color="primary" *ngIf="test && test.status === 2" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-icon>grading</mat-icon>
+                Create New Test
+            </button>
+            <button mat-raised-button color="primary" *ngIf="test && test.status === 2" [routerLink]="['/user/my-tests']" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-icon>grading</mat-icon>
+                My Tests
+            </button>
+        </div>
     </div>
     <div *ngIf="test && test.status === 1" fxFlex="20" >
         <app-question-pallete

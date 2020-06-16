@@ -5,15 +5,18 @@
         [statement]="question.question"
       ></app-statement>
     </div>
+    <div fxFill class="question-tags" *ngIf="question.tags">
+      <p><em>(2010, 2012, 2010-II) </em> </p>
+    </div>
     <div fxFill class="options-div" *ngIf="question.isSingleAnswer">
       <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
         <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 
             class="margin-half-em" 
             color="primary"
-            [disabled]="question.isSubmitted"
             [value]="i+1"
-          ></mat-radio-button>
+          ></mat-radio-button> 
+          <!-- [disabled]="question.isSubmitted" -->
           <app-statement
             [statement]="op"
           ></app-statement>
@@ -25,10 +28,11 @@
         <mat-checkbox
           class="margin-half-em" 
           color="primary"
-          [disabled]="question.isSubmitted"
-          [value]="i+1" 
+          [value]="i+1"
+          [checked]="isCheckedOption(i+1)"
           (change)="onCheckboxChange($event)"
         ></mat-checkbox>
+        <!-- [disabled]="question.isSubmitted" -->
         <app-statement
           [statement]="op"
         ></app-statement>

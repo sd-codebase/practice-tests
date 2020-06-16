@@ -36,12 +36,6 @@ export class CreateTestComponent implements OnInit {
     this.isTestLoaded = false;
     try {
       this.test = await this.http.post('/tests', {userId: this.storage.getUserId()}).toPromise() as ITest;
-      const {questions} = this.test;
-      this.test.questions = [
-        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
-        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
-        ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions, ...questions,
-      ];
       this.test.questions = this.test.questions.map( (que, index) => {
         const question = new CQuestion(que as any);
         question.questionNum = index + 1;
