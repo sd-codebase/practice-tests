@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const host = 'https://test-for-all-services.herokuapp.com/api';
 @Injectable({
@@ -9,7 +10,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  get(url, params?) {
+  get(url, params?): Observable<any> {
     return this.http.get(host + url, params);
   }
 

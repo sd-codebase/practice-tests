@@ -16,7 +16,9 @@ export class TestsListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.tests = await this.http.get('/tests/all', {userId: this.storage.getUserId()}).toPromise();
+    this.http.get('/tests/all', {userId: this.storage.getUserId()}).subscribe( tests => {
+      this.tests = tests;
+    });
   }
 
 }
