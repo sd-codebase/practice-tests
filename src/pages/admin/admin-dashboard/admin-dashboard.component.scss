@@ -11,3 +11,17 @@
         }
     }
 }
+
+
+.hide-button, .show-button {
+    position: fixed;
+    bottom: 5px;
+    opacity: 0.6;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.show-button {
+    left: 1em;
+}

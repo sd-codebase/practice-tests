@@ -1,6 +1,6 @@
 <div class="user-dashboard">
     <mat-drawer-container class="drawer-container">
-        <mat-drawer mode="side" opened>
+        <mat-drawer mode="side" [opened]="isDrowerOpened">
             <div fxFill fxLayout="column" fxLayoutGap="1em">
                 <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user/test']">
                     Take a test
@@ -22,9 +22,17 @@
                     Logout
                     <mat-icon>done</mat-icon>
                 </button>
+                <button *ngIf="isDrowerOpened" class="hide-button" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="isDrowerOpened = false">
+                    <mat-icon>chevron_left</mat-icon>
+                    Hide
+                </button>
             </div>
         </mat-drawer>
         <mat-drawer-content>
+            <button *ngIf="!isDrowerOpened" class="show-button" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="isDrowerOpened = true">
+                Open
+                <mat-icon>chevron_right</mat-icon>
+            </button>
             <router-outlet></router-outlet>
         </mat-drawer-content>
     </mat-drawer-container>

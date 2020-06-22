@@ -1,6 +1,6 @@
 <div class="admin-dashboard">
     <mat-drawer-container class="drawer-container">
-        <mat-drawer mode="side" opened>
+        <mat-drawer mode="side" [opened]="isDrowerOpened">
             <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
                 <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin/import-questions']">
                     Import Questions
@@ -22,9 +22,17 @@
                     Logout
                     <mat-icon>done</mat-icon>
                 </button>
+                <button *ngIf="isDrowerOpened" class="hide-button" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="isDrowerOpened = false">
+                    <mat-icon>chevron_left</mat-icon>
+                    Hide
+                </button>
             </div>
         </mat-drawer>
         <mat-drawer-content>
+            <button *ngIf="!isDrowerOpened" class="show-button" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="isDrowerOpened = true">
+                Open
+                <mat-icon>chevron_right</mat-icon>
+            </button>
             <router-outlet></router-outlet>
         </mat-drawer-content>
     </mat-drawer-container>

@@ -6,10 +6,10 @@
       ></app-statement>
     </div>
     <div fxFill class="question-tags" *ngIf="question.tags">
-      <p><em>(2010, 2012, 2010-II) </em> </p>
+      <p><em>({{ question.tags }}) </em> </p>
     </div>
     <div fxFill class="options-div" *ngIf="question.isSingleAnswer">
-      <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
+      <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="0.1em">
         <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 
             class="margin-half-em" 
@@ -24,7 +24,7 @@
       </mat-radio-group>
     </div>
     <div fxFill class="options-div" *ngIf="!question.isSingleAnswer">
-      <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options;let i = index">
+      <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
         <mat-checkbox
           class="margin-half-em" 
           color="primary"

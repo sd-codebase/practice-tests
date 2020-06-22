@@ -14,18 +14,18 @@ export class MathjaxComponent implements OnChanges, OnInit {
   constructor(public gs: GlobalService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-  //  if (changes.content) {
-  //     this.renderMath();
-  //   }
+   if (changes.content) {
+      this.renderMath();
+    }
   }
 
   renderMath() {
     // tslint:disable-next-line: no-string-literal
     this.mathJaxObject  = this.gs.nativeGlobal()['MathJax'];
     const angObj = this;
-    //setTimeout(() => {
-    angObj.mathJaxObject.Hub.Queue(['Typeset', angObj.mathJaxObject.Hub], 'mathContent');
-    //}, 1000);
+    setTimeout(() => {
+      angObj.mathJaxObject.Hub.Queue(['Typeset', angObj.mathJaxObject.Hub], 'mathContent');
+    }, 1000);
   }
 
   loadMathConfig() {
