@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">Validate Math Expression</mat-toolbar>
+<app-page-header [header]="'Validate Math Expression'"></app-page-header>
 <div class="page-container">
     <textarea [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
     <button (click)="validate()">Validate</button>

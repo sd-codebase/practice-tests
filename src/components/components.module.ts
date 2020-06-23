@@ -7,6 +7,7 @@ import { HttpService } from './http.service';
 import { GlobalService } from './mathjax/global.service';
 import { LoaderComponent } from './loader/loader.component';
 import { TimePipe } from './pipes/time.pipe';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { TimePipe } from './pipes/time.pipe';
     XlsxToJsonUploadComponent,
     LoaderComponent,
     TimePipe,
+    PageHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { TimePipe } from './pipes/time.pipe';
     XlsxToJsonUploadComponent,
     LoaderComponent,
     TimePipe,
+    PageHeaderComponent,
   ],
   providers : [
     HttpService,

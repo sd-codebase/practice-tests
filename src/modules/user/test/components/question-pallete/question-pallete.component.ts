@@ -8,6 +8,7 @@ import { EQuestionStatus, ITest, CQuestion } from '../../test.model';
 })
 export class QuestionPalleteComponent implements OnInit {
   @Input() test: ITest;
+  @Input() action = 'attempt';
   @Output() handleQuestionSelection = new EventEmitter();
   constructor() { }
 
@@ -30,7 +31,7 @@ export class QuestionPalleteComponent implements OnInit {
   }
 
   chooseQuestion(question: CQuestion) {
-    if ( question.status === EQuestionStatus.NOTVISITED) {
+    if (this.action === 'attempt' && question.status === EQuestionStatus.NOTVISITED) {
       question.status = EQuestionStatus.UNANSWERED;
     }
     this.handleQuestionSelection.emit(question);

@@ -1,0 +1,22 @@
+<div *ngFor="let subject of data.subjects">
+    <h3>{{ subject.name }}</h3>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let chapter of subject.chapters">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            {{ subject.name }}
+            </mat-panel-title>
+            <mat-panel-description>
+            {{ chapter.name }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <button mat-raised-button color="primary" *ngFor="let topic of chapter.topics" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-icon>grading</mat-icon>
+                {{ topic.name }}
+            </button>
+        </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-divider></mat-divider>
+</div>

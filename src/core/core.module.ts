@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MaterialModules = [
   MatSidenavModule,
@@ -30,6 +31,7 @@ const MaterialModules = [
   MatRadioModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
+  MatTabsModule,
 ];
 
 @NgModule({

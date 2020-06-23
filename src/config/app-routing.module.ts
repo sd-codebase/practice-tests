@@ -8,6 +8,10 @@ import { ValidateMathExpressionComponent } from '@pages/admin/validate-math-expr
 import { AuthGuard } from 'src/auth/auth.guard';
 import { HomeComponent } from '@pages/home/home.component';
 import { MyTestsComponent } from '@pages/user/my-tests/my-tests.component';
+import { TestAnswerKeyComponent } from '@pages/user/test-answer-key/test-answer-key.component';
+import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.component';
+import { ProfileComponent } from '@pages/user/profile/profile.component';
+import { StartTestsContainerComponent } from '@pages/user/start-tests-container/start-tests-container.component';
 
 
 const routes: Routes = [
@@ -22,8 +26,12 @@ const routes: Routes = [
   {
     path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
     children: [
+      {path: 'profile', component: ProfileComponent},
       {path: 'test', component: TestComponent},
       {path: 'my-tests', component: MyTestsComponent},
+      {path: 'start-taking-test', component: StartTestsContainerComponent},
+      {path: 'test-answer-key/:testId', component: TestAnswerKeyComponent},
+      {path: 'attempt-test/:testId', component: TestAttemptComponent},
     ],
   }
 ];

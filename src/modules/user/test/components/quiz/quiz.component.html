@@ -4,11 +4,12 @@
     <div class="question-container">
         <app-question
             *ngIf="question"
+            [action]="action"
             [question]="question"
             [counter]="counter"
         ></app-question>
     </div>
-    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question">
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question && action === 'attempt'">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.1em">
             <button fxFlex="25" mat-raised-button color="lime" [disabled]="question.userAnswer.length === 0" (click)="saveAndNext()"> 
                 {{ isLastQuestion() ? 'Save' : 'Save & Next' }}
@@ -38,6 +39,30 @@
                 <mat-icon>done_outline</mat-icon>
                 Submit Test
             </button>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question && action === 'view'">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+                <button mat-raised-button color="" *ngIf="question.questionNum !== 1 " (click)="viewPrevQuestion()">
+                    <mat-icon>skip_previous</mat-icon>
+                    Previous
+                </button>
+                <button mat-raised-button color="" (click)="showAnswer()">
+                    <mat-icon>done</mat-icon>
+                    View Answer
+                </button>
+                <button mat-raised-button color="" *ngIf="question.questionNum !== test.questionCount" (click)="viewNextQuestion()">
+                    Next
+                    <mat-icon>skip_next</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="isAnswerVisible && answerDescription">
+            <app-statement
+                *ngIf="answerDescription"
+                [statement]="answerDescription"
+            ></app-statement>
         </div>
     </div>
 </div>

@@ -3,29 +3,34 @@
     <div fxFill class="question-div">
       <app-statement
         [statement]="question.question"
+        (handleInputChange)="onInputChange($event)"
       ></app-statement>
     </div>
     <div fxFill class="question-tags" *ngIf="question.tags">
       <p><em>({{ question.tags }}) </em> </p>
     </div>
-    <div fxFill class="options-div" *ngIf="question.isSingleAnswer">
+    <div fxFill class="options-div" *ngIf="hasOptions && question.isSingleAnswer">
       <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="0.1em">
         <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 
             class="margin-half-em" 
             color="primary"
             [value]="i+1"
+            *ngIf="op.statement && action === 'attempt'"
           ></mat-radio-button> 
           <!-- [disabled]="question.isSubmitted" -->
+          <span *ngIf="op.statement && action === 'view'">{{ i+1 }}) </span>
           <app-statement
+            *ngIf="op.statement"
             [statement]="op"
           ></app-statement>
         </div>
       </mat-radio-group>
     </div>
-    <div fxFill class="options-div" *ngIf="!question.isSingleAnswer">
+    <div fxFill class="options-div" *ngIf="hasOptions && !question.isSingleAnswer">
       <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
         <mat-checkbox
+          *ngIf="op.statement && action === 'attempt'"
           class="margin-half-em" 
           color="primary"
           [value]="i+1"
@@ -33,7 +38,9 @@
           (change)="onCheckboxChange($event)"
         ></mat-checkbox>
         <!-- [disabled]="question.isSubmitted" -->
+        <span *ngIf="op.statement && action === 'view'">{{ i+1 }}) </span>
         <app-statement
+          *ngIf="op.statement"
           [statement]="op"
         ></app-statement>
       </div>

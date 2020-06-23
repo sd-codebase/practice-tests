@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { ITest, CQuestion, EQuestionStatus } from '../../test.model';
+import { ITest, CQuestion, EQuestionStatus, CStatement } from '../../test.model';
 import { LoaderService } from '@components/loader.service';
 
 @Component({
@@ -9,18 +9,27 @@ import { LoaderService } from '@components/loader.service';
 })
 export class QuizComponent implements OnInit, OnDestroy {
   @Input() test: ITest;
+  @Input() action: string;
   @Output() timerPause = new EventEmitter();
   @Output() timerResume = new EventEmitter();
   @Output() handleFinishTest = new EventEmitter();
   public counter: number;
   public question: CQuestion;
+  public isAnswerVisible = false;
+  public answerDescription: CStatement;
+
 
   constructor(
     private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
-    this.firstQuestion();
+    console.log(this.action)
+    if (this.action === 'attempt') {
+      this.firstQuestion();
+    } else if (this.action === 'view') {
+      this.viewFirstQuestion();
+    }
   }
 
   pauseTimer() {
@@ -128,6 +137,69 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   finishTest() {
     this.handleFinishTest.emit();
+  }
+
+  // view only methods
+  viewFirstQuestion() {
+    this.loaderService.show();
+    this.isAnswerVisible = false;
+    this.question = null;
+    setTimeout(() => {
+      this.question = this.test.questions[0];
+      this.releaseLoader();
+    }, 1);
+  }
+
+  viewNextQuestion() {
+    if (this.test.questionCount === this.question.questionNum) {
+      return;
+    }
+    this.loaderService.show();
+    this.isAnswerVisible = false;
+    const questionNum = this.question.questionNum;
+    this.question = null;
+    setTimeout(() => {
+      this.question = this.test.questions.find( que => que.questionNum === (questionNum + 1));
+      this.releaseLoader();
+    }, 1);
+  }
+
+  viewPrevQuestion() {
+    this.loaderService.show();
+    this.isAnswerVisible = false;
+    const questionNum = this.question.questionNum;
+    this.question = null;
+    setTimeout(() => {
+      this.question = this.test.questions.find( que => que.questionNum === (questionNum - 1));
+      this.releaseLoader();
+    }, 1);
+  }
+
+  setQuestionToView( question: CQuestion) {
+    if (this.question === question) {
+      return;
+    }
+    this.loaderService.show();
+    this.isAnswerVisible = false;
+    this.question = null;
+    setTimeout(() => {
+      this.question = question;
+      this.releaseLoader();
+    }, 1);
+  }
+
+  releaseLoader() {
+    setTimeout(() => {
+      this.timerResume.emit();
+      this.loaderService.hide();
+    }, 2000);
+  }
+
+  showAnswer() {
+    this.loaderService.show();
+    this.isAnswerVisible = true;
+    this.answerDescription = this.question.question;
+    this.releaseLoader();
   }
 
   ngOnDestroy() {

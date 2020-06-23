@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -6,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-  public isDrowerOpened = true;
-
-  constructor() { }
+  constructor(public drawerService: DrawerService) { }
 
   ngOnInit() {
   }

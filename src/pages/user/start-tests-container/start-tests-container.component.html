@@ -1,0 +1,20 @@
+<app-page-header [header]="'Start taking tests'"></app-page-header>
+<div class="page-container">
+    <mat-tab-group>
+        <mat-tab label="Topicwise tests">
+            <app-topicwise [data]="data"></app-topicwise>
+        </mat-tab>
+        <mat-tab label="Chapterwise test">
+            <app-chapterwise [data]="data"></app-chapterwise>
+        </mat-tab>
+        <mat-tab label="Subjectwise test">
+            <app-subjectwise [data]="data"></app-subjectwise>
+        </mat-tab>
+        <mat-tab label="All Subjects test">
+            <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-icon>grading</mat-icon>
+                All Subjects
+            </button>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,0 +1,8 @@
+// app-topicwise, app-chapterwise,  app-subjectwise {
+//     padding: 1em !important;
+// }
+
+:host ::ng-deep .mat-tab-body-wrapper {
+    padding: 1em !important;
+    height: 100%;
+}

@@ -9,10 +9,12 @@ import { CQuestion } from '../../test.model';
 export class QuestionComponent implements OnInit {
   @Input() question: CQuestion;
   @Input() counter: number;
+  @Input() action = 'attempt';
+  public hasOptions = true;
   constructor() { }
 
   ngOnInit() {
-    this.question.isCorrectAnswer = this.question.isCorrectAnswer.bind(this.question);
+    this.hasOptions = this.question.options.some(op => op.statement);
   }
 
   onCheckboxChange(e) {
@@ -33,6 +35,10 @@ export class QuestionComponent implements OnInit {
 
   isCheckedOption(opNum) {
     return this.question.userAnswer && this.question.userAnswer.length && this.question.userAnswer.includes(opNum);
+  }
+
+  onInputChange(userAnswer) {
+    this.question.userAnswer = userAnswer;
   }
 
 }

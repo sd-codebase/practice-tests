@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-raised-button color="primary" *ngFor="let subject of data.subjects" fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon>grading</mat-icon>
+        {{ subject.name }}
+    </button>
+</div>

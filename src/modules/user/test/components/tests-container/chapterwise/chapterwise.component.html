@@ -1,0 +1,15 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let subject of data.subjects">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        {{ subject.name }}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-raised-button color="primary" *ngFor="let chapter of subject.chapters" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            {{ chapter.name }}
+        </button>
+    </div>
+    </mat-expansion-panel>
+</mat-accordion>

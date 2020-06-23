@@ -1,5 +1,6 @@
 export interface ITest {
     status: ETestStatus;
+    _id?: string;
     id: string;
     questionCount: number;
     attemptCount: number;

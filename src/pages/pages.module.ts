@@ -10,6 +10,10 @@ import { ImportQuestionsComponent } from './admin/import-questions/import-questi
 import { ValidateMathExpressionComponent } from './admin/validate-math-expression/validate-math-expression.component';
 import { HomeComponent } from './home/home.component';
 import { MyTestsComponent } from './user/my-tests/my-tests.component';
+import { TestAnswerKeyComponent } from './user/test-answer-key/test-answer-key.component';
+import { TestAttemptComponent } from './user/test-attempt/test-attempt.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { StartTestsContainerComponent } from './user/start-tests-container/start-tests-container.component';
 
 @NgModule({
   imports: [
@@ -31,6 +35,10 @@ import { MyTestsComponent } from './user/my-tests/my-tests.component';
     ValidateMathExpressionComponent,
     HomeComponent,
     MyTestsComponent,
+    TestAnswerKeyComponent,
+    TestAttemptComponent,
+    ProfileComponent,
+    StartTestsContainerComponent,
   ]
 })
 export class PagesModule { }

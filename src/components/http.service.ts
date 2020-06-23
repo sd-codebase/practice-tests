@@ -22,4 +22,8 @@ export class HttpService {
   put(url, data?) {
     return this.http.put(host + url, data);
   }
+
+  delete(url, params?): Observable<any> {
+    return this.http.delete(host + url, params);
+  }
 }

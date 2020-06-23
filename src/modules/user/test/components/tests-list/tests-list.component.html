@@ -1,4 +1,4 @@
-<mat-accordion multi>
+<mat-accordion multi *ngIf="tests && tests.length > 0">
     <mat-expansion-panel *ngFor="let test of tests">
       <mat-expansion-panel-header>
         <mat-panel-title>{{ test.chapter.subject }}</mat-panel-title>
@@ -8,9 +8,9 @@
               <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
               {{ test.isSubmitted ? 'Finished' : 'Pending'}}
             </button>
-            <a *ngIf="!test.isSubmitted" class="view-questions" [routerLink]="['/user/test']">Start Test Again</a>
-            <a *ngIf="test.isSubmitted" class="view-questions" [routerLink]="['/user/test']">View Questions</a>
-            <button title="Delete this test" mat-mini-fab color="warn">
+            <a *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/attempt-test', test._id]">Start Test</a>
+            <a *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/test-answer-key', test._id]">View Answer</a>
+            <button title="Delete this test" mat-mini-fab color="warn" (click)="deleteTest(test);$event.stopPropagation();">
               <mat-icon>delete</mat-icon>
             </button>
         </mat-panel-description>
@@ -22,3 +22,13 @@
   
     </mat-expansion-panel>
 </mat-accordion>
+
+<div fxFill fxLayout="column" fxLayoutAlign="space-between center" *ngIf="!tests || tests.length == 0">
+  <span> No tests available</span>
+  <span>
+    <button mat-raised-button color="primary" [routerLink]="['/user/start-taking-test']" fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-icon>grading</mat-icon>
+      Create Test
+    </button>
+  </span>
+</div>
