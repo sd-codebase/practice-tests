@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '@components/drawer-service';
 import { StorageService } from '@components/storage.serice';
+import { AuthService } from 'src/auth/auth.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -22,6 +23,7 @@ export class UserDashboardComponent implements OnInit {
   constructor(
     public drawerService: DrawerService,
     private storageService: StorageService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit() {

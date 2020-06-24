@@ -10,7 +10,7 @@
                     <mat-icon>supervised_user_circle</mat-icon>
                     Go to user
                 </button>
-                <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/']">
+                <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="auth.logout()">
                     <mat-icon>settings_power</mat-icon>
                     Logout
                 </button>

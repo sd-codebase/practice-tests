@@ -12,8 +12,8 @@ export class SubjectwiseComponent extends GenerateTest implements OnInit {
   ngOnInit() {
   }
 
-  createTest() {
-    this.generateTest();
+  createTest(subject) {
+    this.generateTest({questionCount: 50, subject});
   }
 
 }

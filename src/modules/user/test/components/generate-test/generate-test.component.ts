@@ -1,10 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '@components/http.service';
-import { LoaderService } from '@components/loader.service';
-import { StorageService } from '@components/storage.serice';
-import { ITest } from '../../test.model';
-import { Router } from '@angular/router';
-import { NotificationService, ENotification } from '@components/notifications.service';
+import { Component } from '@angular/core';
 import { GenerateTest } from '../tests-container/generate-test-class';
 
 @Component({
@@ -14,6 +8,6 @@ import { GenerateTest } from '../tests-container/generate-test-class';
 })
 export class GenerateTestComponent extends GenerateTest {
   createTest() {
-    this.generateTest();
+    this.generateTest({questionCount: 50});
   }
 }

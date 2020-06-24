@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '@components/drawer-service';
+import { AuthService } from 'src/auth/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,7 +13,7 @@ export class AdminDashboardComponent implements OnInit {
     {menu: 'Upload questions', path: '/admin/import-questions', icon: 'cloud_upload'},
     {menu: 'Validate expression', path: '/admin/validate-maths-expressions', icon: 'check_circle'},
   ];
-  constructor(public drawerService: DrawerService) { }
+  constructor(public drawerService: DrawerService, public auth: AuthService) { }
 
   ngOnInit() {
   }

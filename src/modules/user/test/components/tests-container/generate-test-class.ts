@@ -17,10 +17,10 @@ export abstract class GenerateTest {
         private notificationService: NotificationService,
     ) { }
 
-    async generateTest() {
+    async generateTest(dataToPost?) {
         this.loaderService.show();
         try {
-          this.test = await this.http.post('/tests', {userId: this.storage.getUserId()}).toPromise() as ITest;
+          this.test = await this.http.post('/tests', {userId: this.storage.getUserId(), ...dataToPost}).toPromise() as ITest;
           if (this.test) {
             this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly');
             this.router.navigate(['/user/attempt-test', this.test._id]);

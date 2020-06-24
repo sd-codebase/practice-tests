@@ -13,7 +13,7 @@ export class ChapterwiseComponent extends GenerateTest implements OnInit {
   }
 
   createTest() {
-    this.generateTest();
+    this.generateTest({questionCount: 50});
   }
 
 }
