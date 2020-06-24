@@ -15,7 +15,7 @@ export class StatementComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.statement.statement.includes('*inputbox*')) {
+    if (this.statement.statement && this.statement.statement.includes('*inputbox*')) {
       this.hasInputBox = true;
       this.statementList = this.statement.statement.split('*inputbox*');
     }

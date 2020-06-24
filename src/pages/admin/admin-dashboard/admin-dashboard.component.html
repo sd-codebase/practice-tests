@@ -2,25 +2,17 @@
     <mat-drawer-container class="drawer-container">
         <mat-drawer mode="side" [opened]="drawerService.opened">
             <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
-                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin/import-questions']">
-                    Import Questions
-                    <mat-icon>cloud_upload</mat-icon>
-                </button>
-                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin/validate-maths-expressions']">
-                    Validate Expression
-                    <mat-icon>done</mat-icon>
-                </button>
-                <button fxLayoutGap="15em" fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin/import']">
-                    Take a test
-                    <mat-icon>done</mat-icon>
+                <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
+                    <mat-icon>{{menu.icon}}</mat-icon>
+                    {{menu.menu}}
                 </button>
                 <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/user']">
+                    <mat-icon>supervised_user_circle</mat-icon>
                     Go to user
-                    <mat-icon>done</mat-icon>
                 </button>
                 <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/']">
+                    <mat-icon>settings_power</mat-icon>
                     Logout
-                    <mat-icon>done</mat-icon>
                 </button>
             </div>
         </mat-drawer>

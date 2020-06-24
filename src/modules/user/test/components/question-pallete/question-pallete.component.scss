@@ -12,4 +12,8 @@ button {
     padding: 0.1em;
     height: 53vh;
     overflow-y: auto;
+
+    &.view-mode {
+        height: 80vh;
+    }
 }

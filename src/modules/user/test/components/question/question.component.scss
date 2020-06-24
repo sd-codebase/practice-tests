@@ -10,6 +10,10 @@
 .scroll-questions {
     height: 60vh;
     overflow-y: auto;
+
+    &.view-mode {
+        height: 50vh;
+    }
 }
 
 .margin-half-em {

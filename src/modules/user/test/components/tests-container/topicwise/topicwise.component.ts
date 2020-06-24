@@ -1,15 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { GenerateTest } from '../generate-test-class';
 
 @Component({
   selector: 'app-topicwise',
   templateUrl: './topicwise.component.html',
   styleUrls: ['./topicwise.component.scss']
 })
-export class TopicwiseComponent implements OnInit {
+export class TopicwiseComponent extends GenerateTest implements OnInit {
   @Input() data: any;
-  constructor() { }
 
   ngOnInit() {
+  }
+
+  createTest() {
+    this.generateTest();
   }
 
 }

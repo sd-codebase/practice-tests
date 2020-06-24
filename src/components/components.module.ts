@@ -8,6 +8,7 @@ import { GlobalService } from './mathjax/global.service';
 import { LoaderComponent } from './loader/loader.component';
 import { TimePipe } from './pipes/time.pipe';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { NotificationBarComponent } from './notifications.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PageHeaderComponent } from './page-header/page-header.component';
     LoaderComponent,
     TimePipe,
     PageHeaderComponent,
+    NotificationBarComponent,
   ],
   imports: [
     CommonModule,
@@ -32,5 +34,6 @@ import { PageHeaderComponent } from './page-header/page-header.component';
     HttpService,
     GlobalService,
   ],
+  entryComponents: [NotificationBarComponent]
 })
 export class ComponentsModule { }

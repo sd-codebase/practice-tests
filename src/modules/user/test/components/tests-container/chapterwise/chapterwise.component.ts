@@ -1,16 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { GenerateTest } from '../generate-test-class';
 
 @Component({
   selector: 'app-chapterwise',
   templateUrl: './chapterwise.component.html',
   styleUrls: ['./chapterwise.component.scss']
 })
-export class ChapterwiseComponent implements OnInit {
+export class ChapterwiseComponent extends GenerateTest implements OnInit {
   @Input() data: any;
 
-  constructor() { }
-
   ngOnInit() {
+  }
+
+  createTest() {
+    this.generateTest();
   }
 
 }

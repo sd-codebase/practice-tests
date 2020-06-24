@@ -6,8 +6,8 @@
         </mat-panel-title>
     </mat-expansion-panel-header>
     <div fxLayout="row" fxLayoutAlign="space-around center">
-        <button mat-raised-button color="primary" *ngFor="let chapter of subject.chapters" fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-icon>grading</mat-icon>
+        <button mat-raised-button color="primary" *ngFor="let chapter of subject.chapters" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+            <mat-icon>article</mat-icon>
             {{ chapter.name }}
         </button>
     </div>

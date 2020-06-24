@@ -12,13 +12,17 @@ import { TestAnswerKeyComponent } from '@pages/user/test-answer-key/test-answer-
 import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.component';
 import { ProfileComponent } from '@pages/user/profile/profile.component';
 import { StartTestsContainerComponent } from '@pages/user/start-tests-container/start-tests-container.component';
+import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
+import { ViewQuestionsComponent } from '@pages/admin/view-questions/view-questions.component';
+import { AdminAuthGuard } from 'src/auth/admin.auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {
-    path: 'admin', component: AdminDashboardComponent,
+    path: 'admin', component: AdminDashboardComponent, canActivate: [ AdminAuthGuard ],
     children: [
+      {path: 'view-questions', component: ViewQuestionsComponent},
       {path: 'import-questions', component: ImportQuestionsComponent},
       {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
     ],
@@ -26,6 +30,7 @@ const routes: Routes = [
   {
     path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
     children: [
+      {path: 'coming-soon', component: ComingSoonComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'test', component: TestComponent},
       {path: 'my-tests', component: MyTestsComponent},

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ITest, CQuestion, EQuestionStatus, CStatement } from '../../test.model';
 import { LoaderService } from '@components/loader.service';
+import { HttpService } from '@components/http.service';
 
 @Component({
   selector: 'app-quiz',
@@ -17,14 +18,14 @@ export class QuizComponent implements OnInit, OnDestroy {
   public question: CQuestion;
   public isAnswerVisible = false;
   public answerDescription: CStatement;
-
+  public answer: string;
 
   constructor(
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private http: HttpService,
   ) { }
 
   ngOnInit() {
-    console.log(this.action)
     if (this.action === 'attempt') {
       this.firstQuestion();
     } else if (this.action === 'view') {
@@ -195,10 +196,12 @@ export class QuizComponent implements OnInit, OnDestroy {
     }, 2000);
   }
 
-  showAnswer() {
+  async showAnswer() {
     this.loaderService.show();
+    const answer = await this.http.get('/questions/answer/' + this.question.id).toPromise();
     this.isAnswerVisible = true;
-    this.answerDescription = this.question.question;
+    this.answer = answer.answer;
+    this.answerDescription = answer.answerDescription;
     this.releaseLoader();
   }
 

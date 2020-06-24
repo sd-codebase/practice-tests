@@ -11,7 +11,7 @@
             <app-subjectwise [data]="data"></app-subjectwise>
         </mat-tab>
         <mat-tab label="All Subjects test">
-            <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
                 <mat-icon>grading</mat-icon>
                 All Subjects
             </button>

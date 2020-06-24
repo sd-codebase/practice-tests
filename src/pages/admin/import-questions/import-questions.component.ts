@@ -34,38 +34,44 @@ export class ImportQuestionsComponent implements OnInit {
       );
       const op1 = new CStatement(
         data.op1,
-        data.containedImage,
+        data.op1ContainedImage,
         _.zipObject(optionStatementKeys, data[Keys.op1].split(',').map( item => item === 'Yes' ? true : false)) as any
       );
       const op2 = new CStatement(
         data.op2,
-        data.containedImage,
+        data.op2ContainedImage,
         _.zipObject(optionStatementKeys, data[Keys.op2].split(',').map( item => item === 'Yes' ? true : false)) as any
       );
       const op3 = new CStatement(
         data.op3,
-        data.containedImage,
+        data.op3ContainedImage,
         _.zipObject(optionStatementKeys, data[Keys.op3].split(',').map( item => item === 'Yes' ? true : false)) as any
       );
       const op4 = new CStatement(
         data.op4,
-        data.containedImage,
+        data.op4ContainedImage,
         _.zipObject(optionStatementKeys, data[Keys.op4].split(',').map( item => item === 'Yes' ? true : false)) as any
       );
       const op5 = data.op5 && new CStatement(
         data.op5,
-        data.containedImage,
+        data.op5ContainedImage,
         _.zipObject(optionStatementKeys, data[Keys.op5].split(',').map( item => item === 'Yes' ? true : false)) as any
       );
       const options = [op1, op2, op3, op4];
       if (op5) {
         options.push(op5);
       }
+      const answerDescription = new CStatement(
+        data.answer_decription,
+        data.answerContainedImage,
+        _.zipObject(optionStatementKeys, data[Keys.op1].split(',').map( item => item === 'Yes' ? true : false)) as any
+      );
       const isSingleAnswer = data[Keys.question].split(',')[4] === 'Yes';
       const {level, tags} = data;
-      dataToPush.push(new CQuestion({_id: null, question, options, answer : data.answer, isSingleAnswer, chapter, level, tags}));
+      dataToPush.push(new CQuestion({
+        id: null, question, options, answer : data.answer, answerDescription, isSingleAnswer, chapter, level, tags
+      }));
     });
-    // console.log(dataToPush);
     this.uploadData = await this.http.post(this.urlToUpload, dataToPush).toPromise();
     this.loaderService.hide();
   }

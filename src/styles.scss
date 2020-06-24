@@ -7,6 +7,21 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 !important;
 }
 
+.snackbar {
+    font-size: 12px !important;
+    color: #fff;
+    width: 5em !important;
+}
+.danger {
+    background-color: red;
+}
+.success {
+    background-color: green;
+}
+.warning {
+    background-color: orange;
+}
+
 .page-container {
     margin: 0.5em 1em;
 }

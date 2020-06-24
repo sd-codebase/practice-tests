@@ -7,7 +7,7 @@
 </div>
 <h3>Choose a Question</h3>
 <mat-divider></mat-divider>
-<div class="info scroll-pallete">
+<div class="info scroll-pallete" [class.view-mode]="action === 'view'">
     <button mat-mini-fab (click)="chooseQuestion(question)" [color]="getColor(question)" *ngFor="let question of test.questions; let i = index">
         {{ i + 1 }}
     </button>

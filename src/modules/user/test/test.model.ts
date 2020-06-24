@@ -69,6 +69,7 @@ export class CQuestion {
     question: CStatement;
     options: CStatement[];
     answer: number[] | number;
+    answerDescription?: CStatement;
     isSingleAnswer: boolean;
     userAnswer?: number[] = [];
     isSubmitted?: boolean;
@@ -78,11 +79,12 @@ export class CQuestion {
     tags: string;
     level: EQuestionLevels;
 
-    constructor({_id, question, options, answer, isSingleAnswer, chapter, level, tags}) {
-        this.id = _id;
+    constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags}) {
+        this.id = id;
         this.question = question;
         this.options = options;
         this.answer = answer;
+        this.answerDescription = answerDescription;
         this.isSingleAnswer = isSingleAnswer;
         this.chapter = chapter;
         this.tags = tags;

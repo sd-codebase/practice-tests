@@ -14,13 +14,17 @@ import { TestAnswerKeyComponent } from './user/test-answer-key/test-answer-key.c
 import { TestAttemptComponent } from './user/test-attempt/test-attempt.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { StartTestsContainerComponent } from './user/start-tests-container/start-tests-container.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { ViewQuestionsComponent } from './admin/view-questions/view-questions.component';
+import { AdminModule } from '@modules/admin/admin.module';
 
 @NgModule({
   imports: [
     CommonModule,
     CoreModule,
     TestModule,
-    ComponentsModule
+    ComponentsModule,
+    AdminModule
   ],
   exports: [
     AdminDashboardComponent,
@@ -39,6 +43,8 @@ import { StartTestsContainerComponent } from './user/start-tests-container/start
     TestAttemptComponent,
     ProfileComponent,
     StartTestsContainerComponent,
+    ComingSoonComponent,
+    ViewQuestionsComponent,
   ]
 })
 export class PagesModule { }

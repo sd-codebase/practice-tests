@@ -1,4 +1,4 @@
-<div class="scroll-questions">
+<div class="scroll-questions" [class.view-mode]="action === 'view'">
   <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
     <div fxFill class="question-div">
       <app-statement
@@ -15,11 +15,11 @@
           <mat-radio-button 
             class="margin-half-em" 
             color="primary"
-            [value]="i+1"
+            [value]="getOption(i+1)"
             *ngIf="op.statement && action === 'attempt'"
           ></mat-radio-button> 
           <!-- [disabled]="question.isSubmitted" -->
-          <span *ngIf="op.statement && action === 'view'">{{ i+1 }}) </span>
+          <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
           <app-statement
             *ngIf="op.statement"
             [statement]="op"
@@ -33,12 +33,12 @@
           *ngIf="op.statement && action === 'attempt'"
           class="margin-half-em" 
           color="primary"
-          [value]="i+1"
-          [checked]="isCheckedOption(i+1)"
+          [value]="getOption(i+1)"
+          [checked]="isCheckedOption(getOption(i+1))"
           (change)="onCheckboxChange($event)"
         ></mat-checkbox>
         <!-- [disabled]="question.isSubmitted" -->
-        <span *ngIf="op.statement && action === 'view'">{{ i+1 }}) </span>
+        <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
         <app-statement
           *ngIf="op.statement"
           [statement]="op"
