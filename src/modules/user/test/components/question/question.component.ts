@@ -12,21 +12,21 @@ export class QuestionComponent implements OnInit {
   @Input() action = 'attempt';
   public hasOptions = true;
   constructor() { }
-
+  
   ngOnInit() {
     this.hasOptions = this.question.options.some(op => op.statement);
   }
 
   onCheckboxChange(e) {
-    const value = Number(e.source.value);
-    const checkedAnswer = this.question.userAnswer || [];
+    const value = e.source.value.toString();
+    const checkedAnswer = this.question.userAnswer && this.question.userAnswer.split(',') || [];
 
     if (e.checked && !checkedAnswer.includes(value)) {
       checkedAnswer.push(value);
     } else if (!e.checked && checkedAnswer.includes(value)) {
       checkedAnswer.splice(checkedAnswer.indexOf(value), 1);
     }
-    this.question.userAnswer = checkedAnswer;
+    this.question.userAnswer = checkedAnswer.join();
   }
 
   submitAnswer() {

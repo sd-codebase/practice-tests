@@ -68,10 +68,10 @@ export class CQuestion {
     id?: string;
     question: CStatement;
     options: CStatement[];
-    answer: number[] | number;
+    answer: string;
     answerDescription?: CStatement;
     isSingleAnswer: boolean;
-    userAnswer?: number[] = [];
+    userAnswer?: string;
     isSubmitted?: boolean;
     status?: EQuestionStatus;
     questionNum?: number;

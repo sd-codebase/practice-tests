@@ -6,10 +6,7 @@
         (handleInputChange)="onInputChange($event)"
       ></app-statement>
     </div>
-    <div fxFill class="question-tags" *ngIf="question.tags">
-      <p><em>({{ question.tags }}) </em> </p>
-    </div>
-    <div fxFill class="options-div" *ngIf="hasOptions && question.isSingleAnswer">
+   <div fxFill class="options-div" *ngIf="hasOptions && question.isSingleAnswer">
       <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="0.1em">
         <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 

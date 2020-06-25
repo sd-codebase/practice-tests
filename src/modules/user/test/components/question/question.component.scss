@@ -17,12 +17,13 @@
 }
 
 .margin-half-em {
-    margin: 1em;
+    margin: 1em !important
 }
 
 .question-tags p {
     text-align: right;
     margin: 0;
+    padding-right: 1em;
 }
 
 .question-div {

@@ -42,6 +42,9 @@ export class CreateTestComponent implements OnInit {
         const question = new CQuestion(que as any);
         question.questionNum = index + 1;
         question.status = EQuestionStatus.NOTVISITED;
+        if (que.tags) {
+          question.question.statement = `${question.question.statement} <strong><em>[${que.tags}]</em></strong>`;
+        }
         return question;
       });
     } catch (e) {

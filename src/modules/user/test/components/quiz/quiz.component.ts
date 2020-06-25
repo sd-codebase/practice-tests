@@ -123,7 +123,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   clearResponse() {
     this.question.isSubmitted = false;
-    this.question.userAnswer = [];
+    this.question.userAnswer = '';
   }
 
   isLastQuestion() {
@@ -201,7 +201,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     const answer = await this.http.get('/questions/answer/' + this.question.id).toPromise();
     this.isAnswerVisible = true;
     this.answer = answer.answer;
-    this.answerDescription = answer.answerDescription;
+    this.answerDescription =
+      (answer.answerDescription.hasImage || answer.answerDescription.isImage || answer.answerDescription.statement)
+      ? answer.answerDescription : null;
     this.releaseLoader();
   }
 
