@@ -1,3 +1,27 @@
 mat-card-content{
     padding-top: 2em;
 }
+.border-bottom {
+    padding-bottom: 1em;
+    border-bottom: 1px solid gray;
+}
+.card-layout {
+    box-shadow:  1px 3px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 1em;
+
+    &.row-one {
+        width: 18em;
+        height: 3em;
+    }
+
+    &.row-two {
+        width: 18em;
+        height: 7em;
+    }
+
+    &.row-four {
+        width: 18em;
+        height: 15em;
+    }
+}

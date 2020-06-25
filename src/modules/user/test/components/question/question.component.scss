@@ -17,16 +17,21 @@
 }
 
 .margin-half-em {
-    margin: 1em !important
+    margin: 0.1em 0.3em !important
 }
 
-.question-tags p {
-    text-align: right;
-    margin: 0;
-    padding-right: 1em;
+.question-tags {
+    margin: 0 !important;
+    p {
+        text-align: right;
+        margin: 0;
+        padding-right: 1em;
+        font-size: 0.7em !important;
+    }
 }
 
 .question-div {
+    margin: 0 !important;
 }
 
 .options-div {

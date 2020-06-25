@@ -8,7 +8,24 @@ import { ITest } from '../../test.model';
 })
 export class TestStatisticsComponent implements OnInit {
   @Input() test: ITest;
-
+  myData = [
+    ['London', 8136000],
+    ['New York', 8538000],
+    ['Paris', 2244000],
+    ['Berlin', 3470000],
+    ['Kairo', 19500000],
+  ];
+  options = {
+    title: 'My Daily Activities',
+    pieHole: 0.4,
+  };
+  optionsColumn = {
+    title: 'Density of Precious Metals, in g/cm^3',
+    width: 300,
+    height: 200,
+    bar: {groupWidth: '95%'},
+    legend: { position: 'none' },
+  };
   constructor() { }
 
   ngOnInit() {

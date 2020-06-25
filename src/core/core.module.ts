@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CountdownModule } from 'ngx-countdown';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -46,6 +47,7 @@ const MaterialModules = [
     MaterialModules,
     FlexLayoutModule,
     CountdownModule,
+    GoogleChartsModule,
   ],
   exports: [
     HttpClientModule,
@@ -55,6 +57,7 @@ const MaterialModules = [
     MaterialModules,
     FlexLayoutModule,
     CountdownModule,
+    GoogleChartsModule,
   ]
 })
 export class CoreModule { }

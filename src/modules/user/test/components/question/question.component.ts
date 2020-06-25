@@ -12,7 +12,7 @@ export class QuestionComponent implements OnInit {
   @Input() action = 'attempt';
   public hasOptions = true;
   constructor() { }
-  
+
   ngOnInit() {
     this.hasOptions = this.question.options.some(op => op.statement);
   }
