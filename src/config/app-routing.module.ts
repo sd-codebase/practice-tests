@@ -22,6 +22,7 @@ const routes: Routes = [
   {
     path: 'admin', component: AdminDashboardComponent, canActivate: [ AdminAuthGuard ],
     children: [
+      {path: '', component: ComingSoonComponent},
       {path: 'view-questions', component: ViewQuestionsComponent},
       {path: 'import-questions', component: ImportQuestionsComponent},
       {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {
     path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
     children: [
+      {path: '', component: ComingSoonComponent},
       {path: 'coming-soon', component: ComingSoonComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'test', component: TestComponent},

@@ -11,12 +11,13 @@ import { AuthService } from 'src/auth/auth.service';
 export class UserDashboardComponent implements OnInit {
   public menus = [
     {menu: 'My Profile', path: '/user/profile', icon: 'person'},
-    {menu: 'My Tests', path: '/user/my-tests', icon: 'batch_prediction'},
-    {menu: 'Reports', path: '/user/coming-soon', icon: 'analytics'},
-    {menu: 'Demo test', path: '/user/test', icon: 'assignment'},
-    {menu: 'Start taking test', path: '/user/start-taking-test', icon: 'assignment_turned_in'},
+    {menu: 'Syllabus', path: '/user/coming-soon', icon: 'article'},
     {menu: 'Solved Papers', path: '/user/coming-soon', icon: 'done_all'},
-    {menu: 'Notes', path: '/user/coming-soon', icon: 'article'},
+    {menu: 'Sample test', path: '/user/test', icon: 'assignment'},
+    {menu: 'Start taking test', path: '/user/start-taking-test', icon: 'assignment_turned_in'},
+    {menu: 'My Tests', path: '/user/my-tests', icon: 'batch_prediction'},
+    {menu: 'Progress', path: '/user/coming-soon', icon: 'analytics'},
+    {menu: 'Ask a question', path: '/user/coming-soon', icon: 'forum'},
   ];
   public userProfile;
   public isAdmin = false;

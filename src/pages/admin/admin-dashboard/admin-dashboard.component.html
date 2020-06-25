@@ -1,7 +1,7 @@
 <div class="admin-dashboard">
     <mat-drawer-container class="drawer-container">
         <mat-drawer mode="side" [opened]="drawerService.opened">
-            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
+            <div class="padding-top" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
                 <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
                     <mat-icon>{{menu.icon}}</mat-icon>
                     {{menu.menu}}

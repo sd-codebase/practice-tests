@@ -3,8 +3,9 @@
     .drawer-container {
         height: 100%;
         mat-drawer {
-            width: 15em;
-            padding: 1em;
+            min-width: 11em;
+            max-width: 15em;
+            padding: 0 0.5em;
             .mat-list-item {
                 cursor: pointer;
             }
@@ -26,7 +27,8 @@
 }
 
 .user-image {
-    height: 7em;
-    width: 7em;
+    height: 5em;
+    width: 5em;
     border-radius: 50%;
+    margin-top: 0.5em;
 }

@@ -3,13 +3,18 @@
     .drawer-container {
         height: 100%;
         mat-drawer {
-            width: 15em;
-            padding: 1em;
+            min-width: 11em;
+            max-width: 15em;
+            padding: 0 0.5em;
             .mat-list-item {
                 cursor: pointer;
             }
         }
     }
+}
+
+.padding-top {
+    padding-top: 0.5em;
 }
 
 
