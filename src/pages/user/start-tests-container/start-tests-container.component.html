@@ -10,11 +10,25 @@
         <mat-tab label="Subjectwise test">
             <app-subjectwise [data]="data"></app-subjectwise>
         </mat-tab>
-        <mat-tab label="All Subjects test">
-            <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
-                <mat-icon>grading</mat-icon>
-                All Subjects
-            </button>
+        <mat-tab label="Mock test">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+                    <mat-icon>grading</mat-icon>
+                    JEE Main
+                </button>
+                <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+                    <mat-icon>grading</mat-icon>
+                    JEE Advance Paper - I
+                </button>
+                <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+                    <mat-icon>grading</mat-icon>
+                    JEE Advance Paper - II
+                </button>
+                <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+                    <mat-icon>grading</mat-icon>
+                    NEET
+                </button>
+            </div>
         </mat-tab>
     </mat-tab-group>
 </div>

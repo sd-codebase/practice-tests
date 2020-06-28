@@ -6,7 +6,6 @@
             *ngIf="question"
             [action]="action"
             [question]="question"
-            [counter]="counter"
         ></app-question>
     </div>
     <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question && action === 'attempt'">
@@ -48,22 +47,23 @@
                     <mat-icon>skip_previous</mat-icon>
                     Previous
                 </button>
-                <button mat-raised-button color="" (click)="showAnswer()">
+                <!-- <button mat-raised-button color="" (click)="showAnswer()">
                     <mat-icon>done</mat-icon>
                     View Answer
-                </button>
+                </button> -->
                 <button mat-raised-button color="" *ngIf="question.questionNum !== test.questionCount" (click)="viewNextQuestion()">
                     Next
                     <mat-icon>skip_next</mat-icon>
                 </button>
             </div>
         </div>
-        <div class="answer-block" fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="isAnswerVisible">
-            <span>Ans. ({{answer}})</span>
-            <span *ngIf="!answerDescription">Stay in touch for answer description</span>
+        <div class="answer-block" fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question && action=== 'view'">
+            <span>Ans. ({{question.answer}})</span>
+            <span *ngIf="!question.answerDescription">Stay in touch for answer description</span>
             <app-statement
-                *ngIf="answerDescription"
-                [statement]="answerDescription"
+                *ngIf="question.answerDescription"
+                [imagePath]="question.imagePath"
+                [statement]="question.answerDescription"
             ></app-statement>
         </div>
     </div>

@@ -13,7 +13,7 @@ export class SubjectwiseComponent extends GenerateTest implements OnInit {
   }
 
   createTest(subject) {
-    this.generateTest({questionCount: 50, subject});
+    this.generateTest({questionCount: 60, subject});
   }
 
 }

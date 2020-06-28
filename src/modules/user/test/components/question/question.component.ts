@@ -8,7 +8,6 @@ import { CQuestion } from '../../test.model';
 })
 export class QuestionComponent implements OnInit {
   @Input() question: CQuestion;
-  @Input() counter: number;
   @Input() action = 'attempt';
   public hasOptions = true;
   constructor() { }

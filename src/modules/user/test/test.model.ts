@@ -78,8 +78,9 @@ export class CQuestion {
     chapter: CChapter;
     tags: string;
     level: EQuestionLevels;
+    imagePath: string;
 
-    constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags}) {
+    constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags, imagePath}) {
         this.id = id;
         this.question = question;
         this.options = options;
@@ -89,6 +90,7 @@ export class CQuestion {
         this.chapter = chapter;
         this.tags = tags;
         this.level = level;
+        this.imagePath = imagePath;
     }
 
     isCorrectAnswer() {

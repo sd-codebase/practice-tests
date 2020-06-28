@@ -1,4 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { HttpService } from '@components/http.service';
+import { LoaderService } from '@components/loader.service';
+import { CQuestion } from '@modules/user/test/test.model';
 
 @Component({
   selector: 'app-validate-math-expression',
@@ -8,7 +11,11 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 export class ValidateMathExpressionComponent implements OnInit {
   public content: string;
   public isValidate = false;
-  constructor() { }
+  public matchedQuestion: CQuestion;
+  constructor(
+    private loaderService: LoaderService,
+    private http: HttpService,
+  ) { }
 
   ngOnInit() {
   }
@@ -25,7 +32,15 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.isValidate = false;
     setTimeout(() => {
       this.isValidate = true;
-    }, 100)
+    }, 100);
+  }
+
+  async isQuestionExists() {
+    this.matchedQuestion = null;
+    this.loaderService.show();
+    this.matchedQuestion = await this.http.post('/questions/matching-question', {'question.statement': this.content})
+    .toPromise() as CQuestion;
+    this.loaderService.hide();
   }
 
 }

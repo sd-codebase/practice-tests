@@ -8,7 +8,7 @@
             <h4>Time left</h4>
             <button class="strong" mat-raised-button color="accent" fxLayout="row" fxLayoutAlign="space-between center">
                 <mat-icon>timer</mat-icon>
-                <countdown [config]="{leftTime: timer, format: 'mm:ss'}" (event)="handleEvent($event)"></countdown>
+                <countdown [config]="{leftTime: timer, format: 'HH:mm:ss'}" (event)="handleEvent($event)"></countdown>
             </button>
         </div>
         <app-quiz fxFill
@@ -19,25 +19,31 @@
             (timerPause) = "pauseTimer()"
             (timerResume) = "resumeTimer()"
         ></app-quiz>
-        <app-test-statistics fxFill
-            *ngIf="test && test.status === 2"
-            [test]="test"
-        ></app-test-statistics>
-        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-            <button mat-raised-button color="primary" *ngIf="test && test.status === 2" [routerLink]="['/user/start-taking-test']" fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-icon>grading</mat-icon>
-                Create New Test
-            </button>
-            <button mat-raised-button color="primary" *ngIf="test && test.status === 2" [routerLink]="['/user/my-tests']" fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-icon>grading</mat-icon>
-                My Tests
-            </button>
-        </div>
+        
     </div>
     <div *ngIf="test && test.status === 1" fxFlex="20" >
         <app-question-pallete
             [test]="test"
             (handleQuestionSelection)="onQuestionSelection($event)"
         ></app-question-pallete>
+    </div>
+</div>
+<div fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="test && test.status === 2">
+    <app-test-statistics
+        [test]="test"
+    ></app-test-statistics>
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+        <button mat-raised-button color="success" *ngIf="test && test.status === 2" [routerLink]="['/user/test-answer-key', test._id]" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            Answer key
+        </button>
+        <button mat-raised-button color="orange" *ngIf="test && test.status === 2" [routerLink]="['/user/my-tests']" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            My Tests
+        </button>
+        <button mat-raised-button color="primary" *ngIf="test && test.status === 2" [routerLink]="['/user/start-taking-test']" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>grading</mat-icon>
+            Create New Test
+        </button>
     </div>
 </div>

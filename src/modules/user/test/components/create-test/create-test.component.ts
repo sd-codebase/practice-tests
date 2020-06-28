@@ -66,9 +66,9 @@ export class CreateTestComponent implements OnInit {
     try {
       this.test.status = ETestStatus.FINISHED;
       this.test.attemptCount = this.test.questions.filter( que => que.isSubmitted).length;
-      // this.test.correctCount = this.test.questions.filter( que => que.correctAnswer).length;
-      this.test.percentage = +(this.test.correctCount / this.test.questionCount * 100).toFixed(2);
-      this.test = await this.http.put('/tests', this.test).toPromise()  as ITest;
+      const test = this.test;
+      this.test = null;
+      this.test = await this.http.put('/tests', test).toPromise()  as ITest;
     } catch (e) {
 
     } finally {
@@ -96,7 +96,7 @@ export class CreateTestComponent implements OnInit {
 
   handleEvent(e) {
     if (this.isTestLoaded && (e.action === 'stop' || e.action === 'done')) {
-      this.test.completeTime = e.left ? e.left / 1000 : this.test.allottedTime;
+      this.test.completeTime = e.left ? e.left / 1000 : 0;
       this.onFinishTest();
     }
   }

@@ -20,7 +20,7 @@ export class TestsListComponent implements OnInit {
 
   async ngOnInit() {
     this.loaderService.show();
-    this.tests = await this.http.get('/tests/all', {userId: this.storage.getUserId()}).toPromise();
+    this.tests = await this.http.get('/tests/all?userId=' + this.storage.getUserId()).toPromise();
     this.loaderService.hide();
   }
 

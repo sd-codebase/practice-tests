@@ -15,6 +15,9 @@ import { StartTestsContainerComponent } from '@pages/user/start-tests-container/
 import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
 import { ViewQuestionsComponent } from '@pages/admin/view-questions/view-questions.component';
 import { AdminAuthGuard } from 'src/auth/admin.auth.guard';
+import { VerifyQuestionsComponent } from '@pages/admin/verify-questions/verify-questions.component';
+import { ImportSolvedPapersComponent } from '@pages/admin/import-solved-papers/import-solved-papers.component';
+import { SolvedPapersComponent } from '@pages/user/solved-papers/solved-papers.component';
 
 
 const routes: Routes = [
@@ -25,7 +28,9 @@ const routes: Routes = [
       {path: '', component: ComingSoonComponent},
       {path: 'view-questions', component: ViewQuestionsComponent},
       {path: 'import-questions', component: ImportQuestionsComponent},
+      {path: 'import-predefined-test', component: ImportSolvedPapersComponent},
       {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
+      {path: 'verify-questions', component: VerifyQuestionsComponent},
     ],
   },
   {
@@ -34,6 +39,7 @@ const routes: Routes = [
       {path: '', component: ComingSoonComponent},
       {path: 'coming-soon', component: ComingSoonComponent},
       {path: 'profile', component: ProfileComponent},
+      {path: 'solved-papers', component: SolvedPapersComponent},
       {path: 'test', component: TestComponent},
       {path: 'my-tests', component: MyTestsComponent},
       {path: 'start-taking-test', component: StartTestsContainerComponent},

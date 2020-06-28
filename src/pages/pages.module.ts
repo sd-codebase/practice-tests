@@ -17,6 +17,9 @@ import { StartTestsContainerComponent } from './user/start-tests-container/start
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ViewQuestionsComponent } from './admin/view-questions/view-questions.component';
 import { AdminModule } from '@modules/admin/admin.module';
+import { VerifyQuestionsComponent } from './admin/verify-questions/verify-questions.component';
+import { ImportSolvedPapersComponent } from './admin/import-solved-papers/import-solved-papers.component';
+import { SolvedPapersComponent } from './user/solved-papers/solved-papers.component';
 
 @NgModule({
   imports: [
@@ -45,6 +48,9 @@ import { AdminModule } from '@modules/admin/admin.module';
     StartTestsContainerComponent,
     ComingSoonComponent,
     ViewQuestionsComponent,
+    VerifyQuestionsComponent,
+    ImportSolvedPapersComponent,
+    SolvedPapersComponent,
   ]
 })
 export class PagesModule { }

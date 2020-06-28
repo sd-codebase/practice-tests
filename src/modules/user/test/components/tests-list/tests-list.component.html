@@ -17,6 +17,7 @@
       </mat-expansion-panel-header>
   
       <app-test-statistics
+        *ngIf="test.isSubmitted"
         [test]="test"
       ></app-test-statistics>
   

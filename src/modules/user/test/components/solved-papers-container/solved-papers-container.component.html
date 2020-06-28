@@ -1,0 +1,8 @@
+<div fxLayout="row wrap" fxLayoutGap="0.1em grid">
+    <div class="content" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let paper of papers">
+        <button mat-raised-button [routerLink]="['/user/test-answer-key', paper._id]" color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon>article</mat-icon>
+            {{ paper.testName }}
+        </button>
+    </div>
+</div>

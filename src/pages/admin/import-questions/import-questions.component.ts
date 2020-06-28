@@ -3,6 +3,7 @@ import { HttpService } from '@components/http.service';
 import { CChapter, CQuestion, CStatement } from '@modules/user/test/test.model';
 import * as _ from 'lodash';
 import { LoaderService } from '@components/loader.service';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-import-questions',
@@ -15,6 +16,7 @@ export class ImportQuestionsComponent implements OnInit {
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
+    private storage: StorageService,
   ) { }
 
   ngOnInit() {
@@ -69,10 +71,12 @@ export class ImportQuestionsComponent implements OnInit {
       const isSingleAnswer = data[Keys.question].split(',')[4] === 'Yes';
       const {level, tags} = data;
       dataToPush.push(new CQuestion({
-        id: null, question, options, answer : data.answer, answerDescription, isSingleAnswer, chapter, level, tags
+        id: null, question, options, answer : data.answer,
+        answerDescription, isSingleAnswer, chapter,
+        level, tags, imagePath: data.image_path,
       }));
     });
-    this.uploadData = await this.http.post(this.urlToUpload, dataToPush).toPromise();
+    this.uploadData = await this.http.post(this.urlToUpload, {questions: dataToPush, userId: this.storage.getUserId()}).toPromise();
     this.loaderService.hide();
   }
 }

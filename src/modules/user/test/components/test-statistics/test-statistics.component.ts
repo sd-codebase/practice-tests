@@ -8,27 +8,47 @@ import { ITest } from '../../test.model';
 })
 export class TestStatisticsComponent implements OnInit {
   @Input() test: ITest;
-  myData = [
-    ['London', 8136000],
-    ['New York', 8538000],
-    ['Paris', 2244000],
-    ['Berlin', 3470000],
-    ['Kairo', 19500000],
+  piData = [
+    ['Correct', 0],
+    ['Wrong', 0],
+    ['Skipped', 0],
   ];
-  options = {
-    title: 'My Daily Activities',
+  columnData = [
+    ['Correct', 0],
+    ['Wrong', 0],
+    ['Skipped', 0],
+  ];
+  piOptions = {
+    title: 'Test Analysis',
     pieHole: 0.4,
+    width: 340,
+    height: 254,
+    colors: ['#109618', '#dc3912', '#3366cc']
   };
-  optionsColumn = {
-    title: 'Density of Precious Metals, in g/cm^3',
-    width: 300,
-    height: 200,
+  columnOptions = {
+    title: 'Test Analysis',
+    width: 340,
+    height: 254,
     bar: {groupWidth: '95%'},
     legend: { position: 'none' },
+    colors: ['#3366cc', '#dc3912', '#109618']
   };
   constructor() { }
 
   ngOnInit() {
+    this.piData[0][1] = this.test.correctCount;
+    this.piData[1][1] = this.test.attemptCount - this.test.correctCount;
+    this.piData[2][1] = this.test.questionCount - this.test.attemptCount;
+
+    this.columnData[0][1] = this.test.correctCount;
+    this.columnData[1][1] = this.test.attemptCount - this.test.correctCount;
+    this.columnData[2][1] = this.test.questionCount - this.test.attemptCount;
+
+    // this.columnData[0][1] = this.test.percentage;
+    // this.columnData[1][1] = (this.test.attemptCount - this.test.correctCount) / this.test.questionCount * 100;
+    // this.columnData[2][1] =
+    // this.test.attemptCount === this.test.questionCount
+    // ? 0 : (this.test.questionCount - this.test.attemptCount) / this.test.questionCount * 100;
   }
 
   getButtonColor(num1, num2) {

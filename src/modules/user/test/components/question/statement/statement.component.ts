@@ -7,6 +7,7 @@ import { CStatement } from '@modules/user/test/test.model';
   styleUrls: ['./statement.component.scss']
 })
 export class StatementComponent implements OnInit {
+  @Input() imagePath: string;
   @Input() statement: CStatement;
   @Output() handleInputChange = new EventEmitter();
   public statementList: string[];
@@ -26,7 +27,7 @@ export class StatementComponent implements OnInit {
   }
 
   fetchImage(src) {
-    return 'assets/questions/science/12/mathematics/maths_chapter_1/' + src + '.png';
+    return `assets${this.imagePath.trim()}${src.trim()}.PNG`;
   }
 
 }

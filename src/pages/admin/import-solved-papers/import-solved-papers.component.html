@@ -1,0 +1,7 @@
+<app-page-header [header]="'Import Questions'"></app-page-header>
+<div class="page-container">
+    <app-xlsx-to-json-upload
+        (handleUploadedData)="onDataRead($event)"
+    ></app-xlsx-to-json-upload>
+    {{uploadData | json}}
+</div>

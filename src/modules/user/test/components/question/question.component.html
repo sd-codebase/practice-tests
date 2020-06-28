@@ -2,6 +2,7 @@
   <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
     <div fxFill class="question-div">
       <app-statement
+        [imagePath]="question.imagePath"
         [statement]="question.question"
         (handleInputChange)="onInputChange($event)"
       ></app-statement>
@@ -22,6 +23,7 @@
           <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
           <app-statement
             *ngIf="op.statement"
+            [imagePath]="question.imagePath"
             [statement]="op"
           ></app-statement>
         </div>
@@ -41,6 +43,7 @@
         <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
         <app-statement
           *ngIf="op.statement"
+          [imagePath]="question.imagePath"
           [statement]="op"
         ></app-statement>
       </div>

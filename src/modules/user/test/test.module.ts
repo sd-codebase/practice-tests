@@ -14,6 +14,7 @@ import { GenerateTestComponent } from './components/generate-test/generate-test.
 import { TopicwiseComponent } from './components/tests-container/topicwise/topicwise.component';
 import { SubjectwiseComponent } from './components/tests-container/subjectwise/subjectwise.component';
 import { ChapterwiseComponent } from './components/tests-container/chapterwise/chapterwise.component';
+import { SolvedPapersContainerComponent } from './components/solved-papers-container/solved-papers-container.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,9 @@ import { ChapterwiseComponent } from './components/tests-container/chapterwise/c
     TopicwiseComponent,
     SubjectwiseComponent,
     ChapterwiseComponent,
+    QuestionComponent,
+    StatementComponent,
+    SolvedPapersContainerComponent,
   ],
   declarations: [
     CreateTestComponent,
@@ -43,6 +47,7 @@ import { ChapterwiseComponent } from './components/tests-container/chapterwise/c
     TopicwiseComponent,
     SubjectwiseComponent,
     ChapterwiseComponent,
+    SolvedPapersContainerComponent,
   ],
 })
 export class TestModule { }

@@ -1,61 +1,47 @@
-<div fxFill fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="1em">
+<div fxFill fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="1em" *ngIf="test">
     <div class="border-bottom" fxFill fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="1em">
         Test Result
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
-        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="0.5em">
             <div class="card-layout row-one" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <span>Remark</span>
-                <span>Fail</span>
+                <span>{{ test.percentage > 70 ? 'Pass' : 'Fail'}}</span>
             </div>
             <div fxFill class="card-layout row-four" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Total Marks</span>
+                    <span>{{ test.questionCount * 4 }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Score</span>
+                    <span>{{ (this.test.correctCount * 4) - (this.test.attemptCount - this.test.correctCount) }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Positive</span>
+                    <span>{{ this.test.correctCount * 4 }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Negative</span>
+                    <span>-{{ this.test.attemptCount - this.test.correctCount }}</span>
                 </div>
             </div>
             <div fxFill class="card-layout row-two" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Duration</span>
+                    <span>{{ test.allottedTime | time : 'fromSeconds' }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                    <span>Remark</span>
-                    <span>Fail</span>
+                    <span>Spent</span>
+                    <span>{{ (test.allottedTime - test.completeTime) | time : 'fromSeconds' }}</span>
                 </div>
             </div>
         </div>
         <div class="card-layout">
-            <google-chart [type]="'PieChart'" [data]="myData" [options]="options"></google-chart>
+            <google-chart [type]="'PieChart'" [data]="piData" [options]="piOptions"></google-chart>
         </div>
         <div class="card-layout">
-            <google-chart [type]="'ColumnChart'" [data]="myData" [options]="optionsColumn"></google-chart>
+            <google-chart [type]="'ColumnChart'" [data]="columnData" [options]="columnOptions"></google-chart>
         </div>
     </div>
-    <mat-card *ngIf="test">
-        <mat-card-content fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="5em">
-            <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                <label>Questions</label><button mat-mini-fab color="primary">{{ test.questionCount }}</button>
-                <label>Attempted</label><button mat-mini-fab [color]="getButtonColor(test.attemptCount, test.questionCount)">{{ test.attemptCount }}</button>
-                <label>Correct</label><button mat-mini-fab [color]="getButtonColor(test.correctCount, test.questionCount)">{{ test.correctCount }}</button>
-            </div>
-            <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                <label>Alotted Time</label><button mat-raised-button color="primary">{{ test.allottedTime | time : 'fromSeconds' }}</button>
-                <label>Complete Time</label><button mat-raised-button [color]="getButtonColor((test.allottedTime - test.completeTime), test.allottedTime)">{{ (test.allottedTime - test.completeTime) | time : 'fromSeconds' }}</button>
-                <label>Percentage</label><button mat-raised-button [color]="getButtonColor(test.percentage, 100)">{{ test.percentage  | number:'2.0-2' }}%</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
 </div>

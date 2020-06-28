@@ -1,0 +1,27 @@
+<div fxFlex="80" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4em">
+    <div fxFlex="20" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
+        <a *ngFor="let question of questions" (click)="setQuestion(question)">{{ question._id }}</a>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
+        <div class="question-container">
+            <app-question
+                *ngIf="question"
+                [action]="'view'"
+                [question]="question"
+            ></app-question>
+        </div>
+        <div class="answer-block" fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
+            <span>Ans. ({{question.answer}})</span>
+            <span *ngIf="!question.answerDescription">Stay in touch for answer description</span>
+            <app-statement
+                *ngIf="question.answerDescription"
+                [imagePath]="question.imagePath"
+                [statement]="question.answerDescription"
+            ></app-statement>
+        </div>
+        <button mat-raised-button color="success" (click)="verifyQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
+            <mat-icon>done</mat-icon>
+            Verify
+        </button>
+    </div>
+</div>
