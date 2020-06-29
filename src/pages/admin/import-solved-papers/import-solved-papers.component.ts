@@ -4,6 +4,7 @@ import { CChapter, CQuestion, CStatement } from '@modules/user/test/test.model';
 import * as _ from 'lodash';
 import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-import-solved-papers',
@@ -17,9 +18,11 @@ export class ImportSolvedPapersComponent implements OnInit {
     private http: HttpService,
     private loaderService: LoaderService,
     private storage: StorageService,
+    private drawerService: DrawerService,
   ) { }
 
   ngOnInit() {
+    this.drawerService.setPageHeader('Import Solved Papers');
   }
 
   async onDataRead({names, jsonData}) {

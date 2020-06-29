@@ -2,7 +2,7 @@
     height: 100%;
     .drawer-container {
         height: 100%;
-        mat-drawer {
+        mat-sidenav {
             min-width: 11em;
             max-width: 15em;
             padding: 0 0.5em;
@@ -31,4 +31,8 @@
     width: 5em;
     border-radius: 50%;
     margin-top: 0.5em;
+}
+
+.mat-icon {
+    cursor: pointer;
 }

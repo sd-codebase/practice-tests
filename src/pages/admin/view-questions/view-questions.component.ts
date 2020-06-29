@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-view-questions',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewQuestionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private drawerService: DrawerService,
+  ) { }
 
   ngOnInit() {
+    this.drawerService.setPageHeader('View Questions');
   }
 
 }

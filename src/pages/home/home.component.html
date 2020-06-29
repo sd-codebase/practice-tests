@@ -1,11 +1,11 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
-    <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/admin']" *ngIf="auth.loggedIn">
-        <mat-icon>dashboard</mat-icon>
+    <button *ngIf="auth.loggedIn && storageService.getUserId() === '5ee352aea4928b0014252d80' " fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/admin']">
+        <mat-icon>toc</mat-icon>
         Admin Dashboard
     </button>
     <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/user']" *ngIf="auth.loggedIn">
-        <mat-icon>dashboard</mat-icon>
-        Dashboard
+        <mat-icon>toc</mat-icon>
+        User Dashboard
     </button>
     <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="auth.login()" *ngIf="!auth.loggedIn">
         <mat-icon>login</mat-icon>

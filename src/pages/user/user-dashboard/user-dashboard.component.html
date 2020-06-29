@@ -1,6 +1,6 @@
 <div class="user-dashboard">
-    <mat-drawer-container class="drawer-container">
-        <mat-drawer mode="side" [opened]="drawerService.opened">
+    <mat-sidenav-container class="drawer-container">
+        <mat-sidenav mode="over" #sidenav>
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
                 <img class="user-image" [src]="userProfile.picture">
                 <div fxLayout="column" fxLayoutGap="1em">
@@ -18,9 +18,12 @@
                     </button>
                 </div>
             </div>
-        </mat-drawer>
-        <mat-drawer-content>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <mat-toolbar color="primary">
+                <mat-icon (click)="sidenav.toggle()" title="Open Menus">toc</mat-icon> {{ drawerService.pageHeader }}
+            </mat-toolbar>
             <router-outlet></router-outlet>
-        </mat-drawer-content>
-    </mat-drawer-container>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

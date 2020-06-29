@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
-    <mat-icon *ngIf="drawerService.opened" (click)="drawerService.close()">menu_open</mat-icon>
-    <mat-icon *ngIf="!drawerService.opened" (click)="drawerService.open()">dashboard</mat-icon>
+    <!-- <mat-icon *ngIf="drawerService.opened" (click)="drawerService.close()">toc</mat-icon> -->
+    <!-- <mat-icon *ngIf="!drawerService.opened" (click)="drawerService.open()">toc</mat-icon> -->
+    <mat-icon (click)="drawerService.open()">toc</mat-icon>
     {{header}}
 </mat-toolbar>

@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpService } from '@components/http.service';
 import { LoaderService } from '@components/loader.service';
 import { CQuestion } from '@modules/user/test/test.model';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-validate-math-expression',
@@ -15,9 +16,11 @@ export class ValidateMathExpressionComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private http: HttpService,
+    private drawerService: DrawerService,
   ) { }
 
   ngOnInit() {
+    this.drawerService.setPageHeader('Validate Expresssion');
   }
 
   onChange(changes: string) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-my-tests',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-tests.component.scss']
 })
 export class MyTestsComponent implements OnInit {
-  public pageHeader = 'My tests';
-  constructor() { }
+  constructor(
+    private drawerService: DrawerService,
+  ) { }
 
   ngOnInit() {
+    this.drawerService.setPageHeader('My tests');
   }
 
 }
