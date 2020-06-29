@@ -1,5 +1,5 @@
 <div fxFlex="80" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4em">
-    <div fxFlex="20" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
+    <div class="question-id-container" fxFlex="20" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
         <a *ngFor="let question of questions" (click)="setQuestion(question)">{{ question._id }}</a>
     </div>
     <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">

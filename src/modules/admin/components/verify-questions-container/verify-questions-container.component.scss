@@ -1,6 +1,9 @@
 app-question, .answer-block {
     font-family: 'Times New Roman', Times, serif; font-size: 1.5em !important;
 }
+.question-id-container {
+    max-height: 50em;
+}
 a {
     cursor: pointer;
 }

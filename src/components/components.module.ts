@@ -9,6 +9,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { TimePipe } from './pipes/time.pipe';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { NotificationBarComponent } from './notifications.service';
+import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NotificationBarComponent } from './notifications.service';
     TimePipe,
     PageHeaderComponent,
     NotificationBarComponent,
+    ComingSoonComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { NotificationBarComponent } from './notifications.service';
     LoaderComponent,
     TimePipe,
     PageHeaderComponent,
+    ComingSoonComponent,
   ],
   providers : [
     HttpService,

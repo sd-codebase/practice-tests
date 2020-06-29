@@ -1,4 +1,8 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/admin']" *ngIf="auth.loggedIn">
+        <mat-icon>dashboard</mat-icon>
+        Admin Dashboard
+    </button>
     <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" [routerLink]="['/user']" *ngIf="auth.loggedIn">
         <mat-icon>dashboard</mat-icon>
         Dashboard

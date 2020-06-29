@@ -7,7 +7,7 @@
         <app-mathjax *ngIf="isValidate" [content]="content"></app-mathjax>
     </div>
     <div *ngIf="matchedQuestion" >
-        <span>{{matchedQuestion._id}}</span><br>
+        <span>{{matchedQuestion.id}}</span><br>
         <app-mathjax [content]="matchedQuestion.question.statement"></app-mathjax>
     </div>
 </div>
