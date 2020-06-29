@@ -2,4 +2,31 @@
     .question-pallet-container {
         display: none;
     }
+    .question-pallete-opener {
+        display: block !important;
+        cursor: pointer;
+        font-size: 3em !important;
+        position: fixed;
+        top:0.95em;right:0;
+    }
+    .question-pallete-mobile {
+        display: block ;
+        top: 0;
+        bottom:0;
+        right: 0;
+        position: fixed; 
+        background-color: #000;
+
+        div.pallet {
+            display: block;
+            padding: 0.2em;
+            height: 100vh;
+            background-color: #fff !important;
+            margin-left: 50% !important;
+        }
+    }
+}
+
+.question-pallete-mobile.disabled, .question-pallete-opener {
+    display: none; 
 }

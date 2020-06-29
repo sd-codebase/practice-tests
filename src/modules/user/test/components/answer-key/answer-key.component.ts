@@ -16,6 +16,7 @@ export class AnswerKeyComponent implements OnInit {
 
   @Input() testId: string;
   public test: ITest;
+  public openQuestionPallete = false;
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
