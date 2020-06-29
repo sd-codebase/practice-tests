@@ -1,12 +1,12 @@
 <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-    <app-quiz fxFlex="78"
+    <app-quiz fxFlex="78" fxFlex.xs="98"
         *ngIf="test && test.status === 2"
         [action]="'view'"
         [test]="test"
     ></app-quiz>
 
-    <div *ngIf="test && test.status === 2" fxFlex="20" >
-        <app-question-pallete
+    <div *ngIf="test && test.status === 2" fxFlex="20"  fxFlex.xs="0">
+        <app-question-pallete class="question-pallet-container"
             [action]="'view'"
             [test]="test"
             (handleQuestionSelection)="onQuestionSelection($event)"

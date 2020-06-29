@@ -1,4 +1,4 @@
-<div *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
+<div fxFill *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
     <h3 *ngIf="question">Question {{ question.questionNum }}:</h3>
     <mat-divider></mat-divider>
     <div class="question-container">
@@ -9,14 +9,14 @@
         ></app-question>
     </div>
     <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question && action === 'attempt'">
-        <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.1em">
-            <button fxFlex="25" mat-raised-button color="lime" [disabled]="!question.userAnswer" (click)="saveAndNext()"> 
+        <div class="question-action-buttons" fxFill fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <button mat-raised-button color="lime" [disabled]="!question.userAnswer" (click)="saveAndNext()"> 
                 {{ isLastQuestion() ? 'Save' : 'Save & Next' }}
             </button>
-            <button fxFlex="25" mat-raised-button color="accent" [disabled]="!question.userAnswer" (click)="saveAndMarkForReviewAndNext()"> 
+            <button mat-raised-button color="accent" [disabled]="!question.userAnswer" (click)="saveAndMarkForReviewAndNext()"> 
                 {{ isLastQuestion() ? 'Save & Mark for review' : 'Save, Mark for review & Next' }}
             </button>
-            <button fxFlex="25" mat-raised-button color="primary" (click)="markForReviewAndNext()">
+            <button mat-raised-button color="primary" (click)="markForReviewAndNext()">
                 {{ isLastQuestion() ? 'Mark for review' : 'Mark for review & Next' }}
             </button>
             <button mat-raised-button [disabled]="!question.userAnswer" (click)="clearResponse()">
@@ -34,7 +34,7 @@
                     <mat-icon>skip_next</mat-icon>
                 </button>
             </div>
-            <button fxFlex="20" mat-raised-button color="lime" (click)="finishTest()">
+            <button mat-raised-button color="lime" (click)="finishTest()">
                 <mat-icon>done_outline</mat-icon>
                 Submit Test
             </button>
@@ -61,6 +61,7 @@
             <span>Ans. ({{question.answer}})</span>
             <span *ngIf="!question.answerDescription">Stay in touch for answer description</span>
             <app-statement
+                fxFill
                 *ngIf="question.answerDescription"
                 [imagePath]="question.imagePath"
                 [statement]="question.answerDescription"

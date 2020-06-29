@@ -41,3 +41,14 @@
 .question-box {
     font-size: 18px;
 }
+
+@media only screen and (max-width: 600px)  {
+    .scroll-questions {
+        height: 60vh;
+        overflow-y: auto;
+    
+        &.view-mode {
+            height: 50vh;
+        }
+    }
+}
