@@ -36,7 +36,6 @@ export class CreateTestComponent implements OnInit {
     this.loaderService.show();
     this.isTestLoaded = false;
     try {
-      // this.test = await this.http.post('/tests', {userId: this.storage.getUserId()}).toPromise() as ITest;
       this.test = await this.http.get('/tests/' + this.testId).toPromise() as ITest;
       this.test.questions = this.test.questions.map( (que, index) => {
         const question = new CQuestion(que as any);
