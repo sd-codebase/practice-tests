@@ -1,9 +1,9 @@
-<div *ngIf="!hasInputBox && !statement.isImage" fxLayout="{{statement.isImageFloated ? 'row' : 'column' }}" fxFill fxLayoutAlign="start start" fxLayoutGap="2em">
+<div class="margin-bottom-1em" *ngIf="!hasInputBox && !statement.isImage" fxLayout="column" fxFill fxLayoutAlign="start start" fxLayoutGap="2em">
     <app-mathjax *ngIf="statement.isMathExpression" [content]="statement.statement"></app-mathjax>
     <span *ngIf="!statement.isMathExpression" [innerHTML]="statement.statement"></span>
-    <img [ngClass]="{'flotted-image': statement.isImageFloated, 'below-image': !statement.isImageFloated}" *ngIf="statement.hasImage" [src]="fetchImage(statement.containedImage)"/>
+    <img class="below-image" *ngIf="statement.hasImage" [src]="fetchImage(statement.containedImage)"/>
 </div>
-<div *ngIf="!hasInputBox && statement.isImage">
+<div class="margin-bottom-1em" *ngIf="!hasInputBox && statement.isImage">
     <img class="below-image" [src]="fetchImage(statement.statement)"/>
 </div>
 <div *ngIf="hasInputBox">

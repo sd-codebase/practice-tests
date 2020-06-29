@@ -22,6 +22,7 @@ export class CreateTestComponent implements OnInit {
   public test: ITest;
   public timer = 0;
   public isTestLoaded = false;
+  public openQuestionPallete = false;
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,

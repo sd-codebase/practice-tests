@@ -9,6 +9,7 @@ export interface ITest {
     allottedTime: number;
     completeTime: number;
     percentage: number;
+    testName?: string;
 }
 
 export enum ETestStatus {

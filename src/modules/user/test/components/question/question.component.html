@@ -12,7 +12,7 @@
     </div>
    <div fxFill class="options-div" *ngIf="hasOptions && question.isSingleAnswer">
       <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="0.1em">
-        <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
+        <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 
             class="margin-half-em" 
             color="primary"
@@ -30,7 +30,7 @@
       </mat-radio-group>
     </div>
     <div fxFill class="options-div" *ngIf="hasOptions && !question.isSingleAnswer">
-      <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
+      <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
         <mat-checkbox
           *ngIf="op.statement && action === 'attempt'"
           class="margin-half-em" 

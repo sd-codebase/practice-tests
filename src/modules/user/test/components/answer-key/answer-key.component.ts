@@ -3,6 +3,7 @@ import { HttpService } from '@components/http.service';
 import { LoaderService } from '@components/loader.service';
 import { ITest, CQuestion } from '../../test.model';
 import { QuizComponent } from '../quiz/quiz.component';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-answer-key',
@@ -18,6 +19,7 @@ export class AnswerKeyComponent implements OnInit {
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
+    private drawerService: DrawerService,
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class AnswerKeyComponent implements OnInit {
         question.questionNum = index + 1;
         return question;
       });
+      this.drawerService.setPageHeader(this.test.testName);
       this.loaderService.hide();
     }
   }
