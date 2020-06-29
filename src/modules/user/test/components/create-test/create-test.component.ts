@@ -3,7 +3,6 @@ import { ITest, ETestStatus, CQuestion, EQuestionStatus } from '../../test.model
 import { HttpService } from '@components/http.service';
 import { CountdownComponent } from 'ngx-countdown';
 import { QuizComponent } from '../quiz/quiz.component';
-import { StorageService } from '@components/storage.serice';
 import { LoaderService } from '@components/loader.service';
 
 @Component({
