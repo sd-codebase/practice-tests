@@ -1,3 +1,23 @@
 .view-questions {
     font-size: 12px;
 }
+
+.status-icon-button {
+    display: none;
+}
+
+.status-button {
+    display: block;
+}
+
+@media only screen and (max-width: 600px)  {
+    .status-button {
+        display: none !important;
+    }
+    .status-icon-button {
+        display: block;
+    }
+    .created-info {
+        max-width: 5em;
+    }
+}

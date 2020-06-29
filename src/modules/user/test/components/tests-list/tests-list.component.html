@@ -3,8 +3,11 @@
       <mat-expansion-panel-header>
         <mat-panel-title>{{ test.chapter.subject }}</mat-panel-title>
         <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
-            Created: {{ test.createdAt }}
-            <button mat-raised-button color="{{ test.isSubmitted ? 'success' : 'accent'}}" fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="created-info shorten-text" [title]="test.createdAt">Created: {{ test.createdAt }}</span>
+            <button class="status-icon-button" mat-mini-fab color="{{ test.isSubmitted ? 'success' : 'accent'}}" >
+              <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
+            </button>
+            <button class="status-button" mat-raised-button color="{{ test.isSubmitted ? 'success' : 'accent'}}" fxLayout="row" fxLayoutAlign="space-between center">
               <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
               {{ test.isSubmitted ? 'Finished' : 'Pending'}}
             </button>
