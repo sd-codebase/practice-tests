@@ -19,8 +19,8 @@ export class NotificationService {
             data: {icon, title, message},
             panelClass: [snackbarclass, 'snackbar'],
             duration: 3000,
-            horizontalPosition: 'left',
-            verticalPosition: 'bottom',
+            horizontalPosition: window.innerWidth <= 600 ? 'center' : 'left',
+            verticalPosition: window.innerWidth <= 600 ? 'top' : 'bottom',
         });
     }
 }
