@@ -1,5 +1,6 @@
-<div class="{{ loading ? 'loader' : '' }}">
+<div class="loader-overlay" [class.loader]="loading">
     <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
         <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
     </div>
 </div>
+<div class="inactive-overlay" [class.loader]="inactiveLoading"></div>
