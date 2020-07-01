@@ -1,0 +1,14 @@
+<div style="margin: 1em" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+    <div class="container">
+        <div>
+            <div [id]="contentBlock.element" class="animate" *ngFor="let contentBlock of contents">
+                <app-mathjax [content]="contentBlock.content"></app-mathjax>
+            </div>
+        </div>
+    </div>
+    <div fxFLex="10" class="actions">
+        <button (click)="animate()">Show</button>
+    </div>
+</div>
+<!-- <span class="a1">/</span>
+<span class="a2">/</span> -->

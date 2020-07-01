@@ -10,6 +10,7 @@ import { VerifyQuestionsComponent } from './verify-questions/verify-questions.co
 import { ImportSolvedPapersComponent } from './import-solved-papers/import-solved-papers.component';
 import { CoreModule } from '@core/core.module';
 import { AdminsRoutingModule } from '@config/admins.routing.module';
+import { AnimateContentComponent } from './animate-content/animate-content.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { AdminsRoutingModule } from '@config/admins.routing.module';
       ViewQuestionsComponent,
       VerifyQuestionsComponent,
       ImportSolvedPapersComponent,
+      AnimateContentComponent,
     ]
   })
 export class AdminPagesModule { }

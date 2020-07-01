@@ -17,4 +17,7 @@
         <input type="text" [(ngModel)]="inputValue" (keyup)="valueChanged()">
         <span [innerHTML]="statementList[1]"></span>
     </ng-container>
+    <div class="margin-bottom-1em" *ngIf="statement.isImage || statement.hasImage">
+        <img class="below-image" [src]="fetchImage(statement.isImage ? statement.statement : statement.containedImage)"/>
+    </div>
 </div>

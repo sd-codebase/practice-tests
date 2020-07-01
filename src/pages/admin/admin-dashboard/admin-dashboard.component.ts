@@ -14,6 +14,7 @@ export class AdminDashboardComponent implements OnInit {
     {menu: 'Upload Tests', path: '/admin/import-predefined-test', icon: 'cloud_upload'},
     {menu: 'Validate expression', path: '/admin/validate-maths-expressions', icon: 'check_circle'},
     {menu: 'Verify Questions', path: '/admin/verify-questions', icon: 'check_circle'},
+    {menu: 'Animate Content', path: '/admin/animate-content', icon: 'slow_motion_video'},
   ];
   constructor(public drawerService: DrawerService, public auth: AuthService) { }
 

@@ -6,6 +6,7 @@ import { ImportQuestionsComponent } from '@pages/admin/import-questions/import-q
 import { ImportSolvedPapersComponent } from '@pages/admin/import-solved-papers/import-solved-papers.component';
 import { ValidateMathExpressionComponent } from '@pages/admin/validate-math-expression/validate-math-expression.component';
 import { VerifyQuestionsComponent } from '@pages/admin/verify-questions/verify-questions.component';
+import { AnimateContentComponent } from '@pages/admin/animate-content/animate-content.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
     {path: 'import-predefined-test', component: ImportSolvedPapersComponent},
     {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
     {path: 'verify-questions', component: VerifyQuestionsComponent},
+    {path: 'animate-content', component: AnimateContentComponent},
 ];
 
 @NgModule({
