@@ -7,6 +7,6 @@
     </div>
     <div *ngIf="matchedQuestion" >
         <span>{{matchedQuestion.id}}</span><br>
-        <app-mathjax [content]="matchedQuestion.question.statement"></app-mathjax>
+        <app-mathjax [content]="matchedQuestion.question"></app-mathjax>
     </div>
 </div>

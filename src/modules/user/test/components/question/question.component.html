@@ -17,12 +17,12 @@
             class="margin-half-em" 
             color="primary"
             [value]="getOption(i+1)"
-            *ngIf="op.statement && action === 'attempt'"
+            *ngIf="op && action === 'attempt'"
           ></mat-radio-button> 
           <!-- [disabled]="question.isSubmitted" -->
-          <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
+          <span *ngIf="op">({{ getOption(i+1) }}) </span>
           <app-statement
-            *ngIf="op.statement"
+            *ngIf="op"
             [imagePath]="question.imagePath"
             [statement]="op"
           ></app-statement>
@@ -32,7 +32,7 @@
     <div fxFill class="options-div" *ngIf="hasOptions && !question.isSingleAnswer">
       <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
         <mat-checkbox
-          *ngIf="op.statement && action === 'attempt'"
+          *ngIf="op && action === 'attempt'"
           class="margin-half-em" 
           color="primary"
           [value]="getOption(i+1)"
@@ -40,9 +40,9 @@
           (change)="onCheckboxChange($event)"
         ></mat-checkbox>
         <!-- [disabled]="question.isSubmitted" -->
-        <span *ngIf="op.statement">({{ getOption(i+1) }}) </span>
+        <span *ngIf="op">({{ getOption(i+1) }}) </span>
         <app-statement
-          *ngIf="op.statement"
+          *ngIf="op"
           [imagePath]="question.imagePath"
           [statement]="op"
         ></app-statement>

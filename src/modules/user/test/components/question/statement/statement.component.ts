@@ -8,18 +8,44 @@ import { CStatement } from '@modules/user/test/test.model';
 })
 export class StatementComponent implements OnInit {
   @Input() imagePath: string;
-  @Input() statement: CStatement;
+  @Input() statement: string;
   @Output() handleInputChange = new EventEmitter();
-  public statementList: string[];
-  public hasInputBox = false;
+  public statementList: any = [];
   public inputValue = '';
   constructor() { }
 
   ngOnInit() {
-    if (this.statement.statement && this.statement.statement.includes('*inputbox*')) {
-      this.hasInputBox = true;
-      this.statementList = this.statement.statement.split('*inputbox*');
+    let statements;
+    if (this.statement.includes('#')) {
+      statements = this.statement.split('#');
+    } else {
+      statements = [this.statement];
     }
+    statements.forEach( st => {
+      let localStates;
+      if (st.includes('*inputbox*')) {
+        localStates = st.split('*inputbox*');
+        this.statementList.push(this.getStatement(localStates[0]));
+        this.statementList.push({type: 'input'});
+        this.statementList.push(this.getStatement(localStates[1]));
+      } else {
+        this.statementList.push(this.getStatement(st));
+      }
+    });
+  }
+
+  getStatement(st: string) {
+    return {content: st, type: this.getType(st)};
+  }
+
+  getType(st: string) {
+    if (st.includes('$') || st.includes('\\begin') || st.includes('\\[')) {
+      return 'math';
+    }
+    if (st.includes('.PNG')) {
+      return 'image';
+    }
+    return 'text';
   }
 
   valueChanged() {
@@ -27,7 +53,7 @@ export class StatementComponent implements OnInit {
   }
 
   fetchImage(src) {
-    return `assets${this.imagePath.trim()}${src.trim()}.PNG`;
+    return `assets${this.imagePath.trim()}${src.trim()}`;
   }
 
 }

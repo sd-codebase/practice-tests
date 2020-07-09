@@ -1,4 +1,4 @@
-<div class="margin-bottom-1em" *ngIf="!hasInputBox && !statement.isImage" fxLayout="column" fxFill fxLayoutAlign="start start" fxLayoutGap="2em">
+<!-- <div class="margin-bottom-1em" *ngIf="!hasInputBox && !statement.isImage" fxLayout="column" fxFill fxLayoutAlign="start start" fxLayoutGap="2em">
     <app-mathjax *ngIf="statement.isMathExpression" [content]="statement.statement"></app-mathjax>
     <span *ngIf="!statement.isMathExpression" [innerHTML]="statement.statement"></span>
     <img class="below-image" *ngIf="statement.hasImage" [src]="fetchImage(statement.containedImage)"/>
@@ -20,4 +20,20 @@
     <div class="margin-bottom-1em" *ngIf="statement.isImage || statement.hasImage">
         <img class="below-image" [src]="fetchImage(statement.isImage ? statement.statement : statement.containedImage)"/>
     </div>
+</div> -->
+<div fxLayout="column" fxFill fxLayoutAlign="start start" fxLayoutGap="0.5em">
+    <ng-container *ngFor="let st of statementList">
+        <ng-container *ngIf="st.type === 'image'">
+            <img [src]="fetchImage(st.content)"/>
+        </ng-container>
+        <ng-container *ngIf="st.type === 'math'">
+            <app-mathjax [content]="st.content"></app-mathjax>
+        </ng-container>
+        <ng-container *ngIf="st.type === 'text'">
+            <span [innerHTML]="st.content"></span>
+        </ng-container>
+        <ng-container *ngIf="st.type === 'input'">
+            <input type="text" [(ngModel)]="inputValue" (keyup)="valueChanged()">
+        </ng-container>
+    </ng-container>
 </div>

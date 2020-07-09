@@ -34,10 +34,14 @@ export class VerifyQuestionsContainerComponent implements OnInit {
   }
 
   setQuestion(question) {
+    this.loaderService.show();
     this.question = null;
     setTimeout(() => {
       this.question = question;
     }, 1000);
+    setTimeout(() => {
+      this.loaderService.hide();
+    }, 3000);
   }
 
   async verifyQuestion() {

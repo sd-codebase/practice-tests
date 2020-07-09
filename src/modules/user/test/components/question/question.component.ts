@@ -13,7 +13,7 @@ export class QuestionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.hasOptions = this.question.options.some(op => op.statement);
+    this.hasOptions = this.question.options.some(op => op);
   }
 
   onCheckboxChange(e) {

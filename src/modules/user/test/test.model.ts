@@ -34,11 +34,11 @@ export enum EQuestionLevels {
 }
 
 export class CStatement {
-    statement: string; //if isImage true question itself would be image
-    containedImage: string; //if hasImage true, then img will have value 
+    statement: string; // if isImage true question itself would be image
+    containedImage: string; // if hasImage true, then img will have value 
     isImage: boolean;
     hasImage: boolean;
-    isImageFloated: boolean; //if only hasImage true then true or false
+    isImageFloated: boolean; // if only hasImage true then true or false
     isMathExpression: boolean;
 
     constructor(st: string, containedImage: string, statement: CStatement) {
@@ -67,10 +67,10 @@ export class CChapter {
 
 export class CQuestion {
     id?: string;
-    question: CStatement;
-    options: CStatement[];
+    question: string;
+    options: string[];
     answer: string;
-    answerDescription?: CStatement;
+    answerDescription?: string;
     isSingleAnswer: boolean;
     userAnswer?: string;
     isSubmitted?: boolean;
