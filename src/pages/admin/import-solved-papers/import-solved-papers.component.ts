@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@components/http.service';
 import { CChapter, CQuestion } from '@modules/user/test/test.model';
-import * as _ from 'lodash';
 import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
 import { DrawerService } from '@components/drawer-service';
@@ -34,11 +33,18 @@ export class ImportSolvedPapersComponent implements OnInit {
       if (data.op5) {
         options.push(data.op5);
       }
+      options.forEach( op => {
+        op = op && op.trim() || '';
+      });
       const isSingleAnswer = !data.answer.includes(',');
-      const {level, tags} = data;
+      let {level, tags, question, answer_description} = data;
+      level = level && level.trim();
+      tags = tags && tags.trim();
+      question = question && question.trim();
+      answer_description = answer_description && answer_description.trim();
       dataToPush.push(new CQuestion({
-        id: null, question: data.question, options, answer : data.answer,
-        answerDescription: data.answer_description, isSingleAnswer, chapter,
+        id: null, question, options, answer : data.answer,
+        answerDescription: answer_description, isSingleAnswer, chapter,
         level, tags, imagePath: data.image_path,
       }));
     });
