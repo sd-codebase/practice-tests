@@ -32,7 +32,11 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   formatString() {
-    this.content = this.content.split('\n').join(' ').trim();
+    this.content = this.content.split('\n').join(' ').replace(/\s\s+/g, ' ').trim();
+  }
+
+  formatBreaksInString() {
+    this.content = this.content.split('\n').join(' <br> ').trim();
   }
 
   validate() {
