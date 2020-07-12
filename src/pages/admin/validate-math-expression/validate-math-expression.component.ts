@@ -31,6 +31,10 @@ export class ValidateMathExpressionComponent implements OnInit {
     }
   }
 
+  formatString() {
+    this.content = this.content.split('\n').join(' ').trim();
+  }
+
   validate() {
     this.isValidate = false;
     setTimeout(() => {

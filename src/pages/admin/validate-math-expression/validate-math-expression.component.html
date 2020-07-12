@@ -1,6 +1,8 @@
 <div class="page-container">
-    <textarea [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
+    <textarea [(ngModel)]="content" ></textarea> 
+    <!-- (ngModelChange)="onChange($event)" -->
     <button (click)="validate()">Validate</button>
+    <button (click)="formatString()">Format Content</button>
     <button (click)="isQuestionExists()">CheckIfExists</button>
     <div>
         <app-mathjax *ngIf="isValidate" [content]="content"></app-mathjax>
