@@ -59,9 +59,18 @@ export class CChapter {
 
     constructor(chapter: CChapter) {
         this.stream = chapter.stream;
-        this.class = chapter.stream;
+        this.class = chapter.class;
         this.subject = chapter.subject;
         this.chapter = chapter.chapter;
+    }
+}
+
+export class CTopic extends CChapter {
+    topic: string;
+
+    constructor(topic: CTopic) {
+        super(topic);
+        this.topic = topic.topic;
     }
 }
 

@@ -10,6 +10,7 @@ import { TimePipe } from './pipes/time.pipe';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { NotificationBarComponent } from './notifications.service';
 import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
     PageHeaderComponent,
     NotificationBarComponent,
     ComingSoonComponent,
+    AutocompleteComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
     TimePipe,
     PageHeaderComponent,
     ComingSoonComponent,
+    AutocompleteComponent,
   ],
   providers : [
     HttpService,

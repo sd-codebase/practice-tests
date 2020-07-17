@@ -1,14 +1,5 @@
 <div class="page-container">
     <mat-tab-group>
-        <mat-tab label="Topicwise tests">
-            <app-topicwise [data]="data"></app-topicwise>
-        </mat-tab>
-        <mat-tab label="Chapterwise test">
-            <app-chapterwise [data]="data"></app-chapterwise>
-        </mat-tab>
-        <mat-tab label="Subjectwise test">
-            <app-subjectwise [data]="data"></app-subjectwise>
-        </mat-tab>
         <mat-tab label="Mock test">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
@@ -28,6 +19,15 @@
                     NEET
                 </button>
             </div>
+        </mat-tab>
+        <mat-tab label="Topicwise tests" *ngIf="data">
+            <app-topicwise [data]="data"></app-topicwise>
+        </mat-tab>
+        <mat-tab label="Chapterwise test" *ngIf="data">
+            <app-chapterwise [data]="data"></app-chapterwise>
+        </mat-tab>
+        <mat-tab label="Subjectwise test" *ngIf="data">
+            <app-subjectwise [data]="data"></app-subjectwise>
         </mat-tab>
     </mat-tab-group>
 </div>

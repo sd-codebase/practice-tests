@@ -8,10 +8,12 @@ import { MyTestsComponent } from '@pages/user/my-tests/my-tests.component';
 import { StartTestsContainerComponent } from '@pages/user/start-tests-container/start-tests-container.component';
 import { TestAnswerKeyComponent } from '@pages/user/test-answer-key/test-answer-key.component';
 import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.component';
+import { SyllabusNotesComponent } from '@pages/user/syllabus-notes/syllabus-notes.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
     {path: 'coming-soon', component: ComingSoonComponent},
+    {path: 'syllabus', component: SyllabusNotesComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'solved-papers', component: SolvedPapersComponent},
     {path: 'test', component: TestComponent},

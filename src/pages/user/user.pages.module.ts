@@ -11,6 +11,8 @@ import { StartTestsContainerComponent } from './start-tests-container/start-test
 import { CoreModule } from '@core/core.module';
 import { UsersRoutingModule } from '@config/users.routing.module';
 import { SolvedPapersComponent } from './solved-papers/solved-papers.component';
+import { SyllabusNotesComponent } from './syllabus-notes/syllabus-notes.component';
+import { UserModule } from '@modules/user/user.module';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { SolvedPapersComponent } from './solved-papers/solved-papers.component';
       TestModule,
       ComponentsModule,
       UsersRoutingModule,
+      UserModule,
     ],
     exports: [
       TestComponent
@@ -32,6 +35,7 @@ import { SolvedPapersComponent } from './solved-papers/solved-papers.component';
       ProfileComponent,
       StartTestsContainerComponent,
       SolvedPapersComponent,
+      SyllabusNotesComponent,
     ]
   })
 export class UserPagesModule { }

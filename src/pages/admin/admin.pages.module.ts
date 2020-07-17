@@ -11,6 +11,8 @@ import { ImportSolvedPapersComponent } from './import-solved-papers/import-solve
 import { CoreModule } from '@core/core.module';
 import { AdminsRoutingModule } from '@config/admins.routing.module';
 import { AnimateContentComponent } from './animate-content/animate-content.component';
+import { CreateNotesComponent } from './create-notes/create-notes.component';
+import { ImportChaptersComponent } from './import-chapters/import-chapters.component';
 
 @NgModule({
     imports: [
@@ -30,6 +32,8 @@ import { AnimateContentComponent } from './animate-content/animate-content.compo
       VerifyQuestionsComponent,
       ImportSolvedPapersComponent,
       AnimateContentComponent,
+      CreateNotesComponent,
+      ImportChaptersComponent,
     ]
   })
 export class AdminPagesModule { }

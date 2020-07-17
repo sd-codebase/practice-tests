@@ -11,7 +11,7 @@ import { AuthService } from 'src/auth/auth.service';
 export class UserDashboardComponent implements OnInit {
   public menus = [
     {menu: 'My Profile', path: '/user/profile', icon: 'person'},
-    {menu: 'Syllabus', path: '/user/coming-soon', icon: 'article'},
+    {menu: 'Syllabus', path: '/user/syllabus', icon: 'article'},
     {menu: 'Solved Papers', path: '/user/solved-papers', icon: 'done_all'},
     {menu: 'Sample test', path: '/user/test', icon: 'assignment'},
     {menu: 'Start taking test', path: '/user/start-taking-test', icon: 'assignment_turned_in'},

@@ -20,6 +20,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const MaterialModules = [
   MatSidenavModule,
@@ -35,6 +38,9 @@ const MaterialModules = [
   MatExpansionModule,
   MatTabsModule,
   MatSnackBarModule,
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({

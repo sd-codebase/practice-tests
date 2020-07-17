@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { NotificationService, ENotification } from '@components/notifications.service';
 import { ITest } from '../../test.model';
 import { Injectable } from '@angular/core';
+import { DrawerService } from '@components/drawer-service';
 
 @Injectable()
 export abstract class GenerateTest {
     public test: ITest;
     constructor(
-        private http: HttpService,
+        protected drawerService: DrawerService,
+        protected http: HttpService,
         private storage: StorageService,
         private loaderService: LoaderService,
         private router: Router,

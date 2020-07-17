@@ -1,0 +1,34 @@
+<div fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+        <app-autocomplete
+            [label]="Stream"
+            [options]="streams"
+            (handleSelection)="streamChange($event)"
+            ></app-autocomplete>
+        <app-autocomplete
+            [label]="Class"
+            [options]="classes"
+            (handleSelection)="classChange($event)"
+        ></app-autocomplete>
+        <app-autocomplete
+            [label]="Subject"
+            [options]="subjects"
+            (handleSelection)="subjectChange($event)"
+        ></app-autocomplete>
+        <app-autocomplete
+            [label]="Chapter"
+            [options]="chapters"
+            (handleSelection)="chapterChange($event)"
+        ></app-autocomplete>
+        <app-autocomplete
+            [label]="Topic"
+            [options]="topics"
+            (handleSelection)="topicChange($event)"
+        ></app-autocomplete>
+        <button [disabled]="!criteria.topic || !data" mat-raised-button color="success" fxLayout="row" fxLayoutAlign="space-between center" (click)="saveNotes()">
+            <mat-icon>done</mat-icon>
+            Save
+        </button>
+    </div>
+    <ckeditor [disabled]="!criteria.topic" fxFill [editor]="Editor" [(ngModel)]="data"></ckeditor>
+</div>

@@ -5,6 +5,8 @@ import { QuestionContainerComponent } from './components/question-container/ques
 import { VerifyQuestionsContainerComponent } from './components/verify-questions-container/verify-questions-container.component';
 import { CoreModule } from '@core/core.module';
 import { TestModule } from '@modules/user/test/test.module';
+import { NotesEditorComponent } from './components/notes-editor/notes-editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -12,14 +14,17 @@ import { TestModule } from '@modules/user/test/test.module';
     CommonModule,
     ComponentsModule,
     TestModule,
+    CKEditorModule,
   ],
   exports: [
     QuestionContainerComponent,
     VerifyQuestionsContainerComponent,
+    NotesEditorComponent,
   ],
   declarations: [
     QuestionContainerComponent,
-    VerifyQuestionsContainerComponent
+    VerifyQuestionsContainerComponent,
+    NotesEditorComponent,
   ],
 })
 export class AdminModule {}

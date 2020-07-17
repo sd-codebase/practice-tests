@@ -8,8 +8,10 @@ import { GenerateTest } from '../generate-test-class';
 })
 export class SubjectwiseComponent extends GenerateTest implements OnInit {
   @Input() data: any;
+  public subjects: string[];
 
   ngOnInit() {
+    this.subjects = Array.from(new Set(this.data.map( ob => ob.subject)));
   }
 
   createTest(subject) {

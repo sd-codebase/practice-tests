@@ -7,15 +7,19 @@ import { ImportSolvedPapersComponent } from '@pages/admin/import-solved-papers/i
 import { ValidateMathExpressionComponent } from '@pages/admin/validate-math-expression/validate-math-expression.component';
 import { VerifyQuestionsComponent } from '@pages/admin/verify-questions/verify-questions.component';
 import { AnimateContentComponent } from '@pages/admin/animate-content/animate-content.component';
+import { CreateNotesComponent } from '@pages/admin/create-notes/create-notes.component';
+import { ImportChaptersComponent } from '@pages/admin/import-chapters/import-chapters.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
     {path: 'view-questions', component: ViewQuestionsComponent},
+    {path: 'import-chapters', component: ImportChaptersComponent},
     {path: 'import-questions', component: ImportQuestionsComponent},
     {path: 'import-predefined-test', component: ImportSolvedPapersComponent},
     {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
     {path: 'verify-questions', component: VerifyQuestionsComponent},
     {path: 'animate-content', component: AnimateContentComponent},
+    {path: 'create-notes', component: CreateNotesComponent},
 ];
 
 @NgModule({

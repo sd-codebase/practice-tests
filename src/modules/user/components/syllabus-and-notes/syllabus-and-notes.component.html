@@ -1,0 +1,26 @@
+<ng-container *ngIf="menus">
+    <div class="accordion-container" *ngFor="let subject of subjects">
+        <h3>{{ subject }}</h3>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let chapter of getChapters(subject)">
+                <mat-expansion-panel-header fxFill fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-panel-title>
+                    {{ chapter }}
+                    </mat-panel-title>
+                    <mat-panel-description (click)="$event.stopPropagation(); getNotes(subject, chapter)"> Notes </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <button mat-raised-button color="primary" *ngFor="let topic of getTopics(chapter)" fxLayout="row" fxLayoutAlign="space-between center" (click)="getNotes(subject, chapter, topic)">
+                        <mat-icon>topic</mat-icon>
+                        {{ topic }}
+                    </button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <mat-divider></mat-divider>
+    </div>
+</ng-container>
+<button mat-raised-button *ngIf="!menus" color="primary" fxLayout="row" fxLayoutAlign="space-between center" (click)="showMenu()">
+    <mat-icon>topic</mat-icon>Show Menus
+</button>
+<div [innerHTML]="content" *ngIf="!menus"></div>

@@ -1,19 +1,16 @@
-<div *ngFor="let subject of data.subjects">
-    <h3>{{ subject.name }}</h3>
+<div *ngFor="let subject of subjects">
+    <h3>{{ subject }}</h3>
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let chapter of subject.chapters">
+        <mat-expansion-panel *ngFor="let chapter of getChapters(subject)">
         <mat-expansion-panel-header>
             <mat-panel-title>
-            {{ chapter.name }}
+            {{ chapter }}
             </mat-panel-title>
-            <!-- <mat-panel-description>
-            {{ chapter.name }}
-            </mat-panel-description> -->
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-            <button mat-raised-button color="primary" *ngFor="let topic of chapter.topics" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+            <button mat-raised-button color="primary" *ngFor="let topic of getTopics(chapter)" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest()">
                 <mat-icon>topic</mat-icon>
-                {{ topic.name }}
+                {{ topic }}
             </button>
         </div>
         </mat-expansion-panel>

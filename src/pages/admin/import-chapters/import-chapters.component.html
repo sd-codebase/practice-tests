@@ -1,0 +1,23 @@
+<div class="page-container">
+    <app-xlsx-to-json-upload
+        (handleUploadedData)="onDataRead($event)"
+    ></app-xlsx-to-json-upload>
+    <table *ngIf="uploadedData">
+        <tr>
+            <th>Stream</th>
+            <th>Class</th>
+            <th>Subject</th>
+            <th>Chapter</th>
+            <th>Topics</th>
+            <th>Status</th>
+        </tr>
+        <tr *ngFor="let upload of uploadedData">
+            <td>{{ upload.data.stream }}</td>
+            <td>{{ upload.data.class }}</td>
+            <td>{{ upload.data.subject }}</td>
+            <td>{{ upload.data.chapter }}</td>
+            <td>{{ upload.data.topic }}</td>
+            <td>{{ upload.status }}</td>
+        </tr>
+    </table>
+</div>

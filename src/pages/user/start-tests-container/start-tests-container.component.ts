@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GenerateTest } from '@modules/user/test/components/tests-container/generate-test-class';
+import { CTopic } from '@modules/user/test/test.model';
 
 @Component({
   selector: 'app-start-tests-container',
@@ -7,43 +8,15 @@ import { GenerateTest } from '@modules/user/test/components/tests-container/gene
   styleUrls: ['./start-tests-container.component.scss']
 })
 export class StartTestsContainerComponent extends GenerateTest implements OnInit {
-  public data = {stream: 'Science', class: '12', subjects: [
-    { name: 'Mathematics', chapters: [
-      { name: 'Trogonometric Functions & Equations', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-      { name: 'Complex Numbers', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-    ]},
-    { name: 'Chemistry', chapters: [
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-    ]},
-    { name: 'Biology', chapters: [
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-    ]},
-    { name: 'Physics', chapters: [
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-      { name: 'Basic Concepts Of Chemistry', topics: [
-        {name: 'Topic 1' }, {name: 'Topic 1' }, {name: 'Topic 1' },
-      ]},
-    ]}
-  ]};
+  public data: CTopic[];
 
   ngOnInit() {
+    this.drawerService.setPageHeader('Take a test');
+    this.fetchChapters();
+  }
 
+  async fetchChapters() {
+    this.data = await this.http.get('/chapters/').toPromise();
   }
 
   createTest() {
