@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { ITest, CQuestion, EQuestionStatus, CStatement } from '../../test.model';
+import { ITest, CQuestion, EQuestionStatus, CStatement, IInstructions } from '../../test.model';
 import { LoaderService } from '@components/loader.service';
 import { HttpService } from '@components/http.service';
 
@@ -14,6 +14,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   @Output() timerPause = new EventEmitter();
   @Output() timerResume = new EventEmitter();
   @Output() handleFinishTest = new EventEmitter();
+
+  public instructions: IInstructions[];
   public counter: number;
   public question: CQuestion;
   public isAnswerVisible = false;
@@ -31,6 +33,26 @@ export class QuizComponent implements OnInit, OnDestroy {
     } else if (this.action === 'view') {
       this.viewFirstQuestion();
     }
+    this.getInstructions();
+  }
+
+  getInstructions() {
+    const instructions = this.test.instructions;
+    this.instructions = Object.keys(instructions).map( key => {
+      return {
+        key,
+        value: instructions[key].instruction,
+        questions: instructions[key].questions,
+      };
+    });
+  }
+
+  getInfoTooltip(question: CQuestion) {
+    if (!question) {
+      return '';
+    }
+    const instruction = this.instructions.find( inf => inf.questions.includes(question.questionNum));
+    return instruction.value;
   }
 
   pauseTimer() {

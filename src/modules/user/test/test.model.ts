@@ -10,6 +10,13 @@ export interface ITest {
     completeTime: number;
     percentage: number;
     testName?: string;
+    instructions: any[];
+}
+
+export interface IInstructions {
+    key: string;
+    value: string;
+    questions: number[];
 }
 
 export enum ETestStatus {

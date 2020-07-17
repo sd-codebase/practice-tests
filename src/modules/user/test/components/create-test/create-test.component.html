@@ -4,6 +4,12 @@
             <mat-icon>article</mat-icon>
             Start Test
         </button>
+        <div fxFill fxLayout="column" fxLayoutAlign="space-between start" *ngIf="test && test.status === 0">
+            <div fxFill fxLayout="column" fxLayoutAlign="space-between start" *ngFor="let info of instructions">
+                <h3>{{info.key}}</h3>
+                <div [innerHTML]="info.value"></div>
+            </div>
+        </div>
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" *ngIf="test && test.status === 1" >
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
                 <h4>Time left</h4>

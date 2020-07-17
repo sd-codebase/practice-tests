@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { ITest, ETestStatus, CQuestion, EQuestionStatus } from '../../test.model';
+import { ITest, ETestStatus, CQuestion, EQuestionStatus, IInstructions } from '../../test.model';
 import { HttpService } from '@components/http.service';
 import { CountdownComponent } from 'ngx-countdown';
 import { QuizComponent } from '../quiz/quiz.component';
@@ -18,7 +18,7 @@ export class CreateTestComponent implements OnInit {
   @ViewChild(QuizComponent, {static: false})
   public quizCompo: QuizComponent;
 
-
+  public instructions: IInstructions[];
   public test: ITest;
   public timer = 0;
   public isTestLoaded = false;
@@ -37,6 +37,7 @@ export class CreateTestComponent implements OnInit {
     this.isTestLoaded = false;
     try {
       this.test = await this.http.get('/tests/' + this.testId).toPromise() as ITest;
+      this.getInstructions();
       this.test.questions = this.test.questions.map( (que, index) => {
         const question = new CQuestion(que as any);
         question.questionNum = index + 1;
@@ -48,6 +49,17 @@ export class CreateTestComponent implements OnInit {
     } finally {
       this.loaderService.hide();
     }
+  }
+
+  getInstructions() {
+    const instructions = this.test.instructions;
+    this.instructions = Object.keys(instructions).map( key => {
+      return {
+        key,
+        value: instructions[key].instruction,
+        questions: instructions[key].questions,
+      };
+    });
   }
 
   startTest() {

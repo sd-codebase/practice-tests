@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CountdownModule } from 'ngx-countdown';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -54,6 +55,7 @@ const MaterialModules = [
     FlexLayoutModule,
     CountdownModule,
     GoogleChartsModule,
+    TooltipModule,
   ],
   exports: [
     HttpClientModule,
@@ -64,6 +66,7 @@ const MaterialModules = [
     FlexLayoutModule,
     CountdownModule,
     GoogleChartsModule,
+    TooltipModule,
   ]
 })
 export class CoreModule { }

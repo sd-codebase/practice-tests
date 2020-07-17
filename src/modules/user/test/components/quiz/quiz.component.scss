@@ -2,6 +2,11 @@ app-question, .answer-block {
     font-family: 'Times New Roman', Times, serif; font-size: 1.5em !important;
 }
 
+.info-tooltip {
+    cursor: pointer;
+    font-size: 2em !important;
+}
+
 @media only screen and (max-width: 600px)  {
     app-question, .answer-block {
         font-family: 'Times New Roman', Times, serif; font-size: 1em !important;

@@ -1,5 +1,8 @@
 <div fxFill *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
-    <h3 *ngIf="question">Question {{ question.questionNum }}:</h3>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 *ngIf="question">Question {{ question.questionNum }}: </h3>
+        <mat-icon class="info-tooltip" [tooltip]="getInfoTooltip(question)" [options]="{placement: 'left'}">info</mat-icon>
+    </div>
     <mat-divider></mat-divider>
     <div class="question-container">
         <app-question
