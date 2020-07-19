@@ -29,19 +29,19 @@ export class ImportSolvedPapersComponent implements OnInit {
     const dataToPush = [];
     jsonData[names[0]].forEach( data => {
       const chapter = new CChapter(data);
-      const options = [data.op1, data.op2, data.op3, data.op4];
+      const options = [data.op1 || '', data.op2 || '', data.op3 || '', data.op4 || ''];
       if (data.op5) {
-        options.push(data.op5);
+        options.push(data.op5 || '');
       }
       options.forEach( op => {
-        op = op && op.trim() || '';
+        op = op && op.toString().trim() || '';
       });
       const isSingleAnswer = !data.answer.includes(',');
       let {level, tags, question, answer_description} = data;
-      level = level && level.trim();
-      tags = tags && tags.trim();
-      question = question && question.trim();
-      answer_description = answer_description && answer_description.trim();
+      level = level && level.toString().trim();
+      tags = tags && tags.toString().trim();
+      question = question && question.toString().trim();
+      answer_description = answer_description && answer_description.toString().trim();
       dataToPush.push(new CQuestion({
         id: null, question, options, answer : data.answer,
         answerDescription: answer_description, isSingleAnswer, chapter,
