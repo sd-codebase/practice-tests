@@ -4,6 +4,7 @@ import { ITest } from '../../test.model';
 import { StorageService } from '@components/storage.serice';
 import { LoaderService } from '@components/loader.service';
 import { ArrayObjectUtil } from '@core/array-object-util';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-tests-list',
@@ -16,19 +17,30 @@ export class TestsListComponent implements OnInit {
     private http: HttpService,
     private storage: StorageService,
     private loaderService: LoaderService,
+    private notificationService: NotificationService,
   ) { }
 
   async ngOnInit() {
-    this.loaderService.show();
-    this.tests = await this.http.get('/tests/all?userId=' + this.storage.getUserId()).toPromise();
-    this.loaderService.hide();
+    try {
+      await this.loaderService.show();
+      this.tests = await this.http.get('/tests/all?userId=' + this.storage.getUserId()).toPromise();
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
   async deleteTest(test: ITest) {
-    this.loaderService.show();
-    await this.http.delete('/tests/' + test._id).toPromise();
-    ArrayObjectUtil.removeObject(this.tests, test);
-    this.loaderService.hide();
+    try {
+      await this.loaderService.show();
+      await this.http.delete('/tests/' + test._id).toPromise();
+      ArrayObjectUtil.removeObject(this.tests, test);
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import { HttpService } from '@components/http.service';
 import { CountdownComponent } from 'ngx-countdown';
 import { QuizComponent } from '../quiz/quiz.component';
 import { LoaderService } from '@components/loader.service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-create-test',
@@ -26,6 +27,7 @@ export class CreateTestComponent implements OnInit {
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -33,9 +35,9 @@ export class CreateTestComponent implements OnInit {
   }
 
   async fetchTest() {
-    this.loaderService.show();
     this.isTestLoaded = false;
     try {
+      await this.loaderService.show();
       this.test = await this.http.get('/tests/' + this.testId).toPromise() as ITest;
       this.getInstructions();
       this.test.questions = this.test.questions.map( (que, index) => {
@@ -45,7 +47,7 @@ export class CreateTestComponent implements OnInit {
         return question;
       });
     } catch (e) {
-
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
     }
@@ -62,8 +64,8 @@ export class CreateTestComponent implements OnInit {
     });
   }
 
-  startTest() {
-    this.loaderService.show();
+  async startTest() {
+    await this.loaderService.show();
     this.test.status = ETestStatus.STARTED;
     setTimeout(() => {
       this.timer = this.test.allottedTime;
@@ -73,15 +75,15 @@ export class CreateTestComponent implements OnInit {
   }
 
   async onFinishTest() {
-    this.loaderService.show();
     try {
+      await this.loaderService.show();
       this.test.status = ETestStatus.FINISHED;
       this.test.attemptCount = this.test.questions.filter( que => que.isSubmitted).length;
       const test = this.test;
       this.test = null;
       this.test = await this.http.put('/tests', test).toPromise()  as ITest;
     } catch (e) {
-
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
     }

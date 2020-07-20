@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '@components/http.service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-syllabus-and-notes',
@@ -14,6 +16,8 @@ export class SyllabusAndNotesComponent implements OnInit {
 
   constructor(
     private http: HttpService,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -21,8 +25,15 @@ export class SyllabusAndNotesComponent implements OnInit {
   }
 
   async fetchChapters() {
-    this.data = await this.http.get('/chapters').toPromise();
-    this.subjects = Array.from(new Set(this.data.map( ob => ob.subject)));
+    try {
+      await this.loaderService.show();
+      this.data = await this.http.get('/chapters').toPromise();
+      this.subjects = Array.from(new Set(this.data.map( ob => ob.subject)));
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
   getChapters(subject: string) {
@@ -34,10 +45,17 @@ export class SyllabusAndNotesComponent implements OnInit {
   }
 
   async getNotes(subject, chapter, topic?) {
-    this.menus = false;
-    const notesData = await this.http.get('/notes', {subject, chapter, topic}).toPromise();
-    if (notesData && notesData.data) {
-      this.content = notesData.data;
+    try {
+      await this.loaderService.show();
+      this.menus = false;
+      const notesData = await this.http.get('/notes', {subject, chapter, topic}).toPromise();
+      if (notesData && notesData.data) {
+        this.content = notesData.data;
+      }
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
     }
   }
 

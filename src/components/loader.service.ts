@@ -11,6 +11,9 @@ export class LoaderService {
 
   show() {
     this.loader.next(true);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(true), 100);
+    });
   }
 
   hide() {

@@ -8,7 +8,7 @@ export class NotificationService {
     constructor(
         private snackBar: MatSnackBar,
     ) {}
-    show(status, title, message) {
+    show(status: ENotification, title: string | EError, message: string) {
         const icon =  status === ENotification.SUCCESS && 'verified_user'
         || status === ENotification.WARNING && 'notification_important'
         || status === ENotification.DANGER && 'cancel';
@@ -18,7 +18,7 @@ export class NotificationService {
         this.snackBar.openFromComponent(NotificationBarComponent, {
             data: {icon, title, message},
             panelClass: [snackbarclass, 'snackbar'],
-            duration: 3000,
+            duration: status === ENotification.DANGER ? 10000 : 4000,
             horizontalPosition: window.innerWidth <= 600 ? 'center' : 'left',
             verticalPosition: window.innerWidth <= 600 ? 'top' : 'bottom',
         });
@@ -27,6 +27,11 @@ export class NotificationService {
 
 export enum ENotification {
     SUCCESS, WARNING, DANGER
+}
+
+export enum EError {
+    HANDLED = 'Error',
+    UNHANDLED = 'Unhandled Error',
 }
 
 

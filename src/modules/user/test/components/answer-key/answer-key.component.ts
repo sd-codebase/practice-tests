@@ -4,6 +4,7 @@ import { LoaderService } from '@components/loader.service';
 import { ITest, CQuestion } from '../../test.model';
 import { QuizComponent } from '../quiz/quiz.component';
 import { DrawerService } from '@components/drawer-service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-answer-key',
@@ -21,6 +22,7 @@ export class AnswerKeyComponent implements OnInit {
     private http: HttpService,
     private loaderService: LoaderService,
     private drawerService: DrawerService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -29,15 +31,20 @@ export class AnswerKeyComponent implements OnInit {
 
   async fetchTest() {
     if (this.testId) {
-      this.loaderService.show();
-      this.test = await this.http.get('/tests/' + this.testId).toPromise();
-      this.test.questions = this.test.questions.map( (que, index) => {
-        const question = new CQuestion(que as any);
-        question.questionNum = index + 1;
-        return question;
-      });
-      this.drawerService.setPageHeader(this.test.testName);
-      this.loaderService.hide();
+      try {
+        await this.loaderService.show();
+        this.test = await this.http.get('/tests/' + this.testId).toPromise();
+        this.test.questions = this.test.questions.map( (que, index) => {
+          const question = new CQuestion(que as any);
+          question.questionNum = index + 1;
+          return question;
+        });
+        this.drawerService.setPageHeader(this.test.testName);
+      } catch (e) {
+        this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+      } finally {
+        this.loaderService.hide();
+      }
     }
   }
 

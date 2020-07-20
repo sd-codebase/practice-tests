@@ -3,6 +3,7 @@ import { HttpService } from '@components/http.service';
 import { LoaderService } from '@components/loader.service';
 import { CQuestion } from '@modules/user/test/test.model';
 import { DrawerService } from '@components/drawer-service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-validate-math-expression',
@@ -17,6 +18,7 @@ export class ValidateMathExpressionComponent implements OnInit {
     private loaderService: LoaderService,
     private http: HttpService,
     private drawerService: DrawerService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -48,10 +50,15 @@ export class ValidateMathExpressionComponent implements OnInit {
 
   async isQuestionExists() {
     this.matchedQuestion = null;
-    this.loaderService.show();
-    this.matchedQuestion = await this.http.post('/questions/matching-question', {'question.statement': this.content})
-    .toPromise() as CQuestion;
-    this.loaderService.hide();
+    try {
+      await this.loaderService.show();
+      this.matchedQuestion = await this.http.post('/questions/matching-question', {'question.statement': this.content})
+        .toPromise() as CQuestion;
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
 }

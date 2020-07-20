@@ -3,6 +3,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CTopic } from '@modules/user/test/test.model';
 import { HttpService } from '@components/http.service';
 import { LoaderService } from '@components/loader.service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-notes-editor',
@@ -25,11 +26,19 @@ export class NotesEditorComponent implements OnInit {
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
+    private notificationService: NotificationService,
   ) { }
 
   async ngOnInit() {
-    this.topicsData = await this.http.get('/chapters/').toPromise();
-    this.streams = Array.from(new Set(this.topicsData.map( ob => ob.stream)));
+    try{
+      await this.loaderService.hide();
+      this.topicsData = await this.http.get('/chapters/').toPromise();
+      this.streams = Array.from(new Set(this.topicsData.map( ob => ob.stream)));
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
   streamChange(stream) {
@@ -60,20 +69,30 @@ export class NotesEditorComponent implements OnInit {
   }
 
   async topicChange(topic) {
-    this.criteria.topic = topic;
-    this.loaderService.show();
-    const notesData = await this.http.get('/notes', this.criteria).toPromise();
-    if (notesData && notesData.data) {
-      this.data = notesData.data;
+    try {
+      this.criteria.topic = topic;
+      await this.loaderService.show();
+      const notesData = await this.http.get('/notes', this.criteria).toPromise();
+      if (notesData && notesData.data) {
+        this.data = notesData.data;
+      }
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
     }
-    this.loaderService.hide();
   }
 
   async saveNotes() {
     const notes = {...this.criteria, data: this.data};
-    this.loaderService.show();
-    const notesData = await this.http.post('/notes', notes).toPromise();
-    this.loaderService.hide();
+    try {
+      await this.loaderService.show();
+      const notesData = await this.http.post('/notes', notes).toPromise();
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angu
 import { ITest, CQuestion, EQuestionStatus, CStatement, IInstructions } from '../../test.model';
 import { LoaderService } from '@components/loader.service';
 import { HttpService } from '@components/http.service';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-quiz',
@@ -25,6 +26,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   constructor(
     private loaderService: LoaderService,
     private http: HttpService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -55,8 +57,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     return instruction.value;
   }
 
-  pauseTimer() {
-    this.loaderService.show();
+  async pauseTimer() {
+    await this.loaderService.show();
     this.timerPause.emit();
   }
 
@@ -163,8 +165,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   // view only methods
-  viewFirstQuestion() {
-    this.loaderService.show();
+  async viewFirstQuestion() {
+    await this.loaderService.show();
     this.isAnswerVisible = false;
     this.question = null;
     setTimeout(() => {
@@ -173,11 +175,11 @@ export class QuizComponent implements OnInit, OnDestroy {
     }, 1);
   }
 
-  viewNextQuestion() {
+  async viewNextQuestion() {
     if (this.test.questionCount === this.question.questionNum) {
       return;
     }
-    this.loaderService.show();
+    await this.loaderService.show();
     this.isAnswerVisible = false;
     const questionNum = this.question.questionNum;
     this.question = null;
@@ -187,8 +189,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     }, 1);
   }
 
-  viewPrevQuestion() {
-    this.loaderService.show();
+  async viewPrevQuestion() {
+    await this.loaderService.show();
     this.isAnswerVisible = false;
     const questionNum = this.question.questionNum;
     this.question = null;
@@ -198,11 +200,11 @@ export class QuizComponent implements OnInit, OnDestroy {
     }, 1);
   }
 
-  setQuestionToView( question: CQuestion) {
+  async setQuestionToView( question: CQuestion) {
     if (this.question === question) {
       return;
     }
-    this.loaderService.show();
+    await this.loaderService.show();
     this.isAnswerVisible = false;
     this.question = null;
     setTimeout(() => {
@@ -219,14 +221,18 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   async showAnswer() {
-    this.loaderService.show();
-    const answer = await this.http.get('/questions/answer/' + this.question.id).toPromise();
-    this.isAnswerVisible = true;
-    this.answer = answer.answer;
-    this.answerDescription =
-      (answer.answerDescription.hasImage || answer.answerDescription.isImage || answer.answerDescription.statement)
-      ? answer.answerDescription : null;
-    this.releaseLoader();
+    try {
+      await this.loaderService.show();
+      const answer = await this.http.get('/questions/answer/' + this.question.id).toPromise();
+      this.isAnswerVisible = true;
+      this.answer = answer.answer;
+      this.answerDescription =
+        (answer.answerDescription.hasImage || answer.answerDescription.isImage || answer.answerDescription.statement)
+        ? answer.answerDescription : null;
+      this.releaseLoader();
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    }
   }
 
   ngOnDestroy() {

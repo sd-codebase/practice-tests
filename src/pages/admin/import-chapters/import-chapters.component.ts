@@ -4,6 +4,7 @@ import { LoaderService } from '@components/loader.service';
 import { CTopic } from '@modules/user/test/test.model';
 import { HttpService } from '@components/http.service';
 import { StorageService } from '@components/storage.serice';
+import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
 @Component({
   selector: 'app-import-chapters',
@@ -18,31 +19,35 @@ export class ImportChaptersComponent implements OnInit {
     private loaderService: LoaderService,
     private drawerService: DrawerService,
     private storage: StorageService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
     this.drawerService.setPageHeader('Import Topics');
   }
 
-  onDataRead({names, jsonData}) {
-    this.loaderService.show();
-    setTimeout(() => {
-      this.uploadData(names, jsonData);
-    }, 100);
+  async onDataRead({names, jsonData}) {
+    this.uploadData(names, jsonData);
   }
 
   async uploadData(names, jsonData) {
-    const dataToPush: CTopic[] = [];
-    jsonData[names[0]].forEach( data => {
-      const topic = new CTopic(data);
-      // Object.keys(topic).forEach(key => {
-      //   if (topic[key] !== '') {
-      //     topic[key] = topic[key].trim();
-      //   }
-      // });
-      dataToPush.push(topic);
-    });
-    this.uploadedData = await this.http.post(this.urlToUpload, {chapters: dataToPush, userId: this.storage.getUserId()}).toPromise();
-    this.loaderService.hide();
+    try {
+      await this.loaderService.show();
+      const dataToPush: CTopic[] = [];
+      jsonData[names[0]].forEach( data => {
+        const topic = new CTopic(data);
+        // Object.keys(topic).forEach(key => {
+        //   if (topic[key] !== '') {
+        //     topic[key] = topic[key].trim();
+        //   }
+        // });
+        dataToPush.push(topic);
+      });
+      this.uploadedData = await this.http.post(this.urlToUpload, {chapters: dataToPush, userId: this.storage.getUserId()}).toPromise();
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
   }
 }
