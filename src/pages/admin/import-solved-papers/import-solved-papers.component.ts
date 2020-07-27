@@ -27,6 +27,10 @@ export class ImportSolvedPapersComponent implements OnInit {
   }
 
   async onDataRead({names, jsonData}) {
+    const proceed = confirm(`Do you want to upload ${names[0]}`);
+    if (!proceed) {
+      return;
+    }
     try {
       await this.loaderService.show();
       const dataToPush = [];

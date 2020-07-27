@@ -27,7 +27,10 @@ export class ImportChaptersComponent implements OnInit {
   }
 
   async onDataRead({names, jsonData}) {
-    this.uploadData(names, jsonData);
+    const proceed = confirm(`Do you want to upload ${names[0]}`);
+    if (proceed) {
+      this.uploadData(names, jsonData);
+    }
   }
 
   async uploadData(names, jsonData) {
