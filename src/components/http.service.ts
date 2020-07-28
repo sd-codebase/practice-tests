@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
-const host = 'https://test-for-all-services.herokuapp.com/api';
-// const host = 'http://localhost:3000/api';
+const host = environment.apiUrl;
+
 @Injectable()
 export class HttpService {
 

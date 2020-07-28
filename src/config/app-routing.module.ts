@@ -10,11 +10,11 @@ import { AdminAuthGuard } from 'src/auth/admin.auth.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {
-    path: 'admin', component: AdminDashboardComponent, canActivate: [ AdminAuthGuard ],
+    path: 'admin', component: AdminDashboardComponent, canActivate: [ AdminAuthGuard ], canActivateChild: [AdminAuthGuard],
     loadChildren: () => import('src/pages/admin/admin.pages.module').then(m => m.AdminPagesModule),
   },
   {
-    path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard],
+    path: 'user', component: UserDashboardComponent, canActivate: [ AuthGuard], canActivateChild: [AuthGuard],
     loadChildren: () => import('src/pages/user/user.pages.module').then(m => m.UserPagesModule),
   }
 ];

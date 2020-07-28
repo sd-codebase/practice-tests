@@ -22,7 +22,6 @@ export class UserDashboardComponent implements OnInit {
   ];
   public pageHeader: string;
   public userProfile;
-  public isAdmin = false;
   constructor(
     public drawerService: DrawerService,
     private storageService: StorageService,
@@ -31,7 +30,6 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.userProfile = this.storageService.getUser();
-    this.isAdmin = this.userProfile.userId === '5ee352aea4928b0014252d80';
     this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
   }
 }

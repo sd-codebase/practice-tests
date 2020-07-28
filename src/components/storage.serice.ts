@@ -6,7 +6,7 @@ export class StorageService {
   constructor() { }
 
   getUserId() {
-      return this.getUser().userId;
+      return this.getUser()._id;
   }
 
   getUser() {
@@ -15,6 +15,18 @@ export class StorageService {
 
   setUser(user) {
     this.setItem(Storage.USER, user);
+  }
+
+  removeToken() {
+    this.setItem(Storage.TOKEN, '');
+  }
+
+  setToken(token) {
+    this.setItem(Storage.TOKEN, token);
+  }
+
+  getToken() {
+    return this.getItem(Storage.TOKEN);
   }
 
   private getItem(key) {
@@ -27,5 +39,6 @@ export class StorageService {
 }
 
 export enum Storage {
-    USER = 'user',
+  USER = 'user',
+  TOKEN = 'token',
 }

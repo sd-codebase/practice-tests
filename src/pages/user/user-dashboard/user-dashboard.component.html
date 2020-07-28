@@ -2,13 +2,13 @@
     <mat-sidenav-container class="drawer-container">
         <mat-sidenav mode="over" #sidenav>
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
-                <img class="user-image" [src]="userProfile.picture">
+                <!-- <img class="user-image" [src]="userProfile.picture"> -->
                 <div fxLayout="column" fxLayoutGap="1em">
                     <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
                         <mat-icon>{{menu.icon}}</mat-icon>
                         {{menu.menu}}
                     </button>
-                    <button fxLayout="row" *ngIf="isAdmin" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin']">
+                    <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/admin']">
                         <mat-icon>supervised_user_circle</mat-icon>
                         Go to Admin
                     </button>
