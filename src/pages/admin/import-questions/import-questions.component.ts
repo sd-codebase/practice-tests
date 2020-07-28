@@ -43,7 +43,7 @@ export class ImportQuestionsComponent implements OnInit {
         options.forEach( op => {
           op = op && op.trim() || '';
         });
-        const isSingleAnswer = !data.answer.includes(',');
+        const isSingleAnswer = !data.answer.toString().includes(',');
         let {level, tags, question, answer_description} = data;
         level = level && level.trim();
         tags = tags && tags.trim();

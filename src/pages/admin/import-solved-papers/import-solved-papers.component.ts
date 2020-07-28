@@ -43,7 +43,8 @@ export class ImportSolvedPapersComponent implements OnInit {
         options.forEach( op => {
           op = op && op.toString().trim() || '';
         });
-        const isSingleAnswer = !data.answer.includes(',');
+        console.log(data);
+        const isSingleAnswer = !data.answer.toString().includes(',');
         let {level, tags, question, answer_description} = data;
         level = level && level.toString().trim();
         tags = tags && tags.toString().trim();
