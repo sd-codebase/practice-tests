@@ -6,7 +6,8 @@ import { AuthService } from 'src/auth/auth.service';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  styleUrls: ['./user-dashboard.component.scss'],
+  providers: [ DrawerService ],
 })
 export class UserDashboardComponent implements OnInit {
   public menus = [
@@ -19,6 +20,7 @@ export class UserDashboardComponent implements OnInit {
     {menu: 'Progress', path: '/user/coming-soon', icon: 'analytics'},
     {menu: 'Ask a question', path: '/user/coming-soon', icon: 'forum'},
   ];
+  public pageHeader: string;
   public userProfile;
   public isAdmin = false;
   constructor(
@@ -30,5 +32,6 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this.userProfile = this.storageService.getUser();
     this.isAdmin = this.userProfile.userId === '5ee352aea4928b0014252d80';
+    this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
   }
 }

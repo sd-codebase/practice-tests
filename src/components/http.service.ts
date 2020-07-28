@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 
 const host = 'https://test-for-all-services.herokuapp.com/api';
 // const host = 'http://localhost:3000/api';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HttpService {
 
   constructor(private http: HttpClient) { }

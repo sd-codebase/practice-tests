@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
   ],
   exports: [
-      AppRoutingModule,
+    AppRoutingModule,
   ]
 })
 export class ConfigModule { }

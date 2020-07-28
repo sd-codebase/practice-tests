@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DrawerService {
+    public pageHeader = new Subject<string>();
     public opened = true;
-    public pageHeader = '';
+    constructor() {}
     open() {
         this.opened = true;
     }
@@ -13,8 +13,7 @@ export class DrawerService {
     close() {
         this.opened = false;
     }
-
     setPageHeader(header: string) {
-        this.pageHeader = header;
+        this.pageHeader.next(header);
     }
 }

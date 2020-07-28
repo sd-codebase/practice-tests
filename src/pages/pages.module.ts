@@ -8,6 +8,12 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AdminModule } from '@modules/admin/admin.module';
 
+import { HttpService } from '@components/http.service';
+import { DrawerService } from '@components/drawer-service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +30,13 @@ import { AdminModule } from '@modules/admin/admin.module';
     AdminDashboardComponent,
     UserDashboardComponent,
     HomeComponent,
-  ]
+  ],
+  providers: [
+    HttpService,
+    DrawerService,
+    LoaderService,
+    NotificationService,
+    StorageService,
+  ],
 })
 export class PagesModule { }

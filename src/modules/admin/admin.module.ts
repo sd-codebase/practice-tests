@@ -7,6 +7,11 @@ import { CoreModule } from '@core/core.module';
 import { TestModule } from '@modules/user/test/test.module';
 import { NotesEditorComponent } from './components/notes-editor/notes-editor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { HttpService } from '@components/http.service';
+import { DrawerService } from '@components/drawer-service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
 
 @NgModule({
   imports: [
@@ -25,6 +30,13 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     QuestionContainerComponent,
     VerifyQuestionsContainerComponent,
     NotesEditorComponent,
+  ],
+  providers: [
+    HttpService,
+    DrawerService,
+    LoaderService,
+    NotificationService,
+    StorageService,
   ],
 })
 export class AdminModule {}

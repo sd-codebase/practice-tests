@@ -15,6 +15,11 @@ import { TopicwiseComponent } from './components/tests-container/topicwise/topic
 import { SubjectwiseComponent } from './components/tests-container/subjectwise/subjectwise.component';
 import { ChapterwiseComponent } from './components/tests-container/chapterwise/chapterwise.component';
 import { SolvedPapersContainerComponent } from './components/solved-papers-container/solved-papers-container.component';
+import { HttpService } from '@components/http.service';
+import { DrawerService } from '@components/drawer-service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
 
 @NgModule({
   imports: [
@@ -48,6 +53,13 @@ import { SolvedPapersContainerComponent } from './components/solved-papers-conta
     SubjectwiseComponent,
     ChapterwiseComponent,
     SolvedPapersContainerComponent,
+  ],
+  providers: [
+    HttpService,
+    DrawerService,
+    LoaderService,
+    NotificationService,
+    StorageService,
   ],
 })
 export class TestModule { }

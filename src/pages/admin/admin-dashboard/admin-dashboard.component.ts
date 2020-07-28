@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawerService } from '@components/drawer-service';
 import { AuthService } from 'src/auth/auth.service';
+import { DrawerService } from '@components/drawer-service';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  styleUrls: ['./admin-dashboard.component.scss'],
+  providers: [ DrawerService ],
 })
 export class AdminDashboardComponent implements OnInit {
   public menus = [
@@ -18,9 +19,16 @@ export class AdminDashboardComponent implements OnInit {
     {menu: 'Animate Content', path: '/admin/animate-content', icon: 'slow_motion_video'},
     {menu: 'Create Notes', path: '/admin/create-notes', icon: 'menu_book'},
   ];
-  constructor(public drawerService: DrawerService, public auth: AuthService) { }
+
+  public pageHeader: string;
+
+  constructor(
+    public drawerService: DrawerService,
+    public auth: AuthService,
+  ) { }
 
   ngOnInit() {
+    this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
   }
 
 }

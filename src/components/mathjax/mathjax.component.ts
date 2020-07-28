@@ -5,7 +5,8 @@ import { GlobalService } from './global.service';
 @Component({
   selector: 'app-mathjax',
   templateUrl: './mathjax.component.html',
-  styleUrls: ['./mathjax.component.scss']
+  styleUrls: ['./mathjax.component.scss'],
+  providers: [ GlobalService ],
 })
 export class MathjaxComponent implements OnChanges, OnInit {
   @Input() content: string;

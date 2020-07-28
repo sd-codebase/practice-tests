@@ -14,6 +14,12 @@ import { AnimateContentComponent } from './animate-content/animate-content.compo
 import { CreateNotesComponent } from './create-notes/create-notes.component';
 import { ImportChaptersComponent } from './import-chapters/import-chapters.component';
 
+import { HttpService } from '@components/http.service';
+import { DrawerService } from '@components/drawer-service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
+
 @NgModule({
     imports: [
       CommonModule,
@@ -34,6 +40,13 @@ import { ImportChaptersComponent } from './import-chapters/import-chapters.compo
       AnimateContentComponent,
       CreateNotesComponent,
       ImportChaptersComponent,
-    ]
+    ],
+    providers: [
+      HttpService,
+      DrawerService,
+      LoaderService,
+      NotificationService,
+      StorageService,
+    ],
   })
 export class AdminPagesModule { }

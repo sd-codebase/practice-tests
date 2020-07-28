@@ -14,6 +14,11 @@ import { SolvedPapersComponent } from './solved-papers/solved-papers.component';
 import { SyllabusNotesComponent } from './syllabus-notes/syllabus-notes.component';
 import { UserModule } from '@modules/user/user.module';
 
+import { HttpService } from '@components/http.service';
+import { DrawerService } from '@components/drawer-service';
+import { LoaderService } from '@components/loader.service';
+import { NotificationService } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
 
 @NgModule({
     imports: [
@@ -36,6 +41,13 @@ import { UserModule } from '@modules/user/user.module';
       StartTestsContainerComponent,
       SolvedPapersComponent,
       SyllabusNotesComponent,
-    ]
+    ],
+    providers: [
+      HttpService,
+      DrawerService,
+      LoaderService,
+      NotificationService,
+      StorageService,
+    ],
   })
 export class UserPagesModule { }

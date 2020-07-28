@@ -1,13 +1,12 @@
 import { Injectable, Component, Inject } from '@angular/core';
 import { MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NotificationService {
     constructor(
         private snackBar: MatSnackBar,
     ) {}
+
     show(status: ENotification, title: string | EError, message: string) {
         const icon =  status === ENotification.SUCCESS && 'verified_user'
         || status === ENotification.WARNING && 'notification_important'

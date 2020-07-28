@@ -4,13 +4,15 @@ import { MathjaxComponent } from './mathjax/mathjax.component';
 import { CoreModule } from '@core/core.module';
 import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-upload.component';
 import { HttpService } from './http.service';
-import { GlobalService } from './mathjax/global.service';
 import { LoaderComponent } from './loader/loader.component';
 import { TimePipe } from './pipes/time.pipe';
 import { PageHeaderComponent } from './page-header/page-header.component';
-import { NotificationBarComponent } from './notifications.service';
+import { NotificationBarComponent, NotificationService } from './notifications.service';
 import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { DrawerService } from './drawer-service';
+import { LoaderService } from './loader.service';
+import { StorageService } from './storage.serice';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
   ],
   imports: [
     CommonModule,
-    CoreModule
+    CoreModule,
   ],
   exports: [
     MathjaxComponent,
@@ -38,7 +40,10 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
   ],
   providers : [
     HttpService,
-    GlobalService,
+    DrawerService,
+    LoaderService,
+    NotificationService,
+    StorageService,
   ],
   entryComponents: [NotificationBarComponent]
 })
