@@ -19,6 +19,8 @@ import { DrawerService } from '@components/drawer-service';
 import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
 
 @NgModule({
     imports: [
@@ -47,6 +49,7 @@ import { StorageService } from '@components/storage.serice';
       LoaderService,
       NotificationService,
       StorageService,
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
   })
 export class AdminPagesModule { }

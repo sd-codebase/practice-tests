@@ -47,6 +47,7 @@ export class CreateTestComponent implements OnInit {
         return question;
       });
     } catch (e) {
+      console.log(e);
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
@@ -54,6 +55,9 @@ export class CreateTestComponent implements OnInit {
   }
 
   getInstructions() {
+    if (!this.test.instructions) {
+      return {};
+    }
     const instructions = this.test.instructions;
     this.instructions = Object.keys(instructions).map( key => {
       return {

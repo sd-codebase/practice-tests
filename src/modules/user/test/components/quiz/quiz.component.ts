@@ -39,6 +39,9 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   getInstructions() {
+    if (!this.test.instructions) {
+      return {};
+    }
     const instructions = this.test.instructions;
     this.instructions = Object.keys(instructions).map( key => {
       return {
@@ -50,8 +53,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   getInfoTooltip(question: CQuestion) {
-    if (!question) {
-      return '';
+    if (!question || !this.instructions) {
+      return 'NA';
     }
     const instruction = this.instructions.find( inf => inf.questions.includes(question.questionNum));
     return instruction.value;

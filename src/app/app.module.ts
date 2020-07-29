@@ -7,6 +7,7 @@ import { ComponentsModule } from '@components/components.module';
 import { PagesModule } from '@pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { LoaderService } from '@components/loader.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

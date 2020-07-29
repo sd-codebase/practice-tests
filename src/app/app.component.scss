@@ -1,13 +1,35 @@
 p {
-font-family: Lato;
+    font-family: Lato;
 }
 .question-container div {
-margin: 15px 5px;
-font-size: 30px;
+    margin: 15px 5px;
+    font-size: 30px;
 }
 .green{
-color: green;
+    color: green;
 }
 .red{
-color:red
+    color:red
+}
+
+.loader-overlay, .inactive-overlay{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: none;
+    background-color: #000;
+    z-index: 100;
+    opacity: 0.5;
+
+    &.loader {
+        display: block;
+    }
+}
+
+.inactive-overlay {
+    opacity: 0;
 }
