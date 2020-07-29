@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/auth/auth.service';
 import { DrawerService } from '@components/drawer-service';
+import { AuthenticationService } from 'src/auth/authentication/authentication.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,7 +24,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     public drawerService: DrawerService,
-    public auth: AuthService,
+    public auth: AuthenticationService,
   ) { }
 
   ngOnInit() {
