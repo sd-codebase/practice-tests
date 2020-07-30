@@ -11,6 +11,7 @@ import { GlobalService } from './global.service';
 export class MathjaxComponent implements OnChanges, OnInit {
   @Input() content: string;
   mathJaxObject;
+  public elementId = Math.random().toString();
 
   constructor(public gs: GlobalService) { }
 
@@ -23,10 +24,10 @@ export class MathjaxComponent implements OnChanges, OnInit {
   renderMath() {
     // tslint:disable-next-line: no-string-literal
     this.mathJaxObject  = this.gs.nativeGlobal()['MathJax'];
-    const angObj = this;
-    setTimeout(() => {
-      angObj.mathJaxObject.Hub.Queue(['Typeset', angObj.mathJaxObject.Hub], 'mathContent');
-    }, 1000);
+    this.mathJaxObject.Hub.Queue(['Typeset', this.mathJaxObject.Hub, this.elementId]);
+    // setTimeout(() => {
+    // angObj.mathJaxObject.Hub.Queue(['Typeset', angObj.mathJaxObject.Hub], 'idOfElement');
+    // }, 1000);
   }
 
   loadMathConfig() {
@@ -45,5 +46,13 @@ export class MathjaxComponent implements OnChanges, OnInit {
   ngOnInit() {
      this.loadMathConfig();
      this.renderMath();
+  }
+
+  disableUi() {
+
+  }
+
+  enableUi() {
+
   }
 }

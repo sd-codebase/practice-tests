@@ -5,6 +5,7 @@ import { CountdownComponent } from 'ngx-countdown';
 import { QuizComponent } from '../quiz/quiz.component';
 import { LoaderService } from '@components/loader.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-create-test',
@@ -24,10 +25,12 @@ export class CreateTestComponent implements OnInit {
   public timer = 0;
   public isTestLoaded = false;
   public openQuestionPallete = false;
+  public startwithQuestion: number;
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,26 @@ export class CreateTestComponent implements OnInit {
     this.isTestLoaded = false;
     try {
       await this.loaderService.show();
+      const inProgressTest = this.storageService.getInProgressTest(this.testId);
+      if (inProgressTest.test) {
+        this.test = inProgressTest.test;
+        this.getInstructions();
+        this.timer = inProgressTest.timeLeft;
+        this.isTestLoaded = true;
+        this.startwithQuestion = inProgressTest.currentQuestion;
+      } else {
+        this.fetchTestFromServer();
+      }
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
+  }
+
+  async fetchTestFromServer() {
+    try {
+      await this.loaderService.show();
       this.test = await this.http.get('/tests/' + this.testId).toPromise() as ITest;
       this.getInstructions();
       this.test.questions = this.test.questions.map( (que, index) => {
@@ -46,8 +69,8 @@ export class CreateTestComponent implements OnInit {
         question.status = EQuestionStatus.NOTVISITED;
         return question;
       });
+      this.startwithQuestion = 1;
     } catch (e) {
-      console.log(e);
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
@@ -86,6 +109,7 @@ export class CreateTestComponent implements OnInit {
       const test = this.test;
       this.test = null;
       this.test = await this.http.put('/tests', test).toPromise()  as ITest;
+      this.storageService.removeTest(this.test._id);
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
@@ -96,12 +120,19 @@ export class CreateTestComponent implements OnInit {
   pauseTimer() {
     if (this.counter) {
       this.counter.pause();
+      this.saveTestProgress();
     }
   }
 
   resumeTimer() {
     if (this.counter) {
       this.counter.resume();
+    }
+  }
+
+  saveTestProgress() {
+    if (this.counter.left / 1000 > 0 && this.test.status === ETestStatus.STARTED) {
+      this.storageService.saveTestProgress(this.test, this.counter.left / 1000, this.quizCompo.question.questionNum);
     }
   }
 

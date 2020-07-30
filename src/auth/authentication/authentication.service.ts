@@ -48,7 +48,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.storageService.removeToken();
+        this.storageService.clear();
         location.reload();
     }
 

@@ -24,9 +24,10 @@
             *ngIf="test && test.status === 1"
             [action]="'attempt'"
             [test]="test"
+            [startwithQuestion]="startwithQuestion"
             (handleFinishTest)="finishTest()"
-            (timerPause) = "pauseTimer()"
-            (timerResume) = "resumeTimer()"
+            (timerPause) = "pauseTimer($event)"
+            (timerResume) = "resumeTimer($event)"
         ></app-quiz>
         
     </div>

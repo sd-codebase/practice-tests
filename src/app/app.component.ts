@@ -18,12 +18,12 @@ export class AppComponent implements OnInit {
     this.loaderService.loader
       .subscribe( loading => {
         this.loading = loading;
-        if (!loading) {
-          this.inactiveLoading = true;
-          setTimeout(() => {
-            this.inactiveLoading = false;
-          }, 1000);
-        }
+        // if (!loading) {
+        //   this.inactiveLoading = true;
+        //   setTimeout(() => {
+        //     this.inactiveLoading = false;
+        //   }, 1000);
+        // }
       });
   }
 }

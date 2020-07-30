@@ -12,6 +12,7 @@ import { NotificationService, ENotification, EError } from '@components/notifica
 export class QuizComponent implements OnInit, OnDestroy {
   @Input() test: ITest;
   @Input() action: string;
+  @Input() startwithQuestion = 1;
   @Output() timerPause = new EventEmitter();
   @Output() timerResume = new EventEmitter();
   @Output() handleFinishTest = new EventEmitter();
@@ -31,7 +32,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.action === 'attempt') {
-      this.firstQuestion();
+      this.specifiedQuestion(this.startwithQuestion);
     } else if (this.action === 'view') {
       this.viewFirstQuestion();
     }
@@ -62,7 +63,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   async pauseTimer() {
     await this.loaderService.show();
-    this.timerPause.emit();
+    this.timerPause.emit(this.question.questionNum);
   }
 
   resumeTimer() {
@@ -98,11 +99,12 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.resumeTimer();
   }
 
-  firstQuestion() {
+
+  specifiedQuestion(questionNum) {
     this.pauseTimer();
     this.question = null;
     setTimeout(() => {
-      this.question = this.test.questions[0];
+      this.question = this.test.questions.find( que => que.questionNum === questionNum);
       this.updateQuestionStatus();
     }, 1);
     this.counter = 0;

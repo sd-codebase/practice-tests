@@ -9,6 +9,7 @@ import { StartTestsContainerComponent } from '@pages/user/start-tests-container/
 import { TestAnswerKeyComponent } from '@pages/user/test-answer-key/test-answer-key.component';
 import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.component';
 import { SyllabusNotesComponent } from '@pages/user/syllabus-notes/syllabus-notes.component';
+import { CanDeactivateGuard } from 'src/guards/candeactivate.guard';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
@@ -20,11 +21,12 @@ const routes: Routes = [
     {path: 'my-tests', component: MyTestsComponent},
     {path: 'start-taking-test', component: StartTestsContainerComponent},
     {path: 'test-answer-key/:testId', component: TestAnswerKeyComponent},
-    {path: 'attempt-test/:testId', component: TestAttemptComponent},
+    {path: 'attempt-test/:testId', component: TestAttemptComponent, canDeactivate: [CanDeactivateGuard]},
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [CanDeactivateGuard],
 })
 export class UsersRoutingModule { }
