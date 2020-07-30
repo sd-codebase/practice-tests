@@ -63,7 +63,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   async pauseTimer() {
     await this.loaderService.show();
-    this.timerPause.emit(this.question.questionNum);
+    this.timerPause.emit();
   }
 
   resumeTimer() {
