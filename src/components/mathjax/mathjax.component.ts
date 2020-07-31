@@ -16,7 +16,8 @@ export class MathjaxComponent implements OnChanges, OnInit {
   constructor(public gs: GlobalService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-   if (changes.content) {
+    if (changes.content) {
+      this.loadMathConfig();
       this.renderMath();
     }
   }

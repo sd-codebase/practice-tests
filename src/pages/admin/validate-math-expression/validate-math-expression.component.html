@@ -1,6 +1,6 @@
 <div class="page-container">
     <div>
-        <textarea [(ngModel)]="content" ></textarea>
+        <textarea [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
         <!-- (ngModelChange)="onChange($event)" -->
     </div>
     <div class="action-buttons">

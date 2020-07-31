@@ -26,11 +26,12 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   onChange(changes: string) {
-    if (changes) {
-      this.content = changes.split('\n').join(' ').trim();
-    } else {
-      this.content = '';
-    }
+    // if (changes) {
+    //   this.content = changes.split('\n').join(' ').trim();
+    // } else {
+    //   this.content = '';
+    // }
+    this.validate();
   }
 
   formatString() {

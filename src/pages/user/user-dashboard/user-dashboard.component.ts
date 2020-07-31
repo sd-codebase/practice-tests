@@ -17,7 +17,7 @@ export class UserDashboardComponent implements OnInit {
     {menu: 'Sample test', path: '/user/test', icon: 'assignment'},
     {menu: 'Start taking test', path: '/user/start-taking-test', icon: 'assignment_turned_in'},
     {menu: 'My Tests', path: '/user/my-tests', icon: 'batch_prediction'},
-    {menu: 'Progress', path: '/user/coming-soon', icon: 'analytics'},
+    {menu: 'Progress', path: '/user/my-progress', icon: 'analytics'},
     {menu: 'Ask a question', path: '/user/coming-soon', icon: 'forum'},
   ];
   public pageHeader: string;

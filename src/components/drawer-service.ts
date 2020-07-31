@@ -14,6 +14,7 @@ export class DrawerService {
         this.opened = false;
     }
     setPageHeader(header: string) {
+        console.log(header);
         this.pageHeader.next(header);
     }
 }

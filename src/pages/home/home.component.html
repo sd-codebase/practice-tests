@@ -1,46 +1,52 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="showView">
-    <mat-tab-group>
-        <mat-tab label="Sign In">
-            <div fxLayout="column" fxLayoutGap="1em" class="form">
-                <mat-form-field appearance="outline">
-                    <mat-label>Email Id</mat-label>
-                    <input matInput placeholder="Email Id" [(ngModel)]="loginUser.email">
-                    <mat-icon matSuffix>person</mat-icon>
-                    <mat-hint>Enter your email</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput placeholder="Password" [(ngModel)]="loginUser.password">
-                    <mat-icon matSuffix>security</mat-icon>
-                    <mat-hint>Enter your password</mat-hint>
-                </mat-form-field>
-                <button [disabled]="!loginUser.email || !loginUser.password" mat-raised-button color="primary" (click)="login()">Sign In</button>
-            </div>
-        </mat-tab>
-        <mat-tab label="Sign Up">
-            <div fxLayout="column" fxLayoutGap="1em" class="form">
-                <mat-form-field appearance="outline">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Name" [(ngModel)]="signUpUser.name">
-                    <mat-hint>Enter your name</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Course</mat-label>
-                    <input matInput placeholder="Course" [(ngModel)]="signUpUser.course">
-                    <mat-hint>Cource name</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Email Id</mat-label>
-                    <input matInput placeholder="Email Id" [(ngModel)]="signUpUser.email">
-                    <mat-hint>Enter your email</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput placeholder="Password" [(ngModel)]="signUpUser.password">
-                    <mat-hint>Enter your password</mat-hint>
-                </mat-form-field>
-                <button [disabled]="!signUpUser.email || !signUpUser.password" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+    <div fxLayout="column" class="form-container">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
+            <img src="assets/app-logo.jpg" class="logo">
+            <span class="app-name">Assessment Portal</span>
+        </div>
+        <mat-tab-group>
+            <mat-tab label="Sign In">
+                <div fxLayout="column" fxLayoutGap="1em" class="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput placeholder="Email Id" [(ngModel)]="loginUser.email">
+                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-hint>Enter your email</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" [(ngModel)]="loginUser.password">
+                        <mat-icon matSuffix>security</mat-icon>
+                        <mat-hint>Enter your password</mat-hint>
+                    </mat-form-field>
+                    <button [disabled]="!loginUser.email || !loginUser.password" mat-raised-button color="primary" (click)="login()">Sign In</button>
+                </div>
+            </mat-tab>
+            <mat-tab label="Sign Up">
+                <div fxLayout="column" fxLayoutGap="1em" class="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Name" [(ngModel)]="signUpUser.name">
+                        <mat-hint>Enter your name</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Course</mat-label>
+                        <input matInput placeholder="Course" [(ngModel)]="signUpUser.course">
+                        <mat-hint>Cource name</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput placeholder="Email Id" [(ngModel)]="signUpUser.email">
+                        <mat-hint>Enter your email</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" [(ngModel)]="signUpUser.password">
+                        <mat-hint>Enter your password</mat-hint>
+                    </mat-form-field>
+                    <button [disabled]="!signUpUser.email || !signUpUser.password" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>

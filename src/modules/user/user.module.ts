@@ -8,6 +8,7 @@ import { DrawerService } from '@components/drawer-service';
 import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
+import { MyProgressComponent } from './components/my-progress/my-progress.component';
 
 @NgModule({
     imports: [
@@ -17,9 +18,11 @@ import { StorageService } from '@components/storage.serice';
     ],
     declarations: [
         SyllabusAndNotesComponent,
+        MyProgressComponent,
     ],
     exports: [
         SyllabusAndNotesComponent,
+        MyProgressComponent,
     ],
     providers: [
         HttpService,

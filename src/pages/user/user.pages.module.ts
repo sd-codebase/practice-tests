@@ -21,6 +21,7 @@ import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
       StartTestsContainerComponent,
       SolvedPapersComponent,
       SyllabusNotesComponent,
+      ProgressComponent,
     ],
     providers: [
       HttpService,

@@ -10,6 +10,7 @@ import { TestAnswerKeyComponent } from '@pages/user/test-answer-key/test-answer-
 import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.component';
 import { SyllabusNotesComponent } from '@pages/user/syllabus-notes/syllabus-notes.component';
 import { CanDeactivateGuard } from 'src/guards/candeactivate.guard';
+import { ProgressComponent } from '@pages/user/progress/progress.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'start-taking-test', component: StartTestsContainerComponent},
     {path: 'test-answer-key/:testId', component: TestAnswerKeyComponent},
     {path: 'attempt-test/:testId', component: TestAttemptComponent, canDeactivate: [CanDeactivateGuard]},
+    {path: 'my-progress', component: ProgressComponent},
 ];
 
 @NgModule({
