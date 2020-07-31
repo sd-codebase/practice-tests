@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
 
   async login() {
     try {
-      const logIn = await this.auth.login(this.loginUser);
-      if (logIn) {
-        this.router.navigate(['/user']);
+      const logInUser = await this.auth.login(this.loginUser);
+      if (logInUser) {
+        this.router.navigate([URL[ logInUser.role || 0]]);
       }
     } catch (e) {
 
@@ -50,3 +50,7 @@ export class HomeComponent implements OnInit {
     }
   }
 }
+
+const URL = [
+  '/guest', '/instructor', '/user', '/admin'
+];

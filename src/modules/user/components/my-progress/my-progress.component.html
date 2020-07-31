@@ -1,11 +1,24 @@
-<div fxLayout="row" fxLayoutAlign="space-between start">
-    <div class="card-layout">
-        <google-chart
-            [type]="'LineChart'" 
-            [data]="lineData" 
-            [options]="lineOptions"
-            [columns]="chartColumns"
-        ></google-chart>
+<div fxLayout="column" fxLayoutGap="2em">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div class="card-layout">
+            <google-chart
+                [type]="'LineChart'" 
+                [data]="lineData" 
+                [options]="lineOptions"
+                [columns]="chartColumns"
+            ></google-chart>
+        </div>
+        <div class="card-layout">
+            <google-chart [type]="'PieChart'" [data]="piData" [options]="piOptions"></google-chart>
+        </div>
     </div>
-    
+
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div class="card-layout">
+            <google-chart [type]="'PieChart'" [data]="piData" [options]="piOptions"></google-chart>
+        </div>
+        <div class="card-layout">
+            <google-chart [type]="'ColumnChart'" [data]="columnData" [options]="columnOptions"></google-chart>
+        </div>
+    </div>
 </div>

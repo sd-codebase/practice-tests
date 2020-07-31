@@ -13,7 +13,7 @@ export class ComingSoonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.drawerService.setPageHeader('Coming Soon');
+    this.drawerService.setPageHeader('Dashboard');
   }
 
 }

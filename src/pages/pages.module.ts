@@ -13,6 +13,8 @@ import { DrawerService } from '@components/drawer-service';
 import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
+import { InstructorDashboardComponent } from './instructor/components/instructor-dashboard/instructor-dashboard.component';
+import { GuestDashboardComponent } from './guest/components/guest-dashboard/guest-dashboard.component';
 
 @NgModule({
   imports: [
@@ -25,11 +27,15 @@ import { StorageService } from '@components/storage.serice';
   exports: [
     AdminDashboardComponent,
     UserDashboardComponent,
+    InstructorDashboardComponent,
+    GuestDashboardComponent,
   ],
   declarations: [
     AdminDashboardComponent,
     UserDashboardComponent,
     HomeComponent,
+    InstructorDashboardComponent,
+    GuestDashboardComponent,
   ],
   providers: [
     HttpService,

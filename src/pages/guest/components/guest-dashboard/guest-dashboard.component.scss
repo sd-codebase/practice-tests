@@ -1,4 +1,4 @@
-.user-dashboard {
+.guest-dashboard {
     height: 100%;
     .drawer-container {
         height: 100%;
@@ -9,12 +9,14 @@
             .mat-list-item {
                 cursor: pointer;
             }
-            .menu-list {
-                padding-top: 1em;
-            }
         }
     }
 }
+
+.padding-top {
+    padding-top: 0.5em;
+}
+
 
 .hide-button, .show-button {
     position: fixed;
@@ -27,13 +29,6 @@
 
 .show-button {
     left: 1em;
-}
-
-.user-image {
-    height: 5em;
-    width: 5em;
-    border-radius: 50%;
-    margin-top: 0.5em;
 }
 
 .mat-icon {

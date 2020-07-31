@@ -23,7 +23,7 @@ export class AuthenticationService {
                 this.storageService.setToken(userLogin.token);
                 this.storageService.setUser(userLogin.savedUser);
                 this.notificationService.show(ENotification.SUCCESS, 'Logged In', 'Login successful');
-                return true;
+                return userLogin.savedUser;
             }
         } catch (e) {
             this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
@@ -68,4 +68,12 @@ export interface IUser {
     password: string;
     name?: string;
     course?: string;
+    role?: EUserRole;
+}
+
+export enum EUserRole {
+    GUEST,
+    INSTRUCTOR,
+    USER,
+    ADMIN,
 }

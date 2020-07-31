@@ -15,7 +15,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input matInput placeholder="Password" [(ngModel)]="loginUser.password">
+                        <input type="password" matInput placeholder="Password" [(ngModel)]="loginUser.password">
                         <mat-icon matSuffix>security</mat-icon>
                         <mat-hint>Enter your password</mat-hint>
                     </mat-form-field>
@@ -41,7 +41,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input matInput placeholder="Password" [(ngModel)]="signUpUser.password">
+                        <input type="password" matInput placeholder="Password" [(ngModel)]="signUpUser.password">
                         <mat-hint>Enter your password</mat-hint>
                     </mat-form-field>
                     <button [disabled]="!signUpUser.email || !signUpUser.password" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
