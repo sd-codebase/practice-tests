@@ -1,0 +1,67 @@
+<div fxFill fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="start start">
+    <div fxFill fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start center" *ngIf="newUser">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="newUser.name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="newUser.email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Contact</mat-label>
+            <input matInput [(ngModel)]="newUser.contact">
+        </mat-form-field>
+        <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="addGuest()">
+            <mat-icon>done</mat-icon>
+            <span> Save </span>
+        </button>
+        <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button (click)="discardUser()">
+            <mat-icon>close</mat-icon>
+            <span> Discard </span>
+        </button>
+    </div>
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Contact </th>
+            <th> Actions </th>
+        </tr>
+        <tr *ngFor="let user of users">
+            <ng-container *ngTemplateOutlet="user.isEditMode ? userTemplateEdit : userTemplateView; context:{user:user}" ></ng-container>
+        </tr>
+    </table>
+</div>
+
+<ng-template #userTemplateView let-user="user">
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.contact }}</td>
+    <td fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
+        <button title="Edit" mat-mini-fab color="primary" (click)="user.isEditMode = true">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button title="Activate/Deactivate" mat-mini-fab>
+            <mat-icon *ngIf="user.enabled">visibility_off</mat-icon>
+            <mat-icon *ngIf="!user.enabled">visibility</mat-icon>
+        </button>
+        <button title="Delete this test" mat-mini-fab color="warn">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </td>
+</ng-template>
+
+<ng-template #userTemplateEdit let-user="user">
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.contact }}</td>
+    <td fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
+        <button title="Save" mat-mini-fab color="primary">
+            <mat-icon>done</mat-icon>
+        </button>
+        <button title="Discard" mat-mini-fab>
+            <mat-icon>close</mat-icon>
+        </button>
+    </td>
+</ng-template>

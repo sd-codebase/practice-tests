@@ -8,6 +8,10 @@
                         <mat-icon>{{menu.icon}}</mat-icon>
                         {{menu.menu}}
                     </button>
+                    <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" [routerLink]="['/instructor']">
+                        <mat-icon>settings_power</mat-icon>
+                        Instructor
+                    </button>
                     <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="auth.logout()">
                         <mat-icon>settings_power</mat-icon>
                         Logout

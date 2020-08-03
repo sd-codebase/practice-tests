@@ -14,6 +14,7 @@ import { IntructorRoutingModule } from '@config/instructor.routing.module';
 import { CoreModule } from '@core/core.module';
 import { ComponentsModule } from '@components/components.module';
 import { InstructorProfileComponent } from './components/profile/profile.component';
+import { InstructorModule } from '@modules/instructor/instructor.module';
 
 
 
@@ -29,6 +30,7 @@ import { InstructorProfileComponent } from './components/profile/profile.compone
     CoreModule,
     ComponentsModule,
     IntructorRoutingModule,
+    InstructorModule,
   ],
   providers: [
     HttpService,

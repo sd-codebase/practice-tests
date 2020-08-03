@@ -65,10 +65,14 @@ export interface ILoginResponse {
 export interface IUser {
     _id?: string;
     email: string;
-    password: string;
+    contact?: string;
+    password?: string;
     name?: string;
     course?: string;
     role?: EUserRole;
+    enabled?: boolean;
+    isEditMode?: boolean;
+    belongsTo?: string;
 }
 
 export enum EUserRole {
