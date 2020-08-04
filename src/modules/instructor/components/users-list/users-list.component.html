@@ -1,27 +1,50 @@
 <div fxFill fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="start start">
-    <div fxFill fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start center" *ngIf="newUser">
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="newUser.name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="newUser.email">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Contact</mat-label>
-            <input matInput [(ngModel)]="newUser.contact">
-        </mat-form-field>
-        <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="addGuest()">
-            <mat-icon>done</mat-icon>
-            <span> Save </span>
-        </button>
-        <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button (click)="discardUser()">
-            <mat-icon>close</mat-icon>
-            <span> Discard </span>
-        </button>
+    <div fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="start start">
+        <mat-radio-group fxLayout="row" fxLayoutGap="2em" fxLayoutAlign="start center"
+            aria-labelledby="Action type"
+            [(ngModel)]="pageAction">
+            <mat-radio-button class="example-radio-button" value="USER"> USER </mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="GROUP"> GROUP </mat-radio-button>
+        </mat-radio-group>
+        <div fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start center" *ngIf="pageAction === 'GROUP' && newGroup">
+            <mat-form-field>
+                <mat-label>Group Name</mat-label>
+                <input matInput [(ngModel)]="newGroup.name">
+            </mat-form-field>
+            <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="addGroup()">
+                <mat-icon>done</mat-icon>
+                <span> Save </span>
+            </button>
+            <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button (click)="discardGroup()">
+                <mat-icon>close</mat-icon>
+                <span> Discard </span>
+            </button>
+        </div>
+        <div fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start center" *ngIf="pageAction === 'USER' && newUser">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="newUser.name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="newUser.email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Contact</mat-label>
+                <input matInput [(ngModel)]="newUser.contact">
+            </mat-form-field>
+            <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="addGuest()">
+                <mat-icon>done</mat-icon>
+                <span> Save </span>
+            </button>
+            <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button (click)="discardUser()">
+                <mat-icon>close</mat-icon>
+                <span> Discard </span>
+            </button>
+        </div>
     </div>
-    <table>
+    
+    <table *ngIf="pageAction === 'USER'">
         <tr>
             <th> Name </th>
             <th> Email </th>
@@ -30,6 +53,16 @@
         </tr>
         <tr *ngFor="let user of users">
             <ng-container *ngTemplateOutlet="user.isEditMode ? userTemplateEdit : userTemplateView; context:{user:user}" ></ng-container>
+        </tr>
+    </table>
+    <table *ngIf="pageAction === 'GROUP'">
+        <tr>
+            <th> Name </th>
+            <th> Users </th>
+        </tr>
+        <tr *ngFor="let group of groups">
+            <td>{{ group.name }}</td>
+            <td> <a (click)="openUserGroupDialog(group)">Users</a></td>
         </tr>
     </table>
 </div>

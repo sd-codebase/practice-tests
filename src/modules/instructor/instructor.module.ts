@@ -8,6 +8,7 @@ import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { UserGroupsComponent } from './components/user-groups/user-groups.component';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
     ],
     declarations: [
       UsersListComponent,
+      UserGroupsComponent,
     ],
     exports: [
       UsersListComponent,
@@ -28,5 +30,6 @@ import { UsersListComponent } from './components/users-list/users-list.component
         NotificationService,
         StorageService,
     ],
+    entryComponents: [ UserGroupsComponent ]
 })
 export class InstructorModule { }

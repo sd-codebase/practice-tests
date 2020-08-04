@@ -115,6 +115,10 @@ app-mathjax {
     text-overflow: ellipsis;
 }
 
+.mat-dialog-container {
+    padding: 0 !important;
+}
+
 @media only screen and (max-width: 600px)  {
     .snackbar {
         width: 20em !important;
