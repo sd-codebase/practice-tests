@@ -1,0 +1,123 @@
+<div fxLayout="column" fxLayoutGap="1em">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em">
+        <button mat-raised-button color="primary" (click)="saveConfig(true)" *ngIf="testConfig._id && !viewMode">
+            Update
+        </button>
+        <button mat-raised-button (click)="discardTestConfig()" *ngIf="testConfig._id && !viewMode">
+            Discard
+        </button>
+        <button mat-raised-button (click)="discardViewMode()" *ngIf="testConfig._id && viewMode">
+            Close
+        </button>
+        <button mat-raised-button color="primary" (click)="saveConfig(false)" *ngIf="!testConfig._id">
+            Save
+        </button>
+        <button mat-raised-button (click)="newTestConfig()" *ngIf="!testConfig._id">
+            Reset
+        </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" [class.disabled]="viewMode">
+        <mat-form-field>
+            <mat-label>Course</mat-label>
+            <mat-select [(ngModel)]="testConfig.course" name="course">
+                <mat-option *ngFor="let course of courses" [value]="course">
+                    {{course}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Paper Name</mat-label>
+            <input matInput [(ngModel)]="testConfig.paperName">
+        </mat-form-field>
+        <mat-form-field class="number-field" title="No of Question">
+            <mat-label>No of Question</mat-label>
+            <input matInput [(ngModel)]="testConfig.noOfQuestions">
+        </mat-form-field>
+        <mat-form-field class="number-field" title="Marks to each question">
+            <mat-label>Marks to each question</mat-label>
+            <input matInput [(ngModel)]="testConfig.marksToEachQuestion">
+        </mat-form-field>
+        <mat-slide-toggle
+            color="primary"
+            [(ngModel)]="testConfig.isNegativeMarking"
+            (ngModelChange)="onNegativeMarkingChange()">
+            Negative Marking
+        </mat-slide-toggle>
+        <mat-slide-toggle
+            color="primary"
+            [disabled]="!testConfig.isNegativeMarking"
+            [(ngModel)]="testConfig.isOptionwiseNegativeMarking">
+            Optionwise Negative Marking
+        </mat-slide-toggle>
+        <mat-form-field class="number-field" title="Negative Marks to each question">
+            <mat-label>Negative Marks to each question</mat-label>
+            <input [disabled]="!testConfig.isNegativeMarking" matInput [(ngModel)]="testConfig.negativeMarksToEachQuestion">
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" [class.disabled]="viewMode">
+        <h3>Sections</h3>
+        <button mat-icon-button color="primary" (click)="addSection()">
+            <mat-icon>library_add</mat-icon>
+        </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" *ngFor="let section of testConfig.sections" [class.disabled]="viewMode">
+        <mat-form-field>
+            <mat-label>Section Name</mat-label>
+            <input matInput [(ngModel)]="section.sectionName">
+        </mat-form-field>
+        <mat-form-field class="number-field" title="Question Start">
+            <mat-label>Question Start</mat-label>
+            <input matInput [(ngModel)]="section.questionNumberFrom">
+        </mat-form-field>
+        <mat-form-field class="number-field" title="Question End">
+            <mat-label>Question End</mat-label>
+            <input matInput [(ngModel)]="section.questionNumberTo">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Type Of Question</mat-label>
+            <mat-select [(ngModel)]="section.type" name="type">
+                <mat-option value="questionTypes.INTEGER">Integer</mat-option>
+                <mat-option value="questionTypes.ONE">One Option Correct</mat-option>
+                <mat-option value="questionTypes.TWO">Two Options Correct</mat-option>
+                <mat-option value="questionTypes.THREE">Three Options Correct</mat-option>
+                <mat-option value="questionTypes.FOUR">Four Options Correct</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Subject</mat-label>
+            <mat-select [(ngModel)]="section.subject" name="subject">
+                <mat-option *ngFor="let subject of subjects" [value]="subject">
+                    {{subject}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Chapters</mat-label>
+            <input matInput [disabled]="true">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Topics</mat-label>
+            <input matInput [disabled]="true">
+        </mat-form-field>
+        <mat-form-field class="textarea-input">
+            <mat-label>Instructions</mat-label>
+            <textarea matInput [(ngModel)]="section.instructions"></textarea>
+        </mat-form-field>
+    </div>
+</div>
+<div>
+    <table>
+        <tr>
+            <th> Paper Name </th>
+            <th> Select </th>
+        </tr>
+        <tr *ngFor="let config of testConfigList">
+            <td>{{ config.paperName }}</td>
+            <td> 
+                <a (click)="selectTestConfigForUpdate(config)">Update</a>,
+                <a (click)="selectTestConfigForView(config)">View</a>
+            </td>
+            <!-- <td> <a (click)="openUserGroupDialog(group)">Users</a></td> -->
+        </tr>
+    </table>
+</div>

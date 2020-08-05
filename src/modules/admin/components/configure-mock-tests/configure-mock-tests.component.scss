@@ -1,3 +1,13 @@
+.number-field {
+    width: 5em;
+}
+mat-form-field {
+    width: 10em;
+}
+.textarea-input {
+    width: 20em;
+}
+
 table {
     border-collapse: collapse;
     border: 1px solid gray;
@@ -7,4 +17,8 @@ table {
         width: 15em;
         border: 1px solid gray;
     }
+}
+
+.disabled {
+    pointer-events: none;
 }

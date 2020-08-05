@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '@components/drawer-service';
 import { StorageService } from '@components/storage.serice';
 import { AuthenticationService } from 'src/auth/authentication/authentication.service';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -26,9 +27,11 @@ export class UserDashboardComponent implements OnInit {
     public drawerService: DrawerService,
     private storageService: StorageService,
     public auth: AuthenticationService,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
+    this.loaderService.hide();
     this.userProfile = this.storageService.getUser();
     this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
   }

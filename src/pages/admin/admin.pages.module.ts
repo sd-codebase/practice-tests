@@ -21,6 +21,7 @@ import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
+import { ConfigureTestsComponent } from './configure-tests/configure-tests.component';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
       AnimateContentComponent,
       CreateNotesComponent,
       ImportChaptersComponent,
+      ConfigureTestsComponent,
     ],
     providers: [
       HttpService,

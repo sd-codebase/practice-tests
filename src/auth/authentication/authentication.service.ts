@@ -17,7 +17,6 @@ export class AuthenticationService {
 
     async login(userDetails) {
         try {
-            await this.loaderService.show();
             const userLogin = await this.http.post('/users/authenticate', userDetails).toPromise() as ILoginResponse;
             if (userLogin.token && userLogin.savedUser) {
                 this.storageService.setToken(userLogin.token);
@@ -28,7 +27,6 @@ export class AuthenticationService {
         } catch (e) {
             this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
         } finally {
-            this.loaderService.hide();
         }
         return false;
     }

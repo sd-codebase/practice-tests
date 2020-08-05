@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '@components/storage.serice';
 import { AuthenticationService, IUser } from 'src/auth/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '@components/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,17 @@ export class HomeComponent implements OnInit {
   constructor(
     public auth: AuthenticationService,
     public storageService: StorageService,
+    private loaderService: LoaderService,
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.auth.isAuthenticated()) {
-      this.router.navigate(['/user']);
+      await this.loaderService.show();
+      const logInUser = this.storageService.getUser();
+      if (logInUser) {
+        this.router.navigate([URL[ logInUser.role || 0]]);
+      }
     } else {
       this.showView = true;
     }
@@ -39,6 +45,7 @@ export class HomeComponent implements OnInit {
 
   async login() {
     try {
+      await this.loaderService.show();
       const logInUser = await this.auth.login(this.loginUser);
       if (logInUser) {
         this.router.navigate([URL[ logInUser.role || 0]]);
@@ -46,7 +53,6 @@ export class HomeComponent implements OnInit {
     } catch (e) {
 
     } finally {
-
     }
   }
 }

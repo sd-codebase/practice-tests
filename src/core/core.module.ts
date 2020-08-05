@@ -25,6 +25,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 const MaterialModules = [
   MatSidenavModule,
@@ -44,6 +46,8 @@ const MaterialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatDialogModule,
+  MatSlideToggleModule,
+  MatSelectModule,
 ];
 
 @NgModule({

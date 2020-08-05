@@ -71,17 +71,19 @@
     <td>{{ user.name }}</td>
     <td>{{ user.email }}</td>
     <td>{{ user.contact }}</td>
-    <td fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
-        <button title="Edit" mat-mini-fab color="primary" (click)="user.isEditMode = true">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button title="Activate/Deactivate" mat-mini-fab>
-            <mat-icon *ngIf="user.enabled">visibility_off</mat-icon>
-            <mat-icon *ngIf="!user.enabled">visibility</mat-icon>
-        </button>
-        <button title="Delete this test" mat-mini-fab color="warn">
-            <mat-icon>delete</mat-icon>
-        </button>
+    <td>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
+            <button title="Edit" mat-mini-fab color="primary" (click)="user.isEditMode = true">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button title="Activate/Deactivate" mat-mini-fab>
+                <mat-icon *ngIf="user.enabled">visibility_off</mat-icon>
+                <mat-icon *ngIf="!user.enabled">visibility</mat-icon>
+            </button>
+            <button title="Delete this test" mat-mini-fab color="warn">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </td>
 </ng-template>
 
@@ -89,12 +91,14 @@
     <td>{{ user.name }}</td>
     <td>{{ user.email }}</td>
     <td>{{ user.contact }}</td>
-    <td fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
-        <button title="Save" mat-mini-fab color="primary">
-            <mat-icon>done</mat-icon>
-        </button>
-        <button title="Discard" mat-mini-fab>
-            <mat-icon>close</mat-icon>
-        </button>
+    <td>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="0.5em">
+            <button title="Save" mat-mini-fab color="primary">
+                <mat-icon>done</mat-icon>
+            </button>
+            <button title="Discard" mat-mini-fab>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </td>
 </ng-template>

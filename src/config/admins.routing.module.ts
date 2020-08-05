@@ -9,6 +9,7 @@ import { VerifyQuestionsComponent } from '@pages/admin/verify-questions/verify-q
 import { AnimateContentComponent } from '@pages/admin/animate-content/animate-content.component';
 import { CreateNotesComponent } from '@pages/admin/create-notes/create-notes.component';
 import { ImportChaptersComponent } from '@pages/admin/import-chapters/import-chapters.component';
+import { ConfigureTestsComponent } from '@pages/admin/configure-tests/configure-tests.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
     {path: 'import-predefined-test', component: ImportSolvedPapersComponent},
     {path: 'validate-maths-expressions', component: ValidateMathExpressionComponent},
     {path: 'verify-questions', component: VerifyQuestionsComponent},
+    {path: 'mock-test-configuration', component: ConfigureTestsComponent},
     {path: 'animate-content', component: AnimateContentComponent},
     {path: 'create-notes', component: CreateNotesComponent},
 ];
