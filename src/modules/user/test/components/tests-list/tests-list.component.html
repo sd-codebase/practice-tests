@@ -1,18 +1,18 @@
 <mat-accordion multi *ngIf="tests && tests.length > 0">
     <mat-expansion-panel *ngFor="let test of tests">
       <mat-expansion-panel-header>
-        <mat-panel-title>{{ test.chapter.subject }}</mat-panel-title>
+        <mat-panel-title fxFlex="20">{{ test.testName }}</mat-panel-title>
         <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="created-info shorten-text" [title]="test.createdAt">Created: {{ test.createdAt }}</span>
-            <button class="status-icon-button" mat-mini-fab color="{{ test.isSubmitted ? 'success' : 'accent'}}" >
+            <span fxFlex="30" class="created-info shorten-text" [title]="test.createdAt">Created: {{ test.createdAt }}</span>
+            <button fxFlex="25" class="status-icon-button" mat-mini-fab color="{{ test.isSubmitted ? 'success' : 'accent'}}" >
               <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
             </button>
-            <button class="status-button" mat-raised-button color="{{ test.isSubmitted ? 'success' : 'accent'}}" fxLayout="row" fxLayoutAlign="space-between center">
+            <button fxFlex="25" class="status-button" mat-raised-button color="{{ test.isSubmitted ? 'success' : 'accent'}}" fxLayout="row" fxLayoutAlign="center center">
               <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
               {{ test.isSubmitted ? 'Finished' : 'Pending'}}
             </button>
-            <a *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/attempt-test', test._id]">Start Test</a>
-            <a *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/test-answer-key', test._id]">View Answer</a>
+            <a fxFlex="25" *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/attempt-test', test._id]">Start Test</a>
+            <a fxFlex="25" *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/test-answer-key', test._id]">View Answer</a>
             <button title="Delete this test" mat-mini-fab color="warn" (click)="deleteTest(test);$event.stopPropagation();">
               <mat-icon>delete</mat-icon>
             </button>

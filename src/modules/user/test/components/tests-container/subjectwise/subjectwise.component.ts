@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GenerateTest } from '../generate-test-class';
+import { ETestConfigType } from '@modules/admin/components/configure-mock-tests/configure-mock-tests.component';
 
 @Component({
   selector: 'app-subjectwise',
@@ -15,7 +16,7 @@ export class SubjectwiseComponent extends GenerateTest implements OnInit {
   }
 
   createTest(subject) {
-    this.generateTest({questionCount: 60, subject});
+    this.generateTest({subject, type: ETestConfigType.SUBJECT, course: this.storage.getMyCourse()});
   }
 
 }

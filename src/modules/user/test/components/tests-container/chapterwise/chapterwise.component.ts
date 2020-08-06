@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GenerateTest } from '../generate-test-class';
 import { CTopic } from '@modules/user/test/test.model';
+import { ETestConfigType } from '@modules/admin/components/configure-mock-tests/configure-mock-tests.component';
 
 @Component({
   selector: 'app-chapterwise',
@@ -19,8 +20,8 @@ export class ChapterwiseComponent extends GenerateTest implements OnInit {
     return Array.from(new Set(this.data.filter(ob => ob.subject === subject).map( ob => ob.chapter)));
   }
 
-  createTest() {
-    this.generateTest({questionCount: 20});
+  createTest(subject, chapter) {
+    this.generateTest({subject, chapter, type: ETestConfigType.CHAPTER, course: this.storage.getMyCourse()});
   }
 
 }

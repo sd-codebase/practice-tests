@@ -26,6 +26,7 @@ export class AuthenticationService {
             }
         } catch (e) {
             this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+            this.loaderService.hide();
         } finally {
         }
         return false;

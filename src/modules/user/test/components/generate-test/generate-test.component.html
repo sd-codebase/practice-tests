@@ -1,8 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="0.5em">
     <div fxFlex="78" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-        <button mat-raised-button color="primary" *ngIf="!test" (click)="createTest()" fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-raised-button color="primary" *ngIf="!test" [routerLink]="['/user/start-taking-test']" fxLayout="row" fxLayoutAlign="space-between center">
             <mat-icon>grading</mat-icon>
-            Create Test
+            Start Generating Test
         </button>
     </div>
 </div>

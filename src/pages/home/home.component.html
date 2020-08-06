@@ -19,7 +19,8 @@
                         <mat-icon matSuffix>security</mat-icon>
                         <mat-hint>Enter your password</mat-hint>
                     </mat-form-field>
-                    <button [disabled]="!loginUser.email || !loginUser.password" mat-raised-button color="primary" (click)="login()">Sign In</button>
+                    <button *ngIf="loginUser && isGuestUser" mat-raised-button color="primary" (click)="login(true)">Sign In As Guest</button>
+                    <button *ngIf="loginUser && isUser" mat-raised-button color="primary" (click)="login(false)">Sign In</button>
                 </div>
             </mat-tab>
             <mat-tab label="Sign Up">

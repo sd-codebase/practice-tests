@@ -3,6 +3,7 @@ import { LoaderService } from '@components/loader.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { HttpService } from '@components/http.service';
 import { cloneDeep } from 'lodash';
+import { ArrayObjectUtil } from '@core/array-object-util';
 
 @Component({
   selector: 'app-configure-mock-tests',
@@ -13,9 +14,10 @@ export class ConfigureMockTestsComponent implements OnInit {
   public testConfig: IMockTestConfig;
   public testConfigSnapshot: IMockTestConfig;
   public testConfigList: IMockTestConfig[] = [];
+  public testTypes = ETestConfigType;
   public questionTypes = EQuestionType;
-  public courses = ['JEE', 'NEET', 'JEE Adv I', 'JEE Adv. II'];
-  public subjects = ['Physics', 'Chemistry', 'Maths', 'Biology'];
+  public courses = ['JEE Mains', 'NEET', 'JEE Advanced I', 'JEE Advanced II'];
+  public subjects = ['All', 'Physics', 'Chemistry', 'Mathematics', 'Biology'];
   public viewMode = false;
 
   constructor(
@@ -63,10 +65,35 @@ export class ConfigureMockTestsComponent implements OnInit {
     this.testConfig.sections.push(this.newSection());
   }
 
+  removeSection(section) {
+    ArrayObjectUtil.removeObject(this.testConfig.sections, section);
+  }
+
+  addBlock(section) {
+    section.blocks.push(this.newSectionBlock());
+  }
+
+  removeBlock(section, block) {
+    ArrayObjectUtil.removeObject(section.blocks, block);
+  }
+
   onNegativeMarkingChange() {
     if (!this.testConfig.isNegativeMarking) {
-      this.testConfig.negativeMarksToEachQuestion = 0;
-      this.testConfig.isOptionwiseNegativeMarking = false;
+      this.testConfig.sections.forEach( section => {
+        section.negativeMarksToEachQuestion = 0; section.isOptionwiseNegativeMarking = false;
+      });
+    } else {
+      this.testConfig.sections.forEach( section => section.negativeMarksToEachQuestion = 1);
+    }
+  }
+
+  onPassingStrategyChange() {
+    if (this.testConfig.isSectionwisePassing) {
+      this.testConfig.passingPercentage = 0;
+      this.testConfig.sections.forEach( section => section.passingPercentage = 60);
+    } else {
+      this.testConfig.passingPercentage = 60;
+      this.testConfig.sections.forEach( section => section.passingPercentage = 0);
     }
   }
 
@@ -94,12 +121,11 @@ export class ConfigureMockTestsComponent implements OnInit {
     this.testConfig = {
       paperName: '',
       course: '',
+      type: ETestConfigType.CUSTOM,
       noOfQuestions: 90,
-      marksToEachQuestion: 4,
       isNegativeMarking: false,
-      negativeMarksToEachQuestion: 0,
+      isSectionwisePassing: false,
       passingPercentage: 60,
-      isOptionwiseNegativeMarking: false,
       sections: [
         this.newSection()
       ]
@@ -109,13 +135,26 @@ export class ConfigureMockTestsComponent implements OnInit {
   newSection() {
     return {
       sectionName: '',
+      marksToEachQuestion: 4,
+      minutesToEachQuestion: 4,
+      negativeMarksToEachQuestion: 0,
+      isOptionwiseNegativeMarking: false,
+      passingPercentage: 0,
+      subject: '',
+      instructions: '',
+      blocks: [
+        this.newSectionBlock()
+      ],
+    };
+  }
+
+  newSectionBlock() {
+    return {
       questionNumberFrom: 1,
       questionNumberTo: 5,
-      type: EQuestionType.INTEGER,
-      subject: '',
+      type: EQuestionType.ONE,
       chapters: ['All'],
-      topic: ['All'],
-      instructions: '',
+      topics: ['All'],
     };
   }
 
@@ -124,27 +163,39 @@ export class ConfigureMockTestsComponent implements OnInit {
 export interface IMockTestConfig {
   _id?: string;
   paperName: string;
+  type: ETestConfigType;
   course: string;
   noOfQuestions: number;
-  marksToEachQuestion: number;
   isNegativeMarking: boolean;
-  negativeMarksToEachQuestion: number;
+  isSectionwisePassing: boolean;
   passingPercentage: number;
-  isOptionwiseNegativeMarking: boolean;
   sections: IMockTestSection[];
 }
 
 export interface IMockTestSection {
   sectionName: string;
+  marksToEachQuestion: number;
+  minutesToEachQuestion: number;
+  isOptionwiseNegativeMarking: boolean;
+  negativeMarksToEachQuestion: number;
+  passingPercentage: number;
+  subject: string;
+  instructions: string;
+  blocks: IMockTestSectionBlock[];
+}
+
+export interface IMockTestSectionBlock {
   questionNumberFrom: number;
   questionNumberTo: number;
   type: EQuestionType;
-  subject: string;
   chapters: string[];
-  topic: string[];
-  instructions: string;
+  topics: string[];
 }
 
 export enum EQuestionType {
-  INTEGER, ONE, TWO, THREE, FOUR
+  NUMERIC, ONE, TWO, THREE, FOUR
+}
+
+export enum ETestConfigType {
+  CUSTOM, SUBJECT, CHAPTER, TOPIC
 }

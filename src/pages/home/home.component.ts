@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '@components/storage.serice';
-import { AuthenticationService, IUser } from 'src/auth/authentication/authentication.service';
+import { AuthenticationService, IUser, EUserRole } from 'src/auth/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '@components/loader.service';
 
@@ -43,11 +43,26 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  async login() {
+  get isGuestUser() {
+    return this.loginUser.email && !this.loginUser.password;
+  }
+
+  get isUser() {
+    return this.loginUser.email && this.loginUser.password;
+  }
+
+  async login(isGuest: boolean) {
     try {
       await this.loaderService.show();
-      const logInUser = await this.auth.login(this.loginUser);
+      const user: any = this.loginUser;
+      if (isGuest) {
+        user.userType = 'Guest';
+      }
+      const logInUser = await this.auth.login(user);
       if (logInUser) {
+        if (logInUser.role === EUserRole.USER) {
+          this.storageService.setMyCourse(logInUser.course);
+        }
         this.router.navigate([URL[ logInUser.role || 0]]);
       }
     } catch (e) {

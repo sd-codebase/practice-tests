@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GenerateTest } from '../generate-test-class';
+import { ETestConfigType } from '@modules/admin/components/configure-mock-tests/configure-mock-tests.component';
 
 @Component({
   selector: 'app-topicwise',
@@ -22,8 +23,8 @@ export class TopicwiseComponent extends GenerateTest implements OnInit {
     return Array.from(new Set(this.data.filter(ob => ob.chapter === chapter).map( ob => ob.topic)));
   }
 
-  createTest() {
-    this.generateTest({questionCount: 10});
+  createTest(subject, chapter, topic) {
+    this.generateTest({subject, chapter, topic, type: ETestConfigType.TOPIC, course: this.storage.getMyCourse()});
   }
 
 }

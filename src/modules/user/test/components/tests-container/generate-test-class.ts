@@ -13,7 +13,7 @@ export abstract class GenerateTest {
     constructor(
         protected drawerService: DrawerService,
         protected http: HttpService,
-        private storage: StorageService,
+        protected storage: StorageService,
         protected loaderService: LoaderService,
         private router: Router,
         protected notificationService: NotificationService,
@@ -22,7 +22,7 @@ export abstract class GenerateTest {
     async generateTest(dataToPost?) {
         try {
           await this.loaderService.show();
-          this.test = await this.http.post('/tests', {userId: this.storage.getUserId(), ...dataToPost}).toPromise() as ITest;
+          this.test = await this.http.post('/tests', {userId: this.storage.getUserId(), testCriteria : dataToPost}).toPromise() as ITest;
           if (this.test) {
             this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly');
             this.router.navigate(['/user/attempt-test', this.test._id]);

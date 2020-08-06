@@ -5,6 +5,22 @@ export class StorageService {
 
   constructor() { }
 
+  getMyCourse() {
+    return this.getItem(Storage.MYCOURSE);
+  }
+
+  setMyCourse(course) {
+    this.setItem(Storage.MYCOURSE, course);
+  }
+
+  getMyCourses() {
+    return this.getItem(Storage.MYCOURSES);
+  }
+
+  setMyCourseS(courses) {
+    this.setItem(Storage.MYCOURSES, courses);
+  }
+
   getUserId() {
       return this.getUser()._id;
   }
@@ -69,4 +85,6 @@ export class StorageService {
 export enum Storage {
   USER = 'user',
   TOKEN = 'token',
+  MYCOURSES = 'mycourses',
+  MYCOURSE = 'mycourse',
 }
