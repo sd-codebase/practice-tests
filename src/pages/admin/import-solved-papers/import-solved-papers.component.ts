@@ -52,7 +52,7 @@ export class ImportSolvedPapersComponent implements OnInit {
         dataToPush.push(new CQuestion({
           id: null, question, options, answer : data.answer,
           answerDescription: answer_description, isSingleAnswer, chapter,
-          level, tags, imagePath: data.image_path,
+          level, tags, imagePath: data.image_path, infoPara: data.info_para,
         }));
       });
       this.uploadData = await this.http.post(this.urlToUpload,

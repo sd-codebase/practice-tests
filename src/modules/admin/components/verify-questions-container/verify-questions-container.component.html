@@ -4,6 +4,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.5em" *ngIf="questionEdited">
         <label>Question</label>
+        <span *ngIf="questionEdited.infoPara"> {{ questionEdited.infoPara }}</span>
         <textarea [(ngModel)]="questionEdited.question"></textarea>
         <label>Options</label>
         <textarea [(ngModel)]="questionEdited.options[0]"></textarea>

@@ -96,8 +96,9 @@ export class CQuestion {
     tags: string;
     level: EQuestionLevels;
     imagePath: string;
+    infoPara?: number;
 
-    constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags, imagePath}) {
+    constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags, imagePath, infoPara}) {
         this.id = id;
         this.question = question;
         this.options = options;
@@ -108,6 +109,7 @@ export class CQuestion {
         this.tags = tags;
         this.level = level;
         this.imagePath = imagePath;
+        this.infoPara = infoPara;
     }
 
     isCorrectAnswer() {
