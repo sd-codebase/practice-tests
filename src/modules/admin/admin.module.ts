@@ -13,6 +13,7 @@ import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { ConfigureMockTestsComponent } from './components/configure-mock-tests/configure-mock-tests.component';
+import { CreateParagraphsComponent } from './components/create-paragraphs/create-paragraphs.component';
 
 @NgModule({
   imports: [
@@ -27,12 +28,14 @@ import { ConfigureMockTestsComponent } from './components/configure-mock-tests/c
     VerifyQuestionsContainerComponent,
     NotesEditorComponent,
     ConfigureMockTestsComponent,
+    CreateParagraphsComponent
   ],
   declarations: [
     QuestionContainerComponent,
     VerifyQuestionsContainerComponent,
     NotesEditorComponent,
     ConfigureMockTestsComponent,
+    CreateParagraphsComponent,
   ],
   providers: [
     HttpService,

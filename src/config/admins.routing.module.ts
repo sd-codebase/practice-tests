@@ -10,6 +10,7 @@ import { AnimateContentComponent } from '@pages/admin/animate-content/animate-co
 import { CreateNotesComponent } from '@pages/admin/create-notes/create-notes.component';
 import { ImportChaptersComponent } from '@pages/admin/import-chapters/import-chapters.component';
 import { ConfigureTestsComponent } from '@pages/admin/configure-tests/configure-tests.component';
+import { CreateParagraphsPageComponent } from '@pages/admin/create-paragraphs-page/create-paragraphs-page.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'mock-test-configuration', component: ConfigureTestsComponent},
     {path: 'animate-content', component: AnimateContentComponent},
     {path: 'create-notes', component: CreateNotesComponent},
+    {path: 'create-info-paragraphs', component: CreateParagraphsPageComponent},
 ];
 
 @NgModule({

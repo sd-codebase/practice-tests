@@ -1,0 +1,17 @@
+table {
+    border-collapse: collapse;
+    border: 1px solid gray;
+    th, td {
+        padding: 0.5em 1em;
+        text-align: left;
+        width: 10em;
+        border: 1px solid gray;
+
+        &:last-child {
+            width: 30em;
+        }
+    }
+}
+.mat-form-field {
+    width: 30em;
+}

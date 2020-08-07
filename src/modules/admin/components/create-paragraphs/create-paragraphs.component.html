@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="start start">
+    <div fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start start">
+        <div fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="start start">
+            <mat-form-field *ngIf="para._id">
+                <mat-label>ID</mat-label>
+                <input disabled="true" matInput [ngModel]="para.paraId">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Content</mat-label>
+                <textarea matInput [(ngModel)]="para.content" (ngModelChange)="onChange($event)"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tags</mat-label>
+                <input matInput [(ngModel)]="para.tags">
+            </mat-form-field>
+        </div>
+        <app-mathjax [content]="para.content"></app-mathjax>
+    </div>
+    <div fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="start start">
+        <button *ngIf="!para._id" fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="addPara()">
+            <mat-icon>done</mat-icon>
+            <span> Save </span>
+        </button>
+        <button *ngIf="para._id" fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="updatePara()">
+            <mat-icon>done</mat-icon>
+            <span> Update </span>
+        </button>
+        <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button (click)="discardPara()">
+            <mat-icon>close</mat-icon>
+            <span> Discard </span>
+        </button>
+    </div>
+    <table>
+        <tr>
+            <th> ID </th>
+            <th> Action </th>
+            <th> Tags </th>
+        </tr>
+        <tr *ngFor="let para of paraList">
+            <td>{{ para.paraId }}</td>
+            <td> <a (click)="selectPara(para)">Update</a></td>
+            <td> {{para.tags}} </td>
+        </tr>
+    </table>
+</div>

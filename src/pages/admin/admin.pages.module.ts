@@ -22,6 +22,7 @@ import { StorageService } from '@components/storage.serice';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
 import { ConfigureTestsComponent } from './configure-tests/configure-tests.component';
+import { CreateParagraphsPageComponent } from './create-paragraphs-page/create-paragraphs-page.component';
 
 @NgModule({
     imports: [
@@ -44,6 +45,7 @@ import { ConfigureTestsComponent } from './configure-tests/configure-tests.compo
       CreateNotesComponent,
       ImportChaptersComponent,
       ConfigureTestsComponent,
+      CreateParagraphsPageComponent,
     ],
     providers: [
       HttpService,

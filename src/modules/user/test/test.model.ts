@@ -42,7 +42,7 @@ export enum EQuestionLevels {
 
 export class CStatement {
     statement: string; // if isImage true question itself would be image
-    containedImage: string; // if hasImage true, then img will have value 
+    containedImage: string; // if hasImage true, then img will have value
     isImage: boolean;
     hasImage: boolean;
     isImageFloated: boolean; // if only hasImage true then true or false
