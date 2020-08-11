@@ -26,6 +26,8 @@
             [imagePath]="question.imagePath"
             [statement]="op"
           ></app-statement>
+          <mat-icon *ngIf=" action === 'view' && question.userAnswer && question.userAnswer.includes(getOption(i+1)) && question.answer.includes(getOption(i+1))" color="success">done</mat-icon>
+          <mat-icon *ngIf=" action === 'view' && question.userAnswer && question.userAnswer.includes(getOption(i+1)) && !question.answer.includes(getOption(i+1))" color="warn">close</mat-icon>
         </div>
       </mat-radio-group>
     </div>
@@ -46,6 +48,8 @@
           [imagePath]="question.imagePath"
           [statement]="op"
         ></app-statement>
+        <mat-icon *ngIf=" action === 'view' && question.userAnswer && question.userAnswer.includes(getOption(i+1)) && question.answer.includes(getOption(i+1))" color="success">done</mat-icon>
+        <mat-icon *ngIf=" action === 'view' && question.userAnswer && question.userAnswer.includes(getOption(i+1)) && !question.answer.includes(getOption(i+1))" color="warn">close</mat-icon>
       </div>
     </div>
   </div>

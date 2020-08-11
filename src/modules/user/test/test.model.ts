@@ -11,6 +11,8 @@ export interface ITest {
     percentage: number;
     testName?: string;
     instructions: any[];
+    paraObject: any[];
+    totalMarks?: number;
 }
 
 export interface IInstructions {
@@ -97,6 +99,10 @@ export class CQuestion {
     level: EQuestionLevels;
     imagePath: string;
     infoPara?: number;
+    sortOrder?: number;
+    obtainedMarks?: number;
+    negativeMarks?: number;
+    isCorrectAnswer?: number; // 0-false, 1-correct, 2- partial, undefine-unattempted
 
     constructor({id, question, options, answer, answerDescription, isSingleAnswer, chapter, level, tags, imagePath, infoPara}) {
         this.id = id;
@@ -110,14 +116,5 @@ export class CQuestion {
         this.level = level;
         this.imagePath = imagePath;
         this.infoPara = infoPara;
-    }
-
-    isCorrectAnswer() {
-        // this.isSubmitted = true;
-        // if (this.userAnswer && this.answer && this.userAnswer.length === this.answer.length) {
-        //     this.correctAnswer = this.answer.every( opNum => this.userAnswer.includes(opNum) );
-        // } else{
-        //     this.correctAnswer = false;
-        // }
     }
 }

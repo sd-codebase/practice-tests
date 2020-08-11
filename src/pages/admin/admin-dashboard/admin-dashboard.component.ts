@@ -20,7 +20,7 @@ export class AdminDashboardComponent implements OnInit {
     {menu: 'Config Test', path: '/admin/mock-test-configuration', icon: 'settings_applications'},
     {menu: 'Animate Content', path: '/admin/animate-content', icon: 'slow_motion_video'},
     {menu: 'Create Notes', path: '/admin/create-notes', icon: 'menu_book'},
-    {menu: 'Create Paragraphs', path: '/admin/create-info-paragraphs', icon: 'menu_book'},
+    {menu: 'Create Paragraphs', path: '/admin/create-info-paragraphs', icon: 'info'},
   ];
 
   public pageHeader: string;

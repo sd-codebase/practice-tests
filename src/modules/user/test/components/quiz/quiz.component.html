@@ -1,9 +1,10 @@
 <div fxFill *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
     <div fxLayout="row" fxLayoutAlign="space-between center">
         <h3 *ngIf="question">Question {{ question.questionNum }}: </h3>
-        <mat-icon class="info-tooltip" [tooltip]="getInfoTooltip(question)" [options]="{placement: 'left'}">info</mat-icon>
+        <mat-icon class="info-tooltip" (click)="openInfoToolTipDialog()" [tooltip]="">info</mat-icon>
     </div>
     <mat-divider></mat-divider>
+    <a *ngIf="question && question.infoPara" class="info-para-link" (click)="openInfoParaDialog()">Refer information paragraph for this question</a>
     <div class="question-container">
         <app-question
             *ngIf="question"
@@ -61,8 +62,11 @@
             </div>
         </div>
         <div class="answer-block" fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question && action=== 'view'">
-            <span>Ans. ({{question.answer}})</span>
-            <span *ngIf="!question.answerDescription">Stay in touch for answer description</span>
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+                <span>Ans. ({{question.answer}})</span>
+                <span *ngIf="question.obtainedMarks">Obtained Marks: (<span class="green">{{question.obtainedMarks}}</span>)</span>
+                <span *ngIf="question.negativeMarks">Negative Marks: (<span class="red">-{{question.negativeMarks}}</span>)</span>
+            </div>
             <app-statement
                 fxFill
                 *ngIf="question.answerDescription"

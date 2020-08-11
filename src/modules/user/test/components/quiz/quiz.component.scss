@@ -1,10 +1,22 @@
 app-question, .answer-block {
     font-family: 'Times New Roman', Times, serif; font-size: 1.5em !important;
+    span.green {
+        color: #155724;
+    }
+    span.red {
+        color: red;
+    }
 }
 
 .info-tooltip {
     cursor: pointer;
     font-size: 2em !important;
+}
+
+.info-para-link {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px)  {

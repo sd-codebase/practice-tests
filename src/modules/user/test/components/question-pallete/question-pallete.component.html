@@ -5,11 +5,20 @@
     <button mat-mini-fab color="accent"></button> Answered and Marked <br>
     <button mat-mini-fab color="primary"></button> Marked for review <br>
 </div>
+<div class="info" *ngIf="action === 'view'">
+    <button mat-mini-fab color=""></button> Unanswered <br>
+    <button mat-mini-fab color="success"></button> Correct <br>
+    <button mat-mini-fab color="orange"></button> Partial correct <br>
+    <button mat-mini-fab color="warn"></button> Wrong <br>
+</div>
 <h3>Choose a Question</h3>
 <mat-divider></mat-divider>
+<div class="subject-navigation" fxLayout="row wrap" fxLayoutGap="0.2em">
+    <button [color]=" subject === activeSubject ? 'primary' : ''" mat-raised-button *ngFor="let subject of subjectButtons" (click)="filterQuestions(subject)"> {{ subject }}</button>
+</div>
 <div class="info scroll-pallete" [class.view-mode]="action === 'view'">
-    <button mat-mini-fab (click)="chooseQuestion(question)" [color]="getColor(question)" *ngFor="let question of test.questions; let i = index">
-        {{ i + 1 }}
+    <button mat-mini-fab (click)="chooseQuestion(question)" [color]="getColor(question)" *ngFor="let question of filteredQuestions; let i = index">
+        {{ question.questionNum }}
     </button>
 </div>
 

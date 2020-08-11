@@ -43,6 +43,10 @@
             <mat-label>No of Question</mat-label>
             <input matInput [(ngModel)]="testConfig.noOfQuestions">
         </mat-form-field>
+        <mat-form-field class="number-field" title="Total marks">
+            <mat-label>Total Marks</mat-label>
+            <input matInput [(ngModel)]="testConfig.totalMarks">
+        </mat-form-field>
         <mat-slide-toggle
             color="primary"
             [(ngModel)]="testConfig.isNegativeMarking"
@@ -86,8 +90,8 @@
                 <mat-label>Marks to each question</mat-label>
                 <input matInput [(ngModel)]="section.marksToEachQuestion">
             </mat-form-field>
-            <mat-form-field class="number-field" title="Time to each question">
-                <mat-label>Time to each question</mat-label>
+            <mat-form-field class="number-field" title="Time for each question">
+                <mat-label>Time for each question</mat-label>
                 <input matInput [(ngModel)]="section.minutesToEachQuestion">
             </mat-form-field>
             <mat-form-field class="number-field" title="Negative Marks to each question">
@@ -123,11 +127,12 @@
             <mat-form-field>
                 <mat-label>Type Of Answer</mat-label>
                 <mat-select [(ngModel)]="block.type" (ngModelChange)="block.type = +$event" name="type">
-                    <mat-option [value]="questionTypes.NUMERIC">NUMERIC</mat-option>
+                    <mat-option [value]="questionTypes.NUMERIC">Numeric</mat-option>
                     <mat-option [value]="questionTypes.ONE">One Option Correct</mat-option>
                     <mat-option [value]="questionTypes.TWO">Two Options Correct</mat-option>
                     <mat-option [value]="questionTypes.THREE">Three Options Correct</mat-option>
                     <mat-option [value]="questionTypes.FOUR">Four Options Correct</mat-option>
+                    <mat-option [value]="questionTypes.PARAGRAPH">Paragraph</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>

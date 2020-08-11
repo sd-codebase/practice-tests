@@ -19,18 +19,19 @@ export abstract class GenerateTest {
         protected notificationService: NotificationService,
     ) { }
 
-    async generateTest(dataToPost?) {
-        try {
-          await this.loaderService.show();
-          this.test = await this.http.post('/tests', {userId: this.storage.getUserId(), testCriteria : dataToPost}).toPromise() as ITest;
-          if (this.test) {
-            this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly');
-            this.router.navigate(['/user/attempt-test', this.test._id]);
-          }
-        } catch (e) {
-            this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
-        } finally {
-          this.loaderService.hide();
+    async generateTest(dataToPost?, isMockTest = false) {
+      const url = isMockTest ? '/tests/create-mock-test' : '/tests';
+      try {
+        await this.loaderService.show();
+        this.test = await this.http.post(url, {userId: this.storage.getUserId(), testCriteria : dataToPost}).toPromise() as ITest;
+        if (this.test) {
+          this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly');
+          this.router.navigate(['/user/attempt-test', this.test._id]);
         }
+      } catch (e) {
+          this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+      } finally {
+        this.loaderService.hide();
+      }
     }
 }

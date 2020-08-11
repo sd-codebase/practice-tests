@@ -3,6 +3,8 @@ import { ITest, CQuestion, EQuestionStatus, CStatement, IInstructions } from '..
 import { LoaderService } from '@components/loader.service';
 import { HttpService } from '@components/http.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { MatDialog } from '@angular/material/dialog';
+import { QuestionInformationDialogComponent } from '../question-information-dialog/question-information-dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -28,6 +30,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
     private http: HttpService,
     private notificationService: NotificationService,
+    private dilogService: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -58,7 +61,7 @@ export class QuizComponent implements OnInit, OnDestroy {
       return 'NA';
     }
     const instruction = this.instructions.find( inf => inf.questions.includes(question.questionNum));
-    return instruction.value;
+    return `<strong>${instruction.key}</strong><br>${instruction.value}`;
   }
 
   async pauseTimer() {
@@ -237,6 +240,28 @@ export class QuizComponent implements OnInit, OnDestroy {
       this.releaseLoader();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    }
+  }
+
+  openInfoToolTipDialog() {
+    const content = this.getInfoTooltip(this.question);
+    const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
+      data: {
+        content,
+        imagePath: '/instructions/',
+      }
+    });
+  }
+
+  openInfoParaDialog() {
+    if (this.test.paraObject.length) {
+      const { content } = this.test.paraObject.find( para => para.paraId === this.question.infoPara);
+      const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
+        data: {
+          content,
+          imagePath: '/paragraphs/',
+        }
+      });
     }
   }
 

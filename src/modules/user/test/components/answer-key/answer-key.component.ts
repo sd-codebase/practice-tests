@@ -37,6 +37,10 @@ export class AnswerKeyComponent implements OnInit {
         this.test.questions = this.test.questions.map( (que, index) => {
           const question = new CQuestion(que as any);
           question.questionNum = index + 1;
+          question.isCorrectAnswer = que.isCorrectAnswer;
+          question.userAnswer = que.userAnswer;
+          question.obtainedMarks = que.obtainedMarks;
+          question.negativeMarks = que.negativeMarks;
           return question;
         });
         this.drawerService.setPageHeader(this.test.testName);

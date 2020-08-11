@@ -10,10 +10,15 @@ button {
 }
 .scroll-pallete {
     padding: 0.1em;
-    height: 53vh;
+    height: 50vh;
     overflow-y: auto;
 
     &.view-mode {
         height: 80vh;
     }
+}
+.subject-navigation button {
+    line-height: 1.5em !important;
+    padding: 0.2em 0.5em !important;
+    min-width: unset;
 }

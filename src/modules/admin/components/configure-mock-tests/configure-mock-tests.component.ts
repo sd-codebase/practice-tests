@@ -126,6 +126,7 @@ export class ConfigureMockTestsComponent implements OnInit {
       isNegativeMarking: false,
       isSectionwisePassing: false,
       passingPercentage: 60,
+      totalMarks: null,
       sections: [
         this.newSection()
       ]
@@ -170,6 +171,7 @@ export interface IMockTestConfig {
   isSectionwisePassing: boolean;
   passingPercentage: number;
   sections: IMockTestSection[];
+  totalMarks?: number;
 }
 
 export interface IMockTestSection {
@@ -193,7 +195,7 @@ export interface IMockTestSectionBlock {
 }
 
 export enum EQuestionType {
-  NUMERIC, ONE, TWO, THREE, FOUR
+  NUMERIC, ONE, TWO, THREE, FOUR, PARAGRAPH
 }
 
 export enum ETestConfigType {

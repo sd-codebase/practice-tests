@@ -29,7 +29,7 @@ export class QuestionComponent implements OnInit {
   }
 
   submitAnswer() {
-    this.question.isCorrectAnswer();
+    // this.question.isCorrectAnswer();
   }
 
   isCheckedOption(opNum) {

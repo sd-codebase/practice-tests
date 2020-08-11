@@ -6,24 +6,24 @@
         <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="0.5em">
             <div class="card-layout row-one" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <span>Remark</span>
-                <span>{{ test.percentage > 70 ? 'Pass' : 'Fail'}}</span>
+                <span>{{ test.result ? 'Pass' : 'Fail'}}</span>
             </div>
             <div fxFill class="card-layout row-four" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                     <span>Total Marks</span>
-                    <span>{{ test.questionCount * 4 }}</span>
+                    <span>{{ test.totalMarks }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                     <span>Score</span>
-                    <span>{{ (this.test.correctCount * 4) - (this.test.attemptCount - this.test.correctCount) }}</span>
+                    <span>{{ score.score }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                     <span>Positive</span>
-                    <span>{{ this.test.correctCount * 4 }}</span>
+                    <span>{{ score.positive }}</span>
                 </div>
                 <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                     <span>Negative</span>
-                    <span>-{{ this.test.attemptCount - this.test.correctCount }}</span>
+                    <span>{{score.negative ? "-" : ""}}{{ score.negative }}</span>
                 </div>
             </div>
             <div fxFill class="card-layout row-two" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">

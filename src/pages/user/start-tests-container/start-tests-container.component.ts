@@ -43,7 +43,7 @@ export class StartTestsContainerComponent extends GenerateTest implements OnInit
   }
 
   createTest(testConfigId) {
-    this.generateTest({testConfigId});
+    this.generateTest({testConfigId}, true);
   }
 
 }

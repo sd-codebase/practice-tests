@@ -62,14 +62,17 @@ export class CreateTestComponent implements OnInit {
     try {
       await this.loaderService.show();
       this.test = await this.http.get('/tests/' + this.testId).toPromise() as ITest;
-      this.getInstructions();
-      this.test.questions = this.test.questions.map( (que, index) => {
-        const question = new CQuestion(que as any);
-        question.questionNum = index + 1;
-        question.status = EQuestionStatus.NOTVISITED;
-        return question;
-      });
-      this.startwithQuestion = 1;
+      if (this.test.status !== ETestStatus.FINISHED) {
+        this.getInstructions();
+        this.test.questions = this.test.questions.map( (que, index) => {
+          const question = new CQuestion(que as any);
+          question.sortOrder = que.sortOrder;
+          question.questionNum = que.sortOrder;
+          question.status = EQuestionStatus.NOTVISITED;
+          return question;
+        });
+        this.startwithQuestion = 1;
+      }
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

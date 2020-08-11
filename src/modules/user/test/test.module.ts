@@ -20,6 +20,7 @@ import { DrawerService } from '@components/drawer-service';
 import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
+import { QuestionInformationDialogComponent } from './components/question-information-dialog/question-information-dialog.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { StorageService } from '@components/storage.serice';
     SubjectwiseComponent,
     ChapterwiseComponent,
     SolvedPapersContainerComponent,
+    QuestionInformationDialogComponent,
   ],
   providers: [
     HttpService,
@@ -61,5 +63,8 @@ import { StorageService } from '@components/storage.serice';
     NotificationService,
     StorageService,
   ],
+  entryComponents: [
+    QuestionInformationDialogComponent,
+  ]
 })
 export class TestModule { }
