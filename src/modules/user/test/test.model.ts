@@ -13,6 +13,7 @@ export interface ITest {
     instructions: any[];
     paraObject: any[];
     totalMarks?: number;
+    result?: boolean; 
 }
 
 export interface IInstructions {
