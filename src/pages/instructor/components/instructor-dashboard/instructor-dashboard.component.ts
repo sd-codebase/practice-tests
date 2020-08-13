@@ -13,6 +13,7 @@ export class InstructorDashboardComponent implements OnInit {
   public menus = [
     {menu: 'My Profile', path: '/instructor/profile', icon: 'person_pin'},
     {menu: 'Users', path: '/instructor/users', icon: 'person_pin'},
+    {menu: 'Generate Tests', path: '/instructor/generate-tests', icon: 'assignment'},
     {menu: 'Tests', path: '/instructor/tests', icon: 'assignment'},
     {menu: 'Reports', path: '/instructor/reports', icon: 'analytics'},
   ];

@@ -12,6 +12,8 @@ import { ComponentsModule } from '@components/components.module';
 import { GuestAttemptTestComponent } from './components/test/test.component';
 import { GuestRoutingModule } from '@config/guest.routing.module';
 import { GuestModule } from '@modules/guest/guest.module';
+import { TestModule } from '@modules/user/test/test.module';
+import { UserPagesModule } from '@pages/user/user.pages.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { GuestModule } from '@modules/guest/guest.module';
     ComponentsModule,
     GuestRoutingModule,
     GuestModule,
+    TestModule,
+    UserPagesModule,
   ],
   providers: [
     HttpService,

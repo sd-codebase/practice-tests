@@ -15,6 +15,8 @@ import { CoreModule } from '@core/core.module';
 import { ComponentsModule } from '@components/components.module';
 import { InstructorProfileComponent } from './components/profile/profile.component';
 import { InstructorModule } from '@modules/instructor/instructor.module';
+import { GenerateTestsComponent } from './components/generate-tests/generate-tests.component';
+import { AdminModule } from '@modules/admin/admin.module';
 
 
 
@@ -24,6 +26,7 @@ import { InstructorModule } from '@modules/instructor/instructor.module';
     SetTestComponent,
     ReportsComponent,
     InstructorProfileComponent,
+    GenerateTestsComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { InstructorModule } from '@modules/instructor/instructor.module';
     ComponentsModule,
     IntructorRoutingModule,
     InstructorModule,
+    AdminModule,
   ],
   providers: [
     HttpService,

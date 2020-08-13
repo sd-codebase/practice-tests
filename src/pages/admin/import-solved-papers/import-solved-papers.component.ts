@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@components/http.service';
-import { CChapter, CQuestion } from '@modules/user/test/test.model';
+import { CChapter, CQuestion, COURSES } from '@modules/user/test/test.model';
 import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
 import { DrawerService } from '@components/drawer-service';
@@ -14,6 +14,7 @@ import { NotificationService, ENotification, EError } from '@components/notifica
 export class ImportSolvedPapersComponent implements OnInit {
   public urlToUpload = '/tests/create-predefined-test';
   public uploadData: any;
+
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
@@ -26,7 +27,7 @@ export class ImportSolvedPapersComponent implements OnInit {
     this.drawerService.setPageHeader('Import Solved Papers');
   }
 
-  async onDataRead({names, jsonData}) {
+  async onDataRead({names, jsonData, courses}) {
     const proceed = confirm(`Do you want to upload ${names[0]}`);
     if (!proceed) {
       return;
@@ -56,7 +57,7 @@ export class ImportSolvedPapersComponent implements OnInit {
         }));
       });
       this.uploadData = await this.http.post(this.urlToUpload,
-        {testmeta: {name: names[0]}, questions: dataToPush, userId: this.storage.getUserId()}
+        {testmeta: {name: names[0]}, questions: dataToPush, userId: this.storage.getUserId(), courses}
       ).toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);

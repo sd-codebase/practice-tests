@@ -67,7 +67,7 @@ export interface IUser {
     contact?: string;
     password?: string;
     name?: string;
-    course?: string;
+    courses?: string[];
     role?: EUserRole;
     enabled?: boolean;
     isEditMode?: boolean;

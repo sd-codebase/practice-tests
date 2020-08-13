@@ -26,7 +26,7 @@ export class ImportQuestionsComponent implements OnInit {
     this.drawerService.setPageHeader('Import question');
   }
 
-  async onDataRead({names, jsonData}) {
+  async onDataRead({names, jsonData, courses}) {
     const proceed = confirm(`Do you want to upload ${names[0]}`);
     if (!proceed) {
       return;
@@ -55,7 +55,9 @@ export class ImportQuestionsComponent implements OnInit {
           level, tags, imagePath: data.image_path, infoPara: data.info_para,
         }));
       });
-      this.uploadData = await this.http.post(this.urlToUpload, {questions: dataToPush, userId: this.storage.getUserId()}).toPromise();
+      this.uploadData = await this.http.post(this.urlToUpload, {
+        questions: dataToPush, userId: this.storage.getUserId(), courses,
+      }).toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

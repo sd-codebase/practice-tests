@@ -119,8 +119,26 @@ app-mathjax {
     padding: 0 !important;
 }
 
+.humburger {
+    font-size: 2.5em !important;
+    height: 1em !important;
+    width: 1em !important;
+}
+
+span.page-header {
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+.mb-1 {
+    margin-bottom: 1em !important;
+}
+
 @media only screen and (max-width: 600px)  {
     .snackbar {
-        width: 20em !important;
-    }
+        width: 90% !important;
+        margin: auto !important;
+        clear: both;
+        margin-bottom: 1em !important;
+    }    
 }

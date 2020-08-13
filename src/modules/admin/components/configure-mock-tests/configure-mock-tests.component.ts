@@ -4,6 +4,9 @@ import { NotificationService, ENotification, EError } from '@components/notifica
 import { HttpService } from '@components/http.service';
 import { cloneDeep } from 'lodash';
 import { ArrayObjectUtil } from '@core/array-object-util';
+import { StorageService } from '@components/storage.serice';
+import { COURSES, ITest } from '@modules/user/test/test.model';
+import { EUserRole } from 'src/auth/authentication/authentication.service';
 
 @Component({
   selector: 'app-configure-mock-tests',
@@ -16,17 +19,22 @@ export class ConfigureMockTestsComponent implements OnInit {
   public testConfigList: IMockTestConfig[] = [];
   public testTypes = ETestConfigType;
   public questionTypes = EQuestionType;
-  public courses = ['JEE Mains', 'NEET', 'JEE Advanced I', 'JEE Advanced II'];
+  public courses = Object.keys(COURSES).map( key => COURSES[key]);
   public subjects = ['All', 'Physics', 'Chemistry', 'Mathematics', 'Biology'];
   public viewMode = false;
+  public role = 3;
+  public userId;
 
   constructor(
     private loaderService: LoaderService,
     private notificationService: NotificationService,
     private http: HttpService,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
+    this.role = this.storageService.getUser().role;
+    this.userId = this.storageService.getUserId();
     this.newTestConfig();
     this.fetchConfig();
   }
@@ -34,7 +42,13 @@ export class ConfigureMockTestsComponent implements OnInit {
   async fetchConfig() {
     await this.loaderService.show();
     try {
-      this.testConfigList = await this.http.get(`/mock-tests`, this.testConfig).toPromise() as IMockTestConfig[];
+      const testConfigList = await this.http.get(`/mock-tests`).toPromise() as IMockTestConfig[];
+      this.testConfigList = testConfigList.filter( config => {
+        if (this.role === EUserRole.ADMIN) {
+          return config.createdBy === 'ADMIN';
+        }
+        return (config.createdBy === this.userId || config.createdBy === 'ADMIN') && !config.type;
+      });
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
@@ -56,6 +70,24 @@ export class ConfigureMockTestsComponent implements OnInit {
       this.notificationService.show(ENotification.SUCCESS, 'Config created/updated', 'New test config created/updated');
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } finally {
+      this.loaderService.hide();
+    }
+  }
+
+  async generateTest(config) {
+    const url = '/tests/create-mock-test';
+    const userId = this.storageService.getUserId();
+    const testCriteria = {testConfigId: config._id };
+    try {
+      await this.loaderService.show();
+      const test =
+        await this.http.post(url, {userId, testCriteria}).toPromise() as ITest;
+      if (test) {
+        this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly, please go to Tests');
+      }
+    } catch (e) {
+        this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
     }
@@ -127,6 +159,7 @@ export class ConfigureMockTestsComponent implements OnInit {
       isSectionwisePassing: false,
       passingPercentage: 60,
       totalMarks: null,
+      createdBy: this.role === 1 ? 'ADMIN' : this.userId,
       sections: [
         this.newSection()
       ]
@@ -172,6 +205,7 @@ export interface IMockTestConfig {
   passingPercentage: number;
   sections: IMockTestSection[];
   totalMarks?: number;
+  createdBy: string;
 }
 
 export interface IMockTestSection {

@@ -3,6 +3,7 @@ import { StorageService } from '@components/storage.serice';
 import { AuthenticationService, IUser, EUserRole } from 'src/auth/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '@components/loader.service';
+import { COURSES } from '@modules/user/test/test.model';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   public signUpUser: IUser;
   public loginUser: IUser;
   public showView = false;
+  public courses = Object.keys(COURSES).map( key => COURSES[key]);
 
   constructor(
     public auth: AuthenticationService,
@@ -39,7 +41,7 @@ export class HomeComponent implements OnInit {
       email: '',
       password: '',
       name: '',
-      course: '',
+      courses: [],
     };
   }
 
@@ -61,12 +63,14 @@ export class HomeComponent implements OnInit {
       const logInUser = await this.auth.login(user);
       if (logInUser) {
         if (logInUser.role === EUserRole.USER) {
-          this.storageService.setMyCourse(logInUser.course);
+          this.storageService.setMyCourseS(logInUser.courses);
+          this.storageService.setMyCourse(logInUser.courses[0]);
         }
         this.router.navigate([URL[ logInUser.role || 0]]);
+      } else {
+        this.loaderService.hide();
       }
     } catch (e) {
-
     } finally {
     }
   }

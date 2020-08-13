@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '@components/http.service';
 import { ITest } from '../../test.model';
 import { StorageService } from '@components/storage.serice';
@@ -12,6 +12,10 @@ import { NotificationService, ENotification, EError } from '@components/notifica
   styleUrls: ['./tests-list.component.scss']
 })
 export class TestsListComponent implements OnInit {
+  @Input() isGuest = false;
+
+  public attemptTestUrl = '/user/attempt-test';
+  public testAnswerKeyUrl = '/user/test-answer-key';
   public tests: ITest[];
   constructor(
     private http: HttpService,
@@ -21,13 +25,27 @@ export class TestsListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.makeUrls();
     try {
       await this.loaderService.show();
-      this.tests = await this.http.get('/tests/all?userId=' + this.storage.getUserId()).toPromise();
+      let url = '';
+      if (this.isGuest) {
+        url = `/tests/all?isGuest=true&guestUserId=${this.storage.getUserId()}`;
+      } else {
+        url = `/tests/all?userId=${this.storage.getUserId()}`;
+      }
+      this.tests = await this.http.get(url).toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {
       this.loaderService.hide();
+    }
+  }
+
+  makeUrls() {
+    if (this.isGuest) {
+      this.attemptTestUrl = '/guest/attempt-test';
+      this.testAnswerKeyUrl = '/guest/test-answer-key';
     }
   }
 

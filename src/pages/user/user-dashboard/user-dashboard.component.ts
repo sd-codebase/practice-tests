@@ -23,6 +23,9 @@ export class UserDashboardComponent implements OnInit {
   ];
   public pageHeader: string;
   public userProfile;
+  public myCourses = [];
+  public myCourse = '';
+
   constructor(
     public drawerService: DrawerService,
     private storageService: StorageService,
@@ -34,5 +37,12 @@ export class UserDashboardComponent implements OnInit {
     this.loaderService.hide();
     this.userProfile = this.storageService.getUser();
     this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
+    this.myCourses = this.storageService.getMyCourses();
+    this.myCourse = this.storageService.getMyCourse();
+  }
+
+  courseChange() {
+    this.storageService.setMyCourse(this.myCourse);
+    window.location.reload();
   }
 }

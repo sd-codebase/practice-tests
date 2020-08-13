@@ -5,7 +5,7 @@
     <button mat-mini-fab color="accent"></button> Answered and Marked <br>
     <button mat-mini-fab color="primary"></button> Marked for review <br>
 </div>
-<div class="info" *ngIf="action === 'view'">
+<div class="info" *ngIf="action === 'view' && !test.isPredefined">
     <button mat-mini-fab color=""></button> Unanswered <br>
     <button mat-mini-fab color="success"></button> Correct <br>
     <button mat-mini-fab color="orange"></button> Partial correct <br>

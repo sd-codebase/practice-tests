@@ -26,14 +26,14 @@ export class ImportChaptersComponent implements OnInit {
     this.drawerService.setPageHeader('Import Topics');
   }
 
-  async onDataRead({names, jsonData}) {
+  async onDataRead({names, jsonData, courses}) {
     const proceed = confirm(`Do you want to upload ${names[0]}`);
     if (proceed) {
-      this.uploadData(names, jsonData);
+      this.uploadData(names, jsonData, courses);
     }
   }
 
-  async uploadData(names, jsonData) {
+  async uploadData(names, jsonData, courses) {
     try {
       await this.loaderService.show();
       const dataToPush: CTopic[] = [];
@@ -46,7 +46,9 @@ export class ImportChaptersComponent implements OnInit {
         // });
         dataToPush.push(topic);
       });
-      this.uploadedData = await this.http.post(this.urlToUpload, {chapters: dataToPush, userId: this.storage.getUserId()}).toPromise();
+      this.uploadedData = await this.http.post(this.urlToUpload, {
+        chapters: dataToPush, userId: this.storage.getUserId(), courses,
+      }).toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

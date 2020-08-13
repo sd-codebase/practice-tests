@@ -11,9 +11,9 @@
               <mat-icon>{{ test.isSubmitted ? 'done' : 'timer'}}</mat-icon>
               {{ test.isSubmitted ? 'Finished' : 'Pending'}}
             </button>
-            <a fxFlex="25" *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/attempt-test', test._id]">Start Test</a>
-            <a fxFlex="25" *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="['/user/test-answer-key', test._id]">View Answer</a>
-            <button title="Delete this test" mat-mini-fab color="warn" (click)="deleteTest(test);$event.stopPropagation();">
+            <a fxFlex="25" *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="[attemptTestUrl, test._id]">Start Test</a>
+            <a fxFlex="25" *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="[testAnswerKeyUrl, test._id]">View Answer</a>
+            <button *ngIf="!isGuest" title="Delete this test" mat-mini-fab color="warn" (click)="deleteTest(test);$event.stopPropagation();">
               <mat-icon>delete</mat-icon>
             </button>
         </mat-panel-description>
@@ -29,7 +29,7 @@
 
 <div fxFill fxLayout="column" fxLayoutAlign="space-between center" *ngIf="!tests || tests.length == 0">
   <span> No tests available</span>
-  <span>
+  <span *ngIf="!isGuest">
     <button mat-raised-button color="primary" [routerLink]="['/user/start-taking-test']" fxLayout="row" fxLayoutAlign="space-between center">
       <mat-icon>grading</mat-icon>
       Create Test

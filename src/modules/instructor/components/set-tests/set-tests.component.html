@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <th> Paper </th>
+        <th> Date </th>
+        <th> Users </th>
+        <th> Actions </th>
+    </tr>
+    <tr *ngFor="let test of tests">
+        <td>{{ test.testName }}</td>
+        <td>{{ test.createdAt }}</td>
+        <td>
+            <mat-form-field>
+                <mat-label>Select group</mat-label>
+                <mat-select (selectionChange)="groupChange($event.value, test)" name="group">
+                    <mat-option *ngFor="let group of groups" [value]="group">
+                        {{group.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td><mat-icon (click)="deleteTest(test)">delete</mat-icon></td>
+    </tr>
+</table>

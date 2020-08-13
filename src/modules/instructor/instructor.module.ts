@@ -9,6 +9,8 @@ import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserGroupsComponent } from './components/user-groups/user-groups.component';
+import { SetTestsComponent } from './components/set-tests/set-tests.component';
+import { MapUsersComponent } from './components/set-tests/map-users/map-users.component';
 
 @NgModule({
     imports: [
@@ -19,9 +21,12 @@ import { UserGroupsComponent } from './components/user-groups/user-groups.compon
     declarations: [
       UsersListComponent,
       UserGroupsComponent,
+      SetTestsComponent,
+      MapUsersComponent,
     ],
     exports: [
       UsersListComponent,
+      SetTestsComponent,
     ],
     providers: [
         HttpService,
@@ -30,6 +35,9 @@ import { UserGroupsComponent } from './components/user-groups/user-groups.compon
         NotificationService,
         StorageService,
     ],
-    entryComponents: [ UserGroupsComponent ]
+    entryComponents: [
+      UserGroupsComponent,
+      MapUsersComponent,
+    ]
 })
 export class InstructorModule { }

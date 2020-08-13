@@ -1,3 +1,12 @@
+<mat-form-field class="mb-1">
+    <mat-label>Courses</mat-label>
+    <mat-select [(ngModel)]="selectedCourses" name="courses" multiple>
+        <mat-option *ngFor="let course of courses" [value]="course">
+            {{course}}
+        </mat-option>
+    </mat-select>
+    <mat-hint>Select course(s)</mat-hint>
+</mat-form-field>
 <input id="fileUpload" type="file" (change)="onFileChange($event)" class="hidden"/>
 <button fxLayout="row" fxLayoutAlign="space-between center" mat-raised-button color="primary" (click)="onClickUpload()">
     <mat-icon>cloud_upload</mat-icon>

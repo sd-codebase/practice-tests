@@ -17,7 +17,7 @@
         </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em" [class.disabled]="viewMode">
-        <mat-form-field>
+        <mat-form-field *ngIf="role === 2">
             <mat-label>Type Of Test</mat-label>
             <!-- handleTypeChange keep only one section with one block -->
             <mat-select [(ngModel)]="testConfig.type" (ngModelChange)="testConfig.type = +$event" name="type">
@@ -157,14 +157,15 @@
         <tr>
             <th> Paper Name </th>
             <th> Select </th>
+            <th *ngIf="role === 1"> Generate Test </th>
         </tr>
         <tr *ngFor="let config of testConfigList">
             <td>{{ config.paperName }}</td>
             <td> 
-                <a (click)="selectTestConfigForUpdate(config)">Update</a>,
+                <a (click)="selectTestConfigForUpdate(config)" *ngIf="config.createdBy === userId || (config.createdBy === 'ADMIN' && role === 3)">Update, </a>
                 <a (click)="selectTestConfigForView(config)">View</a>
             </td>
-            <!-- <td> <a (click)="openUserGroupDialog(group)">Users</a></td> -->
+            <td *ngIf="role === 1"> <a (click)="generateTest(config)">Generate Test</a></td>
         </tr>
     </table>
 </div>

@@ -58,7 +58,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   getInfoTooltip(question: CQuestion) {
     if (!question || !this.instructions) {
-      return 'NA';
+      return null;
     }
     const instruction = this.instructions.find( inf => inf.questions.includes(question.questionNum));
     return `<strong>${instruction.key}</strong><br>${instruction.value}`;
@@ -245,16 +245,18 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   openInfoToolTipDialog() {
     const content = this.getInfoTooltip(this.question);
-    const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
-      data: {
-        content,
-        imagePath: '/instructions/',
-      }
-    });
+    if (content) {
+      const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
+        data: {
+          content,
+          imagePath: '/instructions/',
+        }
+      });
+    }
   }
 
   openInfoParaDialog() {
-    if (this.test.paraObject.length) {
+    if (this.test.paraObject && this.test.paraObject.length) {
       const { content } = this.test.paraObject.find( para => para.paraId === this.question.infoPara);
       const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
         data: {

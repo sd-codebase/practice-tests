@@ -18,8 +18,8 @@ export class NotificationService {
             data: {icon, title, message},
             panelClass: [snackbarclass, 'snackbar'],
             duration: status === ENotification.DANGER ? 10000 : 4000,
-            horizontalPosition: window.innerWidth <= 600 ? 'center' : 'left',
-            verticalPosition: window.innerWidth <= 600 ? 'top' : 'bottom',
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
         });
     }
 }
@@ -42,7 +42,7 @@ export enum EError {
         <mat-icon>{{data.icon}}</mat-icon>
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.5em">
             <h4>{{data.title}}</h4>
-            <p>{{data.message}}</p>
+            <p style="word-break: break-all">{{data.message}}</p>
         </div>
     </div>
     `,

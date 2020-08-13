@@ -15,6 +15,7 @@ export class TestAttemptComponent implements OnInit, OnDestroy, DeactivationGuar
   @ViewChild('createTest', {static: false}) createTestComponent: CreateTestComponent;
   private sub: Subscription;
   public testId: string;
+
   constructor(
     private route: ActivatedRoute,
     private drawerService: DrawerService,

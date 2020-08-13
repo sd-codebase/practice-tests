@@ -1,0 +1,23 @@
+<div fxLayout="column" class="container-div">
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="0.5em">
+        <mat-icon *ngIf="!isEditing" (click)="isEditing = true">edit</mat-icon>
+        <mat-icon *ngIf="isEditing" (click)="isEditing = false">fact_check</mat-icon>
+        <mat-icon [mat-dialog-close]="users">close</mat-icon>
+    </div>
+    <div fxLayout="column" class="page-container">
+        <h3>{{ data.test.testName }}</h3>
+        <h4>{{ data.test.createdAt }}</h4>
+        <div fxLayout="row wrap" fxLayoutGap="1em">
+            
+        </div>
+        <!-- <app-autocomplete
+            *ngIf="isEditing"
+            [label]="'User name'"
+            [options]="userNames"
+            (handleSelection)="userSelected($event)"
+        ></app-autocomplete>
+        <div fxLayout="row wrap" fxLayoutGap="1em">
+            <span fxLayout="row" fxLayoutAlign="start start" *ngFor="let user of users"> {{ user.name }} <mat-icon *ngIf="isEditing" (click)="removeUser(user)">close</mat-icon></span>
+        </div> -->
+    </div>
+</div>

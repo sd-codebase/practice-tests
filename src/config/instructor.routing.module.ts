@@ -5,11 +5,13 @@ import { AddUsersComponent } from '@pages/instructor/components/add-users/add-us
 import { SetTestComponent } from '@pages/instructor/components/set-test/set-test.component';
 import { ReportsComponent } from '@pages/instructor/components/reports/reports.component';
 import { InstructorProfileComponent } from '@pages/instructor/components/profile/profile.component';
+import { GenerateTestsComponent } from '@pages/instructor/components/generate-tests/generate-tests.component';
 
 const routes: Routes = [
     {path: '', component: ComingSoonComponent},
     {path: 'profile', component: InstructorProfileComponent},
     {path: 'users', component: AddUsersComponent},
+    {path: 'generate-tests', component: GenerateTestsComponent},
     {path: 'tests', component: SetTestComponent},
     {path: 'reports', component: ReportsComponent},
 ];

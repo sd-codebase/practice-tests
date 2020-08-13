@@ -5,6 +5,8 @@ import { ITest, CQuestion } from '../../test.model';
 import { QuizComponent } from '../quiz/quiz.component';
 import { DrawerService } from '@components/drawer-service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { StorageService } from '@components/storage.serice';
+import { EUserRole } from 'src/auth/authentication/authentication.service';
 
 @Component({
   selector: 'app-answer-key',
@@ -18,14 +20,19 @@ export class AnswerKeyComponent implements OnInit {
   @Input() testId: string;
   public test: ITest;
   public openQuestionPallete = false;
+
+  public isGuest = false;
+
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
     private drawerService: DrawerService,
     private notificationService: NotificationService,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
+    this.isGuest = this.storageService.getUser().role !== EUserRole.USER;
     this.fetchTest();
   }
 
@@ -33,7 +40,8 @@ export class AnswerKeyComponent implements OnInit {
     if (this.testId) {
       try {
         await this.loaderService.show();
-        this.test = await this.http.get('/tests/' + this.testId).toPromise();
+        const url = '/tests/' + this.testId + (this.isGuest ? '?isGuest=' + true : '');
+        this.test = await this.http.get(url).toPromise();
         this.test.questions = this.test.questions.map( (que, index) => {
           const question = new CQuestion(que as any);
           question.questionNum = index + 1;
