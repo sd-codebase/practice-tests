@@ -2,9 +2,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class StorageService {
-  private store: any = {};
-
   constructor() { }
+
+  getEndpoints() {
+    return this.getItem(Storage.ENDPOINTS);
+  }
+
+  setEndpoints(endpoints) {
+    this.setItem(Storage.ENDPOINTS, endpoints);
+  }
 
   getMyCourse() {
     return this.getItem(Storage.MYCOURSE);
@@ -18,7 +24,7 @@ export class StorageService {
     return this.getItem(Storage.MYCOURSES);
   }
 
-  setMyCourseS(courses) {
+  setMyCourses(courses) {
     this.setItem(Storage.MYCOURSES, courses);
   }
 
@@ -88,4 +94,5 @@ export enum Storage {
   TOKEN = 'token',
   MYCOURSES = 'mycourses',
   MYCOURSE = 'mycourse',
+  ENDPOINTS = 'endpoints',
 }

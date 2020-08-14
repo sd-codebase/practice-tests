@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '@components/storage.serice';
-import { AuthenticationService, IUser, EUserRole } from 'src/auth/authentication/authentication.service';
+import { AuthenticationService, IUser, EUserRole, IEndpoint } from 'src/auth/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '@components/loader.service';
-import { COURSES } from '@modules/user/test/test.model';
+import { HttpService } from '@components/http.service';
 
 @Component({
   selector: 'app-home',
@@ -14,18 +14,28 @@ export class HomeComponent implements OnInit {
   public signUpUser: IUser;
   public loginUser: IUser;
   public showView = false;
-  public courses = Object.keys(COURSES).map( key => COURSES[key]);
+  public courses = [];
 
   constructor(
     public auth: AuthenticationService,
     public storageService: StorageService,
     private loaderService: LoaderService,
     private router: Router,
+    private http: HttpService,
   ) { }
 
   async ngOnInit() {
+    setTimeout(() => {
+      this.isUserAuthenticated();
+    }, 3000);
+  }
+
+  async isUserAuthenticated() {
+    try {
+      this.courses = await this.http.get('/users/courses').toPromise() as IEndpoint[];
+    } catch (e) {
+    }
     if (this.auth.isAuthenticated()) {
-      await this.loaderService.show();
       const logInUser = this.storageService.getUser();
       if (logInUser) {
         this.router.navigate([URL[ logInUser.role || 0]]);
@@ -62,8 +72,8 @@ export class HomeComponent implements OnInit {
       }
       const logInUser = await this.auth.login(user);
       if (logInUser) {
-        if (logInUser.role === EUserRole.USER) {
-          this.storageService.setMyCourseS(logInUser.courses);
+        if (logInUser.role !== EUserRole.GUEST) {
+          this.storageService.setMyCourses(logInUser.courses);
           this.storageService.setMyCourse(logInUser.courses[0]);
         }
         this.router.navigate([URL[ logInUser.role || 0]]);

@@ -1,3 +1,6 @@
+<div class="progress-bar" *ngIf="!showView">
+    <div class="progress"></div>
+</div>
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="showView">
     <div fxLayout="column" class="form-container">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
@@ -33,8 +36,8 @@
                     <mat-form-field>
                         <mat-label>Course</mat-label>
                         <mat-select [(ngModel)]="signUpUser.courses" name="courses" multiple>
-                            <mat-option *ngFor="let course of courses" [value]="course">
-                                {{course}}
+                            <mat-option *ngFor="let course of courses" [value]="course.course">
+                                {{course.course}}
                             </mat-option>
                         </mat-select>
                         <mat-hint>Select course(s)</mat-hint>

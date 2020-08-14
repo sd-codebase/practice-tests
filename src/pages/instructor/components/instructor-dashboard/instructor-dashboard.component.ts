@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '@components/drawer-service';
 import { AuthenticationService } from 'src/auth/authentication/authentication.service';
 import { LoaderService } from '@components/loader.service';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-instructor-dashboard',
@@ -19,15 +20,26 @@ export class InstructorDashboardComponent implements OnInit {
   ];
 
   public pageHeader: string;
+  public myCourses = [];
+  public myCourse = '';
 
   constructor(
     public drawerService: DrawerService,
     public auth: AuthenticationService,
+    private storageService: StorageService,
     private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
     this.loaderService.hide();
     this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
+    this.myCourses = this.storageService.getMyCourses();
+    this.myCourse = this.storageService.getMyCourse();
+    console.log(this.myCourse);
+  }
+
+  courseChange() {
+    this.storageService.setMyCourse(this.myCourse);
+    window.location.reload();
   }
 }

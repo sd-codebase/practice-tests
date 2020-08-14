@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { LoaderService } from '@components/loader.service';
-import { COURSES } from '@modules/user/test/test.model';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-xlsx-to-json-upload',
@@ -10,14 +10,16 @@ import { COURSES } from '@modules/user/test/test.model';
 })
 export class XlsxToJsonUploadComponent implements OnInit {
   @Output() handleUploadedData = new EventEmitter();
-  public courses = Object.keys(COURSES).map( key => COURSES[key]);
-  public selectedCourses: string[] = [];
+  public courses: string[] = [];
+  public selectedCourse = '';
 
   constructor(
     private loaderService: LoaderService,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
+    this.courses = this.storageService.getMyCourses();
   }
 
   onClickUpload() {
@@ -43,7 +45,7 @@ export class XlsxToJsonUploadComponent implements OnInit {
       }, {});
       setTimeout( () => {
         this.loaderService.hide();
-        this.handleUploadedData.emit({names, jsonData, courses: this.selectedCourses});
+        this.handleUploadedData.emit({names, jsonData, course: this.selectedCourse});
       }, 500);
     };
     reader.readAsBinaryString(file);

@@ -22,10 +22,8 @@ export class SolvedPapersContainerComponent implements OnInit {
   async ngOnInit() {
     try {
       await this.loaderService.show();
-      const papers = await this.http.get(`/tests/solved-papers/${this.storageService.getUserId()}`)
+      this.papers = await this.http.get(`/tests/solved-papers/${this.storageService.getMyCourse()}`)
         .toPromise() as ITest[];
-      const course = this.storageService.getMyCourse();
-      this.papers = papers.filter( paper => paper.courses.includes(course));
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

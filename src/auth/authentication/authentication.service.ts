@@ -21,6 +21,13 @@ export class AuthenticationService {
             if (userLogin.token && userLogin.savedUser) {
                 this.storageService.setToken(userLogin.token);
                 this.storageService.setUser(userLogin.savedUser);
+                const endpoints = {};
+                if (userLogin.endpoints && userLogin.endpoints.length) {
+                    userLogin.endpoints.forEach( api => {
+                        endpoints[api.course] = api.url;
+                    });
+                }
+                this.storageService.setEndpoints(endpoints);
                 this.notificationService.show(ENotification.SUCCESS, 'Logged In', 'Login successful');
                 return userLogin.savedUser;
             }
@@ -56,9 +63,15 @@ export class AuthenticationService {
     }
 }
 
+export interface IEndpoint {
+    course: string;
+    url: string;
+}
+
 export interface ILoginResponse {
     token: string;
     savedUser: IUser;
+    endpoints: IEndpoint[];
 }
 
 export interface IUser {

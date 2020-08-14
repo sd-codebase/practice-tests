@@ -15,7 +15,7 @@ export interface ITest {
     totalMarks?: number;
     result?: boolean;
     isPredefined?: boolean;
-    courses?: string[];
+    course?: string;
     createdAt?: string;
     users: string[];
 }
@@ -122,11 +122,4 @@ export class CQuestion {
         this.imagePath = imagePath;
         this.infoPara = infoPara;
     }
-}
-
-export enum COURSES {
-    NEET = 'Neet',
-    JEE_MAINS = 'Jee Mains',
-    JEE_ADV_PAPER_1 = 'Jee Advanced Paper 1',
-    JEE_ADV_PAPER_2 = 'Jee Advanced Paper 2',
 }

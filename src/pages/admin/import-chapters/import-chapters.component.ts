@@ -33,7 +33,7 @@ export class ImportChaptersComponent implements OnInit {
     }
   }
 
-  async uploadData(names, jsonData, courses) {
+  async uploadData(names, jsonData, course) {
     try {
       await this.loaderService.show();
       const dataToPush: CTopic[] = [];
@@ -47,7 +47,7 @@ export class ImportChaptersComponent implements OnInit {
         dataToPush.push(topic);
       });
       this.uploadedData = await this.http.post(this.urlToUpload, {
-        chapters: dataToPush, userId: this.storage.getUserId(), courses,
+        chapters: dataToPush, userId: this.storage.getUserId(), course,
       }).toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);

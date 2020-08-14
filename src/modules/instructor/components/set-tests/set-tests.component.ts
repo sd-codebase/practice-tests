@@ -20,6 +20,7 @@ export class SetTestsComponent implements OnInit {
   public users: IUser[];
   public groups: IGroup[];
   public tests: ITest[];
+  public course: string;
 
   constructor(
     private http: HttpService,
@@ -30,6 +31,7 @@ export class SetTestsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.course = this.storageService.getMyCourse();
     this.fetchTests();
     this.fetchUsers();
     this.fetchUserGroups();
@@ -38,7 +40,8 @@ export class SetTestsComponent implements OnInit {
   async fetchTests() {
     try {
       await this.loaderService.show();
-      this.tests = await this.http.get('/tests/all?userId=' + this.storageService.getUserId()).toPromise();
+      const tests = await this.http.get('/tests/all?userId=' + this.storageService.getUserId()).toPromise() as ITest[];
+      this.tests = tests.filter( t => t.course === this.course);
       // this.tests.sort((a, b) => a.createdAt > b.createdAt);
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);

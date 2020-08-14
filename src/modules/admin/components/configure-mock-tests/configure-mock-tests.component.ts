@@ -5,7 +5,7 @@ import { HttpService } from '@components/http.service';
 import { cloneDeep } from 'lodash';
 import { ArrayObjectUtil } from '@core/array-object-util';
 import { StorageService } from '@components/storage.serice';
-import { COURSES, ITest } from '@modules/user/test/test.model';
+import { ITest } from '@modules/user/test/test.model';
 import { EUserRole } from 'src/auth/authentication/authentication.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class ConfigureMockTestsComponent implements OnInit {
   public testConfigList: IMockTestConfig[] = [];
   public testTypes = ETestConfigType;
   public questionTypes = EQuestionType;
-  public courses = Object.keys(COURSES).map( key => COURSES[key]);
+  public courses: string[] = [];
+  public course = '';
   public subjects = ['All', 'Physics', 'Chemistry', 'Mathematics', 'Biology'];
   public viewMode = false;
   public role = 3;
@@ -33,6 +34,8 @@ export class ConfigureMockTestsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.courses = this.storageService.getMyCourses();
+    this.course = this.storageService.getMyCourse();
     this.role = this.storageService.getUser().role;
     this.userId = this.storageService.getUserId();
     this.newTestConfig();
@@ -44,6 +47,9 @@ export class ConfigureMockTestsComponent implements OnInit {
     try {
       const testConfigList = await this.http.get(`/mock-tests`).toPromise() as IMockTestConfig[];
       this.testConfigList = testConfigList.filter( config => {
+        if (config.course !== this.course) {
+          return false;
+        }
         if (this.role === EUserRole.ADMIN) {
           return config.createdBy === 'ADMIN';
         }
@@ -152,7 +158,7 @@ export class ConfigureMockTestsComponent implements OnInit {
   newTestConfig() {
     this.testConfig = {
       paperName: '',
-      course: '',
+      course: this.course,
       type: ETestConfigType.CUSTOM,
       noOfQuestions: 90,
       isNegativeMarking: false,

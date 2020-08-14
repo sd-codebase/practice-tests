@@ -13,11 +13,16 @@
             </div>
         </mat-sidenav>
         <mat-sidenav-content>
-            <mat-toolbar color="primary">
+            <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="page-header-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.2em">
                     <mat-icon class="humburger" (click)="sidenav.toggle()" title="Open Menus">toc</mat-icon>
                     <span class="page-header">{{ pageHeader }}</span>
                 </div>
+                <mat-select class="course-container" [(ngModel)]="myCourse" (ngModelChange)="courseChange()" name="course" [title]="myCourse">
+                    <mat-option *ngFor="let course of myCourses" [value]="course">
+                        {{course}}
+                    </mat-option>
+                </mat-select>
             </mat-toolbar>
             <router-outlet></router-outlet>
         </mat-sidenav-content>

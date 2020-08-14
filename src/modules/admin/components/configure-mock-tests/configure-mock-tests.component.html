@@ -27,9 +27,9 @@
                 <mat-option [value]="testTypes.TOPIC">Topic wise</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field [title]="testConfig.course">
             <mat-label>Course</mat-label>
-            <mat-select [(ngModel)]="testConfig.course" name="course">
+            <mat-select [disabled]="role !== 2" [(ngModel)]="testConfig.course" name="course">
                 <mat-option *ngFor="let course of courses" [value]="course">
                     {{course}}
                 </mat-option>
