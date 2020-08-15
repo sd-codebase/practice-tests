@@ -3,6 +3,7 @@ import { HttpService } from '@components/http.service';
 import { StorageService } from '@components/storage.serice';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { LoaderService } from '@components/loader.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthenticationService {
         private storageService: StorageService,
         private notificationService: NotificationService,
         private loaderService: LoaderService,
+        private router: Router,
     ) { }
 
     async login(userDetails) {
@@ -55,7 +57,7 @@ export class AuthenticationService {
 
     logout() {
         this.storageService.clear();
-        location.reload();
+        this.router.navigate(['/']);
     }
 
     public isAuthenticated(): boolean {

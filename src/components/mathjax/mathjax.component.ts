@@ -35,6 +35,7 @@ export class MathjaxComponent implements OnChanges, OnInit {
     // tslint:disable-next-line: no-string-literal
     this.mathJaxObject  = this.gs.nativeGlobal()['MathJax'] ;
     this.mathJaxObject.Hub.Config({
+      messageStyle: 'none',
       showMathMenu: false,
       tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
       menuSettings: { zoom: 'Double-Click', zscale: '150%' },
