@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   public signUpUser: IUser;
   public loginUser: IUser;
   public showView = false;
+  public loaderComplete = false;
   public courses = [];
 
   constructor(
@@ -26,8 +27,9 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     setTimeout(() => {
+      this.loaderComplete = true;
       this.isUserAuthenticated();
-    }, 3000);
+    }, 3800);
   }
 
   async isUserAuthenticated() {

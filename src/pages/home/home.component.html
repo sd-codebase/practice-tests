@@ -1,13 +1,18 @@
-<div class="progress-bar" *ngIf="!showView">
-    <div class="progress"></div>
-</div>
-<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="showView">
-    <div fxLayout="column" class="form-container">
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <div fxLayout="column" class="form-container" [class.view-actual]="showView">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
             <img src="assets/app-logo.jpg" class="logo">
-            <span class="app-name">Assessment Portal</span>
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0.5em">
+                <span class="app-name">Assessment Portal</span>
+                <span class="app-tagline">
+                    <span>Test | Track | Succeed</span>
+                </span>
+            </div>
         </div>
-        <mat-tab-group>
+        <div class="progress-bar" *ngIf="!showView">
+            <div class="progress" [class.loaded]="loaderComplete"></div>
+        </div>
+        <mat-tab-group *ngIf="showView">
             <mat-tab label="Sign In">
                 <div fxLayout="column" fxLayoutGap="1em" class="form">
                     <mat-form-field appearance="outline">

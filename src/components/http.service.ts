@@ -37,7 +37,8 @@ export class HttpService {
   }
 
   getHost(url) {
-    return url.indexOf('/users') !== 0 && this.endpoints[this.course] ? this.endpoints[this.course] + 'api' : host;
+    return url.indexOf('/users') !== 0 && this.endpoints[this.course] && environment.production
+    ? this.endpoints[this.course] + 'api' : host;
   }
 
   getHeaders() {

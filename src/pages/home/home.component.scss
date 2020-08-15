@@ -1,6 +1,8 @@
 .form-container {
     padding: 1em;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    &.view-actual {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
 
     .form {
         padding-top: 1em;
@@ -16,36 +18,24 @@
         font-size: 1.5em;
         font-weight: 500;
         font-family: 'Arvo', serif;
+        color: #673ab7;
+        border-bottom: 0.1em solid #241571;
+        padding-bottom: 0.2em;
+    }
+    .app-tagline {
+        font-size: 0.8em;
+        font-weight: 300;
+        font-family: 'Arvo', serif;
+        color: #241571;
+        text-align: center;
+        letter-spacing: 0.1em;
     }
 }
 
 .progress-bar {
-    position: fixed;
-    top: 45%;
-    left: 45%;
+    margin-top: 1em;
     height: 0.5em;
-    width: 20%;
-}
-
-@media only screen and (max-width: 500px) {
-    .progress-bar {
-        width: 40%;
-        left: 30%;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    .progress-bar {
-        width: 25%;
-        left: 38%;
-    }
-}
-
-@media only screen and (min-width: 901px) {
-    .progress-bar {
-        width: 10%;
-        left: 45%;
-    }
+    width: 100%;
 }
 
 .progress {
@@ -55,6 +45,9 @@
     border-radius: 20px;
     animation-name: slideanimate;
     animation-duration: 4s;
+    &.loaded {
+        width: 100% !important;
+    }
 }
 
 @keyframes slideanimate {
