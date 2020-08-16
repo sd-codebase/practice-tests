@@ -105,6 +105,9 @@ export class CreateTestComponent implements OnInit {
   }
 
   async startTest() {
+    if (!this.test.questions.length) {
+      return;
+    }
     await this.loaderService.show();
     this.test.status = ETestStatus.STARTED;
     setTimeout(() => {

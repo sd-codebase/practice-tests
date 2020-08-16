@@ -21,6 +21,7 @@ import { LoaderService } from '@components/loader.service';
 import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { QuestionInformationDialogComponent } from './components/question-information-dialog/question-information-dialog.component';
+import { CountdownGlobalConfig } from 'ngx-countdown';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { QuestionInformationDialogComponent } from './components/question-inform
     LoaderService,
     NotificationService,
     StorageService,
+    CountdownGlobalConfig,
   ],
   entryComponents: [
     QuestionInformationDialogComponent,

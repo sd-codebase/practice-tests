@@ -23,7 +23,8 @@ export class ConfigureMockTestsComponent implements OnInit {
   public course = '';
   public subjects = ['All', 'Physics', 'Chemistry', 'Mathematics', 'Biology'];
   public viewMode = false;
-  public role = 3;
+  public role = EUserRole.ADMIN;
+  public userRoles = EUserRole;
   public userId;
 
   constructor(
