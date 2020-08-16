@@ -22,6 +22,7 @@ import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { QuestionInformationDialogComponent } from './components/question-information-dialog/question-information-dialog.component';
 import { CountdownGlobalConfig } from 'ngx-countdown';
+import { ScriptLoaderService } from 'angular-google-charts';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { CountdownGlobalConfig } from 'ngx-countdown';
     NotificationService,
     StorageService,
     CountdownGlobalConfig,
+    ScriptLoaderService,
   ],
   entryComponents: [
     QuestionInformationDialogComponent,
