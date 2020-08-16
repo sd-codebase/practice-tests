@@ -76,7 +76,12 @@ export class HomeComponent implements OnInit {
       if (logInUser) {
         if (logInUser.role !== EUserRole.GUEST) {
           this.storageService.setMyCourses(logInUser.courses);
-          this.storageService.setMyCourse(logInUser.courses[0]);
+          if (logInUser.role === EUserRole.ADMIN) {
+            const myCourse = logInUser.courses.find(course => course === 'All') || logInUser.courses[0];
+            this.storageService.setMyCourse(myCourse);
+          } else {
+            this.storageService.setMyCourse(logInUser.courses[0]);
+          }
         }
         this.router.navigate([URL[ logInUser.role || 0]]);
       } else {
