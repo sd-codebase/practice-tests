@@ -11,18 +11,20 @@ h4 {
         display: none;
     }
     .question-pallete-opener {
-        display: block;
+        display: block !important;
         cursor: pointer;
         font-size: 3em !important;
-        margin-right: 0.5em;
+        position: fixed;
+        top:0.95em;right:0;
     }
     .question-pallete-mobile {
-        display: block;
+        display: block ;
         top: 0;
         bottom:0;
-        right: 1em;
+        right: 0;
         position: fixed; 
-        background-color: #000;
+        background-color: rgba(10, 0, 0, 0.5);
+        transition: all 1.0s ease-in-out;
 
         div.pallet {
             display: block;
