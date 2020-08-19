@@ -4,11 +4,11 @@
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
                 <div style="width: 100%;" fxLayout="column">
                     <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2em" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
-                        <mat-icon class="mr-2">{{menu.icon}}</mat-icon>
+                        <mat-icon class="mr-1">{{menu.icon}}</mat-icon>
                         {{menu.menu}}
                     </button>
                     <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2em" mat-raised-button color="primary" (click)="auth.logout()">
-                        <mat-icon class="mr-2">settings_power</mat-icon>
+                        <mat-icon class="mr-1">settings_power</mat-icon>
                         Logout
                     </button>
                 </div>

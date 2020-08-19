@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./dialog-box.component.scss']
 })
 export class DialogBoxComponent implements OnInit {
-
+  public alertTypes = EAlert;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IDialogData
   ) { }
@@ -20,11 +20,20 @@ export class DialogBoxComponent implements OnInit {
 export interface IDialogButton {
   text: string;
   value: any;
+  color: string;
 }
 
 export interface IDialogData {
+  type: EAlert;
   message: string;
   button1?: IDialogButton;
   button2?: IDialogButton;
   button3?: IDialogButton;
+}
+
+export enum EAlert {
+  Warning = 'Warning',
+  Confirm = 'Confirm',
+  Error = 'Error',
+  Alert = 'Alert',
 }
