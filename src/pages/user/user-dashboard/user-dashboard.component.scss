@@ -17,8 +17,13 @@
                 padding-top: 0.5em !important;
                 padding-bottom: 0.5em !important;
                 font-size: 1em;
-                font-weight: 200;
+                font-weight: 400;
                 font-family: 'Arvo', serif;
+
+                mat-icon {
+                    height: 1.2em !important;
+                    font-size: 2em !important;
+                }
             }
         }
     }
