@@ -61,6 +61,7 @@ export class AnswerKeyComponent implements OnInit {
   }
 
   onQuestionSelection(question: CQuestion) {
+    this.openQuestionPallete = false;
     this.quizCompo.setQuestionToView(question);
   }
 

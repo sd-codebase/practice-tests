@@ -9,7 +9,7 @@ import { CStatement } from '../../test.model';
 })
 export class QuestionInformationDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {content: CStatement, imagePath: string}) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {paper: string, content: CStatement, imagePath: string}) {}
 
   ngOnInit() {
   }

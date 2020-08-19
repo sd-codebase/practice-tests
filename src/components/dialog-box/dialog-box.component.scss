@@ -1,4 +1,15 @@
 .dialog-container {
     padding: 2em;
-    max-width: 90%;
+    max-height: 60vh;
+    max-width: 60vh;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 600px)  {
+    .dialog-container {
+        padding: 1em;
+        max-height: 80vh;
+        max-width: 40vh;
+        overflow: auto;
+    }
 }

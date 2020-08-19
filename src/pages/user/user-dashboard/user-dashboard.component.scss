@@ -55,6 +55,9 @@
 
 .page-header-container {
     width: 11em;
+    .page-header {
+        max-width: 7em !important;
+    }
 }
 
 .course-container {

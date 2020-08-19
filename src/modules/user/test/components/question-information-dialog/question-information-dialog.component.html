@@ -1,6 +1,12 @@
-<div class="info-block">
+<div class="info-block" fxLayout="column" fxLayoutGap="1em">
+    <h3>{{data.paper}}</h3>
+    <p><small>Double tap on expression(if any), to zoom.</small></p>
     <app-statement
+        *ngIf="data.content"
         [imagePath]="data.imagePath"
         [statement]="data.content"
     ></app-statement>
+    <div>
+        <button mat-raised-button mat-dialog-close="true">Close</button>
+    </div>
 </div>

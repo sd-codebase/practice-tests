@@ -16,7 +16,6 @@ export class LoaderComponent implements OnInit {
   ngOnInit() {
     this.loaderService.loader
       .subscribe( loading => {
-        console.log('subscribed');
         this.loading = loading;
         if (!loading) {
           this.inactiveLoading = true;

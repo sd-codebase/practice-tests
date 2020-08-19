@@ -5,6 +5,8 @@ import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
 import { DrawerService } from '@components/drawer-service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-import-solved-papers',
@@ -21,17 +23,14 @@ export class ImportSolvedPapersComponent implements OnInit {
     private storage: StorageService,
     private drawerService: DrawerService,
     private notificationService: NotificationService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
     this.drawerService.setPageHeader('Import Solved Papers');
   }
 
-  async onDataRead({names, jsonData, course}) {
-    const proceed = confirm(`Do you want to upload ${names[0]}`);
-    if (!proceed) {
-      return;
-    }
+  async handleUploadData({names, jsonData, course}) {
     try {
       await this.loaderService.show();
       const dataToPush = [];
@@ -64,5 +63,21 @@ export class ImportSolvedPapersComponent implements OnInit {
     } finally {
       this.loaderService.hide();
     }
+  }
+
+  async onDataRead({names, jsonData, course}) {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: {
+        type: 'Confirm',
+        message: `Do you want to upload ${names[0]}`,
+        button1: {text: 'Yes', value: true, color: 'primary'},
+        button2: {text: 'No, do not upload', value: false},
+      }
+    });
+    dialogRef.afterClosed().subscribe( val => {
+      if (val) {
+        this.handleUploadData({names, jsonData, course});
+      }
+    });
   }
 }

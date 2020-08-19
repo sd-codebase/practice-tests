@@ -5,6 +5,8 @@ import { CTopic } from '@modules/user/test/test.model';
 import { HttpService } from '@components/http.service';
 import { StorageService } from '@components/storage.serice';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-import-chapters',
@@ -20,6 +22,7 @@ export class ImportChaptersComponent implements OnInit {
     private drawerService: DrawerService,
     private storage: StorageService,
     private notificationService: NotificationService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -27,10 +30,19 @@ export class ImportChaptersComponent implements OnInit {
   }
 
   async onDataRead({names, jsonData, courses}) {
-    const proceed = confirm(`Do you want to upload ${names[0]}`);
-    if (proceed) {
-      this.uploadData(names, jsonData, courses);
-    }
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: {
+        type: 'Confirm',
+        message: `Do you want to upload ${names[0]}`,
+        button1: {text: 'Yes', value: true, color: 'primary'},
+        button2: {text: 'No, do not upload', value: false},
+      }
+    });
+    dialogRef.afterClosed().subscribe( val => {
+      if (val) {
+        this.uploadData(names, jsonData, courses);
+      }
+    });
   }
 
   async uploadData(names, jsonData, course) {

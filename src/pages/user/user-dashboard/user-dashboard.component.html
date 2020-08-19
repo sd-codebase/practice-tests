@@ -3,11 +3,11 @@
         <mat-sidenav mode="over" #sidenav>
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
                 <div style="width: 100%;" fxLayout="column">
-                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
+                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path" (click)="sidenav.close();">
                         <mat-icon class="mr-1">{{menu.icon}}</mat-icon>
                         {{menu.menu}}
                     </button>
-                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" (click)="auth.logout()">
+                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" (click)="sidenav.close();auth.logout()">
                         <mat-icon class="mr-1">settings_power</mat-icon>
                         Logout
                     </button>
@@ -18,7 +18,7 @@
             <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="page-header-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.2em">
                     <mat-icon class="humburger" (click)="sidenav.toggle()" title="Open Menus">toc</mat-icon>
-                    <span class="page-header">{{ pageHeader }}</span>
+                    <span class="page-header shorten-text">{{ pageHeader }}</span>
                 </div>
                 <mat-select class="course-container" [(ngModel)]="myCourse" (ngModelChange)="courseChange()" name="course" [title]="myCourse">
                     <mat-option *ngFor="let course of myCourses" [value]="course">

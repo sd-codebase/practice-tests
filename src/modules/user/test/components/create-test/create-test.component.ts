@@ -167,6 +167,7 @@ export class CreateTestComponent implements OnInit {
   }
 
   onQuestionSelection(question: CQuestion) {
+    this.openQuestionPallete = false;
     this.quizCompo.setQuestion(question);
   }
 

@@ -247,14 +247,13 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   openInfoToolTipDialog() {
     const content = this.getInfoTooltip(this.question);
-    if (content) {
-      const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
-        data: {
-          content,
-          imagePath: '/instructions/',
-        }
-      });
-    }
+    const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
+      data: {
+        paper: this.test.testName,
+        content,
+        imagePath: '/instructions/',
+      }
+    });
   }
 
   openInfoParaDialog() {
@@ -262,6 +261,7 @@ export class QuizComponent implements OnInit, OnDestroy {
       const { content } = this.test.paraObject.find( para => para.paraId === this.question.infoPara);
       const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
         data: {
+          paper: this.test.testName,
           content,
           imagePath: '/paragraphs/',
         }
