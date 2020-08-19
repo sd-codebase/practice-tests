@@ -5,6 +5,8 @@ import { StorageService } from '@components/storage.serice';
 import { LoaderService } from '@components/loader.service';
 import { ArrayObjectUtil } from '@core/array-object-util';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-tests-list',
@@ -22,6 +24,7 @@ export class TestsListComponent implements OnInit {
     private storage: StorageService,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
+    private dialog: MatDialog,
   ) { }
 
   async ngOnInit() {
@@ -47,6 +50,22 @@ export class TestsListComponent implements OnInit {
       this.attemptTestUrl = '/guest/attempt-test';
       this.testAnswerKeyUrl = '/guest/test-answer-key';
     }
+  }
+
+  onDeleteTest(test: ITest) {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: {
+        type: 'Confirm',
+        message: 'This action will delete this tests. Are you sure to delete this test?',
+        button1: {text: 'Yes', value: true, color: 'primary'},
+        button2: {text: 'No, Do not delete', value: false},
+      }
+    });
+    dialogRef.afterClosed().subscribe( val => {
+      if (val) {
+        this.deleteTest(test);
+      }
+    });
   }
 
   async deleteTest(test: ITest) {

@@ -1,7 +1,10 @@
 <div fxFill *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
     <div fxLayout="row" fxLayoutAlign="space-between center">
         <h3 *ngIf="question">Question {{ question.questionNum }}: </h3>
-        <mat-icon class="info-tooltip" (click)="openInfoToolTipDialog()">info</mat-icon>
+        <div fxLayout="row" fxLayoutGap="1em">
+            <mat-icon class="info-tooltip pallet-opener" (click)="openQuestionPallet.emit()">view_module</mat-icon>
+            <mat-icon class="info-tooltip" (click)="openInfoToolTipDialog()">info</mat-icon>
+        </div>
     </div>
     <mat-divider></mat-divider>
     <a *ngIf="question && question.infoPara" class="info-para-link" (click)="openInfoParaDialog()">Refer information paragraph for this question</a>

@@ -15,6 +15,8 @@ export class QuizComponent implements OnInit, OnDestroy {
   @Input() test: ITest;
   @Input() action: string;
   @Input() startwithQuestion = 1;
+
+  @Output() openQuestionPallet = new EventEmitter();
   @Output() timerPause = new EventEmitter();
   @Output() timerResume = new EventEmitter();
   @Output() handleFinishTest = new EventEmitter();

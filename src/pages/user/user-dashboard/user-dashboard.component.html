@@ -2,14 +2,13 @@
     <mat-sidenav-container class="drawer-container">
         <mat-sidenav mode="over" #sidenav>
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
-                <!-- <img class="user-image" [src]="userProfile.picture"> -->
-                <div fxLayout="column" fxLayoutGap="1em" class="menu-list">
-                    <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
-                        <mat-icon>{{menu.icon}}</mat-icon>
+                <div style="width: 100%;" fxLayout="column">
+                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2em" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path">
+                        <mat-icon class="mr-2">{{menu.icon}}</mat-icon>
                         {{menu.menu}}
                     </button>
-                    <button fxLayout="row" fxLayoutAlign="space-between stretch" mat-raised-button color="primary" (click)="auth.logout()">
-                        <mat-icon>settings_power</mat-icon>
+                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2em" mat-raised-button color="primary" (click)="auth.logout()">
+                        <mat-icon class="mr-2">settings_power</mat-icon>
                         Logout
                     </button>
                 </div>
@@ -27,7 +26,9 @@
                     </mat-option>
                 </mat-select>
             </mat-toolbar>
-            <router-outlet></router-outlet>
+            <div class="outlet">
+                <router-outlet></router-outlet>
+            </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

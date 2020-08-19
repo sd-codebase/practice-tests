@@ -1,7 +1,7 @@
 <mat-accordion multi *ngIf="tests && tests.length > 0">
     <mat-expansion-panel *ngFor="let test of tests">
       <mat-expansion-panel-header>
-        <mat-panel-title fxFlex="20">{{ test.testName }}</mat-panel-title>
+        <mat-panel-title fxFlex="20" class="shorten-text" [title]="test.testName">{{ test.testName }}</mat-panel-title>
         <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
             <span fxFlex="30" class="created-info shorten-text" [title]="test.createdAt">Created: {{ test.createdAt }}</span>
             <button fxFlex="25" class="status-icon-button" mat-mini-fab color="{{ test.isSubmitted ? 'success' : 'accent'}}" >
@@ -13,7 +13,7 @@
             </button>
             <a fxFlex="25" *ngIf="!test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="[attemptTestUrl, test._id]">Start Test</a>
             <a fxFlex="25" *ngIf="test.isSubmitted" class="view-questions" (click)="$event.stopPropagation();" [routerLink]="[testAnswerKeyUrl, test._id]">View Answer</a>
-            <button *ngIf="!isGuest" title="Delete this test" mat-mini-fab color="warn" (click)="deleteTest(test);$event.stopPropagation();">
+            <button *ngIf="!isGuest" title="Delete this test" mat-mini-fab color="warn" (click)="onDeleteTest(test);$event.stopPropagation();">
               <mat-icon>delete</mat-icon>
             </button>
         </mat-panel-description>

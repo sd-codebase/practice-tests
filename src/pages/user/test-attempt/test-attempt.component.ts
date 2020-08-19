@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DrawerService } from '@components/drawer-service';
 import { DeactivationGuarded } from 'src/guards/candeactivate.guard';
 import { CreateTestComponent } from '@modules/user/test/components/create-test/create-test.component';
 import { ETestStatus } from '@modules/user/test/test.model';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-test-attempt',
@@ -19,6 +21,7 @@ export class TestAttemptComponent implements OnInit, OnDestroy, DeactivationGuar
   constructor(
     private route: ActivatedRoute,
     private drawerService: DrawerService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -32,16 +35,21 @@ export class TestAttemptComponent implements OnInit, OnDestroy, DeactivationGuar
     this.createTestComponent.saveTestProgress();
   }
 
-  canDeactivate(): boolean {
+  canDeactivate(): Observable<boolean> | boolean {
     const test = this.createTestComponent.test;
     if (test.status === ETestStatus.STARTED) {
-      const input = confirm('Test is in progress. If you exits progress will be stored, Do you wish to exit?');
-      if (input) {
-        this.createTestComponent.saveTestProgress();
-      }
-      return input;
+      const dialogRef = this.dialog.open(DialogBoxComponent, {
+        data: {
+          type: 'Confirm',
+          message: 'Test is in progress. If you exits progress will be stored, Do you wish to exit?',
+          button1: {text: 'Yes', value: true, color: 'primary'},
+          button2: {text: 'No, stay for a while', value: false},
+        }
+      });
+      return dialogRef.afterClosed();
+    } else {
+      return true;
     }
-    return true;
   }
 
   ngOnDestroy(): void {

@@ -18,18 +18,17 @@
                     <countdown [config]="{leftTime: timer, format: 'HH:mm:ss'}" (event)="handleEvent($event)"></countdown>
                 </button>
             </div>
-            <mat-icon class="question-pallete-opener" (click)="openQuestionPallete=true">view_module</mat-icon>
         </div>
         <app-quiz fxFill
             *ngIf="test && test.status === 1"
             [action]="'attempt'"
             [test]="test"
             [startwithQuestion]="startwithQuestion"
+            (openQuestionPallet)="openQuestionPallete=true"
             (handleFinishTest)="finishTest()"
             (timerPause) = "pauseTimer()"
             (timerResume) = "resumeTimer()"
         ></app-quiz>
-        
     </div>
     <div class="question-pallet-container" *ngIf="test && test.status === 1" fxFlex="20">
         <app-question-pallete

@@ -1,5 +1,5 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
-    <div fxLayout="column" class="form-container" [class.view-actual]="showView">
+    <div fxLayout="column" class="form-container slide-in" [class.view-actual]="showView">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
             <img src="assets/app-logo.jpg" class="logo">
             <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0.2em">
@@ -12,7 +12,7 @@
         <div class="progress-bar" *ngIf="!showView">
             <div class="progress" [class.loaded]="loaderComplete"></div>
         </div>
-        <mat-tab-group *ngIf="showView">
+        <mat-tab-group *ngIf="showView" animationDuration="0ms">
             <mat-tab label="Sign In">
                 <div fxLayout="column" fxLayoutGap="1em" class="form">
                     <mat-form-field appearance="outline">

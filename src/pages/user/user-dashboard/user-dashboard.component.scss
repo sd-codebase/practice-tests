@@ -5,12 +5,17 @@
         mat-sidenav {
             min-width: 11em;
             max-width: 15em;
-            padding: 0 0.5em;
+            // padding: 0 0.5em;
             .mat-list-item {
                 cursor: pointer;
             }
             .menu-list {
                 padding-top: 1em;
+            }
+            .menu-buttom {
+                border-radius: 0 !important;
+                padding-top: 0.5em !important;
+                padding-bottom: 0.5em !important;
             }
         }
     }
@@ -49,8 +54,23 @@
     max-width: 15em;
 }
 
-::ng-deep .mat-select-value {
+::ng-deep .course-container .mat-select-value {
     text-align: right !important;
     padding-right: 0.5em !important;
     font-weight: 500;
+}
+
+.outlet {
+    min-height: calc(100vh - 46px);
+    max-height: calc(100vh - 46px);
+    overflow: auto;
+}
+
+@media only screen and (max-width: 600px)  {
+    mat-sidenav {
+        width: 50% !important;
+    }
+    .menu-buttom {
+        width: 100% !important;
+    }   
 }

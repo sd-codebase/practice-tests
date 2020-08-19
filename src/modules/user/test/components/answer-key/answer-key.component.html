@@ -1,10 +1,10 @@
 <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
     <app-quiz fxFlex="78" fxFlex.xs="98"
         *ngIf="test && test.status === 2"
+        (openQuestionPallet)="openQuestionPallete=true"
         [action]="'view'"
         [test]="test"
     ></app-quiz>
-    <mat-icon class="question-pallete-opener" (click)="openQuestionPallete=true">view_module</mat-icon>
     <div *ngIf="test && test.status === 2" fxFlex="20"  fxFlex.xs="0">
         <app-question-pallete class="question-pallet-container"
             [action]="'view'"

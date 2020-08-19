@@ -133,6 +133,29 @@ span.page-header {
 .mb-1 {
     margin-bottom: 1em !important;
 }
+.mr-2 {
+    margin-right: 2em;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.3em;
+}
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #fff; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 @media only screen and (max-width: 600px)  {
     .snackbar {

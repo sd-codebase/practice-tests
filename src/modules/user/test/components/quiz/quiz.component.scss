@@ -19,6 +19,10 @@ app-question, .answer-block {
     cursor: pointer;
 }
 
+.pallet-opener {
+    display: none;
+}
+
 @media only screen and (max-width: 600px)  {
     app-question, .answer-block {
         font-family: 'Times New Roman', Times, serif; font-size: 1em !important;
@@ -26,5 +30,9 @@ app-question, .answer-block {
 
     .question-action-buttons button {
         margin-bottom: 0.5em !important;
+    }
+
+    .pallet-opener {
+        display: block;
     }
 }

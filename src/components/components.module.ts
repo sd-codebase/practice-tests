@@ -9,6 +9,7 @@ import { PageHeaderComponent } from './page-header/page-header.component';
 import { NotificationBarComponent, NotificationService } from './notifications.service';
 import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     NotificationBarComponent,
     ComingSoonComponent,
     AutocompleteComponent,
+    DialogBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,9 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
     ComingSoonComponent,
     AutocompleteComponent,
   ],
-  entryComponents: [NotificationBarComponent]
+  entryComponents: [
+    NotificationBarComponent,
+    DialogBoxComponent
+  ]
 })
 export class ComponentsModule { }

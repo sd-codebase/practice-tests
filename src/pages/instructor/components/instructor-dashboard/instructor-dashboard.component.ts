@@ -3,6 +3,7 @@ import { DrawerService } from '@components/drawer-service';
 import { AuthenticationService } from 'src/auth/authentication/authentication.service';
 import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor-dashboard',
@@ -28,6 +29,7 @@ export class InstructorDashboardComponent implements OnInit {
     public auth: AuthenticationService,
     private storageService: StorageService,
     private loaderService: LoaderService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,6 @@ export class InstructorDashboardComponent implements OnInit {
 
   courseChange() {
     this.storageService.setMyCourse(this.myCourse);
-    window.location.reload();
+    this.router.navigate(['/instructuctor']);
   }
 }
