@@ -5,15 +5,20 @@
         [action]="'view'"
         [test]="test"
     ></app-quiz>
-    <div *ngIf="test && test.status === 2" fxFlex="20"  fxFlex.xs="0">
-        <app-question-pallete class="question-pallet-container"
+    <div class="question-pallet-container" *ngIf="test && test.status === 2" fxFlex="20"  fxFlex.xs="0">
+        <app-question-pallete
             [action]="'view'"
             [test]="test"
             (handleQuestionSelection)="onQuestionSelection($event)"
         ></app-question-pallete>
     </div>
 </div>
-<div class="question-pallete-mobile" [class.disabled]="!openQuestionPallete" *ngIf="test && test.status === 2" (click)="openQuestionPallete=false">
+<div 
+    class="question-pallete-mobile" 
+    [class.disabled]="!openQuestionPallete" 
+    *ngIf="test && test.status === 2"
+    (click)="openQuestionPallete=false"
+>
     <div class="pallet" (click)="$event.stopPropagation()">
         <app-question-pallete
             [test]="test"

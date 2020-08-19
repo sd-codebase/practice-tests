@@ -56,7 +56,12 @@
         </button>
     </div>
 </div>
-<div class="question-pallete-mobile" [class.disabled]="!openQuestionPallete" *ngIf="test && test.status === 1" (click)="openQuestionPallete=false">
+<div 
+    class="question-pallete-mobile"
+    [class.disabled]="!openQuestionPallete"
+    *ngIf="test && test.status === 1"
+    (click)="openQuestionPallete=false"
+>
     <div class="pallet" (click)="$event.stopPropagation()">
         <app-question-pallete
             [test]="test"
