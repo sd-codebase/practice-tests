@@ -11,7 +11,7 @@
 
     .logo {
         width: 5em;
-        border-radius: 50%;
+        height: auto;
         background: #fff;
     }
 
@@ -75,5 +75,11 @@
 @media only screen and (max-width: 600px)  {
     .form-container {
         width: 100%;
-    } 
+    }
+    .progress-bar {
+        width: 70% !important;
+        margin: auto;
+        clear: both;
+        margin-top: 1em;
+    }
 }

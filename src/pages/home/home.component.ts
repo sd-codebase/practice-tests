@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
 
   async isUserAuthenticated() {
     try {
-      this.courses = await this.http.get('/users/courses').toPromise() as IEndpoint[];
+      const courses = await this.http.get('/users/courses').toPromise() as IEndpoint[];
+      this.courses = courses.filter( course => course.course !== 'All');
     } catch (e) {
     }
     if (this.auth.isAuthenticated()) {
