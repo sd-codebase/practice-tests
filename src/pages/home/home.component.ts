@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit {
       } else {
         this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, 'Something wend wrong');
       }
-    } catch ({err: e}) {
-      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+    } catch ({error: e}) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e && e.message);
     } finally {
       this.loaderService.hide();
     }
