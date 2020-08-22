@@ -13,7 +13,6 @@ export class HttpService {
   private course: string;
   constructor(private http: HttpClient, private storage: StorageService) {
     this.endpoints = this.storage.getEndpoints();
-    this.course = this.storage.getMyCourse();
   }
 
   get(url, params?): Observable<any> {
@@ -37,6 +36,7 @@ export class HttpService {
   }
 
   getHost(url) {
+    this.course = this.storage.getMyCourse();
     return url.indexOf('/users') !== 0 && this.endpoints[this.course] && environment.production
     ? this.endpoints[this.course] + 'api' : host;
   }
