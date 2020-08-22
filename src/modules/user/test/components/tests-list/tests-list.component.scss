@@ -11,6 +11,10 @@
     display: block;
 }
 
+.test-info {
+    width: 45%;
+}
+
 @media only screen and (max-width: 600px)  {
     .status-button {
         display: none !important;

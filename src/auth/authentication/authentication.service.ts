@@ -4,6 +4,7 @@ import { StorageService } from '@components/storage.serice';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { LoaderService } from '@components/loader.service';
 import { Router } from '@angular/router';
+import { validateEmail, validatePassword } from '@core/validation-util';
 
 @Injectable({
     providedIn: 'root'
@@ -42,6 +43,10 @@ export class AuthenticationService {
     }
 
     async signUp(userDetails) {
+        if (!validateEmail(userDetails.email) || !validatePassword(userDetails.password)) {
+            this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, 'Required: valid email and password length at least 8.');
+            return;
+        }
         try {
             await this.loaderService.show();
             const userSignUp = await this.http.post('/users', userDetails).toPromise();
@@ -87,6 +92,7 @@ export interface IUser {
     enabled?: boolean;
     isEditMode?: boolean;
     belongsTo?: string;
+    checked?: boolean;
 }
 
 export enum EUserRole {

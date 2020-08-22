@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutGap="2em">
-    <div fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between start" fxLayoutGap="2em">
         <div class="card-layout">
             <google-chart
                 [type]="'LineChart'" 
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between start" fxLayoutGap="2em">
         <div class="card-layout">
             <google-chart [type]="'PieChart'" [data]="piData" [options]="piOptions"></google-chart>
         </div>

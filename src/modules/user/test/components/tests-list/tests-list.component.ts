@@ -19,6 +19,8 @@ export class TestsListComponent implements OnInit {
   public attemptTestUrl = '/user/attempt-test';
   public testAnswerKeyUrl = '/user/test-answer-key';
   public tests: ITest[];
+  public onGoingTests = [];
+
   constructor(
     private http: HttpService,
     private storage: StorageService,
@@ -28,6 +30,7 @@ export class TestsListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.onGoingTests = Object.keys(this.storage.getOngoingTest());
     this.makeUrls();
     try {
       await this.loaderService.show();
@@ -73,6 +76,7 @@ export class TestsListComponent implements OnInit {
       await this.loaderService.show();
       await this.http.delete('/tests/' + test._id).toPromise();
       ArrayObjectUtil.removeObject(this.tests, test);
+      this.storage.removeTest(test._id);
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

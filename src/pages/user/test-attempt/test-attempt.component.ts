@@ -7,6 +7,7 @@ import { CreateTestComponent } from '@modules/user/test/components/create-test/c
 import { ETestStatus } from '@modules/user/test/test.model';
 import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-test-attempt',
@@ -22,6 +23,7 @@ export class TestAttemptComponent implements OnInit, OnDestroy, DeactivationGuar
     private route: ActivatedRoute,
     private drawerService: DrawerService,
     public dialog: MatDialog,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class TestAttemptComponent implements OnInit, OnDestroy, DeactivationGuar
 
   canDeactivate(): Observable<boolean> | boolean {
     const test = this.createTestComponent.test;
-    if (test.status === ETestStatus.STARTED) {
+    const session = this.storageService.getExpiryTime();
+    if (session && test && test.status === ETestStatus.STARTED) {
       const dialogRef = this.dialog.open(DialogBoxComponent, {
         data: {
           type: 'Confirm',

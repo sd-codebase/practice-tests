@@ -18,8 +18,15 @@ export class UserGroupsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {group: IGroup, users: IUser[]}) {}
 
   ngOnInit() {
-    this.mapUsers();
-    this.filterUserNames();
+    // this.mapUsers();
+    // this.filterUserNames();
+    this.data.users.forEach(user => {
+      if (this.data.group.users.includes(user._id)) {
+        user.checked = true;
+      } else {
+        user.checked = false;
+      }
+    });
   }
 
   filterUserNames() {

@@ -1,0 +1,24 @@
+<div class="page-container">
+    <div fxFill fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between stretch" fxLayoutGap="1em">
+            <mat-card *ngFor="let course of courses">
+                <mat-card-header color="primary">
+                  <mat-card-title>{{course.course}}</mat-card-title>
+                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content>
+                  <div [innerHTML]="course.content"></div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button [color]="course.color">Start taking test</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <div *ngIf="showClear" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+          <p style="font-size: 1.5em;">We recommend you to clear cached data time to time. </p>
+          <small>Clearing will remove your test progress. In progress tests will have to start again.</small>
+          <button mat-raised-button color="warn" (click)="clearStorage()">Clear Now</button>
+        </div>
+    </div>
+</div>

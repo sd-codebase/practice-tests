@@ -31,6 +31,33 @@
                     <button *ngIf="loginUser && isUser" mat-raised-button color="primary" (click)="login(false)">Sign In</button>
                 </div>
             </mat-tab>
+            <mat-tab label="Forgot Password">
+                <div fxLayout="column" fxLayoutGap="1em" class="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput placeholder="Email Id" [(ngModel)]="forgotPassword.email">
+                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-hint>Enter your email</mat-hint>
+                    </mat-form-field>
+                    <div [hidden]="!hasOtp">
+                        <canvas class="canvas" #canvasEl></canvas>
+                    </div>
+                    <mat-form-field appearance="outline" *ngIf="hasOtp">
+                        <mat-label>UIN</mat-label>
+                        <input matInput placeholder="UIN" [(ngModel)]="forgotPassword.otp">
+                        <mat-icon matSuffix>lock</mat-icon>
+                        <mat-hint>Enter password</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" *ngIf="hasOtp">
+                        <mat-label>New Password</mat-label>
+                        <input type="password" matInput placeholder="Password" [(ngModel)]="forgotPassword.password">
+                        <mat-icon matSuffix>security</mat-icon>
+                        <mat-hint>Enter new password</mat-hint>
+                    </mat-form-field>
+                    <button *ngIf="!hasOtp" mat-raised-button color="primary" (click)="forgotPasswordGetOtp()">Get UIN</button>
+                    <button *ngIf="hasOtp && forgotPassword.otp && forgotPassword.password" mat-raised-button color="primary" (click)="resetPassword()">Reset Password</button>
+                </div>
+            </mat-tab>
             <mat-tab label="Sign Up">
                 <div fxLayout="column" fxLayoutGap="1em" class="form">
                     <mat-form-field appearance="outline">
@@ -57,7 +84,7 @@
                         <input type="password" matInput placeholder="Password" [(ngModel)]="signUpUser.password">
                         <mat-hint>Enter your password</mat-hint>
                     </mat-form-field>
-                    <button [disabled]="!signUpUser.email || !signUpUser.password" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
+                    <button [disabled]="!signUpUser.email || !signUpUser.password || !signUpUser.name || !signUpUser.courses.length" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
                 </div>
             </mat-tab>
         </mat-tab-group>

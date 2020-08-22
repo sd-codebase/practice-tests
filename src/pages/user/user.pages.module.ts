@@ -22,6 +22,7 @@ import { StorageService } from '@components/storage.serice';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
 import { ProgressComponent } from './progress/progress.component';
+import { DashboardWidgetPageComponent } from './dashboard-widget-page/dashboard-widget-page.component';
 
 @NgModule({
     imports: [
@@ -45,6 +46,7 @@ import { ProgressComponent } from './progress/progress.component';
       SolvedPapersComponent,
       SyllabusNotesComponent,
       ProgressComponent,
+      DashboardWidgetPageComponent,
     ],
     providers: [
       HttpService,

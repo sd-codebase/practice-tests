@@ -1,11 +1,11 @@
 <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-    <app-quiz fxFlex="78" fxFlex.xs="98"
+    <app-quiz fxFlex="78" fxFlex.xs="100" fxFlex.sm="66" 
         *ngIf="test && test.status === 2"
         (openQuestionPallet)="openQuestionPallete=true"
         [action]="'view'"
         [test]="test"
     ></app-quiz>
-    <div class="question-pallet-container" *ngIf="test && test.status === 2" fxFlex="20"  fxFlex.xs="0">
+    <div class="question-pallet-container" *ngIf="test && test.status === 2" fxFlex="20" fxFlex.xs="0" fxFlex.sm="32">
         <app-question-pallete
             [action]="'view'"
             [test]="test"

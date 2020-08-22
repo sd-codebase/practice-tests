@@ -1,9 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="0.5em">
-    <div fxFlex.xs="98" fxFlex="78" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em">
-        <button mat-raised-button color="primary" *ngIf="test && test.status === 0" (click)="startTest()" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="78" fxFlex.xs="100" fxFlex.sm="66"  fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+        <button class="start-test" mat-raised-button color="primary" *ngIf="test && test.status === 0" (click)="startTest()" fxLayout="row" fxLayoutAlign="space-between center">
             <mat-icon>article</mat-icon>
             Start Test
         </button>
+        <div *ngIf="test && test.status === 0 && onGoingTests.length > 5">
+            Progress of this test wont be stored, as you have some tests in progress.
+            We recommend you to finish or delete all pending test before start, 
+        </div>
         <div fxFill fxLayout="column" fxLayoutAlign="space-between start" *ngIf="test && test.status === 0">
             <div fxFill fxLayout="column" fxLayoutAlign="space-between start" *ngFor="let info of instructions">
                 <h3>{{info.key}}</h3>
@@ -11,13 +15,18 @@
             </div>
         </div>
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" *ngIf="test && test.status === 1" >
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
-                <h4>Time left</h4>
-                <button class="strong" mat-raised-button color="accent" fxLayout="row" fxLayoutAlign="space-between center">
-                    <mat-icon>timer</mat-icon>
-                    <countdown [config]="{leftTime: timer, format: 'HH:mm:ss'}" (event)="handleEvent($event)"></countdown>
-                </button>
-            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em"> -->
+                <div>
+                    <h3>{{test.testName}}</h3>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
+                    <h4>Time left</h4>
+                    <button class="strong" mat-raised-button color="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                        <mat-icon>timer</mat-icon>
+                        <countdown [config]="{leftTime: timer, format: 'HH:mm:ss'}" (event)="handleEvent($event)"></countdown>
+                    </button>
+                </div>
+            <!-- </div> -->
         </div>
         <app-quiz fxFill
             *ngIf="test && test.status === 1"
@@ -30,7 +39,7 @@
             (timerResume) = "resumeTimer()"
         ></app-quiz>
     </div>
-    <div class="question-pallet-container" *ngIf="test && test.status === 1" fxFlex="20">
+    <div class="question-pallet-container" *ngIf="test && test.status === 1" fxFlex="20" fxFlex.xs="0" fxFlex.sm="32">
         <app-question-pallete
             [test]="test"
             (handleQuestionSelection)="onQuestionSelection($event)"

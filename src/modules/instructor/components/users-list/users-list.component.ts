@@ -112,12 +112,12 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserGroupsComponent, {
       data: {
         group,
-        users: this.users.filter( user => user.enabled)
+        users: this.users,
       }
     });
 
     dialogRef.afterClosed().subscribe((result: IUser[]) => {
-      group.users = result.map( user => user._id);
+      group.users = result.filter(user => user.checked).map( user => user._id);
       this.updateGroup(group);
     });
   }

@@ -7,6 +7,7 @@ import { LoaderService } from '@components/loader.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { EUserRole } from 'src/auth/authentication/authentication.service';
+import { filter } from 'lodash';
 
 @Component({
   selector: 'app-create-test',
@@ -30,6 +31,8 @@ export class CreateTestComponent implements OnInit {
   public isGuest = false;
   public answerKeyPath = '/user/test-answer-key';
   public myTestsPath = '/user/my-tests';
+  public onGoingTests = [];
+
   constructor(
     private http: HttpService,
     private loaderService: LoaderService,
@@ -38,6 +41,7 @@ export class CreateTestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onGoingTests = Object.keys(this.storageService.getOngoingTest());
     this.isGuest = this.storageService.getUser().role !== EUserRole.USER;
     if (this.isGuest) {
       this.answerKeyPath = '/guest/test-answer-key';

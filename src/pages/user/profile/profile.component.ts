@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.drawerService.setPageHeader('My Profile');
+    this.drawerService.setPageHeader('Profile');
   }
 
 }

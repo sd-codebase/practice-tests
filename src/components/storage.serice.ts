@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable()
 export class StorageService {
   constructor() { }
+
+  getExpiryTime() {
+    return this.getItem(Storage.EXPIRY);
+  }
 
   getEndpoints() {
     return this.getItem(Storage.ENDPOINTS);
@@ -37,6 +42,8 @@ export class StorageService {
   }
 
   setUser(user) {
+    const expiry = moment().add(30, 'days');
+    this.setItem(Storage.EXPIRY, expiry);
     this.setItem(Storage.USER, user);
   }
 
@@ -56,6 +63,7 @@ export class StorageService {
     test.timeLeft = timeLeft;
     test.currentQuestion = currentQuestion;
     this.setItem(test._id, test);
+    this.setOngoingTest(test._id);
   }
 
   getInProgressTest(testId) {
@@ -70,9 +78,33 @@ export class StorageService {
 
   removeTest(testId) {
     this.removeItem(testId);
+    this.removeOngoingTest(testId);
+  }
+
+  setOngoingTest(testId) {
+    const testsinprogress = this.getOngoingTest();
+    testsinprogress[testId] = true;
+    this.setItem(Storage.TESTSINPROGRESS, testsinprogress);
+  }
+
+  removeOngoingTest(testId) {
+    const testsinprogress = this.getOngoingTest();
+    delete testsinprogress[testId];
+    this.setItem(Storage.TESTSINPROGRESS, testsinprogress);
+  }
+
+  getOngoingTest() {
+    return this.getItem(Storage.TESTSINPROGRESS) || {};
   }
 
   clear() {
+    this.removeItem(Storage.TOKEN);
+    this.removeItem(Storage.USER);
+    this.removeItem(Storage.ENDPOINTS);
+    this.removeItem(Storage.MYCOURSE);
+  }
+
+  clearStorage() {
     localStorage.clear();
   }
 
@@ -90,6 +122,8 @@ export class StorageService {
 }
 
 export enum Storage {
+  TESTSINPROGRESS = 'testsinprogress',
+  EXPIRY = 'expiry',
   USER = 'user',
   TOKEN = 'token',
   MYCOURSES = 'mycourses',

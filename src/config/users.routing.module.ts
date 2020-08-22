@@ -11,9 +11,10 @@ import { TestAttemptComponent } from '@pages/user/test-attempt/test-attempt.comp
 import { SyllabusNotesComponent } from '@pages/user/syllabus-notes/syllabus-notes.component';
 import { CanDeactivateGuard } from 'src/guards/candeactivate.guard';
 import { ProgressComponent } from '@pages/user/progress/progress.component';
+import { DashboardWidgetPageComponent } from '@pages/user/dashboard-widget-page/dashboard-widget-page.component';
 
 const routes: Routes = [
-    {path: '', component: ComingSoonComponent},
+    {path: '', component: DashboardWidgetPageComponent},
     {path: 'coming-soon', component: ComingSoonComponent},
     {path: 'syllabus', component: SyllabusNotesComponent},
     {path: 'profile', component: ProfileComponent},

@@ -24,7 +24,7 @@
 <div fxLayout="column" fxFill fxLayoutAlign="start start" fxLayoutGap="0.5em">
     <ng-container *ngFor="let st of statementList">
         <ng-container *ngIf="st.type === 'image'">
-            <img [src]="fetchImage(st.content)"/>
+            <img class="statement-img" [src]="fetchImage(st.content)"/>
         </ng-container>
         <ng-container *ngIf="st.type === 'math'">
             <app-mathjax [content]="st.content"></app-mathjax>

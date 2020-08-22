@@ -1,7 +1,11 @@
 .container-div {
-    width: 40em;
+    width: 60em;
 
     mat-icon {
         cursor: pointer;
     }
+}
+.checkboxes-container {
+    max-height: 50em;
+    overflow: auto;
 }

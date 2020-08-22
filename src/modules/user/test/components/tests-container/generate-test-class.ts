@@ -28,8 +28,8 @@ export abstract class GenerateTest {
           this.notificationService.show(ENotification.SUCCESS, 'Created', 'Test created successfuly');
           this.router.navigate(['/user/attempt-test', this.test._id]);
         }
-      } catch (e) {
-          this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+      } catch ({error: e}) {
+          this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e && e.message);
       } finally {
         this.loaderService.hide();
       }

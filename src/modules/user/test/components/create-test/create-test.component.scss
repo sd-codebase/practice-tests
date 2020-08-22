@@ -6,6 +6,11 @@ h4 {
     display: none; 
 }
 
+.start-test {
+    font-size: 2em;
+    padding: 4px 10px !important;
+}
+
 @media only screen and (max-width: 600px)  {
     .question-pallet-container {
         display: none;
@@ -32,7 +37,7 @@ h4 {
             padding: 0.2em;
             height: 100vh;
             background-color: #fff !important;
-            margin-left: 50% !important;
+            margin-left: 30% !important;
         }
     }
 }
