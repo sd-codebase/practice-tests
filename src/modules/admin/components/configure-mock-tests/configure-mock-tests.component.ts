@@ -48,7 +48,7 @@ export class ConfigureMockTestsComponent implements OnInit {
     try {
       const testConfigList = await this.http.get(`/mock-tests`).toPromise() as IMockTestConfig[];
       this.testConfigList = testConfigList.filter( config => {
-        if (config.course !== this.course) {
+        if (this.course !== 'All' && config.course !== this.course) {
           return false;
         }
         if (this.role === EUserRole.ADMIN) {
