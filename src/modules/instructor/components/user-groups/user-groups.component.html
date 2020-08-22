@@ -15,7 +15,7 @@
         <div fxLayout="row wrap" fxLayoutGap="1em" class="checkboxes-container">
             <mat-checkbox *ngFor="let userObj of data.users"
                 [(ngModel)]="userObj.checked"
-                [color]="primary"
+                [color]="'primary'"
                 [value]="userObj"> {{userObj.name}}
             </mat-checkbox>
         </div>
