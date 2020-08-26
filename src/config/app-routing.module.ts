@@ -7,9 +7,11 @@ import { HomeComponent } from '@pages/home/home.component';
 import { AdminAuthGuard } from 'src/auth/admin.auth.guard';
 import { InstructorDashboardComponent } from '@pages/instructor/components/instructor-dashboard/instructor-dashboard.component';
 import { GuestDashboardComponent } from '@pages/guest/components/guest-dashboard/guest-dashboard.component';
+import { PolicyComponent } from '@pages/policy/policy.component';
 
 
 const routes: Routes = [
+  { path: 'policy', component: PolicyComponent, pathMatch: 'full' },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   {
     path: 'admin', component: AdminDashboardComponent, canActivate: [ AdminAuthGuard ], canActivateChild: [AdminAuthGuard],

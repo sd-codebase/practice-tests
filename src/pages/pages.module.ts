@@ -15,6 +15,7 @@ import { NotificationService } from '@components/notifications.service';
 import { StorageService } from '@components/storage.serice';
 import { InstructorDashboardComponent } from './instructor/components/instructor-dashboard/instructor-dashboard.component';
 import { GuestDashboardComponent } from './guest/components/guest-dashboard/guest-dashboard.component';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { GuestDashboardComponent } from './guest/components/guest-dashboard/gues
     HomeComponent,
     InstructorDashboardComponent,
     GuestDashboardComponent,
+    PolicyComponent,
   ],
   providers: [
     HttpService,
