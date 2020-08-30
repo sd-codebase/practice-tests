@@ -1,14 +1,17 @@
-<div class="page-container">
-    <div>
-        <textarea [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
+<div class="page-container" fxLayout="column" fxLayoutGap="1em">
+    <div fxLayout="row" fxLayoutGap="1em">
+        <textarea #contentTest [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
         <!-- (ngModelChange)="onChange($event)" -->
+        <div class="action-buttons" fxLayout="column" fxLayoutGap="1em">
+            <button mat-raised-button color="primary" (click)="validate()">Validate</button>
+            <button mat-raised-button color="primary" (click)="formatString()">Format Content</button>
+            <button mat-raised-button color="primary" (click)="formatBreaksInString()">Format LineBreaks</button>
+            <button mat-raised-button color="primary" (click)="formatForPasteAsTable()">Format For Paste as Table</button>
+            <button mat-raised-button color="primary" (click)="isQuestionExists()">CheckIfExists</button>
+            <button mat-raised-button color="primary" (click)="copyInputMessage(contentTest)">Copy Content</button>
+        </div>
     </div>
-    <div class="action-buttons">
-        <button (click)="validate()">Validate</button>
-        <button (click)="formatString()">Format Content</button>
-        <button (click)="formatBreaksInString()">Format LineBreaks</button>
-        <button (click)="isQuestionExists()">CheckIfExists</button>
-    </div>
+    
     <div>
         <app-mathjax *ngIf="isValidate" [content]="content"></app-mathjax>
     </div>

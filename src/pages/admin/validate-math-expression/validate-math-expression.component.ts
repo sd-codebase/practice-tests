@@ -51,6 +51,23 @@ export class ValidateMathExpressionComponent implements OnInit {
     }, 100);
   }
 
+  formatForPasteAsTable() {
+    let toReplace = this.content;
+    const content = '<table><tr><td>';
+    toReplace = content + toReplace
+      .replace('.', '</td><td>')
+      .replace('(a)', '</td><td>')
+      .replace('(b)', '</td><td>')
+      .replace('(c)', '</td><td>')
+      .replace('(d)', '</td><td>')
+      .replace('. (', '</td><td>')
+      .replace(/.$/, '</td></tr></table>');
+    // toReplace = toReplace + '</td><td></td></tr></table>';
+    this.content = toReplace;
+    this.validate();
+    this.copyText(this.content);
+  }
+
   async isQuestionExists() {
     this.matchedQuestion = null;
     try {
@@ -62,6 +79,26 @@ export class ValidateMathExpressionComponent implements OnInit {
     } finally {
       this.loaderService.hide();
     }
+  }
+
+  copyText(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  copyInputMessage(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
   }
 
 }
