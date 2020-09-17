@@ -12,6 +12,7 @@ export class StatementComponent implements OnInit {
   @Output() handleInputChange = new EventEmitter();
   public statementList: any = [];
   public inputValue = '';
+  public resourcesHost = 'https://assessment-web-resources.herokuapp.com/resources';
   constructor() { }
 
   ngOnInit() {
@@ -53,7 +54,8 @@ export class StatementComponent implements OnInit {
   }
 
   fetchImage(src) {
-    return `assets${this.imagePath.trim()}${src.trim()}`;
+    // return `assets${this.imagePath.trim()}${src.trim()}`;
+    return `${this.resourcesHost}/images/${this.imagePath.trim()}${src.trim()}`;
   }
 
 }
