@@ -52,18 +52,28 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   formatForPasteAsTable() {
-    let toReplace = this.content;
-    const content = '<table><tr><td>';
-    toReplace = content + toReplace
-      .replace('.', '</td><td>')
+    const questions = this.content.split('##').map( que => {
+      return '<tr><td>' + que.trim().replace('.', '</td><td>')
       .replace('(a)', '</td><td>')
       .replace('(b)', '</td><td>')
       .replace('(c)', '</td><td>')
       .replace('(d)', '</td><td>')
-      .replace('. (', '</td><td>')
-      .replace(/.$/, '</td></tr></table>');
-    // toReplace = toReplace + '</td><td></td></tr></table>';
-    this.content = toReplace;
+      .replace('. [', '</td><td>')
+      .replace(/.$/, '</td></tr>');
+    });
+    // let toReplace = this.content;
+    // const content = '<table><tr><td>';
+    // toReplace = content + toReplace
+    //   .replace('.', '</td><td>')
+    //   .replace('(a)', '</td><td>')
+    //   .replace('(b)', '</td><td>')
+    //   .replace('(c)', '</td><td>')
+    //   .replace('(d)', '</td><td>')
+    //   .replace('. (', '</td><td>')
+    //   .replace(/.$/, '</td></tr></table>');
+    // // toReplace = toReplace + '</td><td></td></tr></table>';
+    // this.content = toReplace;
+    this.content = '<table>' + questions.join('') + '</table>';
     this.validate();
     this.copyText(this.content);
   }
@@ -99,6 +109,16 @@ export class ValidateMathExpressionComponent implements OnInit {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
+  }
+
+  formatAnswerToPaste() {
+    const answers = this.content.split('#(').map( str => {
+      return '<tr><td>' + str.replace(') :', '</td><td>') + '</td></tr>';
+    });
+
+    this.content = '<table>' + answers.join('') + '</table>';
+    this.validate();
+    this.copyText(this.content);
   }
 
 }
