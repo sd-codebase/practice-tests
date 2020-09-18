@@ -1,30 +1,39 @@
-<div fxFlex="80" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4em">
-    <div class="question-id-container" fxFlex="20" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
-        <a *ngFor="let question of questions" (click)="setQuestion(question)">{{ question._id }}</a>
+<div fxFlex="90" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4em">
+    <div class="question-id-container" fxFlex="10" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.5em">
+        <a *ngFor="let question of questions" (click)="setQuestion(question)">Question {{ question.sortOrder }}</a>
     </div>
-    <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.5em" *ngIf="questionEdited">
+    <div fxFlex="40" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.5em" *ngIf="questionEdited">
+        <div fxLayout="row" fxLayoutGap="1em">
+            <button mat-raised-button color="success" (click)="transpileQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
+                <mat-icon>done</mat-icon>
+                Transpile
+            </button>
+            <button mat-raised-button color="success" (click)="updateAndVerifyQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
+                <mat-icon>done</mat-icon>
+                Update and Verify
+            </button>
+        </div>
+        <label>{{questionEdited.sortOrder}}:- {{questionEdited._id}}</label>
         <label>Question</label>
         <span *ngIf="questionEdited.infoPara"> {{ questionEdited.infoPara }}</span>
-        <textarea [(ngModel)]="questionEdited.question"></textarea>
+        <textarea class="question-text" [(ngModel)]="questionEdited.question"></textarea>
+        <textarea class="question-tags" [(ngModel)]="questionEdited.tags"></textarea>
         <label>Options</label>
-        <textarea [(ngModel)]="questionEdited.options[0]"></textarea>
-        <textarea [(ngModel)]="questionEdited.options[1]"></textarea>
-        <textarea [(ngModel)]="questionEdited.options[2]"></textarea>
-        <textarea [(ngModel)]="questionEdited.options[3]"></textarea>
+        <textarea class="question-option" [(ngModel)]="questionEdited.options[0]"></textarea>
+        <textarea class="question-option" [(ngModel)]="questionEdited.options[1]"></textarea>
+        <textarea class="question-option" [(ngModel)]="questionEdited.options[2]"></textarea>
+        <textarea class="question-option" [(ngModel)]="questionEdited.options[3]"></textarea>
         <label>Answer</label>
-        <textarea [(ngModel)]="questionEdited.answer"></textarea>
-        <textarea [(ngModel)]="questionEdited.answerDescription"></textarea>
-        <button mat-raised-button color="success" (click)="transpileQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
-            <mat-icon>done</mat-icon>
-            Transpile
-        </button>
+        <textarea class="question-tags" [(ngModel)]="questionEdited.answer"></textarea>
+        <textarea class="question-desc" [(ngModel)]="questionEdited.answerDescription"></textarea>
+        
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
         <button mat-raised-button color="success" (click)="updateAndVerifyQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
             <mat-icon>done</mat-icon>
             Update and Verify
         </button>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="0.1em">
-        <div class="question-container">
+        <div>
             <app-question
                 *ngIf="question"
                 [action]="'view'"
@@ -40,9 +49,10 @@
                 [statement]="question.answerDescription"
             ></app-statement>
         </div>
-        <button mat-raised-button color="success" (click)="verifyQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
+        
+        <!-- <button mat-raised-button color="success" (click)="verifyQuestion()" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="question">
             <mat-icon>done</mat-icon>
             Verify
-        </button>
+        </button> -->
     </div>
 </div>

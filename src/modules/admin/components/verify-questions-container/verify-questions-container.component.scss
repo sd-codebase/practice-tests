@@ -3,7 +3,30 @@ app-question, .answer-block {
 }
 .question-id-container {
     max-height: 50em;
+    font-size: medium;
 }
 a {
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.question-text {
+    width: 40em;
+    height: 6em;
+}
+.question-desc {
+    width: 40em;
+    height: 15em;
+}
+.question-tags {
+    width: 10em;
+    height: 2em;
+}
+.question-option {
+    width: 30em;
+    height: 2em;
+}
+
+::ng-deep .scroll-questions {
+    height: unset !important;
 }

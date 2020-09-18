@@ -40,14 +40,14 @@ export class ImportQuestionsComponent implements OnInit {
           options.push(data.op5);
         }
         options.forEach( op => {
-          op = op && op.trim() || '';
+          op = op && op.toString().trim() || '';
         });
         const isSingleAnswer = !data.answer.toString().includes(',');
         let {level, tags, question, answer_description} = data;
-        level = level && level.trim();
-        tags = tags && tags.trim();
-        question = question && question.trim();
-        answer_description = answer_description && answer_description.trim();
+        level = level && level.toString().trim();
+        tags = tags && tags.toString().trim();
+        question = question && question.toString().trim();
+        answer_description = answer_description && answer_description.toString().trim();
         dataToPush.push(new CQuestion({
           id: null, question, options, answer : data.answer,
           answerDescription: answer_description, isSingleAnswer, chapter,
