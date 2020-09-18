@@ -13,7 +13,7 @@
                 Update and Verify
             </button>
         </div>
-        <label>{{questionEdited.sortOrder}}:- {{questionEdited._id}}</label>
+        <label>{{questionEdited.sortOrder}}:- {{questionEdited.id}}</label>
         <label>Question</label>
         <span *ngIf="questionEdited.infoPara"> {{ questionEdited.infoPara }}</span>
         <textarea class="question-text" [(ngModel)]="questionEdited.question"></textarea>
