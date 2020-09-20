@@ -20,6 +20,13 @@ export abstract class GenerateTest {
     ) { }
 
     async generateTest(dataToPost?, isMockTest = false) {
+      if (!this.storage.getUser().email_verified) {
+        if (this.storage.getTestCount() >= 5) {
+          this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, 'Please verify account to proceed');
+          return;
+        }
+        this.storage.addTestCount();
+      }
       const url = isMockTest ? '/tests/create-mock-test' : '/tests';
       try {
         await this.loaderService.show();

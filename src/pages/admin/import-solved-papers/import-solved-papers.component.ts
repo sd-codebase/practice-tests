@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@components/http.service';
-import { CChapter, CQuestion } from '@modules/user/test/test.model';
+import { CChapter, CQuestion, CTopic } from '@modules/user/test/test.model';
 import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
 import { DrawerService } from '@components/drawer-service';
@@ -35,7 +35,7 @@ export class ImportSolvedPapersComponent implements OnInit {
       await this.loaderService.show();
       const dataToPush = [];
       jsonData[names[0]].forEach( data => {
-        const chapter = new CChapter(data);
+        const chapter = new CTopic(data);
         const options = [data.op1 || '', data.op2 || '', data.op3 || '', data.op4 || ''];
         if (data.op5) {
           options.push(data.op5 || '');

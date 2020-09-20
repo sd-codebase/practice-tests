@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import { AvailableCoursesService } from './AvailableCoursesService';
 
 @Injectable()
 export class StorageService {
-  constructor() { }
+  constructor(
+    private avalableCourseSevice: AvailableCoursesService,
+  ) { }
 
   getExpiryTime() {
     return this.getItem(Storage.EXPIRY);
@@ -104,19 +107,31 @@ export class StorageService {
     this.removeItem(Storage.MYCOURSE);
   }
 
+  addTestCount() {
+    const testCounts = Number(this.getItem(Storage.TESTCOUNTS)) || 0;
+    this.setItem(Storage.TESTCOUNTS, testCounts + 1);
+  }
+
+  getTestCount() {
+    return this.getItem(Storage.TESTCOUNTS) || 0;
+  }
+
   clearStorage() {
     localStorage.clear();
   }
 
   private removeItem(key) {
+    key = this.avalableCourseSevice.availableCourseKey + key;
     localStorage.removeItem(key);
   }
 
   private getItem(key) {
+    key = this.avalableCourseSevice.availableCourseKey + key;
     return JSON.parse(localStorage.getItem(key));
   }
 
   private setItem(key, data) {
+    key = this.avalableCourseSevice.availableCourseKey + key;
     return localStorage.setItem(key, JSON.stringify(data));
   }
 }
@@ -129,4 +144,5 @@ export enum Storage {
   MYCOURSES = 'mycourses',
   MYCOURSE = 'mycourse',
   ENDPOINTS = 'endpoints',
+  TESTCOUNTS = 'testcount',
 }

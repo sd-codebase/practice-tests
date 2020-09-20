@@ -6,7 +6,7 @@ import { XlsxToJsonUploadComponent } from './xlsx-to-json-upload/xlsx-to-json-up
 import { LoaderComponent } from './loader/loader.component';
 import { TimePipe } from './pipes/time.pipe';
 import { PageHeaderComponent } from './page-header/page-header.component';
-import { NotificationBarComponent, NotificationService } from './notifications.service';
+import { NotificationBarComponent } from './notifications.service';
 import { ComingSoonComponent } from '@pages/coming-soon/coming-soon.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';

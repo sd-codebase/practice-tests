@@ -3,10 +3,12 @@
         <mat-sidenav mode="over" #sidenav>
             <div fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
                 <div style="width: 100%;" fxLayout="column">
-                    <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" *ngFor="let menu of menus" [routerLink]="menu.path" (click)="sidenav.close();">
-                        <mat-icon class="mr-1">{{menu.icon}}</mat-icon>
-                        {{menu.menu}}
-                    </button>
+                    <ng-container *ngFor="let menu of menus" >
+                        <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" *ngIf="!menu.disabled" [routerLink]="menu.path" (click)="sidenav.close();">
+                            <mat-icon class="mr-1">{{menu.icon}}</mat-icon>
+                            {{menu.menu}}
+                        </button>
+                    </ng-container>
                     <button class="menu-buttom" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="2em" mat-raised-button color="primary" (click)="sidenav.close();auth.logout()">
                         <mat-icon class="mr-1">settings_power</mat-icon>
                         Logout

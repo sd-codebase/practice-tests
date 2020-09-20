@@ -16,6 +16,7 @@ import { StorageService } from '@components/storage.serice';
 import { InstructorDashboardComponent } from './instructor/components/instructor-dashboard/instructor-dashboard.component';
 import { GuestDashboardComponent } from './guest/components/guest-dashboard/guest-dashboard.component';
 import { PolicyComponent } from './policy/policy.component';
+import { AvailableCoursesService } from '@components/AvailableCoursesService';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { PolicyComponent } from './policy/policy.component';
     LoaderService,
     NotificationService,
     StorageService,
+    AvailableCoursesService,
   ],
 })
 export class PagesModule { }

@@ -1,5 +1,11 @@
 <div class="page-container">
     <div fxFill fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+      <ng-container *ngFor="let message of priorityMessages">
+        <p class="priority-message">{{message}}</p>
+      </ng-container>
+      <ng-container *ngFor="let message of priorityMessages">
+        <p class="info-message">{{message}}</p>
+      </ng-container>
         <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between stretch" fxLayoutGap="1em">
             <mat-card *ngFor="let course of courses">
                 <mat-card-header color="primary">
@@ -14,6 +20,10 @@
                   <button mat-raised-button [color]="course.color">Start taking test</button>
                 </mat-card-actions>
               </mat-card>
+        </div>
+        <div *ngIf="!userProfile.email_verified" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+          <p style="font-size: 1.5em;">We recommend you to verify your account. </p>
+          <button mat-raised-button color="warn" [routerLink]="['/user/verification']">Verify Now</button>
         </div>
         <div *ngIf="showClear" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
           <p style="font-size: 1.5em;">We recommend you to clear cached data time to time. </p>

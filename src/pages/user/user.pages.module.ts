@@ -23,6 +23,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from 'src/interceptors/ErrorInterceptor';
 import { ProgressComponent } from './progress/progress.component';
 import { DashboardWidgetPageComponent } from './dashboard-widget-page/dashboard-widget-page.component';
+import { AccountVerificationComponent } from './account-verification/account-verification.component';
+import { AvailableCoursesService } from '@components/AvailableCoursesService';
 
 @NgModule({
     imports: [
@@ -47,6 +49,7 @@ import { DashboardWidgetPageComponent } from './dashboard-widget-page/dashboard-
       SyllabusNotesComponent,
       ProgressComponent,
       DashboardWidgetPageComponent,
+      AccountVerificationComponent,
     ],
     providers: [
       HttpService,
@@ -54,6 +57,7 @@ import { DashboardWidgetPageComponent } from './dashboard-widget-page/dashboard-
       LoaderService,
       NotificationService,
       StorageService,
+      AvailableCoursesService,
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
   })

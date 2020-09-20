@@ -6,6 +6,7 @@ import { LoaderService } from '@components/loader.service';
 import { HttpService } from '@components/http.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { validateEmail, validatePassword } from '@core/validation-util';
+import { AvailableCoursesService } from '@components/AvailableCoursesService';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { validateEmail, validatePassword } from '@core/validation-util';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  public appName = 'Assessment Portal';
   public signUpUser: IUser;
   public loginUser: IUser;
   public showView = false;
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private http: HttpService,
     private notificationService: NotificationService,
+    private availableCourseService: AvailableCoursesService,
   ) { }
 
   drawCanvas(content) {
@@ -49,10 +52,34 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.appName = this.availableCourseService.availableCourse ?
+      this.availableCourseService.availableCourse + ' Test Series' : 'Jee-Neet Test Series';
     setTimeout(() => {
       this.loaderComplete = true;
       this.isUserAuthenticated();
     }, 3800);
+  }
+
+  isValidPassword(pswd) {
+    if ( pswd.length < 8 ) {
+      return false;
+    }
+    if ( !pswd.match(/[A-z]/) ) {
+      return false;
+    }
+
+    if ( !pswd.match(/[A-Z]/) ) {
+      return false;
+    }
+
+    if ( !pswd.match(/\d/) ) {
+      return false;
+    }
+
+    if ( !pswd.match(/[^a-zA-Z0-9\-\/]/) ) {
+      return false;
+    }
+    return true;
   }
 
   async resetPassword() {
@@ -64,7 +91,7 @@ export class HomeComponent implements OnInit {
       await this.loaderService.show();
       await this.http.put('/users/reset-password', this.forgotPassword).toPromise();
       this.hasOtp = false;
-      this.drawCanvas('0000');
+      // this.drawCanvas('0000');
       this.notificationService.show(ENotification.SUCCESS, 'Password Reset', 'Password reset successfully, please login');
     } catch ({err: e}) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
@@ -80,13 +107,9 @@ export class HomeComponent implements OnInit {
     }
     try {
       await this.loaderService.show();
-      const user = await this.http.put('/users/forgot-password', this.forgotPassword).toPromise() as any;
-      if (user && user.otp) {
-        this.hasOtp = true;
-        this.drawCanvas(user.otp);
-      } else {
-        this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, 'Something wend wrong');
-      }
+      await this.http.put('/users/forgot-password', this.forgotPassword).toPromise();
+      this.hasOtp = true;
+      this.notificationService.show(ENotification.SUCCESS, 'Otp Sent', 'OTP sent on email id');
     } catch ({error: e}) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e && e.message);
     } finally {
@@ -142,12 +165,29 @@ export class HomeComponent implements OnInit {
       const logInUser = await this.auth.login(user);
       if (logInUser) {
         if (logInUser.role !== EUserRole.GUEST) {
-          this.storageService.setMyCourses(logInUser.courses);
+          if (this.availableCourseService.availableCourse && logInUser.courses.includes(this.availableCourseService.availableCourse)) {
+            this.storageService.setMyCourses([this.availableCourseService.availableCourse]);
+          } else if (
+            this.availableCourseService.availableCourse && !logInUser.courses.includes(this.availableCourseService.availableCourse)
+          ) {
+            this.storageService.setMyCourses([]);
+          } else {
+            this.storageService.setMyCourses(logInUser.courses);
+          }
+
           if (logInUser.role === EUserRole.ADMIN) {
             const myCourse = logInUser.courses.find(course => course === 'All') || logInUser.courses[0];
             this.storageService.setMyCourse(myCourse);
           } else {
-            this.storageService.setMyCourse(logInUser.courses[0]);
+            if (this.availableCourseService.availableCourse && logInUser.courses.includes(this.availableCourseService.availableCourse)) {
+              this.storageService.setMyCourse(this.availableCourseService.availableCourse);
+            } else if (
+              this.availableCourseService.availableCourse && !logInUser.courses.includes(this.availableCourseService.availableCourse)
+            ) {
+              this.storageService.setMyCourse('');
+            } else {
+              this.storageService.setMyCourse(logInUser.courses[0]);
+            }
           }
         }
         this.router.navigate([URL[ logInUser.role || 0]]);

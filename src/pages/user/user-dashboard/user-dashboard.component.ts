@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
   public menus = [
     {menu: 'Dashboard', path: '/user', icon: 'toc'},
-    {menu: 'Me', path: '/user/profile', icon: 'person'},
+    {menu: 'Me', path: '/user/profile', icon: 'person', disabled: true},
+    {menu: 'Verify Account', path: '/user/verification', icon: 'person', disabled: true},
     {menu: 'Short Notes', path: '/user/syllabus', icon: 'article'},
     {menu: 'Solved Papers', path: '/user/solved-papers', icon: 'done_all'},
     // {menu: 'Sample test', path: '/user/test', icon: 'assignment'},
@@ -42,6 +43,11 @@ export class UserDashboardComponent implements OnInit {
     this.drawerService.pageHeader.subscribe( title => this.pageHeader = title );
     this.myCourses = this.storageService.getMyCourses();
     this.myCourse = this.storageService.getMyCourse();
+    if (this.userProfile.email_verified) {
+      this.menus[1].disabled = false;
+    } else {
+      this.menus[2].disabled = false;
+    }
   }
 
   courseChange() {

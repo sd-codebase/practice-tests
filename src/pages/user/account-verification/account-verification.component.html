@@ -1,0 +1,18 @@
+<div class="page-container">
+    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="userProfile && userProfile.email">
+        <h3>Verify Account</h3>
+        <mat-form-field appearance="outline">
+            <mat-label>Email Id</mat-label>
+            <input matInput placeholder="Email Id" [ngModel]="userProfile.email" disabled>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint (click)="resendOtp()">Resend otp</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>OTP</mat-label>
+            <input matInput placeholder="OTP" [(ngModel)]="otp" maxlength="4" minlength="4">
+            <mat-icon matSuffix>lock</mat-icon>
+            <mat-hint>Enter otp</mat-hint>
+        </mat-form-field>
+        <button [disabled]="!otp" mat-raised-button color="primary" (click)="verifyAccount()">Verify</button>
+    </div>
+</div>

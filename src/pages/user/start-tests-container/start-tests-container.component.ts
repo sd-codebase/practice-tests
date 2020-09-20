@@ -22,7 +22,7 @@ export class StartTestsContainerComponent extends GenerateTest implements OnInit
   async fetchChapters() {
     try {
       await this.loaderService.show();
-      this.data = await this.http.get('/chapters/').toPromise();
+      this.data = await this.http.get('/chapters/for-tests').toPromise();
     } catch (e) {
       this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
     } finally {

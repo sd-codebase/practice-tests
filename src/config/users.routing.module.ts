@@ -12,12 +12,14 @@ import { SyllabusNotesComponent } from '@pages/user/syllabus-notes/syllabus-note
 import { CanDeactivateGuard } from 'src/guards/candeactivate.guard';
 import { ProgressComponent } from '@pages/user/progress/progress.component';
 import { DashboardWidgetPageComponent } from '@pages/user/dashboard-widget-page/dashboard-widget-page.component';
+import { AccountVerificationComponent } from '@pages/user/account-verification/account-verification.component';
 
 const routes: Routes = [
     {path: '', component: DashboardWidgetPageComponent},
     {path: 'coming-soon', component: ComingSoonComponent},
     {path: 'syllabus', component: SyllabusNotesComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'verification', component: AccountVerificationComponent},
     {path: 'solved-papers', component: SolvedPapersComponent},
     {path: 'test', component: TestComponent},
     {path: 'my-tests', component: MyTestsComponent},

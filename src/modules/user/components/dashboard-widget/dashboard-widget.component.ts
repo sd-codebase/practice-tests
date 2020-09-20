@@ -14,6 +14,8 @@ import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component'
 export class DashboardWidgetComponent implements OnInit {
   public courses: IEndpoint[] = [];
   public showClear = false;
+  public userProfile;
+  public priorityMessages = [];
   constructor(
     private storageService: StorageService,
     private router: Router,
@@ -22,11 +24,14 @@ export class DashboardWidgetComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.userProfile = this.storageService.getUser();
     const onGoingTests = this.storageService.getOngoingTest();
     this.showClear = Object.keys(onGoingTests).length > 5;
     try {
-      const courses = await this.http.get('/users/courses').toPromise() as IEndpoint[];
+      const promises = [this.http.get('/users/notifications?critical=true').toPromise(), this.http.get('/users/courses').toPromise()];
+      const [priorityMessages, courses] = await Promise.all(promises);
       this.courses = courses.filter( course => course.course !== 'All');
+      this.priorityMessages = priorityMessages;
     } catch (e) { }
   }
 

@@ -93,6 +93,7 @@ export interface IUser {
     isEditMode?: boolean;
     belongsTo?: string;
     checked?: boolean;
+    emailRecoveryKey?: string;
 }
 
 export enum EUserRole {
