@@ -6,6 +6,8 @@ import { NotificationService, ENotification, EError } from '@components/notifica
 import { ITest } from '../../test.model';
 import { Injectable } from '@angular/core';
 import { DrawerService } from '@components/drawer-service';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export abstract class GenerateTest {
@@ -17,6 +19,7 @@ export abstract class GenerateTest {
         protected loaderService: LoaderService,
         private router: Router,
         protected notificationService: NotificationService,
+        private dialog: MatDialog,
     ) { }
 
     async generateTest(dataToPost?, isMockTest = false) {
@@ -27,6 +30,22 @@ export abstract class GenerateTest {
         }
         this.storage.addTestCount();
       }
+      const dialogRef = this.dialog.open(DialogBoxComponent, {
+        data: {
+          type: 'Confirm',
+          message: `Do you want to generate test?`,
+          button1: {text: 'Yes', value: true, color: 'primary'},
+          button2: {text: 'No, not now', value: false},
+        }
+      });
+      dialogRef.afterClosed().subscribe( val => {
+        if (val) {
+          this.proceedToGenerate(dataToPost, isMockTest);
+        }
+      });
+    }
+
+    async proceedToGenerate(dataToPost?, isMockTest = false) {
       const url = isMockTest ? '/tests/create-mock-test' : '/tests';
       try {
         await this.loaderService.show();

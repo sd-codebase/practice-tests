@@ -17,7 +17,7 @@
 }
 
 .margin-half-em {
-    margin: 0.1em 0.3em !important
+    margin: 0.1em 0.5em !important
 }
 
 .question-tags {
@@ -35,7 +35,7 @@
 }
 
 .options-div {
-
+    margin-top: 1.5em;
 }
 
 .question-box {
@@ -44,7 +44,7 @@
 
 @media only screen and (max-width: 600px)  {
     .scroll-questions {
-        height: 60vh;
+        height: 50vh;
         overflow-y: auto;
     
         &.view-mode {

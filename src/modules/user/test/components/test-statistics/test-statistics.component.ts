@@ -8,6 +8,7 @@ import { ITest } from '../../test.model';
 })
 export class TestStatisticsComponent implements OnInit {
   @Input() test: ITest;
+  private innerWidth = window.innerWidth;
   public score = {
     score: 0,
     positive: 0,
@@ -28,14 +29,14 @@ export class TestStatisticsComponent implements OnInit {
   piOptions = {
     title: 'Test Analysis',
     pieHole: 0.4,
-    width: 340,
-    height: 254,
+    width: this.innerWidth > 300 && this.innerWidth < 350 ? 300 : 340,
+    height: this.innerWidth > 300 && this.innerWidth < 350 ? 230 : 254,
     colors: ['#109618', '#dc3912', '#ff8c00', '#3366cc']
   };
   columnOptions = {
     title: 'Test Analysis',
-    width: 340,
-    height: 254,
+    width: this.innerWidth > 300 && this.innerWidth < 350 ? 300 : 340,
+    height: this.innerWidth > 300 && this.innerWidth < 350 ? 230 : 254,
     bar: {groupWidth: '95%'},
     legend: { position: 'none' },
     colors: ['#3366cc', '#dc3912', '#109618']
@@ -43,6 +44,7 @@ export class TestStatisticsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // this.setChartWidth();
     this.score = {
       score: 0,
       positive: 0,
@@ -63,6 +65,16 @@ export class TestStatisticsComponent implements OnInit {
     this.columnData[1][1] = this.test.questions.filter( que => que.isCorrectAnswer === 0).length;
     this.columnData[2][1] = this.test.questions.filter( que => que.isCorrectAnswer === 2).length;
     this.columnData[3][1] = this.test.questions.filter( que => que.isCorrectAnswer === undefined).length;
+  }
+
+  setChartWidth() {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth > 300 && this.innerWidth < 350) {
+      this.columnOptions.width = 300;
+      this.columnOptions.height = 240;
+      this.piOptions.width = 300;
+      this.piOptions.height = 240;
+    }
   }
 
   getButtonColor(num1, num2) {

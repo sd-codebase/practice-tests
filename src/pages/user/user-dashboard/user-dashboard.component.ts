@@ -16,7 +16,7 @@ export class UserDashboardComponent implements OnInit {
     {menu: 'Dashboard', path: '/user', icon: 'toc'},
     {menu: 'Me', path: '/user/profile', icon: 'person', disabled: true},
     {menu: 'Verify Account', path: '/user/verification', icon: 'person', disabled: true},
-    {menu: 'Short Notes', path: '/user/syllabus', icon: 'article'},
+    {menu: 'Short Notes', path: '/user/syllabus', icon: 'article', disabled: true},
     {menu: 'Solved Papers', path: '/user/solved-papers', icon: 'done_all'},
     // {menu: 'Sample test', path: '/user/test', icon: 'assignment'},
     {menu: 'Start Taking Test', path: '/user/start-taking-test', icon: 'assignment_turned_in'},

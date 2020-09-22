@@ -3,7 +3,7 @@ import { LoaderService } from '@components/loader.service';
 import { StorageService } from '@components/storage.serice';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { NotificationService, ENotification } from '@components/notifications.service';
+import { NotificationService } from '@components/notifications.service';
 
 @Component({
   selector: 'app-root',

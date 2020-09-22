@@ -139,7 +139,7 @@ span.page-header {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 0.3em;
+    display: none;
 }
   
   /* Track */
@@ -163,5 +163,8 @@ span.page-header {
         margin: auto !important;
         clear: both;
         margin-bottom: 1em !important;
-    }    
+    }
+    app-mathjax {
+        max-width: 98%;
+    }  
 }

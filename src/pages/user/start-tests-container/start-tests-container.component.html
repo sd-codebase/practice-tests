@@ -1,4 +1,5 @@
 <div class="page-container">
+
     <mat-tab-group>
         <mat-tab label="Mock test">
             <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -8,13 +9,13 @@
                 </button>
             </div>
         </mat-tab>
-        <mat-tab label="Subjectwise test" *ngIf="data">
+        <mat-tab label="Subject test" *ngIf="data">
             <app-subjectwise [data]="data"></app-subjectwise>
         </mat-tab>
-        <mat-tab label="Chapterwise test" *ngIf="data">
+        <mat-tab label="Chapter test" *ngIf="data">
             <app-chapterwise [data]="data"></app-chapterwise>
         </mat-tab>
-        <mat-tab label="Topicwise tests" *ngIf="data">
+        <mat-tab label="Topic tests" *ngIf="data">
             <app-topicwise [data]="data"></app-topicwise>
         </mat-tab>
     </mat-tab-group>

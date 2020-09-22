@@ -22,6 +22,7 @@
     <div class="pallet" (click)="$event.stopPropagation()">
         <app-question-pallete
             [test]="test"
+            [action]="'view'"
             (handleQuestionSelection)="onQuestionSelection($event)"
         ></app-question-pallete>
     </div>

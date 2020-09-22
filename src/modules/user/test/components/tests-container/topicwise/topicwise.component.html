@@ -7,9 +7,9 @@
             {{ chapter }}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="column" fxLayoutAlign="space-between start">
             <button mat-raised-button color="primary" *ngFor="let topic of getTopics(chapter)" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest(subject, chapter, topic)">
-                <mat-icon>topic</mat-icon>
+                <!-- <mat-icon>topic</mat-icon> -->
                 {{ topic }}
             </button>
         </div>

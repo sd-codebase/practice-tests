@@ -9,10 +9,10 @@
                     </mat-panel-title>
                     <mat-panel-description (click)="$event.stopPropagation(); getNotes(subject, chapter)"> Notes </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div fxLayout="row" fxLayoutAlign="space-between start">
-                    <button mat-raised-button color="primary" *ngFor="let topic of getTopics(chapter)" fxLayout="row" fxLayoutAlign="space-between center" (click)="getNotes(subject, chapter, topic)">
-                        <mat-icon>topic</mat-icon>
-                        {{ topic }}
+                <div fxLayout.xs="column" fxLayout.sm="column" fxLayout="row" fxLayoutAlign.sm="start stretch" fxLayoutAlign.md="start stretch" fxLayoutAlign="start start" fxLayoutGap="1em">
+                    <button class="shorten-text" mat-raised-button color="primary" *ngFor="let topic of getTopics(chapter)" fxLayout="row" fxLayoutAlign="space-between start" (click)="getNotes(subject, chapter, topic)">
+                        <!-- <mat-icon>topic</mat-icon> -->
+                        <span>{{ topic }}</span>
                     </button>
                 </div>
             </mat-expansion-panel>

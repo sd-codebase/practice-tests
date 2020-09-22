@@ -5,6 +5,8 @@ import { HttpService } from '@components/http.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionInformationDialogComponent } from '../question-information-dialog/question-information-dialog.component';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
+import { StorageService } from '@components/storage.serice';
 
 @Component({
   selector: 'app-quiz',
@@ -33,6 +35,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     private http: HttpService,
     private notificationService: NotificationService,
     private dilogService: MatDialog,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
@@ -245,6 +248,22 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
   }
 
+  async reportQuestion() {
+    try {
+      await this.loaderService.show();
+      const report = await this.http.post('/questions/report',
+        {questionId: this.question.id, userId: this.storageService.getUserId()}
+      ).toPromise();
+      this.releaseLoader();
+      this.notificationService.show(ENotification.SUCCESS, 'Report', 'You have reported question!');
+    } catch (e) {
+      this.notificationService.show(ENotification.DANGER, EError.UNHANDLED, e.message);
+      this.releaseLoader();
+    } finally {
+      this.resumeTimer();
+    }
+  }
+
   openInfoToolTipDialog() {
     const content = this.getInfoTooltip(this.question);
     const dialogRef = this.dilogService.open(QuestionInformationDialogComponent, {
@@ -252,6 +271,25 @@ export class QuizComponent implements OnInit, OnDestroy {
         paper: this.test.testName,
         content,
         imagePath: '/instructions/',
+      }
+    });
+  }
+
+  openReportDialog() {
+    const dialogRef = this.dilogService.open(DialogBoxComponent, {
+      data: {
+        type: 'Report',
+        message: `Do you want to report this question?`,
+        button1: {text: 'Yes', value: true, color: 'primary'},
+        button2: {text: 'No', value: false},
+      }
+    });
+    this.pauseTimer();
+    dialogRef.afterClosed().subscribe( val => {
+      if (val) {
+        this.reportQuestion();
+      } else {
+        this.resumeTimer();
       }
     });
   }

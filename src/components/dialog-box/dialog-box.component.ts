@@ -25,7 +25,8 @@ export interface IDialogButton {
 
 export interface IDialogData {
   type: EAlert;
-  message: string;
+  message?: string;
+  html?: string;
   button1?: IDialogButton;
   button2?: IDialogButton;
   button3?: IDialogButton;

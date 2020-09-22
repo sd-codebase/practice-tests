@@ -10,6 +10,12 @@
     max-width: 30em;
 }
 
+@media only screen and (max-width: 600px)  {
+    .below-image, .flotted-image, .statement-img {
+        max-width: 98%;
+    } 
+}
+
 // .margin-bottom-1em {
 //     margin-bottom: 0.2em !important;
 // }

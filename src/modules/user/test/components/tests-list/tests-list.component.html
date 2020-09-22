@@ -20,8 +20,8 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <span class="test-info shorten-text" [title]="test.testName">Test: {{ test.testName }}</span>
-        <span class="test-info shorten-text" [title]="test.createdAt">Created: {{ test.createdAt | date:'medium' }}</span>
+        <span class="test-info shorten-text" [title]="test.testName">{{ test.testName }}</span>
+        <span class="test-info shorten-text" [title]="test.createdAt">{{ test.createdAt | date:'medium' }}</span>
       </div>
       <app-test-statistics
         *ngIf="test.isSubmitted"

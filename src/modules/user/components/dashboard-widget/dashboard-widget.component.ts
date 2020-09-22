@@ -5,6 +5,7 @@ import { IEndpoint } from 'src/auth/authentication/authentication.service';
 import { HttpService } from '@components/http.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
+import { AvailableCoursesService } from '@components/AvailableCoursesService';
 
 @Component({
   selector: 'app-dashboard-widget',
@@ -16,11 +17,13 @@ export class DashboardWidgetComponent implements OnInit {
   public showClear = false;
   public userProfile;
   public priorityMessages = [];
+  public infoMessages = [];
   constructor(
     private storageService: StorageService,
     private router: Router,
     private http: HttpService,
     private dialogService: MatDialog,
+    private availableCourseService: AvailableCoursesService,
   ) { }
 
   async ngOnInit() {
@@ -28,10 +31,18 @@ export class DashboardWidgetComponent implements OnInit {
     const onGoingTests = this.storageService.getOngoingTest();
     this.showClear = Object.keys(onGoingTests).length > 5;
     try {
-      const promises = [this.http.get('/users/notifications?critical=true').toPromise(), this.http.get('/users/courses').toPromise()];
-      const [priorityMessages, courses] = await Promise.all(promises);
+      const promises = [
+        this.http.get('/users/notifications?critical=true').toPromise(),
+        this.http.get('/users/notifications?info=true').toPromise(),
+        this.http.get('/users/courses').toPromise()
+      ];
+      const [priorityMessages, infoMessages, courses] = await Promise.all(promises);
       this.courses = courses.filter( course => course.course !== 'All');
+      if (this.availableCourseService.availableCourse) {
+        this.courses = this.courses.filter( crs => crs.course === this.availableCourseService.availableCourse)
+      }
       this.priorityMessages = priorityMessages;
+      this.infoMessages = infoMessages;
     } catch (e) { }
   }
 

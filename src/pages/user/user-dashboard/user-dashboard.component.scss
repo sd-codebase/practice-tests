@@ -29,6 +29,12 @@
     }
 }
 
+.header-toolbar, ::ng-deep .header-toolbar mat-select {
+    font-size: 1em;
+    font-weight: 400;
+    font-family: 'Arvo', serif;
+}
+
 .hide-button, .show-button {
     position: fixed;
     bottom: 5px;
@@ -80,7 +86,7 @@
 
 @media only screen and (max-width: 600px)  {
     mat-sidenav {
-        width: 50% !important;
+        min-width: 50% !important;
     }
     .menu-buttom {
         width: 100% !important;

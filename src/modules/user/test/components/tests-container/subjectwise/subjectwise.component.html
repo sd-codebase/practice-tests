@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<div fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutAlign.sm="space-between stretch" fxLayoutAlign.md="space-between stretch" fxLayoutGap="1em">
     <button mat-raised-button color="primary" *ngFor="let subject of subjects" fxLayout="row" fxLayoutAlign="space-between center" (click)="createTest(subject)">
         <mat-icon>subject</mat-icon>
         {{ subject}}

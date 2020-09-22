@@ -7,6 +7,8 @@ import { HttpService } from '@components/http.service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 import { validateEmail, validatePassword } from '@core/validation-util';
 import { AvailableCoursesService } from '@components/AvailableCoursesService';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '@components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
   public courses = [];
   public hasOtp = false;
   public forgotPassword: IForgotPasswordUser = {email: ''};
+  public activeTab = 'LOGIN';
 
   @ViewChild('canvasEl', {static: false}) canvasEl: ElementRef;
   private context: CanvasRenderingContext2D;
@@ -34,6 +37,7 @@ export class HomeComponent implements OnInit {
     private http: HttpService,
     private notificationService: NotificationService,
     private availableCourseService: AvailableCoursesService,
+    private dialog: MatDialog,
   ) { }
 
   drawCanvas(content) {
@@ -197,6 +201,58 @@ export class HomeComponent implements OnInit {
     } catch (e) {
     } finally {
     }
+  }
+
+  forgotInfo() {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: {
+        type: 'Instructions',
+        html: `
+        <p>In case of forgot Email Id/Username,<br>please write us on kslabs.care@gmail.com<br>along with your Username recovery key.</p>
+        <mat-hint>
+            <strong>Password Must Contain</strong>
+            <ul>
+                <li>At least 8 characters</li>
+                <li>One letter</li>
+                <li>One uppercase letter</li>
+                <li>One number</li>
+                <li>One special character</li>
+            </ul>
+        </mat-hint>
+        `,
+        button1: {text: 'Ok', value: true, color: 'primary'}
+      }
+    });
+  }
+
+  signUpInfo() {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: {
+        type: 'Instructions',
+        html: `
+        <mat-hint>
+            <strong>Email Id/Username</strong>
+            <ul>
+                <li>Email Id will be your username</li>
+                <li>Please use your authorized emailid<br>so that you can verify it using otp</li>
+                <li>Verification is necessary to get Full access</li>
+                <li>Please enter username recovery key<br>(free text 20 characters, confidetial)</li>
+            </ul>
+        </mat-hint>
+        <mat-hint>
+            <strong>Password Must Contain</strong>
+            <ul>
+                <li>At least 8 characters</li>
+                <li>One letter</li>
+                <li>One uppercase letter</li>
+                <li>One number</li>
+                <li>One special character</li>
+            </ul>
+        </mat-hint>
+        `,
+        button1: {text: 'Ok', value: true, color: 'primary'}
+      }
+    });
   }
 }
 

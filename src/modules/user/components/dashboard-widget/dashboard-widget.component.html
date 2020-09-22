@@ -3,7 +3,7 @@
       <ng-container *ngFor="let message of priorityMessages">
         <p class="priority-message">{{message}}</p>
       </ng-container>
-      <ng-container *ngFor="let message of priorityMessages">
+      <ng-container *ngFor="let message of infoMessages">
         <p class="info-message">{{message}}</p>
       </ng-container>
         <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between stretch" fxLayoutGap="1em">
@@ -16,17 +16,17 @@
                 <mat-card-content>
                   <div [innerHTML]="course.content"></div>
                 </mat-card-content>
-                <mat-card-actions>
-                  <button mat-raised-button [color]="course.color">Start taking test</button>
-                </mat-card-actions>
+                <!-- <mat-card-actions>
+                  <button mat-raised-button [color]="course.color" [routerLink]="[course.redirectLink]" >Start taking test</button>
+                </mat-card-actions> -->
               </mat-card>
         </div>
         <div *ngIf="!userProfile.email_verified" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-          <p style="font-size: 1.5em;">We recommend you to verify your account. </p>
+          <p style="font-size: 1.5em;">We recommend to verify your account. </p>
           <button mat-raised-button color="warn" [routerLink]="['/user/verification']">Verify Now</button>
         </div>
         <div *ngIf="showClear" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-          <p style="font-size: 1.5em;">We recommend you to clear cached data time to time. </p>
+          <p style="font-size: 1.5em;">We recommend to clear cached data time to time. </p>
           <small>Clearing will remove your test progress. In progress tests will have to start again.</small>
           <button mat-raised-button color="warn" (click)="clearStorage()">Clear Now</button>
         </div>

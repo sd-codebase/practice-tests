@@ -1,9 +1,10 @@
 <div fxFill *ngIf="test" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="1em">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-        <h3 *ngIf="question">Question {{ question.questionNum }}: </h3>
-        <div fxLayout="row" fxLayoutGap="1em">
-            <mat-icon class="info-tooltip pallet-opener" (click)="openQuestionPallet.emit()">view_module</mat-icon>
+    <div fxLayout="row" fxLayoutAlign="space-between end">
+        <h3 *ngIf="question">Q{{ question.questionNum }}: </h3>
+        <div fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="space-between end" style="padding-right: 1em;">
+            <mat-icon color="warn" class="info-tooltip" (click)="openReportDialog()">warning</mat-icon>
             <mat-icon class="info-tooltip" (click)="openInfoToolTipDialog()">info</mat-icon>
+            <mat-icon class="info-tooltip pallet-opener" (click)="openQuestionPallet.emit()">view_module</mat-icon>
         </div>
     </div>
     <mat-divider></mat-divider>
@@ -22,12 +23,12 @@
                     {{ isLastQuestion() ? 'Save' : 'Save & Next' }}
                 </button>
                 <button fxFlex="45" mat-raised-button color="accent" [disabled]="!question.userAnswer" (click)="saveAndMarkForReviewAndNext()"> 
-                    {{ isLastQuestion() ? 'Save & Mark for review' : 'Save, Mark for review & Next' }}
+                    {{ isLastQuestion() ? 'Save & Mark' : 'Save, Mark & Next' }}
                 </button>
             </div>
             <div fxFill fxFlex.md="47" fxFlex.lg="47" fxLayout="row" fxLayoutAlign="space-between center">
                 <button fxFlex="45" mat-raised-button color="primary" (click)="markForReviewAndNext()">
-                    {{ isLastQuestion() ? 'Mark for review' : 'Mark for review & Next' }}
+                    {{ isLastQuestion() ? 'Mark' : 'Mark & Next' }}
                 </button>
                 <button fxFlex="45" mat-raised-button [disabled]="!question.userAnswer" (click)="clearResponse()">
                     Clear Response
@@ -38,7 +39,7 @@
             <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
                 <button fxFlex.xs="25" fxFlex.sm="25" mat-raised-button color="" *ngIf="question.questionNum !== 1 " (click)="prevQuestion()">
                     <mat-icon>skip_previous</mat-icon>
-                    Previous
+                    Prev
                 </button>
                 <button fxFlex.xs="25" fxFlex.sm="25" mat-raised-button color="" *ngIf="question.questionNum !== test.questionCount" (click)="nextQuestion()">
                     Next

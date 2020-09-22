@@ -12,120 +12,86 @@
         <div class="progress-bar" *ngIf="!showView">
             <div class="progress" [class.loaded]="loaderComplete"></div>
         </div>
-        <mat-tab-group *ngIf="showView" animationDuration="0ms">
-            <mat-tab label="Sign In">
-                <div fxLayout="column" fxLayoutGap="1em" class="form">
+        <div *ngIf="showView" class="tab-headers" fxLayout="row" fxLayoutAlign="start start">
+            <div fxFlex="30" [class.activeTab]="activeTab === 'LOGIN'" (click)="activeTab = 'LOGIN'">Login</div>
+            <div fxFlex="40" [class.activeTab]="activeTab === 'FORGET'" (click)="activeTab = 'FORGET'">Forgot Password</div>
+            <div fxFlex="30" [class.activeTab]="activeTab === 'SIGNUP'" (click)="activeTab = 'SIGNUP'">Sign Up</div>
+        </div>
+        <div *ngIf="showView" animationDuration="0ms">
+            <div fxLayout="column" fxLayoutGap="1em" class="form" *ngIf="activeTab === 'LOGIN'">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email Id</mat-label>
+                    <input matInput placeholder="Email Id" [(ngModel)]="loginUser.email">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-hint>Enter your email</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput placeholder="Password" [(ngModel)]="loginUser.password">
+                    <mat-icon matSuffix>security</mat-icon>
+                    <mat-hint>Enter your password</mat-hint>
+                </mat-form-field>
+                <button *ngIf="loginUser && isGuestUser" mat-raised-button color="primary" (click)="login(true)">Sign In As Guest</button>
+                <button *ngIf="loginUser && isUser" mat-raised-button color="primary" (click)="login(false)">Sign In</button>
+            </div>
+            <div fxLayout="column" fxLayoutGap="1em" class="form" *ngIf="activeTab === 'FORGET'">
+                <a class="instruction-link" (click)="forgotInfo()">Instructions</a>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email Id</mat-label>
+                    <input matInput placeholder="Email Id" [(ngModel)]="forgotPassword.email" maxlength="100">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-hint>Enter your email</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="hasOtp">
+                    <mat-label>OTP</mat-label>
+                    <input matInput placeholder="OTP" [(ngModel)]="forgotPassword.otp" maxlength="4" minlength="4">
+                    <mat-icon matSuffix>lock</mat-icon>
+                    <mat-hint>Enter otp</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="hasOtp">
+                    <mat-label>New Password</mat-label>
+                    <input type="password" matInput placeholder="Password" [(ngModel)]="forgotPassword.password" maxlength="20">
+                    <mat-icon matSuffix>security</mat-icon>
+                    <mat-hint>Enter new password</mat-hint>
+                </mat-form-field>
+                <button *ngIf="!hasOtp" mat-raised-button color="primary" (click)="forgotPasswordGetOtp()">Send otp</button>
+                <button *ngIf="hasOtp && forgotPassword.otp && forgotPassword.password && isValidPassword(forgotPassword.password)" mat-raised-button color="primary" (click)="resetPassword()">Reset Password</button>
+            </div>
+            <div fxLayout="column" fxLayoutGap="1em" class="form form-containers" *ngIf="activeTab === 'SIGNUP'">
+                <a class="instruction-link" (click)="signUpInfo()">Instructions</a>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" [(ngModel)]="signUpUser.name" maxlength="100">
+                    <mat-hint>Enter your name</mat-hint>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Course</mat-label>
+                    <mat-select [(ngModel)]="signUpUser.courses" name="courses" multiple>
+                        <mat-option *ngFor="let course of courses" [value]="course.course">
+                            {{course.course}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Select course(s)</mat-hint>
+                </mat-form-field>
+                <div fxLayout="column" fxLayoutGap="1em">
                     <mat-form-field appearance="outline">
-                        <mat-label>Email Id</mat-label>
-                        <input matInput placeholder="Email Id" [(ngModel)]="loginUser.email">
-                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-label>Email Id/Username</mat-label>
+                        <input matInput placeholder="Email Id" [(ngModel)]="signUpUser.email" maxlength="100">
                         <mat-hint>Enter your email</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username recovery key</mat-label>
+                        <input matInput placeholder="Username recovery key" [(ngModel)]="signUpUser.emailRecoveryKey" maxlength="100">
+                        <mat-hint>Username recovery key(free text max 100 characters)</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input type="password" matInput placeholder="Password" [(ngModel)]="loginUser.password">
-                        <mat-icon matSuffix>security</mat-icon>
-                        <mat-hint>Enter your password</mat-hint>
+                        <input type="password" matInput placeholder="Password" [(ngModel)]="signUpUser.password" maxlength="20">
+                        <mat-hint>Enter your password</mat-hint><br/>
                     </mat-form-field>
-                    <button *ngIf="loginUser && isGuestUser" mat-raised-button color="primary" (click)="login(true)">Sign In As Guest</button>
-                    <button *ngIf="loginUser && isUser" mat-raised-button color="primary" (click)="login(false)">Sign In</button>
                 </div>
-            </mat-tab>
-            <mat-tab label="Forgot Password/Username">
-                <div fxLayout="column" fxLayoutGap="1em" class="form">
-                    <p *ngIf="!hasOtp"> In case of forgot Email Id/Username, <br>please write us on kslabs.care@gmail.com <br>along with your Username recovery key.</p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Email Id</mat-label>
-                        <input matInput placeholder="Email Id" [(ngModel)]="forgotPassword.email" maxlength="100">
-                        <mat-icon matSuffix>person</mat-icon>
-                        <mat-hint>Enter your email</mat-hint>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" *ngIf="hasOtp">
-                        <mat-label>OTP</mat-label>
-                        <input matInput placeholder="OTP" [(ngModel)]="forgotPassword.otp" maxlength="4" minlength="4">
-                        <mat-icon matSuffix>lock</mat-icon>
-                        <mat-hint>Enter otp</mat-hint>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" *ngIf="hasOtp">
-                        <mat-label>New Password</mat-label>
-                        <input type="password" matInput placeholder="Password" [(ngModel)]="forgotPassword.password" maxlength="20">
-                        <mat-icon matSuffix>security</mat-icon>
-                        <mat-hint>Enter new password</mat-hint>
-                    </mat-form-field>
-                    <button *ngIf="!hasOtp" mat-raised-button color="primary" (click)="forgotPasswordGetOtp()">Send otp</button>
-                    <button *ngIf="hasOtp && forgotPassword.otp && forgotPassword.password && isValidPassword(forgotPassword.password)" mat-raised-button color="primary" (click)="resetPassword()">Reset Password</button>
-                    <mat-hint *ngIf="hasOtp">
-                        <strong>Password Must Contain</strong>
-                        <ul>
-                            <li>At least 8 characters</li>
-                            <li>One letter</li>
-                            <li>One uppercase letter</li>
-                            <li>One number</li>
-                            <li>One special character</li>
-                        </ul>
-                    </mat-hint>
-                </div>
-            </mat-tab>
-            <mat-tab label="Sign Up">
-                <div fxLayout="column" fxLayoutGap="1em" class="form">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input matInput placeholder="Name" [(ngModel)]="signUpUser.name" maxlength="100">
-                        <mat-hint>Enter your name</mat-hint>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Course</mat-label>
-                        <mat-select [(ngModel)]="signUpUser.courses" name="courses" multiple>
-                            <mat-option *ngFor="let course of courses" [value]="course.course">
-                                {{course.course}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-hint>Select course(s)</mat-hint>
-                    </mat-form-field>
-                    <div fxLayout="row" fxLayoutGap="1em">
-                        <div fxLayout="column" fxLayoutGap="1em">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Email Id/Username</mat-label>
-                                <input matInput placeholder="Email Id" [(ngModel)]="signUpUser.email" maxlength="100">
-                                <mat-hint>Enter your email</mat-hint>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Username recovery key</mat-label>
-                                <input matInput placeholder="Username recovery key" [(ngModel)]="signUpUser.emailRecoveryKey" maxlength="100">
-                                <mat-hint>Username recovery key(free text max 100 characters)</mat-hint>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Password</mat-label>
-                                <input type="password" matInput placeholder="Password" [(ngModel)]="signUpUser.password" maxlength="20">
-                                <mat-hint>Enter your password</mat-hint><br/>
-                            </mat-form-field>
-                        </div>
-                        <div fxLayout="column" fxLayoutGap="1em">
-                            <mat-hint>
-                                <strong>Instructions</strong><br>
-                                <strong>Email Id/Username</strong>
-                                <ul>
-                                    <li>Email Id will be your username</li>
-                                    <li>Please use your authorized emailid<br>so that you can verify it using otp</li>
-                                    <li>Verification is necessary to get Full access</li>
-                                    <li>Please enter username recovery key<br>(free text 20 characters, confidetial)</li>
-                                </ul>
-                            </mat-hint>
-                            <mat-hint>
-                                <strong>Password Must Contain</strong>
-                                <ul>
-                                    <li>At least 8 characters</li>
-                                    <li>One letter</li>
-                                    <li>One uppercase letter</li>
-                                    <li>One number</li>
-                                    <li>One special character</li>
-                                </ul>
-                            </mat-hint>
-                        </div>
-                    </div>
-                    <button [disabled]="!signUpUser.email || !signUpUser.password || !isValidPassword(signUpUser.password) || !signUpUser.name || !signUpUser.courses.length" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+                <button [disabled]="!signUpUser.email || !signUpUser.password || !isValidPassword(signUpUser.password) || !signUpUser.name || !signUpUser.courses.length" mat-raised-button color="primary" (click)="auth.signUp(signUpUser)">Sign Up</button>
+            </div>
+        </div>
     </div>
 </div>

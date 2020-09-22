@@ -25,3 +25,14 @@ mat-card-content{
         height: 15em;
     }
 }
+
+@media only screen and (max-width: 375px)  {
+    .card-layout {
+        &.chart-container{
+            padding: 0;
+        }
+        &.row-one, &.row-two, &.row-four {
+            width: 20em;
+        }
+    }
+}

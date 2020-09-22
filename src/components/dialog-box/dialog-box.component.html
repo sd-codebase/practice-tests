@@ -1,7 +1,8 @@
 <div class="dialog-container">
     <div fxLayout="column" fxLayoutGap="1em">
         <h3>{{data.type || alertTypes.Alert}}</h3>
-        <p>{{data.message}}</p>
+        <p *ngIf="data.message">{{data.message}}</p>
+        <div *ngIf="data.html" [innerHtml]="data.html"></div>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="1em">
             <button *ngIf="data.button1" [color]="data.button1.color" mat-raised-button [mat-dialog-close]="data.button1.value">{{data.button1.text}}</button>
             <button *ngIf="data.button2" [color]="data.button2.color" mat-raised-button [mat-dialog-close]="data.button2.value">{{data.button2.text}}</button>
