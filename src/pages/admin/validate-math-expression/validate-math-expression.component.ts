@@ -51,6 +51,43 @@ export class ValidateMathExpressionComponent implements OnInit {
     }, 100);
   }
 
+  convertCompetetiveQueToJson() {
+    const questionString = this.content.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
+    const chunks = questionString.split('</td></tr><tr><td>');
+    const finalJson = chunks.map( chunk => {
+      const splittedChunk = chunk.split('</td><td>');
+      return {
+        srNo: splittedChunk[0].toString().trim(),
+        question: splittedChunk[1].toString().trim() + (splittedChunk[3] ? '<br>' + splittedChunk[3].toString().trim() : ''),
+        tag: splittedChunk[2].toString().trim(),
+        options: [
+          splittedChunk[4].toString().trim(),
+          splittedChunk[5].toString().trim(),
+          splittedChunk[6].toString().trim(),
+          splittedChunk[7].toString().trim()
+        ],
+      };
+    });
+    console.log(finalJson);
+    console.log(JSON.stringify(finalJson));
+    this.copyText(JSON.stringify(finalJson));
+  }
+
+  formatForPasteAsTableDummy() {
+    const questions = this.content.split('##').map( que => {
+      return '<tr><td>' + que.trim().replace('.', '</td><td>')
+      .replace('1)', '</td><td>')
+      .replace('2)', '</td><td>')
+      .replace('3)', '</td><td>')
+      .replace('4)', '</td><td>')
+      .replace('.[', '</td><td>')
+      .replace(']', '</td><td>') + '</td></tr>';
+    });
+    this.content = '<table>' + questions.join('') + '</table>';
+    this.validate();
+    this.copyText(this.content);
+  }
+
   formatForPasteAsTable() {
     const questions = this.content.split('##').map( que => {
       return '<tr><td>' + que.trim().replace('.', '</td><td>')
