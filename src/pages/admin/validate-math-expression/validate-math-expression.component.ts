@@ -89,8 +89,8 @@ export class ValidateMathExpressionComponent implements OnInit {
     const copyContent = this.content;
     const questionString = copyContent.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
     const chunks = questionString.split('</td></tr><tr><td>');
-    const finalJson = chunks.map( chunk => {
-      const splittedChunk = chunk.split('</td><td>').map( chunk => {
+    const finalJson = chunks.map( chunkStr => {
+      const splittedChunk = chunkStr.split('</td><td>').map( chunk => {
         if (chunk !== null || chunk !== undefined) {
           return String(chunk);
         } else {
