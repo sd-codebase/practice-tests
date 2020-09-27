@@ -161,12 +161,20 @@ export class ValidateMathExpressionComponent implements OnInit {
     const rows = this.content.split('##');
     const columnsLength = rows[0].split(',').length;
     const rowsList = [];
+    const htmlRowsList = [];
     for (const row of rows) {
       const columns = row.split(',').map((chunk) => `\\text { ${chunk} }`);
       rowsList.push(columns.join(' & '));
+      const htmlColumns = row.split(',').map((chunk) => `<td>${chunk}</td>`);
+      htmlRowsList.push(htmlColumns.join(''));
     }
     const rowString = rowsList.join(` \\\\ `);
-    this.content = `$\\begin{array}{${strColumns.slice(0, columnsLength)}} ${rowString} \\end{array}$`;
+    const htmlRowString = htmlRowsList.join(`</tr><tr>`);
+    this.content = `
+    <table><tr>${htmlRowString}</tr></table>
+
+    $\\begin{array}{${strColumns.slice(0, columnsLength)}} ${rowString} \\end{array}$
+    `;
     this.validate();
   }
 
