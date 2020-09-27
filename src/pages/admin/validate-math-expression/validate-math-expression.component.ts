@@ -80,6 +80,9 @@ export class ValidateMathExpressionComponent implements OnInit {
     const questions = this.content.split('##').map( que => {
       return '<tr><td>' + que.trim().replace('.', '</td><td>')
       .replace('पर्यायी उत्तरे :', '')
+      .replace('ब)', '<br>ब)')
+      .replace('क)', '<br>क)')
+      .replace('ड)', '<br>ड)')
       .replace('1)', '</td><td>')
       .replace('2)', '</td><td>')
       .replace('3)', '</td><td>')
