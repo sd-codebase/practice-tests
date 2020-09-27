@@ -5,6 +5,22 @@ import { CQuestion } from '@modules/user/test/test.model';
 import { DrawerService } from '@components/drawer-service';
 import { NotificationService, ENotification, EError } from '@components/notifications.service';
 
+const BUTTONS = [
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+  {disabled: false},
+];
+
 @Component({
   selector: 'app-validate-math-expression',
   templateUrl: './validate-math-expression.component.html',
@@ -15,6 +31,7 @@ export class ValidateMathExpressionComponent implements OnInit {
   public isValidate = false;
   public matchedQuestion: CQuestion;
   public jsonContent = [];
+  public buttons = BUTTONS;
   constructor(
     private loaderService: LoaderService,
     private http: HttpService,
