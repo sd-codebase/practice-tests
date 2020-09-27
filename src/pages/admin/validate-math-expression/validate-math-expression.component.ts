@@ -189,25 +189,38 @@ export class ValidateMathExpressionComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
-  createMathTableFromCoammaSaperatedContent() {
-    const strColumns = 'llllllllllllllll';
-    const rows = this.content.split('##');
-    const columnsLength = rows[0].split(',').length;
-    const rowsList = [];
+  getAsTable(str) {
+    const rows = str.split('##');
     const htmlRowsList = [];
     for (const row of rows) {
-      const columns = row.split(',').map((chunk) => `\\text { ${chunk} }`);
-      rowsList.push(columns.join(' & '));
       const htmlColumns = row.split(',').map((chunk) => `<td>${chunk}</td>`);
       htmlRowsList.push(htmlColumns.join(''));
     }
-    const rowString = rowsList.join(` \\\\ `);
     const htmlRowString = htmlRowsList.join(`</tr><tr>`);
-    this.content = `
-    <table><tr>${htmlRowString}</tr></table>
+    return `<table><tr>${htmlRowString}</tr></table>`;
+  }
 
-    $\\begin{array}{${strColumns.slice(0, columnsLength)}} ${rowString} \\end{array}$
-    `;
+  createMathTableFromCoammaSaperatedContent() {
+    const tables = this.content.split('###').map( str => this.getAsTable(str));
+    this.content = tables.join('');
+    // const strColumns = 'llllllllllllllll';
+    // const rows = this.content.split('##');
+    // const columnsLength = rows[0].split(',').length;
+    // const rowsList = [];
+    // const htmlRowsList = [];
+    // for (const row of rows) {
+    //   const columns = row.split(',').map((chunk) => `\\text { ${chunk} }`);
+    //   rowsList.push(columns.join(' & '));
+    //   const htmlColumns = row.split(',').map((chunk) => `<td>${chunk}</td>`);
+    //   htmlRowsList.push(htmlColumns.join(''));
+    // }
+    // const rowString = rowsList.join(` \\\\ `);
+    // const htmlRowString = htmlRowsList.join(`</tr><tr>`);
+    // this.content = `
+    // <table><tr>${htmlRowString}</tr></table>
+
+    // $\\begin{array}{${strColumns.slice(0, columnsLength)}} ${rowString} \\end{array}$
+    // `;
     this.validate();
   }
 
