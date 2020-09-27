@@ -52,6 +52,22 @@ export class ValidateMathExpressionComponent implements OnInit {
     }, 100);
   }
 
+  addHashesBeforeQuestionNum() {
+    let str = this.content;
+    for (let i = 1; i < 150; i++) {
+      str = str.replace('\n' + i + '. ', '\n##' + i + '. ');
+    }
+    this.content = str;
+  }
+
+  addHashesWithYearBeforeQuestionNum() {
+    let str = this.content;
+    for (let i = 1; i < 150; i++) {
+      str = str.replace('\n' + i + '. ', '.[1947]##\n' + i + '. ');
+    }
+    this.content = str;
+  }
+
   convertCompetetiveQueToJson() {
     const copyContent = this.content;
     const questionString = copyContent.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
