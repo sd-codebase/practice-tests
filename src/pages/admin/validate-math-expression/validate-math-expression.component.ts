@@ -80,7 +80,7 @@ export class ValidateMathExpressionComponent implements OnInit {
   addHashesWithYearBeforeQuestionNum() {
     let str = this.content;
     for (let i = 1; i < 150; i++) {
-      str = str.replace('\n' + i + '. ', '.[1947]##\n' + i + '. ');
+      str = str.replace('\n' + i + '. ', '. [1947]##\n' + i + '. ');
     }
     this.content = str;
   }
