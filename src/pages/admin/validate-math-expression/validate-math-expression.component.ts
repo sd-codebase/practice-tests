@@ -14,6 +14,7 @@ export class ValidateMathExpressionComponent implements OnInit {
   public content: string;
   public isValidate = false;
   public matchedQuestion: CQuestion;
+  public jsonContent = [];
   constructor(
     private loaderService: LoaderService,
     private http: HttpService,
@@ -52,7 +53,8 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   convertCompetetiveQueToJson() {
-    const questionString = this.content.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
+    const copyContent = this.content;
+    const questionString = copyContent.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
     const chunks = questionString.split('</td></tr><tr><td>');
     const finalJson = chunks.map( chunk => {
       const splittedChunk = chunk.split('</td><td>');
@@ -71,11 +73,13 @@ export class ValidateMathExpressionComponent implements OnInit {
     console.log(finalJson);
     console.log(JSON.stringify(finalJson));
     this.copyText(JSON.stringify(finalJson));
+    this.jsonContent = finalJson;
   }
 
-  formatForPasteAsTableDummy() {
+  formatForPasteAsTableCompQuestions() {
     const questions = this.content.split('##').map( que => {
       return '<tr><td>' + que.trim().replace('.', '</td><td>')
+      .replace('पर्यायी उत्तरे :', '')
       .replace('1)', '</td><td>')
       .replace('2)', '</td><td>')
       .replace('3)', '</td><td>')
@@ -140,6 +144,20 @@ export class ValidateMathExpressionComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  createMathTableFromCoammaSaperatedContent() {
+    const strColumns = 'llllllllllllllll';
+    const rows = this.content.split('##');
+    const columnsLength = rows[0].split(',').length;
+    const rowsList = [];
+    for (const row of rows) {
+      const columns = row.split(',').map((chunk) => `\\text { ${chunk} }`);
+      rowsList.push(columns.join(' & '));
+    }
+    const rowString = rowsList.join(` \\\\ `);
+    this.content = `$\\begin{array}{${strColumns.slice(0, columnsLength)}} ${rowString} \\end{array}$`;
+    this.validate();
   }
 
   copyInputMessage(inputElement) {

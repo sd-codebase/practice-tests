@@ -6,18 +6,32 @@
             <button mat-raised-button color="primary" (click)="validate()">Validate</button>
             <button mat-raised-button color="primary" (click)="formatString()">Format Content</button>
             <button mat-raised-button color="primary" (click)="formatBreaksInString()">Format LineBreaks</button>
-            <button mat-raised-button color="primary" (click)="formatForPasteAsTableDummy()">Format Comp Question For Paste as Table</button>
+            <button mat-raised-button color="primary" (click)="formatForPasteAsTableCompQuestions()">Format Comp Question For Paste as Table</button>
             <button mat-raised-button color="primary" (click)="convertCompetetiveQueToJson()">Format Comp Content as JSON</button>
             <button mat-raised-button color="primary" (click)="formatForPasteAsTable()">Format Question For Paste as Table</button>
             <button mat-raised-button color="primary" (click)="formatAnswerToPaste()">Format Answer For Paste as Table</button>
             <button mat-raised-button color="primary" (click)="isQuestionExists()">CheckIfExists</button>
+            <button mat-raised-button color="primary" (click)="createMathTableFromCoammaSaperatedContent()">Math Expression Table</button>
             <button mat-raised-button color="primary" (click)="copyInputMessage(contentTest)">Copy Content</button>
+            <button mat-raised-button color="primary" (click)="jsonContent=[]">Clear JSON View</button>
         </div>
     </div>
     
     <div>
         <app-mathjax *ngIf="isValidate" [content]="content"></app-mathjax>
     </div>
+    <table *ngIf="jsonContent.length">
+        <tr *ngFor="let cont of jsonContent">
+            <td> <app-mathjax [content]="cont.srNo"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.question"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.options[0]"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.options[1]"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.options[2]"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.options[3]"></app-mathjax> </td>
+            <td> <app-mathjax [content]="cont.tag"></app-mathjax> </td>
+        </tr>
+    </table>
+
     <div *ngIf="matchedQuestion" >
         <span>{{matchedQuestion.id}}</span><br>
         <app-mathjax [content]="matchedQuestion.question"></app-mathjax>
