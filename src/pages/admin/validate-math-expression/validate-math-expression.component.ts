@@ -57,16 +57,22 @@ export class ValidateMathExpressionComponent implements OnInit {
     const questionString = copyContent.replace('<table><tr><td>', '').replace('</td></tr></table>', '');
     const chunks = questionString.split('</td></tr><tr><td>');
     const finalJson = chunks.map( chunk => {
-      const splittedChunk = chunk.split('</td><td>');
+      const splittedChunk = chunk.split('</td><td>').map( chunk => {
+        if (chunk !== null || chunk !== undefined) {
+          return String(chunk);
+        } else {
+          return '';
+        }
+      });
       return {
-        srNo: splittedChunk[0].toString().trim(),
-        question: splittedChunk[1].toString().trim() + (splittedChunk[3] ? '<br>' + splittedChunk[3].toString().trim() : ''),
-        tag: splittedChunk[2].toString().trim(),
+        srNo: splittedChunk[0].trim(),
+        question: splittedChunk[1].trim() + (splittedChunk[3] ? '<br>' + splittedChunk[3].trim() : ''),
+        tag: splittedChunk[2].trim(),
         options: [
-          splittedChunk[4].toString().trim(),
-          splittedChunk[5].toString().trim(),
-          splittedChunk[6].toString().trim(),
-          splittedChunk[7].toString().trim()
+          splittedChunk[4].trim(),
+          splittedChunk[5].trim(),
+          splittedChunk[6].trim(),
+          splittedChunk[7].trim()
         ],
       };
     });
