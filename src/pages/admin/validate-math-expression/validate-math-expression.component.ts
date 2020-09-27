@@ -64,15 +64,16 @@ export class ValidateMathExpressionComponent implements OnInit {
           return '';
         }
       });
+      console.log(splittedChunk);
       return {
         srNo: splittedChunk[0].trim(),
         question: splittedChunk[1].trim() + (splittedChunk[3] ? '<br>' + splittedChunk[3].trim() : ''),
         tag: splittedChunk[2].trim(),
         options: [
-          splittedChunk[4].trim(),
-          splittedChunk[5].trim(),
-          splittedChunk[6].trim(),
-          splittedChunk[7].trim()
+          splittedChunk[4] ? splittedChunk[4].trim() : '',
+          splittedChunk[5] ? splittedChunk[5].trim() : '',
+          splittedChunk[6] ? splittedChunk[6].trim() : '',
+          splittedChunk[7] ? splittedChunk[7].trim() : '',
         ],
       };
     });
