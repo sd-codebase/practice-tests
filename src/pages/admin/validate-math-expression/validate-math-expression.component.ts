@@ -19,6 +19,8 @@ const BUTTONS = [
   {disabled: false},
   {disabled: false},
   {disabled: false},
+  {disabled: false},
+  {disabled: false},
 ];
 
 @Component({
@@ -62,24 +64,38 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.validate();
   }
 
-  validate() {
+  validate(forcefully = false) {
     this.isValidate = false;
+    if (this.buttons[13].disabled && !forcefully) {
+      return;
+    }
     setTimeout(() => {
       this.isValidate = true;
     }, 100);
   }
 
   addHashesBeforeQuestionNum() {
+    let notfound = '';
+    let notfoundcnt = 0;
     let str = this.content;
-    for (let i = 1; i < 150; i++) {
-      str = str.replace('\n' + i + '. ', '\n##' + i + '. ');
+    for (let i = 1; i < 300; i++) {
+      if (str.indexOf('\n' + i + '. ') === -1) {
+        notfound += (i + ',');
+        notfoundcnt++;
+      } else {
+        str = str.replace('\n' + i + '. ', '\n##' + i + '. ');
+      }
+      if (notfoundcnt >= 4) {
+        break;
+      }
     }
     this.content = str;
+    alert(notfound);
   }
 
   addHashesWithYearBeforeQuestionNum() {
     let str = this.content;
-    for (let i = 1; i < 150; i++) {
+    for (let i = 1; i < 300; i++) {
       str = str.replace('\n' + i + '. ', '. [1947]##\n' + i + '. ');
     }
     this.content = str;
@@ -123,6 +139,9 @@ export class ValidateMathExpressionComponent implements OnInit {
       .replace('ब)', '<br>ब)')
       .replace('क)', '<br>क)')
       .replace('ड)', '<br>ड)')
+      .replace('इ)', '<br>इ)')
+      .replace('फ)', '<br>फ)')
+      .replace('ग)', '<br>ग)')
       .replace('1)', '</td><td>')
       .replace('2)', '</td><td>')
       .replace('3)', '</td><td>')
@@ -189,6 +208,15 @@ export class ValidateMathExpressionComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
+  makeNumberTable() {
+    const headers = ['', 'अ', 'ब', 'क', 'ड', 'इ', 'फ', 'ग'];
+    let rows = this.content.split('\n');
+    const headerLength = rows[0].trim().length + 1;
+    rows = rows.map( (row, index) => (index + 1) + '),' + row.trim().split('').join(','));
+    rows.unshift(headers.slice(0, headerLength).join(','));
+    this.content = this.getAsTable(rows.join('##'));
+  }
+
   getAsTable(str) {
     const rows = str.split('##');
     const htmlRowsList = [];
@@ -239,5 +267,4 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.validate();
     this.copyText(this.content);
   }
-
 }
