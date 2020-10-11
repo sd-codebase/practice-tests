@@ -21,6 +21,7 @@ const BUTTONS = [
   {disabled: false},
   {disabled: false},
   {disabled: false},
+  {disabled: false},
 ];
 
 @Component({
@@ -45,13 +46,33 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.drawerService.setPageHeader('Validate Expresssion');
   }
 
+  private debounce = (func, wait) => {
+    let timeout;
+
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
   onChange(changes: string) {
     // if (changes) {
     //   this.content = changes.split('\n').join(' ').trim();
     // } else {
     //   this.content = '';
     // }
-    this.validate();
+    if (this.buttons[14].disabled) {
+      this.isValidate = false;
+      return;
+    }
+    const validateFun = this.validate.bind(this);
+    this.debounce(validateFun, 500);
+    // this.validate();
   }
 
   formatString() {
@@ -64,11 +85,8 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.validate();
   }
 
-  validate(forcefully = false) {
+  validate() {
     this.isValidate = false;
-    if (this.buttons[13].disabled && !forcefully) {
-      return;
-    }
     setTimeout(() => {
       this.isValidate = true;
     }, 100);
@@ -132,6 +150,10 @@ export class ValidateMathExpressionComponent implements OnInit {
     this.jsonContent = finalJson;
   }
 
+  removeBreakAndLeftBracket() {
+    this.content = this.content.replace(/\n\(/g, '\n');
+  }
+
   formatForPasteAsTableCompQuestions() {
     const questions = this.content.split('##').map( que => {
       return '<tr><td>' + que.trim().replace('.', '</td><td>')
@@ -142,6 +164,12 @@ export class ValidateMathExpressionComponent implements OnInit {
       .replace('इ)', '<br>इ)')
       .replace('फ)', '<br>फ)')
       .replace('ग)', '<br>ग)')
+      .replace('b)', '<br>b)')
+      .replace('c)', '<br>c)')
+      .replace('d)', '<br>d)')
+      .replace('e)', '<br>e)')
+      .replace('f)', '<br>f)')
+      .replace('g)', '<br>g)')
       .replace('1)', '</td><td>')
       .replace('2)', '</td><td>')
       .replace('3)', '</td><td>')
@@ -259,7 +287,11 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   formatAnswerToPaste() {
-    const answers = this.content.split('#(').map( str => {
+    let strContent = this.content;
+    for (let i = 1; i < 100; i++) {
+      strContent = strContent.replace('\n' + i + '. (', '\n#(');
+    }
+    const answers = strContent.split('#(').map( str => {
       return '<tr><td>' + str.replace(') :', '</td><td>') + '</td></tr>';
     });
 

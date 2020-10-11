@@ -3,21 +3,22 @@
         <textarea #contentTest [(ngModel)]="content" (ngModelChange)="onChange($event)"></textarea>
         <!-- (ngModelChange)="onChange($event)" -->
         <div class="action-buttons" fxLayout="column" fxLayoutGap="1em">
-            <button mat-raised-button color="primary" [disabled]="buttons[0].disabled" (click)="validate(true)">Validate</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[0].disabled" (click)="validate()">Validate</button>
             <button mat-raised-button color="primary" [disabled]="buttons[1].disabled" (click)="addHashesBeforeQuestionNum()">Add ## To Question</button>
             <button mat-raised-button color="primary" [disabled]="buttons[2].disabled" (click)="addHashesWithYearBeforeQuestionNum()">Add ## Year To Question</button>
             <button mat-raised-button color="primary" [disabled]="buttons[3].disabled" (click)="formatString()">Format Content</button>
             <button mat-raised-button color="primary" [disabled]="buttons[4].disabled" (click)="formatBreaksInString()">Format LineBreaks</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[5].disabled" (click)="formatForPasteAsTableCompQuestions()">Format Comp Question For Paste as Table</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[6].disabled" (click)="convertCompetetiveQueToJson()">Format Comp Content as JSON</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[7].disabled" (click)="formatForPasteAsTable()">Format Question For Paste as Table</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[8].disabled" (click)="formatAnswerToPaste()">Format Answer For Paste as Table</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[9].disabled" (click)="isQuestionExists()">CheckIfExists</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[10].disabled" (click)="createMathTableFromCoammaSaperatedContent()">Math Expression Table</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[11].disabled" (click)="copyInputMessage(contentTest)">Copy Content</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[12].disabled" (click)="jsonContent=[]">Clear JSON View</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[13].disabled">Auto Validate</button>
-            <button mat-raised-button color="primary" [disabled]="buttons[14].disabled" (click)="makeNumberTable()">Number Table MPSC</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[5].disabled" (click)="removeBreakAndLeftBracket()">'Break('=>'Break Only'</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[6].disabled" (click)="formatForPasteAsTableCompQuestions()">Format Comp Question For Paste as Table</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[7].disabled" (click)="convertCompetetiveQueToJson()">Format Comp Content as JSON</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[8].disabled" (click)="formatForPasteAsTable()">Format Question For Paste as Table</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[9].disabled" (click)="formatAnswerToPaste()">Format Answer For Paste as Table</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[10].disabled" (click)="isQuestionExists()">CheckIfExists</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[11].disabled" (click)="createMathTableFromCoammaSaperatedContent()">Math Expression Table</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[12].disabled" (click)="copyInputMessage(contentTest)">Copy Content</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[13].disabled" (click)="jsonContent=[]">Clear JSON View</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[14].disabled">Auto Validate</button>
+            <button mat-raised-button color="primary" [disabled]="buttons[15].disabled" (click)="makeNumberTable()">Number Table MPSC</button>
         </div>
         <div class="action-buttons" fxLayout="column" fxLayoutGap="1em">
             <button mat-raised-button color="{{ buttonNum.disabled ? 'accent': 'warn'}}" (click)="buttonNum.disabled = !buttonNum.disabled" *ngFor="let buttonNum of buttons">{{ buttonNum.disabled ? 'Enable': 'Disable'}}</button>
