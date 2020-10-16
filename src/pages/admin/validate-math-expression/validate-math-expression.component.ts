@@ -246,6 +246,13 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   getAsTable(str) {
+    for (let i = 1; i < 15; i++) {
+      if (i % 2) {
+        str = str.replace('\n', ',');
+      } else {
+        str = str.replace('\n', '##');
+      }
+    }
     const rows = str.split('##');
     const htmlRowsList = [];
     for (const row of rows) {
@@ -257,7 +264,7 @@ export class ValidateMathExpressionComponent implements OnInit {
   }
 
   createMathTableFromCoammaSaperatedContent() {
-    const tables = this.content.split('###').map( str => this.getAsTable(str));
+    const tables = this.content.split('\n###\n').map( str => this.getAsTable(str));
     this.content = tables.join('');
     // const strColumns = 'llllllllllllllll';
     // const rows = this.content.split('##');
