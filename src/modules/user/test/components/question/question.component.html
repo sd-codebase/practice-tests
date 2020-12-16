@@ -1,6 +1,6 @@
 <div class="scroll-questions" [class.view-mode]="action === 'view'">
   <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question">
-    <div fxFill class="question-div">
+    <div fxFill fxFlex.md="87" fxFlex.lg="87" fxFlex.sm="87" fxFlex.xl="87" fxFlex.xs="87" class="question-div alert-box primary-box">
       <app-statement
         [imagePath]="question.imagePath"
         [statement]="question.question"
@@ -8,11 +8,11 @@
       ></app-statement>
     </div>
     <div fxFill class="question-tags" *ngIf="question.tags">
-      <p><strong><em>({{ question.tags }}) </em></strong></p>
+      <p><strong><em class="alert-box warning-box">({{ question.tags }}) </em></strong></p>
     </div>
     <div fxFill class="options-div" *ngIf="hasOptions && question.isSingleAnswer">
       <mat-radio-group [(ngModel)]="question.userAnswer" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1em">
-        <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0.5em" *ngFor="let op of question.options; let i = index">
+        <div fxFill fxLayout="row" fxLayoutAlign="start start" class="alert-box dark-box" [class.warning-box]="question.userAnswer && question.userAnswer.includes(getOption(i+1))" fxLayoutGap="0.5em" *ngFor="let op of question.options; let i = index">
           <mat-radio-button 
             class="margin-half-em" 
             color="primary"
@@ -32,7 +32,7 @@
       </mat-radio-group>
     </div>
     <div fxFill class="options-div" *ngIf="hasOptions && !question.isSingleAnswer">
-      <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
+      <div fxFill fxLayout="row" fxLayoutAlign="start start" class="alert-box dark-box" [class.warning-box]="question.userAnswer && question.userAnswer.includes(getOption(i+1))" fxLayoutGap="0.1em" *ngFor="let op of question.options;let i = index">
         <mat-checkbox
           *ngIf="op && action === 'attempt'"
           class="margin-half-em" 

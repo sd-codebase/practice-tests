@@ -55,28 +55,30 @@
     <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em" *ngIf="question && action === 'view'">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
             <div fxFlex.xs="100" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
-                <button mat-raised-button color="" *ngIf="question.questionNum !== 1 " (click)="viewPrevQuestion()">
+                <button mat-raised-button color="primary" *ngIf="question.questionNum !== 1 " (click)="viewPrevQuestion()">
                     <mat-icon>skip_previous</mat-icon>
                     Previous
                 </button>
-                <button mat-raised-button color="" *ngIf="question.questionNum !== test.questionCount" (click)="viewNextQuestion()">
+                <button mat-raised-button color="primary" *ngIf="question.questionNum !== test.questionCount" (click)="viewNextQuestion()">
                     Next
                     <mat-icon>skip_next</mat-icon>
                 </button>
             </div>
         </div>
         <div class="answer-block" fxFill fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="1em" *ngIf="question && action=== 'view'">
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em" class="alert-box" [class.info-box]="!question.obtainedMarks && !question.negativeMarks" [class.success-box]="question.obtainedMarks" [class.danger-box]="question.negativeMarks && !question.obtainedMarks">
                 <span>Ans. ({{question.answer}})</span>
                 <span *ngIf="question.obtainedMarks">Obtained Marks: (<span class="green">{{question.obtainedMarks}}</span>)</span>
                 <span *ngIf="question.negativeMarks">Negative Marks: (<span class="red">-{{question.negativeMarks}}</span>)</span>
             </div>
-            <app-statement
-                fxFill
-                *ngIf="question.answerDescription"
-                [imagePath]="question.imagePath"
-                [statement]="question.answerDescription"
-            ></app-statement>
+            <div class="alert-box" [class.success-box]="question.answerDescription">
+                <app-statement
+                    fxFill
+                    *ngIf="question.answerDescription"
+                    [imagePath]="question.imagePath"
+                    [statement]="question.answerDescription"
+                ></app-statement>
+            </div>
         </div>
     </div>
 </div>
