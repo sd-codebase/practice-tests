@@ -18,6 +18,7 @@ export class DashboardWidgetComponent implements OnInit {
   public userProfile;
   public priorityMessages = [];
   public infoMessages = [];
+  public newVersion: AppVersion;
   constructor(
     private storageService: StorageService,
     private router: Router,
@@ -44,6 +45,20 @@ export class DashboardWidgetComponent implements OnInit {
       this.priorityMessages = priorityMessages;
       this.infoMessages = infoMessages;
     } catch (e) { }
+    if (this.availableCourseService.availableCourse && this.availableCourseService.appVersion) {
+      this.getVersionDetails();
+    }
+  }
+
+  async getVersionDetails() {
+    try{
+      const versionDetails: AppVersion = await this.http.get('/users/app-version').toPromise();
+      if(versionDetails.version > this.availableCourseService.appVersion) {
+        this.newVersion = versionDetails;
+      }
+    } catch(e) {
+
+    }
   }
 
   onClearStorage() {
@@ -67,4 +82,11 @@ export class DashboardWidgetComponent implements OnInit {
     });
   }
 
+}
+
+export interface AppVersion {
+  version: string;
+  isMajorUpdate: boolean;
+  updateInfo: string;
+  updateDate: string;
 }

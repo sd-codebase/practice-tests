@@ -3,6 +3,12 @@
       <ng-container *ngFor="let message of priorityMessages">
         <p class="priority-message">{{message}}</p>
       </ng-container>
+      <ng-container *ngIf="newVersion">
+        <div class="alert-box success-box">
+          <strong>New version(v{{newVersion.version}}) is released. Please update your app.(Go to Menu > App)</strong><br/>
+          <div style="padding-left: 1em;padding-top: 0.5em;" *ngIf="newVersion.isMajorUpdate" [innerHtml]="newVersion.updateInfo"></div>
+        </div>
+      </ng-container>
       <ng-container *ngFor="let message of infoMessages">
         <p class="info-message">{{message}}</p>
       </ng-container>

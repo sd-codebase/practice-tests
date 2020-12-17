@@ -4,6 +4,7 @@ import { StorageService } from '@components/storage.serice';
 import { AuthenticationService } from 'src/auth/authentication/authentication.service';
 import { LoaderService } from '@components/loader.service';
 import { Router } from '@angular/router';
+import { AvailableCoursesService } from '@components/AvailableCoursesService';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -35,6 +36,7 @@ export class UserDashboardComponent implements OnInit {
     public auth: AuthenticationService,
     private loaderService: LoaderService,
     private router: Router,
+    public availableCourses: AvailableCoursesService,
   ) { }
 
   ngOnInit() {
